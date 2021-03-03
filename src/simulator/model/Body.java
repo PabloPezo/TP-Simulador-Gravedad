@@ -1,5 +1,6 @@
 package simulator.model;
 //Masacao de quicio tp
+//Puto el de tp
 import org.json.JSONObject;
 
 import simulator.misc.Vector2D;
