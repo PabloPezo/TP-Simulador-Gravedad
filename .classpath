@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/plmmm/eclipse-workspace/TP-Simulador-Gravedad/lib/commons-cli-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/plmmm/eclipse-workspace/TP-Simulador-Gravedad/lib/json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/eclipse-workspace/PhysicsSimulator/lib/commons-cli-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/eclipse-workspace/PhysicsSimulator/lib/json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
