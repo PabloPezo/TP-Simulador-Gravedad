@@ -14,8 +14,8 @@ import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
 
-public class Main {
-
+public class Main
+{
 	// default values for some parameters
 	//
 	private final static Double _dtimeDefaultValue = 2500.0;
@@ -34,7 +34,8 @@ public class Main {
 	private static Factory<ForceLaws> _forceLawsFactory;
 	private static Factory<StateComparator> _stateComparatorFactory;
 
-	private static void init() {
+	private static void init() 
+	{
 		// TODO initialize the bodies factory
 
 		// TODO initialize the force laws factory
@@ -42,7 +43,8 @@ public class Main {
 		// TODO initialize the state comparator
 	}
 
-	private static void parseArgs(String[] args) {
+	private static void parseArgs(String[] args)
+	{
 
 		// define the valid command line options
 		//
@@ -51,7 +53,8 @@ public class Main {
 		// parse the command line as provided in args
 		//
 		CommandLineParser parser = new DefaultParser();
-		try {
+		try 
+		{
 			CommandLine line = parser.parse(cmdLineOptions, args);
 
 			parseHelpOption(line, cmdLineOptions);
@@ -66,21 +69,25 @@ public class Main {
 			// provided in the command line!
 			//
 			String[] remaining = line.getArgs();
-			if (remaining.length > 0) {
+			if (remaining.length > 0) 
+			{
 				String error = "Illegal arguments:";
 				for (String o : remaining)
 					error += (" " + o);
 				throw new ParseException(error);
 			}
 
-		} catch (ParseException e) {
+		} 
+		catch (ParseException e) 
+		{
 			System.err.println(e.getLocalizedMessage());
 			System.exit(1);
 		}
 
 	}
 
-	private static Options buildOptions() {
+	private static Options buildOptions() 
+	{
 		Options cmdLineOptions = new Options();
 
 		// help
@@ -115,14 +122,17 @@ public class Main {
 		return cmdLineOptions;
 	}
 
-	public static String factoryPossibleValues(Factory<?> factory) {
+	public static String factoryPossibleValues(Factory<?> factory)
+	{
 		if (factory == null)
 			return "No values found (the factory is null)";
 
 		String s = "";
 
-		for (JSONObject fe : factory.getInfo()) {
-			if (s.length() > 0) {
+		for (JSONObject fe : factory.getInfo()) 
+		{
+			if (s.length() > 0)
+			{
 				s = s + ", ";
 			}
 			s = s + "'" + fe.getString("type") + "' (" + fe.getString("desc") + ")";
@@ -132,32 +142,41 @@ public class Main {
 		return s;
 	}
 
-	private static void parseHelpOption(CommandLine line, Options cmdLineOptions) {
-		if (line.hasOption("h")) {
+	private static void parseHelpOption(CommandLine line, Options cmdLineOptions) 
+	{
+		if (line.hasOption("h")) 
+		{
 			HelpFormatter formatter = new HelpFormatter();
 			formatter.printHelp(Main.class.getCanonicalName(), cmdLineOptions, true);
 			System.exit(0);
 		}
 	}
 
-	private static void parseInFileOption(CommandLine line) throws ParseException {
+	private static void parseInFileOption(CommandLine line) throws ParseException
+	{
 		_inFile = line.getOptionValue("i");
-		if (_inFile == null) {
+		if (_inFile == null) 
+		{
 			throw new ParseException("In batch mode an input file of bodies is required");
 		}
 	}
 
-	private static void parseDeltaTimeOption(CommandLine line) throws ParseException {
+	private static void parseDeltaTimeOption(CommandLine line) throws ParseException 
+	{
 		String dt = line.getOptionValue("dt", _dtimeDefaultValue.toString());
-		try {
+		try 
+		{
 			_dtime = Double.parseDouble(dt);
 			assert (_dtime > 0);
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			throw new ParseException("Invalid delta-time value: " + dt);
 		}
 	}
 
-	private static JSONObject parseWRTFactory(String v, Factory<?> factory) {
+	private static JSONObject parseWRTFactory(String v, Factory<?> factory) 
+	{
 
 		// the value of v is either a tag for the type, or a tag:data where data is a
 		// JSON structure corresponding to the data of that type. We split this
@@ -167,7 +186,8 @@ public class Main {
 		int i = v.indexOf(":");
 		String type = null;
 		String data = null;
-		if (i != -1) {
+		if (i != -1) 
+		{
 			type = v.substring(0, i);
 			data = v.substring(i + 1);
 		} else {
@@ -177,8 +197,10 @@ public class Main {
 
 		// look if the type is supported by the factory
 		boolean found = false;
-		for (JSONObject fe : factory.getInfo()) {
-			if (type.equals(fe.getString("type"))) {
+		for (JSONObject fe : factory.getInfo())
+		{
+			if (type.equals(fe.getString("type")))
+			{
 				found = true;
 				break;
 			}
@@ -186,7 +208,8 @@ public class Main {
 
 		// build a corresponding JSON for that data, if found
 		JSONObject jo = null;
-		if (found) {
+		if (found) 
+		{
 			jo = new JSONObject();
 			jo.put("type", type);
 			jo.put("data", new JSONObject(data));
@@ -195,36 +218,46 @@ public class Main {
 
 	}
 
-	private static void parseForceLawsOption(CommandLine line) throws ParseException {
+	private static void parseForceLawsOption(CommandLine line) throws ParseException
+	{
 		String fl = line.getOptionValue("fl", _forceLawsDefaultValue);
 		_forceLawsInfo = parseWRTFactory(fl, _forceLawsFactory);
-		if (_forceLawsInfo == null) {
+		if (_forceLawsInfo == null) 
+		{
 			throw new ParseException("Invalid force laws: " + fl);
 		}
 	}
 
-	private static void parseStateComparatorOption(CommandLine line) throws ParseException {
+	private static void parseStateComparatorOption(CommandLine line) throws ParseException
+	{
 		String scmp = line.getOptionValue("cmp", _stateComparatorDefaultValue);
 		_stateComparatorInfo = parseWRTFactory(scmp, _stateComparatorFactory);
-		if (_stateComparatorInfo == null) {
+		if (_stateComparatorInfo == null) 
+		{
 			throw new ParseException("Invalid state comparator: " + scmp);
 		}
 	}
 
-	private static void startBatchMode() throws Exception {
+	private static void startBatchMode() throws Exception
+	{
 		// TODO complete this method
 	}
-
-	private static void start(String[] args) throws Exception {
+	
+	private static void start(String[] args) throws Exception
+	{
 		parseArgs(args);
 		startBatchMode();
 	}
 
-	public static void main(String[] args) {
-		try {
+	public static void main(String[] args) 
+	{
+		try 
+		{
 			init();
 			start(args);
-		} catch (Exception e) {
+		} 
+		catch (Exception e)
+		{
 			System.err.println("Something went wrong ...");
 			System.err.println();
 			e.printStackTrace();

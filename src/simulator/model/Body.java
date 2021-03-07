@@ -47,7 +47,7 @@ public class Body {
 		
 		void resetForce()
 		{
-			force=new Vector2D();
+			force = new Vector2D();
 		}
 		
 		void addForce (Vector2D f)	// Sumar fuerza
