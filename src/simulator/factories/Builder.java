@@ -1,5 +1,6 @@
 package simulator.factories;
 
-public class Builder {
+public class Builder 
+{
 
 }
