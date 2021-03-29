@@ -2,48 +2,45 @@ package simulator.model;
 
 import java.util.List;
 
-public class NewtonUniversalGravitation implements ForceLaws
-{
-	private final static double Gconst = 6.67E - 11;
+import simulator.misc.Vector2D;
+
+public class NewtonUniversalGravitation implements ForceLaws {
+
+	private final double Gconst;
 	
 	public NewtonUniversalGravitation()
 	{
-		super();
+		Gconst = 6.67E-11;	
 	}
 	
-	public void apply(List<Body> bodies) 
+	public void apply(List<Body> bs)
 	{
-
-		for(int i = 0; i < bodies.size(); i++)
+		Vector2D Force;
+		double forceModulo;
+		
+		for (Body bodyPrincipal : bs)
 		{
-			double force = 0.0;
-			for(int j = 0; j < bodies.size(); j++)
+			Force = new Vector2D();
+			
+			for (Body bodySecundario : bs)
 			{
-				if(i != j)
+				if (bodyPrincipal != bodySecundario)
 				{
-					double mass = bodies.get(i).getMass() * bodies.get(j).getMass();
+					forceModulo = 0;
 					
-					if(mass == 0)
+					if (bodyPrincipal.getMass() == 0.0)
 					{
-						
+						bodyPrincipal.vel = new Vector2D();
 					}
 					else
 					{
-						double dist = bodies.get(i).pos.distanceTo(bodies.get(j).pos);
-						force = Gconst * (mass / (dist * dist) );
-						
-						bodies.get(j).pos.direction().scale(force);
+						forceModulo = (Gconst * bodyPrincipal.getMass() * bodySecundario.getMass()) / Math.pow(bodyPrincipal.getPosition().distanceTo(bodySecundario.getPosition()), 2);
+						Force = Force.plus(bodySecundario.getPosition().minus(bodyPrincipal.getPosition()).direction().scale(forceModulo));
 					}
 				}
 			}
+			
+			bodyPrincipal.addForce(Force);
 		}
-		
 	}
-	
-	public String toString()
-	{
-		return null;
-
-	}
-	
 }

@@ -1,92 +1,91 @@
 package simulator.model;
+
 import org.json.JSONObject;
-//version 3/3
 import simulator.misc.Vector2D;
 
 public class Body {
 	
-	protected String id;
-	protected Vector2D pos;
-	protected Vector2D vel;
-	protected Vector2D force;
-	protected double mass;
+	protected String _id;
+	protected Vector2D _vel;
+	protected Vector2D _force;
+	protected Vector2D _pos;
+	protected double _mass;
 	
 	public Body(String id, Vector2D v, Vector2D p, double m)
 	{
-		this.id = id;
-		mass  = m;
-		pos   = new Vector2D(p);
-		vel   = new Vector2D(v);
-		force = new Vector2D();		
+		_id = id;
+		_mass = m;
+		_pos = new Vector2D(p);
+		_vel = new Vector2D(v);
+		_force = new Vector2D();
+	}
+
+	public String getId()
+	{
+		return _id;
 	}
 	
-		public String getId()	// Identificador del cuerpo
+	public Vector2D getVelocity()
+	{
+		return _vel;
+	}
+	
+	public Vector2D getForce()
+	{
+		return _force;
+	}
+	
+	public Vector2D getPosition()
+	{
+		return _pos;
+	}
+	
+	public double getMass()
+	{
+		return _mass;
+	}
+	
+	void addForce (Vector2D f)
+	{
+		_force = _force.plus(f);
+	}
+	
+	void resetForce()
+	{
+		_force = new Vector2D();
+	}
+	
+	void move(double t)
+	{
+		Vector2D accel;
+		if (_mass == 0)
 		{
-			return id;
+			accel = new Vector2D();
 		}
-		
-		public double getMass()	// Masa del cuerpo
+		else
 		{
-			return mass;
+			accel = new Vector2D(_force.scale(1 / _mass));
 		}
+		_pos = _pos.plus((_vel.scale(t)).plus(accel.scale((1/2) * t * t)));
+		_vel = _vel.plus(accel.scale(t));
+	}
+	
+	public JSONObject getState()
+	{
+		JSONObject jso = new JSONObject();
 		
-		public Vector2D getPosition()	// Vector de posicion
-		{
-			return pos;
-		}
+			jso.put("id",getId());
+			jso.put("m",getMass());
+			jso.put("p",getPosition().asJSONArray());
+			jso.put("v",getVelocity().asJSONArray());
+			jso.put("f",getForce().asJSONArray());
 		
-		public Vector2D getVelocity()	// Vector de velocidad
-		{
-			return vel;
-		}
-		
-		public Vector2D getForce()	// Vector de fuerza 
-		{
-			return force;
-		}
-		
-		void resetForce()
-		{
-			force = new Vector2D();
-		}
-		
-		void addForce (Vector2D f)	// Sumar fuerza
-		{
-			force = force.plus(f);
-		}
-		
-		void move(double t)
-		{
-			Vector2D accel;
-			
-			if (mass == 0)
-			{
-				accel = new Vector2D();
-			}
-			else 
-			{
-				accel = new Vector2D(force.scale(1 / mass));
-			}
-			
-			pos = pos.plus((vel.scale(t)).plus(accel.scale( t * t / 2 )));
-			vel = vel.plus(accel.scale(t));
-		}
-		
-		public JSONObject getState()
-		{
-			JSONObject jso = new JSONObject();
-			
-			jso.put("id", id);
-			jso.put("m", mass);
-			jso.put("p", pos);
-			jso.put("v", vel);
-			jso.put("f", force);
-			
-			return jso;
-		}
-		
-		public String toString()
-		{
-			return getState().toString();
-		}	
+		return jso;
+	}
+	
+	public String toString()
+	{
+		return getState().toString();
+	}
+	
 }
