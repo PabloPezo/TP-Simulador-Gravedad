@@ -1,5 +1,7 @@
 package simulator.launcher;
 
+import java.util.ArrayList;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -10,7 +12,16 @@ import org.apache.commons.cli.ParseException;
 import org.json.JSONObject;
 
 import simulator.control.StateComparator;
+import simulator.factories.BasicBodyBuilder;
+import simulator.factories.Builder;
+import simulator.factories.BuilderBasedFactory;
+import simulator.factories.EpsilonEqualStateBuilder;
 import simulator.factories.Factory;
+import simulator.factories.MassEqualStateBuilder;
+import simulator.factories.MassLosingBodyBuilder;
+import simulator.factories.MovingTowardsFixedPointBuilder;
+import simulator.factories.NewtonUniversalGravitationBuilder;
+import simulator.factories.NoForceBuilder;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
 
@@ -36,10 +47,22 @@ public class Main {
 
 	private static void init() {
 		// TODO initialize the bodies factory
+		ArrayList<Builder<Body>>bodyBuilders=new ArrayList<>();
+        bodyBuilders.add(new BasicBodyBuilder());
+        bodyBuilders.add(new MassLosingBodyBuilder());
+        _bodyFactory= new BuilderBasedFactory<Body>(bodyBuilders);
 
-		// TODO initialize the force laws factory
-
-		// TODO initialize the state comparator
+        // TODO initialize the force laws factory
+        ArrayList<Builder<ForceLaws>>forceLawsBuilders= new ArrayList<>();
+        forceLawsBuilders.add(new NewtonUniversalGravitationBuilder());
+        forceLawsBuilders.add(new MovingTowardsFixedPointBuilder());
+        forceLawsBuilders.add(new NoForceBuilder());
+        _forceLawsFactory=new BuilderBasedFactory<ForceLaws>(forceLawsBuilders);
+        // TODO initialize the state comparator
+        ArrayList<Builder<StateComparator>>stateCmpBuilders= new ArrayList<>();
+        stateCmpBuilders.add(new EpsilonEqualStateBuilder());
+        stateCmpBuilders.add(new MassEqualStateBuilder());
+        _stateComparatorFactory= new BuilderBasedFactory<StateComparator>(stateCmpBuilders);
 	}
 
 	private static void parseArgs(String[] args) {

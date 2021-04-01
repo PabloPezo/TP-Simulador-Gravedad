@@ -1,26 +1,41 @@
 package simulator.factories;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import simulator.misc.Vector2D;
 import simulator.model.Body;
+import simulator.model.MassLosingBody;
 
 public class MassLosingBodyBuilder extends Builder<Body> {
 
+	public MassLosingBodyBuilder()
+	{
+		super("mlb", "mass losing body");
+	}
+	
 
 	@Override
-	
-	protected Body createTheInstance(JSONObject data) {
-		// TODO Auto-generated method stub
-		double m = data.getDouble("m");
-		String id = data.getString("id");
+	protected Body createTheInstance(JSONObject js) {
+		double m = js.getDouble("m");
+		String id = js.getString("id");
 		
-		// para los vectores velocidad y posicion
-		// JSONArray pos= data.getJSONArray("p");
-		//con pos.getDouble(i) podemos acceder al iesimo componente
-		// Vector2D p = new Vector2D ( )
+		JSONArray p = js.getJSONArray("p");
+		JSONArray v = js.getJSONArray("v");
 		
-		//UNA VEZ EXTRAIDOS LOS VALORES
-		return new Body(id,Vector2D p ,Vector2D v , m, freq,factor); // calcular las cosas
+		Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
+		Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
+		
+		double factor = js.getDouble("factor");
+		double freq = js.getDouble("freq");
+		
+//		LO PONE GONSALITO PERO NO SABEMOS QUE ES
+		if(js.similar(super.getBuilderInfo().get("data")))
+		{
+			return new MassLosingBody(id, vel, pos, m, factor, freq);
+		}
+		
+		return null;
 	}
 		
 	// createData hay q sobreescribirlo

@@ -5,29 +5,31 @@ import simulator.misc.Vector2D;
 
 public class MovingTowardsFixedPoint implements ForceLaws{
 	
-	private Vector2D point;
-	private double gConst;
+	private Vector2D _point;
+	private double _gConst;
 	
 	public MovingTowardsFixedPoint()
 	{
-		point = new Vector2D();
-		gConst = 9.81;
+		_point = new Vector2D();
+		_gConst = 9.81;
 	}
-	public MovingTowardsFixedPoint(double gConst)
+	
+	public MovingTowardsFixedPoint(Vector2D point, double gConst)
 	{
-		this.gConst = gConst;
-		point = new Vector2D();
+		_gConst = gConst;
+		_point = point;
 	}
 	
 	public void apply(List<Body> bs) {
 		for (Body body : bs)
 		{
-			Vector2D f = new Vector2D(point.minus(body.getPosition()).direction().scale(gConst * body.getMass()));
+			Vector2D f = new Vector2D(_point.minus(body.getPosition()).direction().scale(_gConst * body.getMass()));
 			body.addForce(f);
 		}
 	}
-	
-
-	//aplicacion de una fuerza hacia el centro
-	
+	@Override
+	public String toString()
+	{
+		return "MovingTowardsFixedPoint [point = " + _point + ", gConst = " + _gConst + "]";
+	}
 }
