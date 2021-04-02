@@ -21,12 +21,12 @@ public class MassEqualStates implements StateComparator
 
 	    for(int i = 0; i < js1.length(); i++)
 	    {
-	        if ((js1.getString(i) == js2.getString(i)) && (js1.getDouble(i) == js2.getDouble(i)))
+	        if ((js1.getString(i) != js2.getString(i)) || (js1.getDouble(i) != js2.getDouble(i)))
 	        {
-	        	return true;
+	        	return false;
 	        }
 	    }
-	    return false;
+	    return true;
 	}
 	
 }
