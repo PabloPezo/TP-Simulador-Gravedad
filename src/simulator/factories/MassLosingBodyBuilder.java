@@ -29,7 +29,6 @@ public class MassLosingBodyBuilder extends Builder<Body> {
 		double factor = js.getDouble("factor");
 		double freq = js.getDouble("freq");
 		
-//		LO PONE GONSALITO PERO NO SABEMOS QUE ES
 		if(js.similar(super.getBuilderInfo().get("data")))
 		{
 			return new MassLosingBody(id, vel, pos, m, factor, freq);
@@ -37,18 +36,13 @@ public class MassLosingBodyBuilder extends Builder<Body> {
 		
 		return null;
 	}
-		
-	// createData hay q sobreescribirlo
 	
-	protected JSONObject createData()
+	protected JSONObject createData()	//PONER ESTO O LO DE ID, MASA, POS, FACTOR...??
 	{
-		JSONObject data=new JSONObject();
-		data.put("type", "mlb");
-		data.put("data", createData()); 
-		data.put("desc","Mass losing body");
-		return data;
-	}
-	
-	
-	
+		JSONObject js = new JSONObject();
+		js.put("type", "mlb");
+		js.put("data", createData()); 
+		js.put("desc","Mass losing body");
+		return js;
+	}	
 }

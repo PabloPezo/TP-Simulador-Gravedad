@@ -13,7 +13,6 @@ public class BasicBodyBuilder extends Builder<Body> {
 		super();
 	}
 	
-	
 	@Override
 	protected Body createTheInstance(JSONObject js)
 	{
@@ -26,24 +25,20 @@ public class BasicBodyBuilder extends Builder<Body> {
 		Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
 		Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
 		
-		//LO PONE GONSALITO PERO NO SABEMOS QUE ES
-//		if(js.similar(super.getBuilderInfo().get("data")))
-//		{
-//			return new Body(id, vel, pos, m);
-//		}
-		
+		if(js.similar(super.getBuilderInfo().get("data")))
+		{
+			return new Body(id, vel, pos, m);
+		}
 		return null;
 	}
-		
-	// createData hay q sobreescribirlo
 	
 	protected JSONObject createData()
 	{
 		JSONObject js = new JSONObject();
 		js.put("id", "unique id");
-		js.put("v","velocity");
-		js.put("p", "position");
 		js.put("m", "mass");
+		js.put("p", "position");
+		js.put("v", "velocity");
 		
 		return js;
 	}

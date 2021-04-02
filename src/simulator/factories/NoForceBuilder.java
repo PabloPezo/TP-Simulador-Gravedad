@@ -1,9 +1,9 @@
 package simulator.factories;
 
 import org.json.JSONObject;
-
-import simulator.model.ForceLaws;
 import simulator.model.NoForce;
+import simulator.model.ForceLaws;
+
 
 public class NoForceBuilder extends Builder<ForceLaws> {
 
@@ -13,11 +13,13 @@ public class NoForceBuilder extends Builder<ForceLaws> {
 	}
 	
 	@Override
-	protected ForceLaws createTheInstance(JSONObject js) {
-		if(js.similar(super.getBuilderInfo().get("data")))
+	protected ForceLaws createTheInstance(JSONObject js)
+	{
+		if(js.similar( super.getBuilderInfo().get("data")))
 		{
 			return new NoForce();
 		}
+		
 		return null;
 	}
 

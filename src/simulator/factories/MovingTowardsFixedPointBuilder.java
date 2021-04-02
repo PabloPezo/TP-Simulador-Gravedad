@@ -26,7 +26,7 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 		
 		Vector2D c = new Vector2D(x, y);
 		
-		if (js.similar(super.getBuilderInfo().get("data")))
+		if (js.similar (super.getBuilderInfo().get("data")))
 		{
 			return new MovingTowardsFixedPoint(c, g);
 		}
