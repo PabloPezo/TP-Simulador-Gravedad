@@ -38,13 +38,13 @@ public class EpsilonEqualStates implements StateComparator
 			return false;
 		}
 
-		for(int i=0; i<js1.length(); i++)	//Cambiar que samu tiene esto pero gonsalo tiene otras cosas
+		for(int i=0; i < js1.length(); i++)	//Cambiar que samu tiene esto pero gonsalo tiene otras cosas
 		{
 			JSONObject jso1 = js1.getJSONObject(i);
 			JSONObject jso2 = js2.getJSONObject(i);
 			Vector2D v1, v2;
 
-			if(jso1.getString("id")!=jso2.getString("id")) { return false; }
+			if(jso1.getString("id") != jso2.getString("id")) { return false; }
 			
 			if( jso1.getFloat("m") != jso2.getFloat("m") ) { return false; }	// AÑADIDO POR PEZO REVISAR 
 			
