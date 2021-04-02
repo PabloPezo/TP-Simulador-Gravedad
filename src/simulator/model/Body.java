@@ -13,10 +13,10 @@ public class Body {
 	public Body(String id, Vector2D v, Vector2D p, double m)
 	{
 		_id = id;
-		_mass = m;
-		_pos = new Vector2D(p);
 		_vel = new Vector2D(v);
+		_pos = new Vector2D(p);
 		_force = new Vector2D();
+		_mass = m;
 	}
 
 	public String getId()
@@ -39,11 +39,6 @@ public class Body {
 		return _pos;
 	}
 	
-	public double getMass()
-	{
-		return _mass;
-	}
-	
 	void addForce (Vector2D f)
 	{
 		_force.plus(f);
@@ -52,6 +47,11 @@ public class Body {
 	void resetForce()
 	{
 		_force = new Vector2D();
+	}
+	
+	public double getMass()
+	{
+		return _mass;
 	}
 	
 	void move(double t)
@@ -71,11 +71,11 @@ public class Body {
 	
 	public JSONObject getState()
 	{
-			js.put("id",getId());
-			js.put("m",getMass());
-			js.put("p",getPosition().asJSONArray());
-			js.put("v",getVelocity().asJSONArray());
-			js.put("f",getForce().asJSONArray());
+			js.put("id", getId());
+			js.put("m", getMass());
+			js.put("p", getPosition().asJSONArray());
+			js.put("v" ,getVelocity().asJSONArray());
+			js.put("f", getForce().asJSONArray());
 		
 		return js;
 	}

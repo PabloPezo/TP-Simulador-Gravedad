@@ -13,19 +13,7 @@ public class EpsilonEqualStates implements StateComparator
 	}
 	
 	public boolean equal(JSONObject s1,JSONObject s2)
-	{
-	  /* si los campos "time" son distintos, entonces falso
-	   * si contienen distinto numero de cuerpos,entonces falso
-	   * 
-	   * recorrer los cuerpos y comparar
-	   * para double usar Math.abs(d1-d2)
-	   * para posicion, velocidad.. (es decir vectores):
-	   * crear un vector 2D v1, con las dos componentes extraidas del campo correspondiente de s1
-	   * crear un vector 2D v2, con las dos componentes extraidas del campo correspondiente de s2
-	   * comprobar con v1.distanceTo(v2)<=_eps
-	   * 
-	   */
-		
+	{		
 		JSONArray js1 = s1.getJSONArray("bodies");
         JSONArray js2 = s2.getJSONArray("bodies");
 		
@@ -42,26 +30,27 @@ public class EpsilonEqualStates implements StateComparator
 		{
 			JSONObject jso1 = js1.getJSONObject(i);
 			JSONObject jso2 = js2.getJSONObject(i);
-			Vector2D v1, v2;
-
-			if(jso1.getString("id") != jso2.getString("id")) { return false; }
+			Vector2D v1, v2, f1, f2, p1, p2;
 			
-			if( jso1.getFloat("m") != jso2.getFloat("m") ) { return false; }	// AÑADIDO POR PEZO REVISAR 
+			p1 = new Vector2D(jso1.getJSONArray("p").getDouble(0), jso1.getJSONArray("p").getDouble(1));
+			p2 = new Vector2D(jso2.getJSONArray("p").getDouble(0), jso2.getJSONArray("p").getDouble(1));
+			v1 = new Vector2D(jso1.getJSONArray("v").getDouble(0), jso1.getJSONArray("v").getDouble(1));
+			v2 = new Vector2D(jso2.getJSONArray("v").getDouble(0), jso2.getJSONArray("v").getDouble(1));
+			f1 = new Vector2D(jso1.getJSONArray("f").getDouble(0), jso1.getJSONArray("f").getDouble(1));
+			f2 = new Vector2D(jso2.getJSONArray("f").getDouble(0), jso2.getJSONArray("f").getDouble(1));
 			
-			v1 = new Vector2D (jso1.getJSONArray("p").getDouble(0),jso1.getJSONArray("p").getDouble(1));
-			v2 = new Vector2D (jso2.getJSONArray("p").getDouble(0),jso2.getJSONArray("p").getDouble(1));
-			
-			if(v1.distanceTo(v2) > _eps) { return false; }
-
-			v1 = new Vector2D(jso1.getJSONArray("v").getDouble(0),jso1.getJSONArray("v").getDouble(1));
-			v2 = new Vector2D(jso2.getJSONArray("v").getDouble(0),jso2.getJSONArray("v").getDouble(1));
-
-			if(v1.distanceTo(v2) > _eps) { return false; }
-
-			v1 = new Vector2D (jso1.getJSONArray("f").getDouble(0),jso1.getJSONArray("f").getDouble(1));
-			v2 = new Vector2D (jso2.getJSONArray("f").getDouble(0),jso2.getJSONArray("f").getDouble(1));
-			
-			if(v1.distanceTo(v2) > _eps) { return false; }
+			if(jso1.getString("id") != jso2.getString("id"))
+			{
+				return false;
+			}
+			else if(jso1.getFloat("m") != jso2.getFloat("m") )
+			{
+				return false;
+			}
+			else if(p1.distanceTo(p2) > _eps || v1.distanceTo(v2) > _eps || f1.distanceTo(f2) > _eps)
+			{
+				return false;
+			}
 		}
 		return true;
 	}

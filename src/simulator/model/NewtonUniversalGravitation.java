@@ -20,12 +20,13 @@ public class NewtonUniversalGravitation implements ForceLaws {
 	
 	public void apply(List<Body> bs)	//Cambiar un poquillo
 	{
-		Vector2D Force = new Vector2D();
+		Vector2D appliedForce = new Vector2D();
 		double forceModulo;
+		double distance2;
 		
 		for (Body bodyPrincipal : bs)
 		{
-			Force = new Vector2D();
+			appliedForce = new Vector2D();
 			
 			for (Body bodySecundario : bs)
 			{
@@ -33,19 +34,20 @@ public class NewtonUniversalGravitation implements ForceLaws {
 				{
 					forceModulo = 0;
 					
-					if (bodyPrincipal.getMass() == 0.0)
+					if (bodyPrincipal.getMass() != 0.0)
 					{
-						bodyPrincipal._vel = new Vector2D();
+						distance2 = Math.pow(bodyPrincipal.getPosition().distanceTo(bodySecundario.getPosition()), 2);
+						forceModulo = (_gConst * bodyPrincipal.getMass() * bodySecundario.getMass()) / distance2;
+						appliedForce = appliedForce.plus(bodySecundario.getPosition().minus(bodyPrincipal.getPosition()).direction().scale(forceModulo));
 					}
 					else
 					{
-						forceModulo = (_gConst * bodyPrincipal.getMass() * bodySecundario.getMass()) / Math.pow(bodyPrincipal.getPosition().distanceTo(bodySecundario.getPosition()), 2);
-						Force = Force.plus(bodySecundario.getPosition().minus(bodyPrincipal.getPosition()).direction().scale(forceModulo));
+						bodyPrincipal._vel = new Vector2D();
 					}
 				}
 			}
 			
-			bodyPrincipal.addForce(Force);
+			bodyPrincipal.addForce(appliedForce);
 		}
 	}
 }

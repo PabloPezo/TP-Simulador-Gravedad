@@ -28,6 +28,7 @@ public class Controller {
     {
         JSONObject js = new JSONObject(new JSONTokener(in));
         JSONArray bodies = js.getJSONArray("bodies");
+        
         for(int i = 0; i < bodies.length(); i++)
         {
         	_phySimulator.addBody(_bodiesFactory.createInstance(bodies.getJSONObject(i)));
@@ -61,18 +62,18 @@ public class Controller {
         if(expOutJO != null)
         {
         	expectatedState = expOutJO.getJSONArray("states").getJSONObject(0);
-            if(!cmp.equal(expectatedState, currentState))throw new NotEqualStatesException(expectatedState, currentState, 0);
+            if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, 0);
         }
         
         for(int i=1; i<expOutJO.getJSONArray("states").length(); i++)
         {
-        	expectatedState = expOutJO.getJSONArray("states").getJSONObject(i);
-            if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, i);
+        	if(expOutJO != null)
+        	{
+        		expectatedState = expOutJO.getJSONArray("states").getJSONObject(i);
+                if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, i);
+        	}
         }
-        //comparacion del resto de pasos mediante un for 
-        // lanzar excepcion en caso de que la comparacion se solicite y 
-        // los estados no sean iguales.
-
+        
         p.println("]");
         p.println("}");
     }	

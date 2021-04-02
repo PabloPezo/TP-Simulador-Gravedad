@@ -5,49 +5,58 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-public class BuilderBasedFactory<T> implements Factory{	//COPIADO TODO DE GONZALO ASI QUE NO SE QUE HACER
-	List<Builder<T>> builders;
-	List<JSONObject> factoryElements;
+public class BuilderBasedFactory<T> implements Factory<Object>{	//COPIADO TODO DE GONZALO ASI QUE NO SE QUE HACER
 	
-	public BuilderBasedFactory(List<Builder<T>> builders)
+	List<JSONObject> factoryElements;
+	List<Builder<T>> builderList;
+	
+	public BuilderBasedFactory(List<Builder<T>> builderList)
 	{
-		builders = new ArrayList<Builder<T>>();
-		for (Builder<T> builder : builders)
+		builderList = new ArrayList<Builder<T>>();
+		
+		for (Builder<T> bu : builderList)
 		{
-			factoryElements.add(builder.getBuilderInfo());
+			factoryElements.add(bu.getBuilderInfo());
 		}
 	}
 
 	@Override
-	public Object createInstance(JSONObject info) {
-		Object obj = null;
-		int i = 0;
-		boolean exito = false;
-		if (info == null)
+	public Object createInstance(JSONObject js) throws IllegalArgumentException
+	{
+		Object object = null;
+		
+		if (js != null)
 		{
-			throw new IllegalArgumentException("Invalid value of createInstance: null");
-		}
-		while(i < builders.size() && !exito)
-		{
-			obj = builders.get(i).createInstance(info);
-			if (obj != null)
+			boolean done = false;
+			int i = 0;
+			
+			while(!done && i < builderList.size())
 			{
-				exito = true;
+				object = builderList.get(i).createInstance(js);
+				if (object != null)
+				{
+					done = true;
+				}
+				i++;
 			}
-			i++;
-		}
-		if (obj == null)
-		{
-			throw new IllegalArgumentException("Null object");
+			if (object != null)
+			{
+				return object;
+			}
+			else
+			{
+				throw new IllegalArgumentException("Null object");
+			}
 		}
 		else
 		{
-			return obj;
+			throw new IllegalArgumentException("Invalid value of createInstance: Null");
 		}
 	}
 
 	@Override
-	public java.util.List getInfo() {
+	public java.util.List getInfo()
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
