@@ -4,8 +4,8 @@ import java.util.List;
 
 import simulator.misc.Vector2D;
 
-public class NewtonUniversalGravitation implements ForceLaws {
-
+public class NewtonUniversalGravitation implements ForceLaws 
+{
 	private final double _gConst;
 	
 	public NewtonUniversalGravitation()

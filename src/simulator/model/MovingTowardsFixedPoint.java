@@ -20,14 +20,15 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 		_point = point;
 	}
 	
-	public void apply(List<Body> bs) {
+	public void apply(List<Body> bs) 
+	{
 		for (Body body : bs)
 		{
 			Vector2D f = new Vector2D(_point.minus(body.getPosition()).direction().scale(_gConst * body.getMass()));
 			body.addForce(f);
 		}
 	}
-	@Override
+	
 	public String toString()
 	{
 		return "MovingTowardsFixedPoint [point = " + _point + ", gConst = " + _gConst + "]";

@@ -5,8 +5,8 @@ import org.json.JSONObject;
 import java.util.List;
 import org.json.JSONArray;
 
-public class PhysicsSimulator {
-
+public class PhysicsSimulator
+{
 	private double _realTime;
 	private List <Body>bodyList;
 	private ForceLaws _forceLaws;

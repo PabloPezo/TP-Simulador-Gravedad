@@ -13,8 +13,8 @@ import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.PhysicsSimulator;
 
-public class Controller {
-	
+public class Controller 
+{
 	private PhysicsSimulator _phySimulator;
 	private Factory<Body> _bodiesFactory;
 	

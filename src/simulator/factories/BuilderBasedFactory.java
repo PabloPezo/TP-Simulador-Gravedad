@@ -20,7 +20,6 @@ public class BuilderBasedFactory<T> implements Factory<Object>{	//COPIADO TODO D
 		}
 	}
 
-	@Override
 	public Object createInstance(JSONObject js) throws IllegalArgumentException
 	{
 		Object object = null;
@@ -54,8 +53,7 @@ public class BuilderBasedFactory<T> implements Factory<Object>{	//COPIADO TODO D
 		}
 	}
 
-	@Override
-	public java.util.List getInfo()
+	public java.util.List getInfo() // BUILDER RELLENAR
 	{
 		// TODO Auto-generated method stub
 		return null;

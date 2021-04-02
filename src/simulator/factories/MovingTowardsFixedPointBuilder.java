@@ -7,14 +7,13 @@ import simulator.misc.Vector2D;
 import simulator.model.ForceLaws;
 import simulator.model.MovingTowardsFixedPoint;
 
-public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
-	
+public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
+{
 	public  MovingTowardsFixedPointBuilder()
 	{
 		super("mtcp", "moving towards fixed point");
 	}
 	
-	@Override
 	protected ForceLaws createTheInstance(JSONObject js)
 	{
 		double g = js.has("g")? js.getDouble("g") : 9.81;

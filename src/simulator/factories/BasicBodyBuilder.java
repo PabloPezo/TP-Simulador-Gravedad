@@ -6,14 +6,13 @@ import org.json.JSONObject;
 import simulator.misc.Vector2D;
 import simulator.model.Body;
 
-public class BasicBodyBuilder extends Builder<Body> {
-
+public class BasicBodyBuilder extends Builder<Body> 
+{
 	public BasicBodyBuilder()
 	{
 		super();
 	}
 	
-	@Override
 	protected Body createTheInstance(JSONObject js)
 	{
 		double m = js.getDouble("m");

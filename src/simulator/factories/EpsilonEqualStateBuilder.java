@@ -12,7 +12,6 @@ public class EpsilonEqualStateBuilder extends Builder<StateComparator>
 		super("epseq", "Epsilon-equal states comparator");			
 	}
 	
-	@Override
     protected StateComparator createTheInstance(JSONObject js)
 	{
         double epsilon = js.has("eps") ? js.getDouble("eps") : 0.0;

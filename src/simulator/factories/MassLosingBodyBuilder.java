@@ -7,16 +7,15 @@ import simulator.misc.Vector2D;
 import simulator.model.Body;
 import simulator.model.MassLosingBody;
 
-public class MassLosingBodyBuilder extends Builder<Body> {
-
+public class MassLosingBodyBuilder extends Builder<Body> 
+{
 	public MassLosingBodyBuilder()
 	{
 		super("mlb", "mass losing body");
 	}
-	
 
-	@Override
-	protected Body createTheInstance(JSONObject js) {
+	protected Body createTheInstance(JSONObject js)
+	{
 		double m = js.getDouble("m");
 		String id = js.getString("id");
 		

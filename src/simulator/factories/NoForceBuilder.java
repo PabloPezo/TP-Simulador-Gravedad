@@ -5,14 +5,14 @@ import simulator.model.NoForce;
 import simulator.model.ForceLaws;
 
 
-public class NoForceBuilder extends Builder<ForceLaws> {
+public class NoForceBuilder extends Builder<ForceLaws>
+{
 
 	public NoForceBuilder()
 	{
 		super("nf", "no force");
 	}
-	
-	@Override
+
 	protected ForceLaws createTheInstance(JSONObject js)
 	{
 		if(js.similar( super.getBuilderInfo().get("data")))
