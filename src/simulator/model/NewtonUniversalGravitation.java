@@ -30,7 +30,7 @@ public class NewtonUniversalGravitation implements ForceLaws {
 					
 					if (bodyPrincipal.getMass() == 0.0)
 					{
-						bodyPrincipal.vel = new Vector2D();
+						bodyPrincipal._vel = new Vector2D();
 					}
 					else
 					{

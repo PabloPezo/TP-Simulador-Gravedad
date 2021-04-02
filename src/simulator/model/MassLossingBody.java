@@ -9,7 +9,8 @@ public class MassLossingBody extends Body{
 	protected double _lossFactor;
 	protected double _lossFrequency;
 	
-	public MassLossingBody(String id, Vector2D v, Vector2D p, double m, double lossFactor, double lossFrequency) {
+	public MassLossingBody(String id, Vector2D v, Vector2D p, double m, double lossFactor, double lossFrequency)
+	{
 		super(id, v, p, m);
 		
 		_contador = 0.0;
@@ -17,8 +18,7 @@ public class MassLossingBody extends Body{
 		_lossFrequency = lossFrequency;
 		
 	}
-	
-	@Override
+
 	void move(double t)
 	{
 		super.move(t);
@@ -27,7 +27,7 @@ public class MassLossingBody extends Body{
 		
 		if (_lossFrequency <= _contador)
 		{
-			mass = mass * (1 - _lossFactor);
+			_mass = _mass * (1 - _lossFactor);
 			_contador = 0.0;
 		}
 	}
