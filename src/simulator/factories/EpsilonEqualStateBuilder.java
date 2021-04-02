@@ -20,7 +20,6 @@ public class EpsilonEqualStateBuilder extends Builder<StateComparator> {//CAMBIA
 	        {
 	        	return new EpsilonEqualStates(eps);
 	        }
-
 	        return null;
 	    }
 

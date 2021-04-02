@@ -69,10 +69,6 @@ public class Controller {
         	expectatedState = expOutJO.getJSONArray("states").getJSONObject(i);
             if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, i);
         }
-        //comparacion del resto de pasos mediante un for 
-        // lanzar excepcion en caso de que la comparacion se solicite y 
-        // los estados no sean iguales.
-
         p.println("]");
         p.println("}");
     }	

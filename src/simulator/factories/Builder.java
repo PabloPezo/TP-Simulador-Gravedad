@@ -7,10 +7,7 @@ public abstract class Builder<T> {
 	protected  String _typeTag;
 	protected String _desc; // para la parte 2 
 	
-	public Builder()
-	{
-		
-	}
+	public Builder() { }
 	
 	public Builder(String typeTag, String desc)
 	{

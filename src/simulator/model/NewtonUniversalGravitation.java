@@ -22,6 +22,7 @@ public class NewtonUniversalGravitation implements ForceLaws {
 	{
 		Vector2D Force = new Vector2D();
 		double forceModulo;
+		double distance2;
 		
 		for (Body bodyPrincipal : bs)
 		{
@@ -39,7 +40,8 @@ public class NewtonUniversalGravitation implements ForceLaws {
 					}
 					else
 					{
-						forceModulo = (_gConst * bodyPrincipal.getMass() * bodySecundario.getMass()) / Math.pow(bodyPrincipal.getPosition().distanceTo(bodySecundario.getPosition()), 2);
+						distance2 = Math.pow(bodyPrincipal.getPosition().distanceTo(bodySecundario.getPosition()), 2);
+						forceModulo = (_gConst * bodyPrincipal.getMass() * bodySecundario.getMass()) / distance2;
 						Force = Force.plus(bodySecundario.getPosition().minus(bodyPrincipal.getPosition()).direction().scale(forceModulo));
 					}
 				}

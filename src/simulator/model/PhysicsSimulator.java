@@ -48,16 +48,15 @@ public class PhysicsSimulator {
  	
  	public JSONObject getState()
  	{
- 			JSONObject JSON = new JSONObject();
- 			JSON.put("time",_currentTime);
- 			JSON.put("bodies", bodyList);
- 			return JSON;
+		JSONObject js = new JSONObject();
+		js.put("time", _currentTime);
+		js.put("bodies", bodyList);
+		
+		return js;
  	}
  	
  	public String toString()
  	{
 		return getState().toString();
- 		
  	}
-	
 }
