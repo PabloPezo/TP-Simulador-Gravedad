@@ -44,24 +44,29 @@ public class EpsilonEqualStates implements StateComparator
 			JSONObject jso2 = js2.getJSONObject(i);
 			Vector2D v1, v2;
 
-			if(jso1.getString("id")!=jso2.getString("id")) { return false; }
-			
-			if( jso1.getFloat("m") != jso2.getFloat("m") ) { return false; }	// AÑADIDO POR PEZO REVISAR 
-			
-			v1 = new Vector2D (jso1.getJSONArray("p").getDouble(0),jso1.getJSONArray("p").getDouble(1));
-			v2 = new Vector2D (jso2.getJSONArray("p").getDouble(0),jso2.getJSONArray("p").getDouble(1));
-			
-			if(v1.distanceTo(v2) > _eps) { return false; }
+			if(jso1.getString("id") == jso2.getString("id"))
+			{
+				if( jso1.getFloat("m") != jso2.getFloat("m") ) { return false; }	// AÑADIDO POR PEZO REVISAR 
+				
+				v1 = new Vector2D (jso1.getJSONArray("p").getDouble(0),jso1.getJSONArray("p").getDouble(1));
+				v2 = new Vector2D (jso2.getJSONArray("p").getDouble(0),jso2.getJSONArray("p").getDouble(1));
+				
+				if(v1.distanceTo(v2) > _eps) { return false; }
 
-			v1 = new Vector2D(jso1.getJSONArray("v").getDouble(0),jso1.getJSONArray("v").getDouble(1));
-			v2 = new Vector2D(jso2.getJSONArray("v").getDouble(0),jso2.getJSONArray("v").getDouble(1));
+				v1 = new Vector2D(jso1.getJSONArray("v").getDouble(0),jso1.getJSONArray("v").getDouble(1));
+				v2 = new Vector2D(jso2.getJSONArray("v").getDouble(0),jso2.getJSONArray("v").getDouble(1));
 
-			if(v1.distanceTo(v2) > _eps) { return false; }
+				if(v1.distanceTo(v2) > _eps) { return false; }
 
-			v1 = new Vector2D (jso1.getJSONArray("f").getDouble(0),jso1.getJSONArray("f").getDouble(1));
-			v2 = new Vector2D (jso2.getJSONArray("f").getDouble(0),jso2.getJSONArray("f").getDouble(1));
-			
-			if(v1.distanceTo(v2) > _eps) { return false; }
+				v1 = new Vector2D (jso1.getJSONArray("f").getDouble(0),jso1.getJSONArray("f").getDouble(1));
+				v2 = new Vector2D (jso2.getJSONArray("f").getDouble(0),jso2.getJSONArray("f").getDouble(1));
+				
+				if(v1.distanceTo(v2) > _eps) { return false; }
+			}
+			else
+			{
+				return false;
+			}
 		}
 		return true;
 	}

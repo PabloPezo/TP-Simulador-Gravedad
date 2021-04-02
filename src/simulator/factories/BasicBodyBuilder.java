@@ -15,7 +15,8 @@ public class BasicBodyBuilder extends Builder<Body> {
 	
 	
 	@Override
-	protected Body createTheInstance(JSONObject js) {
+	protected Body createTheInstance(JSONObject js)
+	{
 		double m = js.getDouble("m");
 		String id = js.getString("id");
 		
