@@ -6,10 +6,9 @@ import simulator.misc.Vector2D;
 public class Body {
 	
 	protected String _id;
-	protected Vector2D _vel;
-	protected Vector2D _force;
-	protected Vector2D _pos;
+	protected Vector2D _vel, _force, _pos;
 	protected double _mass;
+	private JSONObject js = new JSONObject();
 	
 	public Body(String id, Vector2D v, Vector2D p, double m)
 	{
@@ -47,7 +46,7 @@ public class Body {
 	
 	void addForce (Vector2D f)
 	{
-		_force = _force.plus(f);
+		_force.plus(f);
 	}
 	
 	void resetForce()
@@ -64,7 +63,7 @@ public class Body {
 		}
 		else
 		{
-			accel = new Vector2D(_force.scale(1 / _mass));
+			accel = getForce().scale(1 / _mass);
 		}
 		_pos = _pos.plus((_vel.scale(t)).plus(accel.scale((1/2) * t * t)));
 		_vel = _vel.plus(accel.scale(t));
@@ -72,17 +71,47 @@ public class Body {
 	
 	public JSONObject getState()
 	{
-		JSONObject jso = new JSONObject();
+			js.put("id",getId());
+			js.put("m",getMass());
+			js.put("p",getPosition().asJSONArray());
+			js.put("v",getVelocity().asJSONArray());
+			js.put("f",getForce().asJSONArray());
 		
-			jso.put("id",getId());
-			jso.put("m",getMass());
-			jso.put("p",getPosition().asJSONArray());
-			jso.put("v",getVelocity().asJSONArray());
-			jso.put("f",getForce().asJSONArray());
-		
-		return jso;
+		return js;
 	}
 	
+	@Override
+	public boolean equals(Object obj)
+	{
+		Body b = (Body) obj;
+		
+		if (obj != null)
+		{
+			if (obj == this)
+			{
+				return true;
+			}
+			else
+			{
+				if (b._id == null && _id == null)
+				{
+					return true;
+				}
+				else if (!_id.equals(b._id))
+				{
+					return false;
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+		
+		return true;
+	}
+	
+	@Override
 	public String toString()
 	{
 		return getState().toString();
