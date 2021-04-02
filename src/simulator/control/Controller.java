@@ -71,7 +71,7 @@ public class Controller {
         }
         //comparacion del resto de pasos mediante un for 
         // lanzar excepcion en caso de que la comparacion se solicite y 
-        // los estados no sean iguales
+        // los estados no sean iguales.
 
         p.println("]");
         p.println("}");
