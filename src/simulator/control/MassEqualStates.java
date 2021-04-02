@@ -26,6 +26,8 @@ public class MassEqualStates implements StateComparator
 	        	return false;
 	        }
 	    }
+	    
+	    // return (s1.get("id") == s2.get("id") || s1.get("m") == s2.get("m"));
 	    return true;
 	}
 	
