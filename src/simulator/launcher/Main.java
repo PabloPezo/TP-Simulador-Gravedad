@@ -38,6 +38,7 @@ public class Main
 	//
 	private static Double _dtime = null;
 	private static String _inFile = null;
+	private static String _outFile = null;
 	private static JSONObject _forceLawsInfo = null;
 	private static JSONObject _stateComparatorInfo = null;
 
@@ -83,8 +84,14 @@ public class Main
 
 			parseHelpOption(line, cmdLineOptions);
 			parseInFileOption(line);
+			
+			
 			// TODO add support of -o, -eo, and -s (define corresponding parse methods)
 
+			parseOutFileOption(line);
+//			parseExpOutFileOption(line);
+//			parseStepsOption(line);
+			
 			parseDeltaTimeOption(line);
 			parseForceLawsOption(line);
 			parseStateComparatorOption(line);
@@ -119,8 +126,22 @@ public class Main
 		// input file
 		cmdLineOptions.addOption(Option.builder("i").longOpt("input").hasArg().desc("Bodies JSON input file.").build());
 
-		// TODO add support for -o, -eo, and -s (add corresponding information to
-		// cmdLineOptions)
+		//Estos tres siguientes los he hecho yo
+		
+		// output file
+		cmdLineOptions.addOption(Option.builder("o").longOpt("output").hasArg().desc("Output file, where output is written. Default value:"
+						+ "the standard output.")
+				.build());
+		
+		// expected output
+		cmdLineOptions.addOption(Option.builder("eo").longOpt("expected-output").hasArg().desc("The expected output file. If not provided"
+						+ "no comparison is applied")
+				.build());
+		
+		// steps
+		cmdLineOptions.addOption(Option.builder("s").longOpt("steps").hasArg().desc("An integer representing the number of simulation steps."
+						+ " Default value: 150.")
+				.build());
 
 		// delta-time
 		cmdLineOptions.addOption(Option.builder("dt").longOpt("delta-time").hasArg()
@@ -181,6 +202,16 @@ public class Main
 		if (_inFile == null) 
 		{
 			throw new ParseException("In batch mode an input file of bodies is required");
+		}
+	}
+	
+	//Hecho por pablito je ese soy yo
+	private static void parseOutFileOption(CommandLine line) throws ParseException 
+	{
+		_outFile = line.getOptionValue("o");
+		if (_outFile == null) 
+		{
+			throw new ParseException("In batch mode an output file of bodies is required");
 		}
 	}
 
