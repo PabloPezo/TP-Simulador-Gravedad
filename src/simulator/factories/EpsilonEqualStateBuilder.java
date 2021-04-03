@@ -12,19 +12,26 @@ public class EpsilonEqualStateBuilder extends Builder<StateComparator>
 		super("epseq", "Epsilon-equal states comparator");			
 	}
 	
-    protected StateComparator createTheInstance(JSONObject js)
+    protected StateComparator createTheInstance(JSONObject js) throws IllegalArgumentException // No estoy seguro de si esta bien. REVISARRRRRRR. Si esta bien poner en todos
 	{
-        double epsilon = js.has("eps") ? js.getDouble("eps") : 0.0;
-        
-        if (js.similar(super.getBuilderInfo().get("data")))
-        {
-        	return new EpsilonEqualStates(epsilon);
-        }
-        else
-        {
-        	return null;
-        }
-    }
+    	try
+    	{
+    		double epsilon = js.has("eps") ? js.getDouble("eps") : 0.0;
+
+    		if (js.similar(super.getBuilderInfo().get("data")))
+    		{
+    			return new EpsilonEqualStates(epsilon);
+    		}
+    		else
+    		{
+    			return null;
+    		}
+    	} 
+    	catch (NumberFormatException e)
+    	{
+    		throw new IllegalArgumentException("Illegal argument");
+    	}
+	}
 
     protected JSONObject createData()
     {

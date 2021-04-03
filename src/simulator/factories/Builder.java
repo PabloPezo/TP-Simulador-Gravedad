@@ -3,8 +3,8 @@ package simulator.factories;
 import org.json.JSONObject;
 
 
-public abstract class Builder<T> {
-
+public abstract class Builder<T> 
+{
 	protected  String _typeTag;
 	protected String _desc;
 	
@@ -24,14 +24,22 @@ public abstract class Builder<T> {
 		return null;
 	}
 	
-	public T createInstance(JSONObject js)
+	public T createInstance(JSONObject js) throws IllegalArgumentException // Cambiado por Pezo 3/4 siguiendo el enunciado. Falta la excepcion
 	{
-		T b = null;
-		if(_typeTag != null && _typeTag.equals(js.get("type")))
+		try
 		{
-			b = createTheInstance(js.getJSONObject("data"));
+			T b = null;
+			if(_typeTag != null && _typeTag.equals(js.get("type")))
+			{
+				b = createTheInstance(js.getJSONObject("data"));
+			}
+
+			return b;
 		}
-		return b;
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException("Illegal arguments");
+		}
 	}
 	
 	public JSONObject getBuilderInfo()
