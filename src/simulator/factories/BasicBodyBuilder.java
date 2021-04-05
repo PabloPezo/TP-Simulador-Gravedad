@@ -8,9 +8,11 @@ import simulator.model.Body;
 
 public class BasicBodyBuilder extends Builder<Body> 
 {
+	static String _type = "basic";
+	static String _desc = "default body";
 	public BasicBodyBuilder()
 	{
-		super();
+		super(_type, _desc);
 	}
 	
 	protected Body createTheInstance(JSONObject js)

@@ -19,9 +19,9 @@ public abstract class Builder<T>
 
 	protected abstract T createTheInstance(JSONObject jsonObject);
 	
-	protected JSONObject createData()
+	protected JSONObject createData() // cambiado por favor funciona
 	{
-		return null;
+		return new JSONObject();
 	}
 	
 	public T createInstance(JSONObject js) 
