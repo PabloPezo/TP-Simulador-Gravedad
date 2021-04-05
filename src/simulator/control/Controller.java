@@ -65,8 +65,11 @@ public class Controller
             if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, 0);
         }
         
-        for(int i=1; i<expOutJO.getJSONArray("states").length(); i++)
+        for(int i=1; i <= steps; i++)
         {
+        	_phySimulator.advance();
+        	currentState = _phySimulator.getState();
+        	p.println(currentState);
         	if(expOutJO != null)
         	{
         		expectatedState = expOutJO.getJSONArray("states").getJSONObject(i);

@@ -1,3 +1,4 @@
+
 package simulator.factories;
 
 import java.util.ArrayList;
@@ -5,24 +6,25 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-public class BuilderBasedFactory<T> implements Factory<Object>{	//COPIADO TODO DE GONZALO ASI QUE NO SE QUE HACER
+public class BuilderBasedFactory<T> implements Factory<T>
+{	//COPIADO TODO DE GONZALO ASI QUE NO SE QUE HACER
 	
 	List<JSONObject> factoryElements;
 	List<Builder<T>> builderList;
 	
 	public BuilderBasedFactory(List<Builder<T>> builderList)
 	{
-		builderList = new ArrayList<Builder<T>>();
-		
+		this.builderList = new ArrayList<Builder<T>>();
+		factoryElements = new ArrayList<>();
 		for (Builder<T> bu : builderList)
 		{
 			factoryElements.add(bu.getBuilderInfo());
 		}
 	}
 
-	public Object createInstance(JSONObject js) throws IllegalArgumentException
+	public T createInstance(JSONObject js) throws IllegalArgumentException
 	{
-		Object object = null;
+		T object = null;
 		
 		if (js != null)
 		{
@@ -53,10 +55,16 @@ public class BuilderBasedFactory<T> implements Factory<Object>{	//COPIADO TODO D
 		}
 	}
 
-	public java.util.List getInfo() // BUILDER RELLENAR
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public java.util.List getInfo() // BUILDER RELLENAR
+//	{
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	
+    public List<JSONObject> getInfo() 
+    {
+        return factoryElements;
+    }
 
 }
+

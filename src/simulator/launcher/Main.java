@@ -1,5 +1,10 @@
 package simulator.launcher;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import org.apache.commons.cli.CommandLine;
@@ -11,6 +16,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.json.JSONObject;
 
+import simulator.control.Controller;
 import simulator.control.StateComparator;
 import simulator.factories.BasicBodyBuilder;
 import simulator.factories.Builder;
@@ -42,6 +48,7 @@ public class Main
 	private static Integer _steps = null;
 	private static String _inFile = null;
 	private static String _outFile = null;
+	private static String _expFile = null; // ESTO DONDE SE INICIALIZA
 	private static JSONObject _forceLawsInfo = null;
 	private static JSONObject _stateComparatorInfo = null;
 
@@ -52,23 +59,21 @@ public class Main
 
 	private static void init() 
 	{
-		// TODO initialize the bodies factory
-		ArrayList<Builder<Body>>bodyBuilders=new ArrayList<>();
+		ArrayList <Builder<Body>> bodyBuilders = new ArrayList<>();
 		bodyBuilders.add(new BasicBodyBuilder());
 		bodyBuilders.add(new MassLosingBodyBuilder());
-		_bodyFactory= new BuilderBasedFactory<Body>(bodyBuilders);
+		_bodyFactory = new BuilderBasedFactory <Body>(bodyBuilders);
 
-		// TODO initialize the force laws factory
 		ArrayList<Builder<ForceLaws>>forceLawsBuilders= new ArrayList<>();
 		forceLawsBuilders.add(new NewtonUniversalGravitationBuilder());
 		forceLawsBuilders.add(new MovingTowardsFixedPointBuilder());
 		forceLawsBuilders.add(new NoForceBuilder());
-		_forceLawsFactory = new BuilderBasedFactory<ForceLaws>(forceLawsBuilders);
-		// TODO initialize the state comparator
+		_forceLawsFactory = new BuilderBasedFactory <ForceLaws>(forceLawsBuilders);
+		
 		ArrayList<Builder<StateComparator>> stateCmpBuilders = new ArrayList<>();
 		stateCmpBuilders.add(new EpsilonEqualStateBuilder());
 		stateCmpBuilders.add(new MassEqualStateBuilder());
-		_stateComparatorFactory = new BuilderBasedFactory<StateComparator>(stateCmpBuilders);
+		_stateComparatorFactory = new BuilderBasedFactory <StateComparator>(stateCmpBuilders);
 	}
 
 	private static void parseArgs(String[] args) 
@@ -92,14 +97,14 @@ public class Main
 			// TODO add support of -o, -eo, and -s (define corresponding parse methods)
 
 			parseOutFileOption(line);
-//			parseExpOutFileOption(line);
-//			parseStepsOption(line);
+			parseExpOutFileOption(line);
+			parseStepsOption(line);
 			
 			parseDeltaTimeOption(line);
 			parseForceLawsOption(line);
 			parseStateComparatorOption(line);
 
-			// if there are some remaining arguments, then something wrong is
+			// if there are some rema+-ining arguments, then something wrong is
 			// provided in the command line!
 			//
 			String[] remaining = line.getArgs();
@@ -311,24 +316,22 @@ public class Main
 		}
 	}
 
-	private static void startBatchMode() throws Exception // HECHO POR MR PEZO REVISAR BIEN
+	private static void startBatchMode() throws Exception
 	{
-		// PhysicsSimulator simulador = new PhysicsSimulator( );	// PARA ESTO HE HECHO UN IMPORT
+		InputStream in = new FileInputStream(new File(_inFile));
+		OutputStream out = _outFile == null ? System.out : new FileOutputStream(new File(_outFile));
 		
-		InputStream in = new FilerInputStream(new File(_inFile));
-		OutputStream out = _outFile == null ? System.out : new FileOutputStream(new File(_outFile)));
-		
-		ForceLaws fuerzas = forceLawsFactory.createInstance()_ForceLawsInfo;
+		ForceLaws fuerzas = _forceLawsFactory.createInstance(_forceLawsInfo);
 		PhysicsSimulator simulador = new PhysicsSimulator(_dtime, fuerzas);
 		Controller control = new Controller(simulador, _bodyFactory);
 		
 		InputStream expOut = null;
-		StateComparator = null;
+		StateComparator cmp = null;
 		
 		if(_expFile != null)
 		{
 			expOut = new FileInputStream(new File(_expFile));
-			cmp = _stateComparatorFactory.createInstance(_stateComparatorInfo)
+			cmp = _stateComparatorFactory.createInstance(_stateComparatorInfo);
 		}
 		
 		control.loadBodies(in);
@@ -347,7 +350,8 @@ public class Main
 		{
 			init();
 			start(args);
-		} catch (Exception e) 
+		}
+		catch (Exception e) 
 		{
 			System.err.println("Something went wrong ...");
 			System.err.println();
