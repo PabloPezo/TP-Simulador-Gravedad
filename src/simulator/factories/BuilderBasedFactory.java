@@ -14,8 +14,9 @@ public class BuilderBasedFactory<T> implements Factory<T>
 	
 	public BuilderBasedFactory(List<Builder<T>> builderList)
 	{
-		this.builderList = new ArrayList<Builder<T>>();
+		this.builderList = new ArrayList<>(builderList);
 		factoryElements = new ArrayList<>();
+
 		for (Builder<T> bu : builderList)
 		{
 			factoryElements.add(bu.getBuilderInfo());
@@ -54,12 +55,6 @@ public class BuilderBasedFactory<T> implements Factory<T>
 			throw new IllegalArgumentException("Invalid value of createInstance: Null");
 		}
 	}
-
-//	public java.util.List getInfo() // BUILDER RELLENAR
-//	{
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 	
     public List<JSONObject> getInfo() 
     {

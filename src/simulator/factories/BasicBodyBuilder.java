@@ -31,16 +31,24 @@ public class BasicBodyBuilder extends Builder<Body>
 		return null;
 	}
 	
-	protected JSONObject createData()
-	{
-		JSONObject js = new JSONObject();
-		js.put("id", "unique id");
-		js.put("m", "mass");
-		js.put("p", "position");
-		js.put("v", "velocity");
-		
-		return js;
-	}
+//	protected JSONObject createData() // revisar
+//	{
+//		JSONObject js = new JSONObject();
+//		js.put("id", "unique id");
+//		js.put("m", "mass");
+//		js.put("p", "position");
+//		js.put("v", "velocity");
+//		
+//		return js;
+//	}
 	
-	
+	protected JSONObject createData() {
+        JSONObject js = new JSONObject();
+        js.put("id", "the identifier");
+        js.put("m", "the mass");
+        js.put("v", "the velocity");
+        js.put("p"," the position");
+        js.put("f", "the force");
+        return js;
+    }
 }

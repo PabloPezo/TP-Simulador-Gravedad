@@ -24,22 +24,16 @@ public abstract class Builder<T>
 		return null;
 	}
 	
-	public T createInstance(JSONObject js) throws IllegalArgumentException // Cambiado por Pezo 3/4 siguiendo el enunciado. Falta la excepcion
+	public T createInstance(JSONObject js) 
 	{
-		try
+		T b = null;
+		if(_typeTag != null && _typeTag.equals(js.get("type")))
 		{
-			T b = null;
-			if(_typeTag != null && _typeTag.equals(js.get("type")))
-			{
-				b = createTheInstance(js.getJSONObject("data"));
-			}
+			b = createTheInstance(js.getJSONObject("data"));
+		}
 
-			return b;
-		}
-		catch(Exception e)
-		{
-			throw new IllegalArgumentException("Illegal arguments");
-		}
+		return b;
+
 	}
 	
 	public JSONObject getBuilderInfo()

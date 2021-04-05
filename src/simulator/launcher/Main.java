@@ -298,7 +298,7 @@ public class Main
 
 	private static void parseForceLawsOption(CommandLine line) throws ParseException
 	{
-		String fl = line.getOptionValue("fl", _forceLawsDefaultValue);
+		String fl = line.getOptionValue("cmp", _forceLawsDefaultValue); // antes ponia fl
 		_forceLawsInfo = parseWRTFactory(fl, _forceLawsFactory);
 		if (_forceLawsInfo == null) 
 		{

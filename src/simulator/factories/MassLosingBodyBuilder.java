@@ -36,12 +36,23 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		return null;
 	}
 	
-	protected JSONObject createData()	//PONER ESTO O LO DE ID, MASA, POS, FACTOR...??
-	{
-		JSONObject js = new JSONObject();
-		js.put("type", "mlb");
-		js.put("data", createData()); 
-		js.put("desc","Mass losing body");
-		return js;
-	}	
+//	protected JSONObject createData()	// REVISAR
+//	{
+//		JSONObject js = new JSONObject();
+//		js.put("type", "mlb");
+//		js.put("data", "Pepe"); 
+//		js.put("desc","Mass losing body");
+//		return js;
+//	}	
+	
+	protected JSONObject createData() {
+        JSONObject js = new JSONObject();
+        js.put("id", "the identifier");
+        js.put("m", "the mass");
+        js.put("v", "the velocity");
+        js.put("p", "the position");
+        js.put("factor", "the loss factor");
+        js.put("freq", "the loss frequency");
+        return js;
+    }
 }
