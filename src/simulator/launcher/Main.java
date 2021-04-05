@@ -32,12 +32,14 @@ public class Main
 	// default values for some parameters
 	//
 	private final static Double _dtimeDefaultValue = 2500.0;
+	private final static Integer _defaultStepsValue = 150;
 	private final static String _forceLawsDefaultValue = "nlug";
 	private final static String _stateComparatorDefaultValue = "epseq";
 
 	// some attributes to stores values corresponding to command-line parameters
 	//
 	private static Double _dtime = null;
+	private static Integer _steps = null;
 	private static String _inFile = null;
 	private static String _outFile = null;
 	private static JSONObject _forceLawsInfo = null;
@@ -61,7 +63,7 @@ public class Main
 		forceLawsBuilders.add(new NewtonUniversalGravitationBuilder());
 		forceLawsBuilders.add(new MovingTowardsFixedPointBuilder());
 		forceLawsBuilders.add(new NoForceBuilder());
-		_forceLawsFactory=new BuilderBasedFactory<ForceLaws>(forceLawsBuilders);
+		_forceLawsFactory = new BuilderBasedFactory<ForceLaws>(forceLawsBuilders);
 		// TODO initialize the state comparator
 		ArrayList<Builder<StateComparator>> stateCmpBuilders = new ArrayList<>();
 		stateCmpBuilders.add(new EpsilonEqualStateBuilder());
@@ -211,9 +213,24 @@ public class Main
 	private static void parseOutFileOption(CommandLine line) throws ParseException 
 	{
 		_outFile = line.getOptionValue("o");
-		if (_outFile == null) 
+	}
+	
+	private static void parseExpOutFileOption(CommandLine line) throws ParseException 
+	{
+		_outFile = line.getOptionValue("eo");
+	}
+	
+	private static void parseStepsOption(CommandLine line) throws ParseException 
+	{
+		String steps = line.getOptionValue("s", _defaultStepsValue.toString());
+		try
 		{
-			throw new ParseException("In batch mode an output file of bodies is required");
+			_steps = Integer.parseInt(steps);
+			assert (_steps > 0);
+		}
+		catch (Exception e)
+		{
+			throw new ParseException("Invalid steps value: " + steps);
 		}
 	}
 
@@ -296,8 +313,26 @@ public class Main
 
 	private static void startBatchMode() throws Exception // HECHO POR MR PEZO REVISAR BIEN
 	{
-		PhysicsSimulator simulador = new PhysicsSimulator( );	// PARA ESTO HE HECHO UN IMPORT
-		// TODO complete this method
+		// PhysicsSimulator simulador = new PhysicsSimulator( );	// PARA ESTO HE HECHO UN IMPORT
+		
+		InputStream in = new FilerInputStream(new File(_inFile));
+		OutputStream out = _outFile == null ? System.out : new FileOutputStream(new File(_outFile)));
+		
+		ForceLaws fuerzas = forceLawsFactory.createInstance()_ForceLawsInfo;
+		PhysicsSimulator simulador = new PhysicsSimulator(_dtime, fuerzas);
+		Controller control = new Controller(simulador, _bodyFactory);
+		
+		InputStream expOut = null;
+		StateComparator = null;
+		
+		if(_expFile != null)
+		{
+			expOut = new FileInputStream(new File(_expFile));
+			cmp = _stateComparatorFactory.createInstance(_stateComparatorInfo)
+		}
+		
+		control.loadBodies(in);
+		control.run(_steps, out, expOut, cmp);
 	}
 
 	private static void start(String[] args) throws Exception
