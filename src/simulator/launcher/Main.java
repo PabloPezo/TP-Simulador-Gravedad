@@ -320,7 +320,6 @@ public class Main
 	{
 		InputStream in = new FileInputStream(new File(_inFile));
 		OutputStream out = _outFile == null ? System.out : new FileOutputStream(new File(_outFile));
-		
 		ForceLaws fuerzas = _forceLawsFactory.createInstance(_forceLawsInfo);
 		PhysicsSimulator simulador = new PhysicsSimulator(_dtime, fuerzas);
 		Controller control = new Controller(simulador, _bodyFactory);

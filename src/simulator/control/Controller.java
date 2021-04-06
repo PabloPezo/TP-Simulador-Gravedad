@@ -28,7 +28,7 @@ public class Controller
     {
         JSONObject js = new JSONObject(new JSONTokener(in));
         JSONArray bodies = js.getJSONArray("bodies");
-        
+        System.out.println(bodies);
         for(int i = 0; i < bodies.length(); i++)
         {
         	_phySimulator.addBody(_bodiesFactory.createInstance(bodies.getJSONObject(i)));
@@ -52,12 +52,21 @@ public class Controller
 		PrintStream p = new PrintStream(out);
 		p.println("{");
 		p.println("\"states\": [");
+		//---------------------------------------------
+		System.out.println("{");
+		System.out.println("\"states\": [");
+		//--------------------------------------------
 			
 		JSONObject expectatedState = null;
 		JSONObject currentState = null;
 		
 		currentState = _phySimulator.getState();
+
         p.println(currentState);
+        
+		//----------------------------------------------
+        System.out.println(currentState);
+		//----------------------------------------------
         
         if(expOutJO != null)
         {
@@ -69,6 +78,14 @@ public class Controller
         {
         	_phySimulator.advance();
         	currentState = _phySimulator.getState();
+    		//----------------------------------------------
+        	if (i < 200)
+        	{
+        		System.out.println(currentState);
+        	}
+
+            
+    		//----------------------------------------------
         	p.println(currentState);
         	if(expOutJO != null)
         	{

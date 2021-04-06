@@ -7,7 +7,6 @@ import simulator.model.ForceLaws;
 
 public class NoForceBuilder extends Builder<ForceLaws>
 {
-
 	public NoForceBuilder()
 	{
 		super("nf", "no force");
@@ -15,12 +14,11 @@ public class NoForceBuilder extends Builder<ForceLaws>
 
 	protected ForceLaws createTheInstance(JSONObject js)
 	{
-		if(js.similar( super.getBuilderInfo().get("data")))
-		{
+//		if(js.similar( super.getBuilderInfo().get("data")))
+//		{
 			return new NoForce();
-		}
-		
-		return null;
+//		}
+//		
+//		return null;
 	}
-
 }

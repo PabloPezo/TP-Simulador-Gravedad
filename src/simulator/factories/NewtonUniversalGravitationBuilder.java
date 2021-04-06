@@ -15,13 +15,13 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 	protected ForceLaws createTheInstance(JSONObject js)
 	{
 		double gConst = js.has("g") ? js.getDouble("g") : 6.67E-11;
-
-		if (js.similar( super.getBuilderInfo().get("data")))
-		{
-			return new NewtonUniversalGravitation(gConst);
-		}
 		
-		return null;
+//		if (js.similar( super.getBuilderInfo().get("data")))
+//		{
+			return new NewtonUniversalGravitation(gConst);
+//		}
+//		
+//		return null;
 	}
 	
 	protected JSONObject createData()

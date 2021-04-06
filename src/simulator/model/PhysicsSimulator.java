@@ -2,6 +2,7 @@ package simulator.model;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 
@@ -20,6 +21,7 @@ public class PhysicsSimulator
 			_forceLaws = fl;
 			_currentTime = 0.0;
 		}	
+		this.bodyList = new ArrayList<Body>();
 	}
 	 	
  	public void advance()
@@ -39,11 +41,16 @@ public class PhysicsSimulator
  	
  	public void addBody(Body b) throws IllegalArgumentException
  	{
- 		if (bodyList.contains(b))
+ 		if (!bodyList.contains(b))
  		{
- 			throw new IllegalArgumentException();
+ 	 		bodyList.add(b);
  		}
- 		bodyList.add(b);
+ 		else
+ 		{
+
+ 	 		throw new IllegalArgumentException();
+ 		}
+
  	}
  	
  	public JSONObject getState()

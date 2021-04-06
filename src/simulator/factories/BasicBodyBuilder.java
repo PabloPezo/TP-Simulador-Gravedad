@@ -26,25 +26,15 @@ public class BasicBodyBuilder extends Builder<Body>
 		Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
 		Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
 		
-		if(js.similar(super.getBuilderInfo().get("data")))
-		{
+//		if(js.similar(super.getBuilderInfo().get("data"))) // ?
+//		{
 			return new Body(id, vel, pos, m);
-		}
-		return null;
+//		}
+//		return null;
 	}
 	
-//	protected JSONObject createData() // revisar
-//	{
-//		JSONObject js = new JSONObject();
-//		js.put("id", "unique id");
-//		js.put("m", "mass");
-//		js.put("p", "position");
-//		js.put("v", "velocity");
-//		
-//		return js;
-//	}
-	
-	protected JSONObject createData() {
+	protected JSONObject createData() 
+	{
         JSONObject js = new JSONObject();
         js.put("id", "the identifier");
         js.put("m", "the mass");

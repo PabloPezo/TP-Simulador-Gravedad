@@ -14,10 +14,10 @@ public class MassEqualStateBuilder extends Builder<StateComparator>
 	
 	protected StateComparator createTheInstance(JSONObject js)
 	{
-        if (js.similar( super.getBuilderInfo().get("data")))
-        {
+//        if (js.similar( super.getBuilderInfo().get("data")))
+//        {
         	return new MassEqualStates();
-        }
-        return null;
+//        }
+//        return null;
 	}
 }

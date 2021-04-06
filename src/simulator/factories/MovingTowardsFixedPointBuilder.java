@@ -16,20 +16,23 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 	
 	protected ForceLaws createTheInstance(JSONObject js)
 	{
-		double g = js.has("g")? js.getDouble("g") : 9.81;
+		Vector2D p = null;
+		JSONArray vector;
+		double g = js.has("g") ? js.getDouble("g") : 9.81;
 		
-		JSONArray vector = js.getJSONArray("c");
-		
-		double x = vector.isEmpty() ? vector.getDouble(0) : 0.0;
-		double y = vector.isEmpty() ? vector.getDouble(1) : 0.0;
-		
-		Vector2D c = new Vector2D(x, y);
-		
-		if (js.similar (super.getBuilderInfo().get("data")))
+		if(!js.isEmpty())
 		{
-			return new MovingTowardsFixedPoint(c, g);
+			vector = js.getJSONArray("c");
+			double x = vector.getDouble(0);
+			double y = vector.getDouble(1);
+			p = new Vector2D(x, y);
 		}
-		return null;
+		else
+		{
+			p = new Vector2D(0.0, 0.0);
+		}
+		return new MovingTowardsFixedPoint(p,g);
+		
 	}
 	
 	protected JSONObject createData()

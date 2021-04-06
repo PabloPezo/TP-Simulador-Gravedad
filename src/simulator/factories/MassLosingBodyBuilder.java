@@ -35,17 +35,9 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		
 		return null;
 	}
-	
-//	protected JSONObject createData()	// REVISAR
-//	{
-//		JSONObject js = new JSONObject();
-//		js.put("type", "mlb");
-//		js.put("data", "Pepe"); 
-//		js.put("desc","Mass losing body");
-//		return js;
-//	}	
-	
-	protected JSONObject createData() {
+
+	protected JSONObject createData() 
+	{
         JSONObject js = new JSONObject();
         js.put("id", "the identifier");
         js.put("m", "the mass");
