@@ -3,8 +3,8 @@ package simulator.model;
 import org.json.JSONObject;
 import simulator.misc.Vector2D;
 
-public class Body {
-	
+public class Body 
+{
 	protected String _id;
 	protected Vector2D _vel, _force, _pos;
 	protected double _mass;
@@ -80,7 +80,6 @@ public class Body {
 		return js;
 	}
 	
-	@Override
 	public boolean equals(Object obj)
 	{
 		Body b = (Body) obj;
@@ -111,7 +110,6 @@ public class Body {
 		return true;
 	}
 	
-	@Override
 	public String toString()
 	{
 		return getState().toString();

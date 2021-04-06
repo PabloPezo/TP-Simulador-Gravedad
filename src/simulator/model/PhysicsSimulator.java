@@ -47,23 +47,22 @@ public class PhysicsSimulator
  		}
  		else
  		{
-
  	 		throw new IllegalArgumentException();
  		}
+ 	}
 
- 	}
- 	
- 	public JSONObject getState()
- 	{
-		JSONObject js = new JSONObject();
-		js.put("time", _currentTime);
-		js.put("bodies", bodyList);
+	public JSONObject getState() 
+	{
+		JSONObject obj = new JSONObject();
+		JSONArray arr = new JSONArray();
 		
-		return js;
- 	}
+		for (Body body : bodyList)
+			arr.put(body.getState());
+		
+		obj.put("bodies", arr);
+		obj.put("time", _currentTime);
+		return obj;
+	}
  	
- 	public String toString()
- 	{
-		return getState().toString();
- 	}
+ 	public String toString() { return getState().toString(); }
 }

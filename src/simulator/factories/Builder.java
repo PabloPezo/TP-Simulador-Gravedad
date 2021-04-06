@@ -19,7 +19,7 @@ public abstract class Builder<T>
 
 	protected abstract T createTheInstance(JSONObject jsonObject);
 	
-	protected JSONObject createData() // cambiado por favor funciona
+	protected JSONObject createData() 
 	{
 		return new JSONObject();
 	}
@@ -29,7 +29,7 @@ public abstract class Builder<T>
 		T b = null;
 		if(_typeTag != null && _typeTag.equals(js.get("type")))
 		{
-			b = createTheInstance(js.getJSONObject("data"));// antes ponia data
+			b = createTheInstance(js.getJSONObject("data"));
 		}
 
 		return b;
