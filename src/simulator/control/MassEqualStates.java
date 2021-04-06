@@ -1,13 +1,8 @@
-	package simulator.control;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+package simulator.control;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
+
 
 public class MassEqualStates implements StateComparator
 {
@@ -21,10 +16,10 @@ public class MassEqualStates implements StateComparator
 
 	    for(int i = 0; i < js1.length(); i++)
 	    {
-	        if ((js1.getString(i) != js2.getString(i)) || (js1.getDouble(i) != js2.getDouble(i)))
-	        {
-	        	return false;
-	        }
+	    	if(js1.getJSONObject(i).getString("id") !=js2.getJSONObject(i).getString("id") || js1.getJSONObject(i).getDouble("m")!=js2.getJSONObject(i).getDouble("m")) 
+	    	{
+	    		return false;
+	    	}
 	    }
 	    return true;
 	}

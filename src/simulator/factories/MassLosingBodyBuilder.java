@@ -28,12 +28,12 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		double factor = js.getDouble("factor");
 		double freq = js.getDouble("freq");
 		
-		if(js.similar(super.getBuilderInfo().get("data")))
-		{
+//		if(js.similar(super.getBuilderInfo().get("data")))
+//		{
 			return new MassLosingBody(id, vel, pos, m, factor, freq);
-		}
+	//	}
 		
-		return null;
+		//return null;
 	}
 
 	protected JSONObject createData() 

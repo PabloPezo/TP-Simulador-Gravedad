@@ -11,7 +11,7 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 {
 	public  MovingTowardsFixedPointBuilder()
 	{
-		super("mtcp", "moving towards fixed point");
+		super("mtfp", "moving towards fixed point");
 	}
 	
 	protected ForceLaws createTheInstance(JSONObject js)

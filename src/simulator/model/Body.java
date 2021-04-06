@@ -63,10 +63,11 @@ public class Body
 		}
 		else
 		{
-			accel = getForce().scale(1 / _mass);
+			accel = getForce().scale(1.0 / _mass);
 		}
-		_pos = _pos.plus((_vel.scale(t)).plus(accel.scale((1/2) * t * t)));
-		_vel = _vel.plus(accel.scale(t));
+		System.out.println("t : " + t);
+		 _pos = _pos.plus(_vel.scale(t).plus(accel.scale(0.5 * t * t)));
+		 _vel = _vel.plus(accel.scale(t));
 	}
 	
 	public JSONObject getState()

@@ -1,6 +1,8 @@
 package simulator.model;
 
 
+import org.json.JSONObject;
+
 import simulator.misc.Vector2D;
 
 public class MassLosingBody extends Body
@@ -31,5 +33,18 @@ public class MassLosingBody extends Body
 			_mass = _mass * (1 - _lossFactor);
 			_contador = 0.0;
 		}
+	}
+	
+	public JSONObject getState()
+	{
+		JSONObject js=new JSONObject();
+		js.put("id", getId());
+		js.put("m", getMass());
+		js.put("p", getPosition().asJSONArray());
+		js.put("v", getVelocity().asJSONArray());
+		js.put("f", getForce().asJSONArray());
+		js.put("factor", getLossFactor());
+		js.put("freq", getLossFrequency());
+		return js;
 	}
 }
