@@ -12,7 +12,7 @@ public class NoForceBuilder extends Builder<ForceLaws>
 		super("nf", "no force");
 	}
 
-	protected ForceLaws createTheInstance(JSONObject js)
+	protected ForceLaws createTheInstance(JSONObject js) // en principio no hace falta excepcion
 	{
 //		if(js.similar( super.getBuilderInfo().get("data")))
 //		{
