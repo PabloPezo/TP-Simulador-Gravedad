@@ -41,7 +41,7 @@ public class Body
 	
 	void addForce (Vector2D f)
 	{
-		_force.plus(f);
+		_force = _force.plus(f);
 	}
 	
 	void resetForce()
@@ -65,7 +65,7 @@ public class Body
 		{
 			accel = getForce().scale(1.0 / _mass);
 		}
-		System.out.println("t : " + t);
+		System.out.println(getForce());
 		 _pos = _pos.plus(_vel.scale(t).plus(accel.scale(0.5 * t * t)));
 		 _vel = _vel.plus(accel.scale(t));
 	}
@@ -76,7 +76,7 @@ public class Body
 			js.put("m", getMass());
 			js.put("p", getPosition().asJSONArray());
 			js.put("v" ,getVelocity().asJSONArray());
-			js.put("f", getForce().asJSONArray());
+			js.put("f", this.getForce().asJSONArray());
 		
 		return js;
 	}

@@ -35,16 +35,24 @@ public class MassLosingBody extends Body
 		}
 	}
 	
-	public JSONObject getState()
-	{
-		JSONObject js=new JSONObject();
-		js.put("id", getId());
-		js.put("m", getMass());
-		js.put("p", getPosition().asJSONArray());
-		js.put("v", getVelocity().asJSONArray());
-		js.put("f", getForce().asJSONArray());
-		js.put("factor", getLossFactor());
-		js.put("freq", getLossFrequency());
-		return js;
+//	public JSONObject getState()
+//	{
+//		JSONObject js=new JSONObject();
+//		js.put("id", getId());
+//		js.put("m", getMass());
+//		js.put("p", getPosition().asJSONArray());
+//		js.put("v", getVelocity().asJSONArray());
+//		js.put("f", getForce().asJSONArray());
+//		js.put("factor", getLossFactor());
+//		js.put("freq", getLossFrequency());
+//		return js;
+//	}
+	
+	// COPIADO DEL SAMU
+	public JSONObject getState() {//formato JSON
+		JSONObject jso = super.getState();
+		jso.put("freq", getLossFrequency());
+		jso.put("factor", getLossFactor());
+		return jso;
 	}
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import simulator.factories.Builder;
+
 public class BuilderBasedFactory<T> implements Factory<T>
 {	//COPIADO TODO DE GONZALO ASI QUE NO SE QUE HACER
 	
@@ -25,35 +27,46 @@ public class BuilderBasedFactory<T> implements Factory<T>
 
 	public T createInstance(JSONObject js) throws IllegalArgumentException
 	{
-		T object = null;
+//		T object = null;
+//		
+//		if (js != null)
+//		{
+//			boolean done = false;
+//			int i = 0;
+//			
+//			while(!done && i < builderList.size())
+//			{
+//				object = builderList.get(i).createInstance(js);
+//				if (object != null)
+//				{
+//					done = true;
+//				}
+//				i++;
+//			}
+//			if (object != null)
+//			{
+//				return object;
+//			}
+//			else
+//			{
+//				throw new IllegalArgumentException("Null object");
+//			}
+//		}
+//		else
+//		{
+//			throw new IllegalArgumentException("Invalid value of createInstance: Null");
+//		}
 		
-		if (js != null)
-		{
-			boolean done = false;
-			int i = 0;
-			
-			while(!done && i < builderList.size())
-			{
-				object = builderList.get(i).createInstance(js);
-				if (object != null)
-				{
-					done = true;
-				}
-				i++;
-			}
-			if (object != null)
-			{
-				return object;
-			}
-			else
-			{
-				throw new IllegalArgumentException("Null object");
-			}
+		/// CAMBIAR QUE LO TENEMOS COMO EL SAMU
+		
+		if (js == null) throw new IllegalArgumentException("Invalid value for createInstance: null");
+		
+		for (Builder<T> b : builderList) {
+			T aux = b.createInstance(js);
+			if (aux != null) return aux;
 		}
-		else
-		{
-			throw new IllegalArgumentException("Invalid value of createInstance: Null");
-		}
+		
+		throw new IllegalArgumentException("Unable to create instance with given info");
 	}
 	
     public List<JSONObject> getInfo() 

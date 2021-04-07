@@ -40,7 +40,6 @@ public class BasicBodyBuilder extends Builder<Body>
         js.put("m", "the mass");
         js.put("v", "the velocity");
         js.put("p"," the position");
-        js.put("f", "the force");
         return js;
     }
 }
