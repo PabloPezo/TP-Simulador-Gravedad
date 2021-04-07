@@ -36,7 +36,7 @@ public class PhysicsSimulator
 		{
  			body.move(_realTime);
 		}
-		this._currentTime += _realTime;
+		_currentTime += _realTime;
  	}
  	
  	public void addBody(Body b) throws IllegalArgumentException

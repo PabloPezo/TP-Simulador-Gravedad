@@ -65,21 +65,11 @@ public class Body
 		{
 			accel = getForce().scale(1.0 / _mass);
 		}
-		System.out.println(getForce());
-		 _pos = _pos.plus(_vel.scale(t).plus(accel.scale(0.5 * t * t)));
-		 _vel = _vel.plus(accel.scale(t));
+		_pos = _pos.plus(_vel.scale(t).plus(accel.scale(0.5 * t * t)));
+		_vel = _vel.plus(accel.scale(t));
 	}
 	
-	public JSONObject getState()
-	{
-			js.put("id", getId());
-			js.put("m", getMass());
-			js.put("p", getPosition().asJSONArray());
-			js.put("v" ,getVelocity().asJSONArray());
-			js.put("f", this.getForce().asJSONArray());
-		
-		return js;
-	}
+
 	
 	public boolean equals(Object obj)
 	{
@@ -111,9 +101,19 @@ public class Body
 		return true;
 	}
 	
-	public String toString()
+	public JSONObject getState()	// necesario?
+	{
+		js.put("id", getId());
+		js.put("m", getMass());
+		js.put("p", getPosition().asJSONArray());
+		js.put("v" ,getVelocity().asJSONArray());
+		js.put("f", this.getForce().asJSONArray());
+
+		return js;
+	}
+	
+	public String toString()		//necesario?
 	{
 		return getState().toString();
 	}
-	
 }

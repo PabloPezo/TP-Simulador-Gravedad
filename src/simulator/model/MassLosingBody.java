@@ -35,6 +35,8 @@ public class MassLosingBody extends Body
 		}
 	}
 	
+	
+// REVISAR SI ES NECESARIO TODO
 //	public JSONObject getState()
 //	{
 //		JSONObject js=new JSONObject();
@@ -48,8 +50,9 @@ public class MassLosingBody extends Body
 //		return js;
 //	}
 	
-	// COPIADO DEL SAMU
-	public JSONObject getState() {//formato JSON
+
+	public JSONObject getState() 
+	{
 		JSONObject jso = super.getState();
 		jso.put("freq", getLossFrequency());
 		jso.put("factor", getLossFactor());

@@ -1,6 +1,7 @@
 package simulator.control;
 
 import org.json.JSONObject;
+
 import org.json.JSONArray;
 import simulator.misc.Vector2D;
 public class EpsilonEqualStates implements StateComparator
@@ -26,7 +27,7 @@ public class EpsilonEqualStates implements StateComparator
 			return false;
 		}
 
-		for(int i=0; i < js1.length(); i++)	//Cambiar que samu tiene esto pero gonsalo tiene otras cosas
+		for(int i=0; i < js1.length(); i++)	
 		{
 			JSONObject jso1 = js1.getJSONObject(i);
 			JSONObject jso2 = js2.getJSONObject(i);
@@ -38,21 +39,16 @@ public class EpsilonEqualStates implements StateComparator
 			v2 = new Vector2D(jso2.getJSONArray("v").getDouble(0), jso2.getJSONArray("v").getDouble(1));
 			f1 = new Vector2D(jso1.getJSONArray("f").getDouble(0), jso1.getJSONArray("f").getDouble(1));
 			f2 = new Vector2D(jso2.getJSONArray("f").getDouble(0), jso2.getJSONArray("f").getDouble(1));
-//			
-//			if(jso1.getString("id") != jso2.getString("id"))
-//			{
-//				return false;
-//			}
-//			else if(jso1.getFloat("m") != jso2.getFloat("m") )
-//			{
-//				return false;
-//			}
-//			else if(p1.distanceTo(p2) > _eps || v1.distanceTo(v2) > _eps || f1.distanceTo(f2) > _eps)
-//			{
-//				return false;
-//			}
-//			
-			if(Math.abs(js1.getJSONObject(i).getDouble("m")-js2.getJSONObject(i).getDouble("m"))>_eps && v1.distanceTo(v2)>_eps && f1.distanceTo(f2)>_eps && p1.distanceTo(p2)>_eps)
+			
+			if(jso1.getString("id") != jso2.getString("id"))
+			{
+				return false;
+			}
+			else if(jso1.getFloat("m") != jso2.getFloat("m") )
+			{
+				return false;
+			}
+			else if(p1.distanceTo(p2) > _eps || v1.distanceTo(v2) > _eps || f1.distanceTo(f2) > _eps)
 			{
 				return false;
 			}
