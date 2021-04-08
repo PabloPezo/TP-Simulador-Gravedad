@@ -22,19 +22,26 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
 		js = js.getJSONObject("data");
 		
-		double m = js.getDouble("m");
-		String id = js.getString("id");
-		
-		JSONArray p = js.getJSONArray("p");
-		JSONArray v = js.getJSONArray("v");
-		
-		Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
-		Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
-		
-		double factor = js.getDouble("factor");
-		double freq = js.getDouble("freq");
+		try
+		{
+			double m = js.getDouble("m");
+			String id = js.getString("id");
 
-		return new MassLosingBody(id, vel, pos, m, factor, freq);
+			JSONArray p = js.getJSONArray("p");
+			JSONArray v = js.getJSONArray("v");
+
+			Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
+			Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
+
+			double factor = js.getDouble("factor");
+			double freq = js.getDouble("freq");
+
+			return new MassLosingBody(id, vel, pos, m, factor, freq);
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException("Illegal argument");
+		}
 	}
 
 	protected JSONObject createData() //REVISAR

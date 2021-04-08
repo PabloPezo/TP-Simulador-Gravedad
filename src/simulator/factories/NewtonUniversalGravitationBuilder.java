@@ -19,10 +19,15 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 	{	
 		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
 		js = js.getJSONObject("data");
-		
-		double gConst = js.has("g") ? js.getDouble("g") : 6.67E-11;
-
-		return new NewtonUniversalGravitation(gConst);
+		try
+		{
+			double gConst = js.has("g") ? js.getDouble("g") : 6.67E-11;
+			return new NewtonUniversalGravitation(gConst);
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException("Illegal argument");
+		}
 	}
 	
 	protected JSONObject createData() // REVISAR
