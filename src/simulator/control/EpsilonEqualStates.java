@@ -38,20 +38,20 @@ public class EpsilonEqualStates implements StateComparator
 			v2 = new Vector2D(jso2.getJSONArray("v").getDouble(0), jso2.getJSONArray("v").getDouble(1));
 			f1 = new Vector2D(jso1.getJSONArray("f").getDouble(0), jso1.getJSONArray("f").getDouble(1));
 			f2 = new Vector2D(jso2.getJSONArray("f").getDouble(0), jso2.getJSONArray("f").getDouble(1));
-//			
-//			if(jso1.getString("id") != jso2.getString("id"))
-//			{
-//				return false;
-//			}
-//			else if(jso1.getFloat("m") != jso2.getFloat("m") )
-//			{
-//				return false;
-//			}
-//			else if(p1.distanceTo(p2) > _eps || v1.distanceTo(v2) > _eps || f1.distanceTo(f2) > _eps)
-//			{
-//				return false;
-//			}
-//			
+			
+			if(!jso1.getString("id").equals(jso2.getString("id")))
+			{
+				return false;
+			}
+			else if(jso1.getFloat("m") == jso2.getFloat("m"))
+			{
+				return false;
+			}
+			else if(p1.distanceTo(p2) > _eps || v1.distanceTo(v2) > _eps || f1.distanceTo(f2) > _eps)
+			{
+				return false;
+			}
+			
 			if(Math.abs(js1.getJSONObject(i).getDouble("m")-js2.getJSONObject(i).getDouble("m"))>_eps && v1.distanceTo(v2)>_eps && f1.distanceTo(f2)>_eps && p1.distanceTo(p2)>_eps)
 			{
 				return false;

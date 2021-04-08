@@ -62,30 +62,30 @@ public class Controller
         p.println(currentState);
 		p.print(","); 
         
-        if(expOutJO != null)
-        {
-        	expectatedState = expOutJO.getJSONArray("states").getJSONObject(0);
-            if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, 0);
-        }
-        
-        for(int i=1; i <= steps; i++)
-        {
-        	_phySimulator.advance();
-        	currentState = _phySimulator.getState();
+		if(expOutJO != null)
+		{
+			expectatedState = expOutJO.getJSONArray("states").getJSONObject(0);
+			if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, expectatedState, currentState, 0);
+		}
 
-            p.println( currentState);
-        	
-        	
-        	if(i != steps) { p.print(","); }
-        	
-        	if(expOutJO != null)
-        	{
-        		expectatedState = expOutJO.getJSONArray("states").getJSONObject(i);
-                if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, i);
-        	}
-        }
-        
-        p.println("]");
-        p.println("}");
+		for(int i=1; i <= steps; i++)
+		{
+			_phySimulator.advance();
+			currentState = _phySimulator.getState();
+
+			p.println( currentState);
+
+
+			if(i != steps) { p.print(","); }
+
+			if(expOutJO != null)
+			{
+				expectatedState = expOutJO.getJSONArray("states").getJSONObject(i);
+				if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, expectatedState, currentState, i);
+			}
+		}
+
+		p.println("]");
+		p.println("}");
     }	
 }
