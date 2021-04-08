@@ -42,8 +42,6 @@ public class Body
 	void addForce (Vector2D f)
 	{
 		_force = _force.plus(f);
-		//System.out.println("Fuerecesita llamada en body con F = " + f + ". Y la f del body = " + _force);
-		
 	}
 	
 	void resetForce()
@@ -67,7 +65,6 @@ public class Body
 		{
 			accel = getForce().scale(1.0 / _mass);
 		}
-		System.out.println("t : " + t);
 		 _pos = _pos.plus(_vel.scale(t).plus(accel.scale(0.5 * t * t)));
 		 _vel = _vel.plus(accel.scale(t));
 	}
