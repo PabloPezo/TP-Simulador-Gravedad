@@ -137,9 +137,6 @@ public class Main
 						+ "'.")
 				.build());
 		
-		
-		
-		
 		cmdLineOptions.addOption(Option.builder("cmp").longOpt("comparator").hasArg()
 				.desc("State comparator to be used when comparing states. Possible values: "
 						+ factoryPossibleValues(_stateComparatorFactory) + ". Default value: '"
