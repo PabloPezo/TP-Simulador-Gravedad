@@ -36,7 +36,7 @@ public abstract class Builder<T>
 
 	}
 	
-	public JSONObject getBuilderInfo()
+	public JSONObject getBuilderInfo() //REVISAR
 	{
 		JSONObject info = new JSONObject();
 		info.put("type", _typeTag);
@@ -44,4 +44,5 @@ public abstract class Builder<T>
 		info.put("desc",_desc);
 		return info;
 	}	
+
 }

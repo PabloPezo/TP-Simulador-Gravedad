@@ -34,25 +34,19 @@ import simulator.model.PhysicsSimulator;
 
 public class Main
 {
-
-	// default values for some parameters
-	//
 	private final static Double _dtimeDefaultValue = 2500.0;
 	private final static Integer _defaultStepsValue = 150;
 	private final static String _forceLawsDefaultValue = "nlug";
 	private final static String _stateComparatorDefaultValue = "epseq";
-
-	// some attributes to stores values corresponding to command-line parameters
-	//
+	
 	private static Double _dtime = null;
 	private static Integer _steps = null;
 	private static String _inFile = null;
 	private static String _outFile = null;
-	private static String _expFile = null; // ESTO DONDE SE INICIALIZA
+	private static String _expFile = null; 
 	private static JSONObject _forceLawsInfo = null;
 	private static JSONObject _stateComparatorInfo = null;
 
-	// factories
 	private static Factory<Body> _bodyFactory;
 	private static Factory<ForceLaws> _forceLawsFactory;
 	private static Factory<StateComparator> _stateComparatorFactory;
@@ -78,13 +72,8 @@ public class Main
 
 	private static void parseArgs(String[] args) 
 	{
-
-		// define the valid command line options
-		//
 		Options cmdLineOptions = buildOptions();
 
-		// parse the command line as provided in args
-		//
 		CommandLineParser parser = new DefaultParser();
 		try
 		{
@@ -93,9 +82,6 @@ public class Main
 			parseHelpOption(line, cmdLineOptions);
 			parseInFileOption(line);
 			
-			
-			// TODO add support of -o, -eo, and -s (define corresponding parse methods)
-
 			parseOutFileOption(line);
 			parseExpOutFileOption(line);
 			parseStepsOption(line);
@@ -104,9 +90,6 @@ public class Main
 			parseForceLawsOption(line);
 			parseStateComparatorOption(line);
 
-			// if there are some rema+-ining arguments, then something wrong is
-			// provided in the command line!
-			//
 			String[] remaining = line.getArgs();
 			if (remaining.length > 0) 
 			{
@@ -115,57 +98,48 @@ public class Main
 					error += (" " + o);
 				throw new ParseException(error);
 			}
-
 		}
 		catch (ParseException e)
 		{
 			System.err.println(e.getLocalizedMessage());
 			System.exit(1);
 		}
-
 	}
 
 	private static Options buildOptions() 
 	{
 		Options cmdLineOptions = new Options();
 
-		// help
 		cmdLineOptions.addOption(Option.builder("h").longOpt("help").desc("Print this message.").build());
 
-		// input file
 		cmdLineOptions.addOption(Option.builder("i").longOpt("input").hasArg().desc("Bodies JSON input file.").build());
 
-		//Estos tres siguientes los he hecho yo
-		
-		// output file
 		cmdLineOptions.addOption(Option.builder("o").longOpt("output").hasArg().desc("Output file, where output is written. Default value:"
 						+ "the standard output.")
 				.build());
 		
-		// expected output
 		cmdLineOptions.addOption(Option.builder("eo").longOpt("expected-output").hasArg().desc("The expected output file. If not provided"
 						+ "no comparison is applied")
 				.build());
 		
-		// steps
 		cmdLineOptions.addOption(Option.builder("s").longOpt("steps").hasArg().desc("An integer representing the number of simulation steps."
 						+ " Default value: 150.")
 				.build());
 
-		// delta-time
 		cmdLineOptions.addOption(Option.builder("dt").longOpt("delta-time").hasArg()
 				.desc("A double representing actual time, in seconds, per simulation step. Default value: "
 						+ _dtimeDefaultValue + ".")
 				.build());
 
-		// force laws
 		cmdLineOptions.addOption(Option.builder("fl").longOpt("force-laws").hasArg()
 				.desc("Force laws to be used in the simulator. Possible values: "
 						+ factoryPossibleValues(_forceLawsFactory) + ". Default value: '" + _forceLawsDefaultValue
 						+ "'.")
 				.build());
-
-		// gravity laws
+		
+		
+		
+		
 		cmdLineOptions.addOption(Option.builder("cmp").longOpt("comparator").hasArg()
 				.desc("State comparator to be used when comparing states. Possible values: "
 						+ factoryPossibleValues(_stateComparatorFactory) + ". Default value: '"
@@ -214,7 +188,6 @@ public class Main
 		}
 	}
 	
-	//Hecho por pablito je ese soy yo
 	private static void parseOutFileOption(CommandLine line) throws ParseException 
 	{
 		_outFile = line.getOptionValue("o");
@@ -253,12 +226,6 @@ public class Main
 
 	private static JSONObject parseWRTFactory(String v, Factory<?> factory) 
 	{
-
-		// the value of v is either a tag for the type, or a tag:data where data is a
-		// JSON structure corresponding to the data of that type. We split this
-		// information
-		// into variables 'type' and 'data'
-		//
 		int i = v.indexOf(":");
 		String type = null;
 		String data = null;
@@ -273,7 +240,6 @@ public class Main
 			data = "{}";
 		}
 
-		// look if the type is supported by the factory
 		boolean found = false;
 		for (JSONObject fe : factory.getInfo()) 
 		{
@@ -284,7 +250,6 @@ public class Main
 			}
 		}
 
-		// build a corresponding JSON for that data, if found
 		JSONObject jo = null;
 		if (found) 
 		{
@@ -298,7 +263,7 @@ public class Main
 
 	private static void parseForceLawsOption(CommandLine line) throws ParseException
 	{
-		String fl = line.getOptionValue("fl", _forceLawsDefaultValue); // antes ponia fl
+		String fl = line.getOptionValue("fl", _forceLawsDefaultValue); 
 		_forceLawsInfo = parseWRTFactory(fl, _forceLawsFactory);
 		if (_forceLawsInfo == null) 
 		{
