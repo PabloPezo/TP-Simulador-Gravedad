@@ -28,7 +28,7 @@ public class BasicBodyBuilder extends Builder<Body>
 		
 //		if(js.similar(super.getBuilderInfo().get("data"))) // ?
 //		{
-			return new Body(id, vel, pos, m);
+		return new Body(id, vel, pos, m);
 //		}
 //		return null;
 	}
@@ -37,10 +37,9 @@ public class BasicBodyBuilder extends Builder<Body>
 	{
         JSONObject js = new JSONObject();
         js.put("id", "the identifier");
-        js.put("m", "the mass");
         js.put("v", "the velocity");
         js.put("p"," the position");
-        js.put("f", "the force");
+        js.put("m", "the mass");
         return js;
     }
 }

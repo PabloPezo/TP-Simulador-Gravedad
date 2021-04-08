@@ -6,8 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/pablo/eclipse-workspace/PhysicsSimulator/lib/commons-cli-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/pablo/eclipse-workspace/PhysicsSimulator/lib/json.jar"/>
 	<classpathentry kind="lib" path="lib/commons-cli-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/json.jar"/>
 	<classpathentry kind="output" path="bin"/>

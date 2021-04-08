@@ -26,7 +26,7 @@ public class EpsilonEqualStates implements StateComparator
 			return false;
 		}
 
-		for(int i=0; i < js1.length(); i++)	//Cambiar que samu tiene esto pero gonsalo tiene otras cosas
+		for(int i=0; i < js1.length(); i++)
 		{
 			JSONObject jso1 = js1.getJSONObject(i);
 			JSONObject jso2 = js2.getJSONObject(i);
