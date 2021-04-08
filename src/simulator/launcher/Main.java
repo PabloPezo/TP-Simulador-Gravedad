@@ -82,8 +82,9 @@ public class Main
 			parseHelpOption(line, cmdLineOptions);
 			parseInFileOption(line);
 			
+			parseExpOutFileOption(line);//
 			parseOutFileOption(line);
-			parseExpOutFileOption(line);
+
 			parseStepsOption(line);
 			
 			parseDeltaTimeOption(line);
@@ -190,12 +191,12 @@ public class Main
 	
 	private static void parseOutFileOption(CommandLine line) throws ParseException 
 	{
-		_outFile = line.getOptionValue("o");
+		_outFile = line.getOptionValue("o");//
 	}
 	
 	private static void parseExpOutFileOption(CommandLine line) throws ParseException 
 	{
-		_outFile = line.getOptionValue("eo");
+		_outFile = line.getOptionValue("eo");//
 	}
 	
 	private static void parseStepsOption(CommandLine line) throws ParseException 
