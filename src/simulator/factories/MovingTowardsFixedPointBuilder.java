@@ -9,13 +9,19 @@ import simulator.model.MovingTowardsFixedPoint;
 
 public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 {
+	static String _type = "mtfp";
+	static String _desc = "moving towards fixed point";
+	
 	public  MovingTowardsFixedPointBuilder()
 	{
-		super("mtfp", "moving towards fixed point");
+		super(_type, _desc);
 	}
 	
 	protected ForceLaws createTheInstance(JSONObject js)
 	{
+		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		js = js.getJSONObject("data");
+		
 		Vector2D p = null;
 		JSONArray vector;
 		double g = js.has("g") ? js.getDouble("g") : 9.81;
@@ -32,7 +38,6 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 			p = new Vector2D(0.0, 0.0);
 		}
 		return new MovingTowardsFixedPoint(p,g);
-		
 	}
 	
 	protected JSONObject createData() // REVISAR

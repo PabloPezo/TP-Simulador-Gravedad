@@ -7,24 +7,22 @@ import simulator.control.EpsilonEqualStates;
 
 public class EpsilonEqualStateBuilder extends Builder<StateComparator>
 {
+	static String _type = "epseq";
+	static String _desc = "Epsilon-equal states comparator";
+	
 	public  EpsilonEqualStateBuilder()
 	{
-		super("epseq", "Epsilon-equal states comparator");			
+		super(_type, _desc);			
 	}
 	
     protected StateComparator createTheInstance(JSONObject js) 
 	{
+		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		js = js.getJSONObject("data");
+		
     	double epsilon = js.has("eps") ? js.getDouble("eps") : 0.0;
 
-    //		if (js.similar(super.getBuilderInfo().get("data")))
-    	//	{
-    			return new EpsilonEqualStates(epsilon);
-//    		}
-//    		else
-//    		{
-//    			return null;
-//    		}
-
+    	return new EpsilonEqualStates(epsilon);
 	}
 
     protected JSONObject createData() //REVISAR

@@ -17,7 +17,7 @@ public abstract class Builder<T>
 		_desc = desc;
 	}
 
-	protected abstract T createTheInstance(JSONObject jsonObject);
+	protected abstract T createTheInstance(JSONObject jsonObject) throws IllegalArgumentException;
 	
 	protected JSONObject createData() 
 	{
@@ -29,7 +29,7 @@ public abstract class Builder<T>
 		T b = null;
 		if(_typeTag != null && _typeTag.equals(js.get("type")))
 		{
-			b = createTheInstance(js.getJSONObject("data"));
+			b = createTheInstance(js);
 		}
 
 		return b;

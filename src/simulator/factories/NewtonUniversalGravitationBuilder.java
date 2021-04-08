@@ -7,21 +7,22 @@ import simulator.model.NewtonUniversalGravitation;
 
 public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws> 
 {
+	static String _type = "nlug";
+	static String _desc = "Newton's law universal gravitation";
+	
 	public NewtonUniversalGravitationBuilder()
 	{
-		super("nlug", "Newton's law universal gravitation");
+		super(_type, _desc);
 	}
 
 	protected ForceLaws createTheInstance(JSONObject js)
-	{
-		double gConst = js.has("g") ? js.getDouble("g") : 6.67E-11;
+	{	
+		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		js = js.getJSONObject("data");
 		
-//		if (js.similar( super.getBuilderInfo().get("data")))
-//		{
-			return new NewtonUniversalGravitation(gConst);
-//		}
-//		
-//		return null;
+		double gConst = js.has("g") ? js.getDouble("g") : 6.67E-11;
+
+		return new NewtonUniversalGravitation(gConst);
 	}
 	
 	protected JSONObject createData() // REVISAR

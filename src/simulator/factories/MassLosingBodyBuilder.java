@@ -9,13 +9,19 @@ import simulator.model.MassLosingBody;
 
 public class MassLosingBodyBuilder extends Builder<Body> 
 {
+	static String _type = "mlb";
+	static String _desc = "mass losing body";
+	
 	public MassLosingBodyBuilder()
 	{
-		super("mlb", "mass losing body");
+		super(_type, _desc);
 	}
 
 	protected Body createTheInstance(JSONObject js)
 	{
+		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		js = js.getJSONObject("data");
+		
 		double m = js.getDouble("m");
 		String id = js.getString("id");
 		
@@ -27,13 +33,8 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		
 		double factor = js.getDouble("factor");
 		double freq = js.getDouble("freq");
-		
-//		if(js.similar(super.getBuilderInfo().get("data")))
-//		{
-			return new MassLosingBody(id, vel, pos, m, factor, freq);
-	//	}
-		
-		//return null;
+
+		return new MassLosingBody(id, vel, pos, m, factor, freq);
 	}
 
 	protected JSONObject createData() //REVISAR
