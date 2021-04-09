@@ -60,8 +60,8 @@ public class Controller
 
 
         p.println(currentState);
-		p.print(","); 
-        
+		p.print(",");
+		
 		if(expOutJO != null)
 		{
 			expectatedState = expOutJO.getJSONArray("states").getJSONObject(0);
