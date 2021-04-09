@@ -25,7 +25,7 @@ public class NewtonUniversalGravitation implements ForceLaws
 		{
 			for (Body body2 : bs)
 			{
-				if(body1 != body2) 
+				if(body1.equals(body2)) 
 				{
 					body1.addForce(f.plus(makeForce(body1,body2)));
 				}

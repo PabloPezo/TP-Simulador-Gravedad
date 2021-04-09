@@ -12,11 +12,11 @@ public class MassEqualStates implements StateComparator
 	    JSONArray js1 = s1.getJSONArray("bodies");
 	    JSONArray js2 = s2.getJSONArray("bodies");
 
-	    if(js1.length()!=js2.length()) { return false; }
+	    if(js1.length() != js2.length()) { return false; }
 
 	    for(int i = 0; i < js1.length(); i++)
 	    {
-	    	if(js1.getJSONObject(i).getString("id") !=js2.getJSONObject(i).getString("id") || js1.getJSONObject(i).getDouble("m")!=js2.getJSONObject(i).getDouble("m")) 
+	    	if(js1.getJSONObject(i).getString("id") != js2.getJSONObject(i).getString("id") || js1.getJSONObject(i).getDouble("m") != js2.getJSONObject(i).getDouble("m")) 
 	    	{
 	    		return false;
 	    	}
