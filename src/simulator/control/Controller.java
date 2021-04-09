@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
 import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.PhysicsSimulator;
@@ -39,28 +37,28 @@ public class Controller
 	{
 		JSONObject expOutJO = null;
 		
-		if(expOut != null)
+		if (expOut != null)
 		{
-			expOutJO = new JSONObject (new JSONTokener(expOut));
+			expOutJO = new JSONObject(new JSONTokener(expOut));
 		}
 		
-		if(out == null)
+		if (out == null)
 		{
-			out = new OutputStream() { public void write(int b)throws IOException {}};
+			out = new OutputStream() { public void write(int b) throws IOException {}};
 		}
 		
-		PrintStream p = new PrintStream(out);
-		p.println("{");
-		p.println("\"states\": [");
+		PrintStream pr = new PrintStream(out);
+		
+		pr.println("{");
+		pr.println("\"states\": [");
 		
 		JSONObject expectatedState = null;
 		JSONObject currentState = null;
 		
 		currentState = _phySimulator.getState();
 
-
-        p.println(currentState);
-		p.print(",");
+        pr.println(currentState);
+		pr.print(",");
 		
 		if(expOutJO != null)
 		{
@@ -73,10 +71,9 @@ public class Controller
 			_phySimulator.advance();
 			currentState = _phySimulator.getState();
 
-			p.println( currentState);
+			pr.println( currentState);
 
-
-			if(i != steps) { p.print(","); }
+			if(i != steps) { pr.print(","); }
 
 			if(expOutJO != null)
 			{
@@ -84,8 +81,7 @@ public class Controller
 				if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, expectatedState, currentState, i);
 			}
 		}
-
-		p.println("]");
-		p.println("}");
+		pr.println("]");
+		pr.println("}");
     }	
 }

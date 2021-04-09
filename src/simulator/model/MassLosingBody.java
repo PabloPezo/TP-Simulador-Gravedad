@@ -33,23 +33,7 @@ public class MassLosingBody extends Body
 			_mass = _mass * (1 - _lossFactor);
 			_contador = 0.0;
 		}
-	}
-	
-	
-// REVISAR SI ES NECESARIO TODO
-//	public JSONObject getState()
-//	{
-//		JSONObject js=new JSONObject();
-//		js.put("id", getId());
-//		js.put("m", getMass());
-//		js.put("p", getPosition().asJSONArray());
-//		js.put("v", getVelocity().asJSONArray());
-//		js.put("f", getForce().asJSONArray());
-//		js.put("factor", getLossFactor());
-//		js.put("freq", getLossFrequency());
-//		return js;
-//	}
-	
+	}	
 
 	public JSONObject getState() 
 	{

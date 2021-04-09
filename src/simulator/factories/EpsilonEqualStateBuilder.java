@@ -17,7 +17,7 @@ public class EpsilonEqualStateBuilder extends Builder<StateComparator>
 	
     protected StateComparator createTheInstance(JSONObject js) 
 	{
-    	if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+    	if(!js.getString("type").equals(_type)) {return null;}
     	js = js.getJSONObject("data");
 
 		try

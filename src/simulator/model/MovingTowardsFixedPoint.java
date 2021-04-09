@@ -22,7 +22,7 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 	
 	public void apply(List<Body> bs) 
 	{
-		for (Body body : bs) // de momento se va a quedar asi
+		for (Body body : bs)
 		{
 			Vector2D f = new Vector2D(_point.minus(body.getPosition()).direction().scale(_gConst * body.getMass()));
 			body.addForce(f);

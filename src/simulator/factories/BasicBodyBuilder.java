@@ -18,7 +18,7 @@ public class BasicBodyBuilder extends Builder<Body>
 	
 	protected Body createTheInstance(JSONObject js)
 	{
-		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		if(!js.getString("type").equals(_type)) {return null;}
 		js = js.getJSONObject("data");
 
 		try
@@ -29,8 +29,8 @@ public class BasicBodyBuilder extends Builder<Body>
 			JSONArray p = js.getJSONArray("p");
 			JSONArray v = js.getJSONArray("v");
 
-			Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
-			Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
+			Vector2D pos = new Vector2D(p.getDouble(0), p.getDouble(1));
+			Vector2D vel = new Vector2D(v.getDouble(0), v.getDouble(1));
 			return new Body(id, vel, pos, m);
 		}
 		catch(Exception e)
