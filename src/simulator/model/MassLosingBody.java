@@ -9,7 +9,7 @@ public class MassLosingBody extends Body
 {
 	protected double _contador, _lossFactor, _lossFrequency;
 	
-	public MassLosingBody(String id, Vector2D v, Vector2D p, double m, double factor, double frequency)	// Cuerpo que hereda de body pero con 3 atributos más
+	public MassLosingBody(String id, Vector2D v, Vector2D p, double m, double factor, double frequency)	// Cuerpo que hereda de body pero con 3 atributos más que describen como pierde masa
 	{
 		super(id, v, p, m);
 		

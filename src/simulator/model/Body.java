@@ -54,7 +54,7 @@ public class Body
 		return _mass;
 	}
 	
-	void move(double t)		// Modifica la posicion y la velocidad del cuerpo
+	void move(double t)		//  mueve el cuerpo durante t segundos utilizando los atributos del mismo
 	{
 		Vector2D accel;
 		if (_mass == 0)
@@ -69,7 +69,7 @@ public class Body
 		 _vel = _vel.plus(accel.scale(t));
 	}
 	
-	public JSONObject getState()	// Devuelve los parámetros del cuerpo
+	public JSONObject getState()	
 	{
 			js.put("id", getId());
 			js.put("m", getMass());
@@ -80,7 +80,7 @@ public class Body
 		return js;
 	}
 	
-	public boolean equals(Object obj)	// Compara sus atributos con el objeto por referencia
+	public boolean equals(Object obj) // Devuelve true si dos cuerpos son iguales
 	{
 		Body b = (Body) obj;
 		

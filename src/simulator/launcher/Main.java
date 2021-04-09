@@ -280,7 +280,7 @@ public class Main
 		}
 	}
 
-	private static void startBatchMode() throws Exception
+	private static void startBatchMode() throws Exception // Inicia la simulación
 	{
 		InputStream in = new FileInputStream(new File(_inFile));
 		OutputStream out = _outFile == null ? System.out : new FileOutputStream(new File(_outFile));
@@ -301,13 +301,13 @@ public class Main
 		control.run(_steps, out, expOut, cmp);
 	}
 
-	private static void start(String[] args) throws Exception	// Comienza a ejecutar los comandos
+	private static void start(String[] args) throws Exception // Parsea todos los datos necesarios e inicia la simulación
 	{
 		parseArgs(args);
 		startBatchMode();
 	}
 
-	public static void main(String[] args) // Controla el desarrollo del programa
+	public static void main(String[] args) 
 	{
 		try
 		{

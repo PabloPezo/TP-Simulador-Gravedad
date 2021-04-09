@@ -20,7 +20,7 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 		_point = point;
 	}
 	
-	public void apply(List<Body> bs) 	// Añade una fuerza en una dirección determinada a un objeto
+	public void apply(List<Body> bs) 	// Añade una fuerza en una dirección determinada (hacia un punto fijo) a un objeto
 	{
 		for (Body body : bs)
 		{

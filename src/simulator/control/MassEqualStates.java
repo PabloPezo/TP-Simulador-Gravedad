@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-public class MassEqualStates implements StateComparator
+public class MassEqualStates implements StateComparator // Comparador de cuerpos
 {
 	public boolean equal(JSONObject s1, JSONObject s2)
 	{
@@ -13,7 +13,7 @@ public class MassEqualStates implements StateComparator
 			JSONArray js1 = s1.getJSONArray("bodies");
 		    JSONArray js2 = s2.getJSONArray("bodies");
 
-		    if(js1.length() == js2.length())	// Comprobar similitud de los JSONs
+		    if(js1.length() == js2.length())	
 		    {
 		    	for(int i = 0; i < js1.length(); i++)
 			    {

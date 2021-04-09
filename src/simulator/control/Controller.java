@@ -22,18 +22,18 @@ public class Controller
 		_bodiesFactory = bodiesFactory;
 	}
 	
-	public void loadBodies(InputStream in)
+	public void loadBodies(InputStream in)  // Carga los cuerpos desde el fichero
     {
         JSONObject js = new JSONObject(new JSONTokener(in));
         JSONArray bodies = js.getJSONArray("bodies");
 
-        for(int i = 0; i < bodies.length(); i++)	// Crea los bodies
+        for(int i = 0; i < bodies.length(); i++)
         {
         	_phySimulator.addBody(_bodiesFactory.createInstance(bodies.getJSONObject(i)));
         }
     }	
 	
-	public void run(int steps, OutputStream out, InputStream expOut, StateComparator cmp) throws NotEqualStatesException
+	public void run(int steps, OutputStream out, InputStream expOut, StateComparator cmp) throws NotEqualStatesException // Corre la simulación
 	{
 		JSONObject expOutJO = null;
 		

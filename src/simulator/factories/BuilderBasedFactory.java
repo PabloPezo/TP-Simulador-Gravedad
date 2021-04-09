@@ -12,7 +12,7 @@ public class BuilderBasedFactory<T> implements Factory<T>
 	List<JSONObject> factoryElements;
 	List<Builder<T>> builderList;
 	
-	public BuilderBasedFactory(List<Builder<T>> builderList)
+	public BuilderBasedFactory(List<Builder<T>> builderList) 
 	{
 		this.builderList = new ArrayList<>(builderList);
 		factoryElements = new ArrayList<>();
@@ -23,7 +23,7 @@ public class BuilderBasedFactory<T> implements Factory<T>
 		}
 	}
 
-	public T createInstance(JSONObject js) throws IllegalArgumentException	// Crea el cuerpo y comprueba las excepciones
+	public T createInstance(JSONObject js) throws IllegalArgumentException	// Si la información suministrada por info es correcta, entonces crea un objeto de tipo T. En otro caso devuelve null 
 	{
 		T object = null;
 		

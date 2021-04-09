@@ -15,10 +15,10 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 		super(_type, _desc);
 	}
 
-	protected ForceLaws createTheInstance(JSONObject js)	// Compara la información con Data
+	protected ForceLaws createTheInstance(JSONObject js)	// Comprueba que los datos son válidos. Si lo son crea un nuevo Body, de lo contrario devolverá null/producirá una excepción
 	{
 		if(!js.getString("type").equals(_type)) {return null;}
-		js = js.getJSONObject("data");
+		js = js.getJSONObject("data");  // Para acceder a los valores de "data" fácilmente
 
 		try
 		{
@@ -32,7 +32,7 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 
 	}
 	
-	protected JSONObject createData()  	// Añade la información
+	protected JSONObject createData()  
 	{
 		JSONObject js = new JSONObject();
 		

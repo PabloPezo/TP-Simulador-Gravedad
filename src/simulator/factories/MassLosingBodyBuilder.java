@@ -17,10 +17,10 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		super(_type, _desc);
 	}
 
-	protected Body createTheInstance(JSONObject js) // Compara con Data la información
+	protected Body createTheInstance(JSONObject js) // Comprueba que los datos son válidos. Si lo son crea un nuevo Body, de lo contrario devolverá null/producirá una excepción
 	{
 		if(!js.getString("type").equals(_type)) {return null;}
-		js = js.getJSONObject("data");
+		js = js.getJSONObject("data");  // Para acceder a los valores de "data" fácilmente
 
 		try
 		{
@@ -45,7 +45,7 @@ public class MassLosingBodyBuilder extends Builder<Body>
 
 	}
 
-	protected JSONObject createData()  	// Añade la información
+	protected JSONObject createData()  	
 	{
         JSONObject js = new JSONObject();
         js.put("id", "the identifier");

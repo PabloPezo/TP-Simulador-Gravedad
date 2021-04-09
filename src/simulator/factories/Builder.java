@@ -17,14 +17,14 @@ public abstract class Builder<T>
 		_desc = desc;
 	}
 
-	protected abstract T createTheInstance(JSONObject jsonObject) throws IllegalArgumentException;
+	protected abstract T createTheInstance(JSONObject jsonObject) throws IllegalArgumentException; // Mét
 	
 	protected JSONObject createData() 
 	{
 		return new JSONObject();
 	}
 	
-	public T createInstance(JSONObject js)
+	public T createInstance(JSONObject js) 	// Devuelve un objeto JSON que sirve de plantilla para el correspondiente constructor, i.e., un valor válido para el parámetro de createInstance
 	{
 		T b = null;
 		if(_typeTag != null && _typeTag.equals(js.get("type")))
@@ -35,7 +35,7 @@ public abstract class Builder<T>
 		return b;
 	}
 	
-	public JSONObject getBuilderInfo()  	// Añade la información
+	public JSONObject getBuilderInfo()  
 	{
 		JSONObject info = new JSONObject();
 		info.put("type", _typeTag);

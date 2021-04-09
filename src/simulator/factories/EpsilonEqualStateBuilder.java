@@ -15,10 +15,10 @@ public class EpsilonEqualStateBuilder extends Builder<StateComparator>
 		super(_type, _desc);
 	}
 	
-    protected StateComparator createTheInstance(JSONObject js)
+    protected StateComparator createTheInstance(JSONObject js) // Comprueba que los datos son válidos. Si lo son crea un nuevo Body, de lo contrario devolverá null/producirá una excepción
 	{
     	if(!js.getString("type").equals(_type)) {return null;}
-    	js = js.getJSONObject("data");
+    	js = js.getJSONObject("data");  // Para acceder a los valores de "data" fácilmente
 
 		try
 		{
@@ -31,7 +31,7 @@ public class EpsilonEqualStateBuilder extends Builder<StateComparator>
 		}
 	}
 
-    protected JSONObject createData()  	// Añade la información
+    protected JSONObject createData()  
     {
 	    JSONObject js = new JSONObject();
 	    js.put("eps", "the allowed error");

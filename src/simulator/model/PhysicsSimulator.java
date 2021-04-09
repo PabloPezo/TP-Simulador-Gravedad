@@ -24,7 +24,7 @@ public class PhysicsSimulator
 		this.bodyList = new ArrayList<Body>();
 	}
 	 	
- 	public void advance()	// Controla el movimiento de los distintos cuerpos
+ 	public void advance()	// Aplica un paso de simulación
  	{
  		for (Body body : bodyList)
 		{
@@ -39,7 +39,7 @@ public class PhysicsSimulator
 		_currentTime += _realTime;
  	}
  	
- 	public void addBody(Body b) throws IllegalArgumentException		//Añade un cuerpo nuevo a la lista
+ 	public void addBody(Body b) throws IllegalArgumentException		// Añade el cuerpo b al simulador
  	{
  		if (!bodyList.contains(b))
  		{
