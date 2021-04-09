@@ -10,6 +10,7 @@ public class BasicBodyBuilder extends Builder<Body>
 {
 	static String _type = "basic";
 	static String _desc = "default body";
+	
 	public BasicBodyBuilder()
 	{
 		super(_type, _desc);
@@ -17,20 +18,25 @@ public class BasicBodyBuilder extends Builder<Body>
 	
 	protected Body createTheInstance(JSONObject js)
 	{
-		double m = js.getDouble("m");
-		String id = js.getString("id");
-		
-		JSONArray p = js.getJSONArray("p");
-		JSONArray v = js.getJSONArray("v");
-		
-		Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
-		Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
-		
-//		if(js.similar(super.getBuilderInfo().get("data"))) // ?
-//		{
-		return new Body(id, vel, pos, m);
-//		}
-//		return null;
+		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		js = js.getJSONObject("data");
+
+		try
+		{
+			double m = js.getDouble("m");
+			String id = js.getString("id");
+
+			JSONArray p = js.getJSONArray("p");
+			JSONArray v = js.getJSONArray("v");
+
+			Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
+			Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
+			return new Body(id, vel, pos, m);
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException("Illegal argument");
+		}
 	}
 	
 	protected JSONObject createData() 
