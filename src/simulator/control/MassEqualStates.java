@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 public class MassEqualStates implements StateComparator
 {
-	public boolean equal(JSONObject s1, JSONObject s2)	//TODOS LO TIENEN IGUAL, CAMBIAR UN POCO(?)
+	public boolean equal(JSONObject s1, JSONObject s2)
 	{
 		if(s1.getDouble("time") != s2.getDouble("time")) { return false; }
 	    JSONArray js1 = s1.getJSONArray("bodies");
@@ -16,7 +16,8 @@ public class MassEqualStates implements StateComparator
 
 	    for(int i = 0; i < js1.length(); i++)
 	    {
-	    	if(js1.getJSONObject(i).getString("id") !=js2.getJSONObject(i).getString("id") || js1.getJSONObject(i).getDouble("m")!=js2.getJSONObject(i).getDouble("m")) 
+	    	//js1.getJSONObject(i).getString("id") !=js2.getJSONObject(i).getString("id") 
+	    	if(js1.getJSONObject(i).getString("id").equals(js2.getJSONObject(i).getString("id") )|| js1.getJSONObject(i).getDouble("m")!=js2.getJSONObject(i).getDouble("m")) 
 	    	{
 	    		return false;
 	    	}
