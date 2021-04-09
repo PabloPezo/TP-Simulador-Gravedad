@@ -2,7 +2,7 @@ package simulator.control;
 
 import org.json.JSONObject;
 
-public class NotEqualStatesException extends Exception // esto lo dio la señora?
+public class NotEqualStatesException extends Exception 
 {
 	private JSONObject _actual;
 	private JSONObject _expected;
@@ -48,5 +48,4 @@ public class NotEqualStatesException extends Exception // esto lo dio la señora
 	{
 		return _step;
 	}
-
 }
