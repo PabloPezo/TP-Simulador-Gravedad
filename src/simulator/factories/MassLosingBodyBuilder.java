@@ -17,9 +17,9 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		super(_type, _desc);
 	}
 
-	protected Body createTheInstance(JSONObject js)
+	protected Body createTheInstance(JSONObject js) // Compara con Data la información
 	{
-		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		if(!js.getString("type").equals(_type)) {return null;}
 		js = js.getJSONObject("data");
 
 		try
@@ -45,7 +45,7 @@ public class MassLosingBodyBuilder extends Builder<Body>
 
 	}
 
-	protected JSONObject createData() 
+	protected JSONObject createData()  	// Añade la información
 	{
         JSONObject js = new JSONObject();
         js.put("id", "the identifier");

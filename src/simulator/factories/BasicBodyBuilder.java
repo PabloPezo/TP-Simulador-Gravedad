@@ -16,7 +16,7 @@ public class BasicBodyBuilder extends Builder<Body>
 		super(_type, _desc);
 	}
 	
-	protected Body createTheInstance(JSONObject js)
+	protected Body createTheInstance(JSONObject js)	// Crea el cuerpo con sus respectivos atributos
 	{
 		if(!js.getString("type").equals(_type)) {return null;}
 		js = js.getJSONObject("data");
@@ -39,7 +39,7 @@ public class BasicBodyBuilder extends Builder<Body>
 		}
 	}
 	
-	protected JSONObject createData() 
+	protected JSONObject createData() 	// Añade la información
 	{
         JSONObject js = new JSONObject();
         js.put("id", "the identifier");

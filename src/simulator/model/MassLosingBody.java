@@ -9,7 +9,7 @@ public class MassLosingBody extends Body
 {
 	protected double _contador, _lossFactor, _lossFrequency;
 	
-	public MassLosingBody(String id, Vector2D v, Vector2D p, double m, double factor, double frequency)
+	public MassLosingBody(String id, Vector2D v, Vector2D p, double m, double factor, double frequency)	// Cuerpo que hereda de body pero con 3 atributos más
 	{
 		super(id, v, p, m);
 		
@@ -22,7 +22,7 @@ public class MassLosingBody extends Body
 	
 	public double getLossFactor() { return _lossFactor; }
 	
-	void move(double t)
+	void move(double t)	// Su función de mover tiene que calcular además el factor pérdida de la masa según el tiempo transcurrido
 	{
 		super.move(t);
 		

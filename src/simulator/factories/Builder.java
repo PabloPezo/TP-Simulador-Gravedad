@@ -24,7 +24,7 @@ public abstract class Builder<T>
 		return new JSONObject();
 	}
 	
-	public T createInstance(JSONObject js) 
+	public T createInstance(JSONObject js)
 	{
 		T b = null;
 		if(_typeTag != null && _typeTag.equals(js.get("type")))
@@ -35,7 +35,7 @@ public abstract class Builder<T>
 		return b;
 	}
 	
-	public JSONObject getBuilderInfo() 
+	public JSONObject getBuilderInfo()  	// Añade la información
 	{
 		JSONObject info = new JSONObject();
 		info.put("type", _typeTag);

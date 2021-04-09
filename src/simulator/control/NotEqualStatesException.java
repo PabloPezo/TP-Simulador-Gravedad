@@ -8,7 +8,7 @@ public class NotEqualStatesException extends Exception
 	private JSONObject _actual, _expected, _ob1, _ob2;
 	private int _step;
 
-	NotEqualStatesException(JSONObject exp, JSONObject act, JSONObject ob1, JSONObject ob2, int step)
+	NotEqualStatesException(JSONObject exp, JSONObject act, JSONObject ob1, JSONObject ob2, int step)	// Escribir mensaje con los distintos estados
 	{
 		super("States are different at step " + step + System.lineSeparator() + 
 			" Actual: " + act + System.lineSeparator() + 

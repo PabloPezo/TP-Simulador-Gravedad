@@ -51,7 +51,7 @@ public class Main
 	private static Factory<ForceLaws> _forceLawsFactory;
 	private static Factory<StateComparator> _stateComparatorFactory;
 
-	private static void init() 
+	private static void init() 	// Inicializa los arrays y los builders
 	{
 		ArrayList <Builder<Body>> bodyBuilders = new ArrayList<>();
 		bodyBuilders.add(new BasicBodyBuilder());
@@ -70,7 +70,7 @@ public class Main
 		_stateComparatorFactory = new BuilderBasedFactory <StateComparator>(stateCmpBuilders);
 	}
 
-	private static void parseArgs(String[] args) 
+	private static void parseArgs(String[] args) 	// Parsea los diferentes comandos
 	{
 		Options cmdLineOptions = buildOptions();
 
@@ -82,7 +82,7 @@ public class Main
 			parseHelpOption(line, cmdLineOptions);
 			parseInFileOption(line);
 			
-			parseExpOutFileOption(line);//
+			parseExpOutFileOption(line);
 			parseOutFileOption(line);
 
 			parseStepsOption(line);
@@ -92,7 +92,7 @@ public class Main
 			parseStateComparatorOption(line);
 
 			String[] remaining = line.getArgs();
-			if (remaining.length > 0) 
+			if (remaining.length > 0) 	// Lanza la excepción cuando el comando es erróneo
 			{
 				String error = "Illegal arguments:";
 				for (String o : remaining)
@@ -107,7 +107,7 @@ public class Main
 		}
 	}
 
-	private static Options buildOptions() 
+	private static Options buildOptions() 	 // Añade la información de las opciones
 	{
 		Options cmdLineOptions = new Options();
 
@@ -167,6 +167,7 @@ public class Main
 		return s;
 	}
 
+	// Parses de cada comando:
 	private static void parseHelpOption(CommandLine line, Options cmdLineOptions) 
 	{
 		if (line.hasOption("h")) 
@@ -300,13 +301,13 @@ public class Main
 		control.run(_steps, out, expOut, cmp);
 	}
 
-	private static void start(String[] args) throws Exception
+	private static void start(String[] args) throws Exception	// Comienza a ejecutar los comandos
 	{
 		parseArgs(args);
 		startBatchMode();
 	}
 
-	public static void main(String[] args) 
+	public static void main(String[] args) // Controla el desarrollo del programa
 	{
 		try
 		{

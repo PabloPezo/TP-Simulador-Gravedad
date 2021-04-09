@@ -10,7 +10,7 @@ public class Body
 	protected double _mass;
 	private JSONObject js = new JSONObject();
 	
-	public Body(String id, Vector2D v, Vector2D p, double m)
+	public Body(String id, Vector2D v, Vector2D p, double m)	// Cada cuerpo tiene asociado estos atributos
 	{
 		_id = id;
 		_vel = new Vector2D(v);
@@ -54,7 +54,7 @@ public class Body
 		return _mass;
 	}
 	
-	void move(double t)
+	void move(double t)		// Modifica la posicion y la velocidad del cuerpo
 	{
 		Vector2D accel;
 		if (_mass == 0)
@@ -69,7 +69,7 @@ public class Body
 		 _vel = _vel.plus(accel.scale(t));
 	}
 	
-	public JSONObject getState()
+	public JSONObject getState()	// Devuelve los parámetros del cuerpo
 	{
 			js.put("id", getId());
 			js.put("m", getMass());
@@ -80,7 +80,7 @@ public class Body
 		return js;
 	}
 	
-	public boolean equals(Object obj)
+	public boolean equals(Object obj)	// Compara sus atributos con el objeto por referencia
 	{
 		Body b = (Body) obj;
 		

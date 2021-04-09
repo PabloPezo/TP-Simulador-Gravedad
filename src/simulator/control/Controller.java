@@ -27,7 +27,7 @@ public class Controller
         JSONObject js = new JSONObject(new JSONTokener(in));
         JSONArray bodies = js.getJSONArray("bodies");
 
-        for(int i = 0; i < bodies.length(); i++)
+        for(int i = 0; i < bodies.length(); i++)	// Crea los bodies
         {
         	_phySimulator.addBody(_bodiesFactory.createInstance(bodies.getJSONObject(i)));
         }

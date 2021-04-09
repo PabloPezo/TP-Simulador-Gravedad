@@ -20,7 +20,7 @@ public class MassEqualStateBuilder extends Builder<StateComparator>
 		return new MassEqualStates();
 	}
 	
-	protected JSONObject createData()
+	protected JSONObject createData() 	// Añade la información
 	{
 		JSONObject data = new JSONObject();
 		return data;

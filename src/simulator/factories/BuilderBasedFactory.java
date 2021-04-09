@@ -23,7 +23,7 @@ public class BuilderBasedFactory<T> implements Factory<T>
 		}
 	}
 
-	public T createInstance(JSONObject js) throws IllegalArgumentException
+	public T createInstance(JSONObject js) throws IllegalArgumentException	// Crea el cuerpo y comprueba las excepciones
 	{
 		T object = null;
 		

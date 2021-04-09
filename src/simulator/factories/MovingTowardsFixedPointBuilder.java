@@ -17,9 +17,9 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 		super(_type, _desc);
 	}
 	
-	protected ForceLaws createTheInstance(JSONObject js)
+	protected ForceLaws createTheInstance(JSONObject js)	// Compara la información con Data
 	{
-		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		if(!js.getString("type").equals(_type)) {return null;}
 		js = js.getJSONObject("data");
 		
 		try
@@ -47,7 +47,7 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 		}
 	}
 	
-	protected JSONObject createData() 
+	protected JSONObject createData()  	// Añade la información
 	{
 		JSONObject js = new JSONObject();
 		

@@ -13,7 +13,7 @@ public class MassEqualStates implements StateComparator
 			JSONArray js1 = s1.getJSONArray("bodies");
 		    JSONArray js2 = s2.getJSONArray("bodies");
 
-		    if(js1.length() == js2.length())
+		    if(js1.length() == js2.length())	// Comprobar similitud de los JSONs
 		    {
 		    	for(int i = 0; i < js1.length(); i++)
 			    {

@@ -19,7 +19,7 @@ public class EpsilonEqualStates implements StateComparator
 		JSONArray jsArray1 = s1.getJSONArray("bodies");
 		JSONArray jsArray2 = s2.getJSONArray("bodies");
 		
-		if (jsArray1.length() == jsArray2.length())
+		if (jsArray1.length() == jsArray2.length())	// Comprobar similitud
 		{
 			for (int i = 0; i < jsArray2.length(); i++)
 			{
@@ -28,7 +28,7 @@ public class EpsilonEqualStates implements StateComparator
 				
 				Vector2D pos1, pos2, vel1, vel2, force1, force2;
 				
-				if (jso1.getString("id").equals(jso2.getString("id")))
+				if (jso1.getString("id").equals(jso2.getString("id")))	// Calcular valores de posición, velocidad y fuerza para comparar
 				{
 					pos1 = new Vector2D(jso1.getJSONArray("p").getDouble(0),jso1.getJSONArray("p").getDouble(1));
 					pos2 = new Vector2D(jso2.getJSONArray("p").getDouble(0),jso2.getJSONArray("p").getDouble(1));
