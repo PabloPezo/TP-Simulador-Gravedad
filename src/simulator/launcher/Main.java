@@ -82,7 +82,7 @@ public class Main
 			parseHelpOption(line, cmdLineOptions);
 			parseInFileOption(line);
 			
-			parseExpOutFileOption(line);
+			parseExpOutFileOption(line);//
 			parseOutFileOption(line);
 
 			parseStepsOption(line);
