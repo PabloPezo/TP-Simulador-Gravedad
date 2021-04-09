@@ -20,6 +20,13 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 		JSONArray vector;
 		double g = js.has("g") ? js.getDouble("g") : 9.81;
 		
+<<<<<<< HEAD
+=======
+		Vector2D p = null;
+		JSONArray vector;
+		double g = js.has("g") ? js.getDouble("g") : 9.81;
+		
+>>>>>>> parent of 0fb131d (Mi parte ya esta)
 		if(!js.isEmpty())
 		{
 			vector = js.getJSONArray("c");
@@ -32,7 +39,10 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 			p = new Vector2D(0.0, 0.0);
 		}
 		return new MovingTowardsFixedPoint(p,g);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> parent of 0fb131d (Mi parte ya esta)
 	}
 	
 	protected JSONObject createData() // REVISAR

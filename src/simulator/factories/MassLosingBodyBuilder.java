@@ -19,6 +19,12 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		double m = js.getDouble("m");
 		String id = js.getString("id");
 		
+<<<<<<< HEAD
+=======
+		double m = js.getDouble("m");
+		String id = js.getString("id");
+		
+>>>>>>> parent of 0fb131d (Mi parte ya esta)
 		JSONArray p = js.getJSONArray("p");
 		JSONArray v = js.getJSONArray("v");
 		
@@ -27,6 +33,7 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		
 		double factor = js.getDouble("factor");
 		double freq = js.getDouble("freq");
+<<<<<<< HEAD
 		
 //		if(js.similar(super.getBuilderInfo().get("data")))
 //		{
@@ -34,6 +41,10 @@ public class MassLosingBodyBuilder extends Builder<Body>
 	//	}
 		
 		//return null;
+=======
+
+		return new MassLosingBody(id, vel, pos, m, factor, freq);
+>>>>>>> parent of 0fb131d (Mi parte ya esta)
 	}
 
 	protected JSONObject createData() //REVISAR

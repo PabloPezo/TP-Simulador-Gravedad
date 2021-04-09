@@ -20,17 +20,27 @@ public class BasicBodyBuilder extends Builder<Body>
 		double m = js.getDouble("m");
 		String id = js.getString("id");
 		
+<<<<<<< HEAD
+=======
+		double m = js.getDouble("m");
+		String id = js.getString("id");
+		
+>>>>>>> parent of 0fb131d (Mi parte ya esta)
 		JSONArray p = js.getJSONArray("p");
 		JSONArray v = js.getJSONArray("v");
 		
 		Vector2D pos = new Vector2D(p.getDouble(0),p.getDouble(1));
 		Vector2D vel = new Vector2D(v.getDouble(0),v.getDouble(1));
+<<<<<<< HEAD
 		
 //		if(js.similar(super.getBuilderInfo().get("data"))) // ?
 //		{
 		return new Body(id, vel, pos, m);
 //		}
 //		return null;
+=======
+		return new Body(id, vel, pos, m);
+>>>>>>> parent of 0fb131d (Mi parte ya esta)
 	}
 	
 	protected JSONObject createData() 
