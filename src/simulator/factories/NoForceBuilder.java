@@ -7,17 +7,20 @@ import simulator.model.ForceLaws;
 
 public class NoForceBuilder extends Builder<ForceLaws>
 {
-	static String _type = "nf";
-	static String _desc = "no force";
-	
 	public NoForceBuilder()
 	{
-		super(_type, _desc);
+		super("nf", "no force");
 	}
 
-	protected ForceLaws createTheInstance(JSONObject js)
+	protected ForceLaws createTheInstance(JSONObject js) // en principio no hace falta excepcion
 	{
-		if(!js.getString("type").equals(_type)) {return null;} 
-		return new NoForce();
+//		if(js.similar( super.getBuilderInfo().get("data")))
+//		{
+			return new NoForce();
+//		}
+//		
+//		return null;
 	}
+	
+	// EL JSON ESE RARO?
 }

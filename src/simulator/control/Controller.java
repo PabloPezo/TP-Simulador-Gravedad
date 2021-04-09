@@ -65,7 +65,7 @@ public class Controller
 		if(expOutJO != null)
 		{
 			expectatedState = expOutJO.getJSONArray("states").getJSONObject(0);
-			if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, expOutJO, currentState, 0);
+			if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, expectatedState, currentState, 0);
 		}
 
 		for(int i=1; i <= steps; i++)
@@ -81,7 +81,7 @@ public class Controller
 			if(expOutJO != null)
 			{
 				expectatedState = expOutJO.getJSONArray("states").getJSONObject(i);
-				if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, expOutJO, currentState, i);
+				if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, expectatedState, currentState, i);
 			}
 		}
 

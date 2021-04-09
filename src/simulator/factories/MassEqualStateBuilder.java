@@ -6,22 +6,22 @@ import simulator.control.MassEqualStates;
 
 public class MassEqualStateBuilder extends Builder<StateComparator> 
 {
-	static String _type = "masseq";
-	static String _desc = "mass equal";
-	
+
 	public MassEqualStateBuilder()
 	{
-		super(_type, _desc);
+		super("masseq", "mass equal");
 	}
 	
-	protected StateComparator createTheInstance(JSONObject js) throws IllegalArgumentException
+	protected StateComparator createTheInstance(JSONObject js)
 	{
-		if(!js.getString("type").equals(_type)) {return null;} 
-
-        return new MassEqualStates();
+//        if (js.similar( super.getBuilderInfo().get("data")))
+//        {
+        	return new MassEqualStates();
+//        }
+//        return null;
 	}
 	
-	protected JSONObject createData()
+	protected JSONObject createData() //REVISAR
 	{
 		JSONObject data = new JSONObject();
 		return data;

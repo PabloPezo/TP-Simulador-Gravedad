@@ -17,22 +17,26 @@ public abstract class Builder<T>
 		_desc = desc;
 	}
 
-	protected abstract T createTheInstance(JSONObject jsonObject) throws IllegalArgumentException;
+	protected abstract T createTheInstance(JSONObject jsonObject);
 	
-	protected JSONObject createData() { return new JSONObject(); }
+	protected JSONObject createData() 
+	{
+		return new JSONObject();
+	}
 	
 	public T createInstance(JSONObject js) 
 	{
 		T b = null;
 		if(_typeTag != null && _typeTag.equals(js.get("type")))
 		{
-			b = createTheInstance(js);
+			b = createTheInstance(js.getJSONObject("data"));
 		}
 
 		return b;
+
 	}
 	
-	public JSONObject getBuilderInfo() 
+	public JSONObject getBuilderInfo() //REVISAR
 	{
 		JSONObject info = new JSONObject();
 		info.put("type", _typeTag);
@@ -40,4 +44,5 @@ public abstract class Builder<T>
 		info.put("desc",_desc);
 		return info;
 	}	
+
 }
