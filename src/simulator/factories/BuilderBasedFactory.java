@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import simulator.factories.Builder;
 
 public class BuilderBasedFactory<T> implements Factory<T>
 {
@@ -57,7 +56,7 @@ public class BuilderBasedFactory<T> implements Factory<T>
 		}
 	}
 	
-    public List<JSONObject> getInfo() //REVISAR
+    public List<JSONObject> getInfo()
     {
         return factoryElements;
     }

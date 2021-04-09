@@ -44,7 +44,7 @@ public class MassLosingBodyBuilder extends Builder<Body>
 		}
 	}
 
-	protected JSONObject createData() //REVISAR
+	protected JSONObject createData() 
 	{
         JSONObject js = new JSONObject();
         js.put("id", "the identifier");

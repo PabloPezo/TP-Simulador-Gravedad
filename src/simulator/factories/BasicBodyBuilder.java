@@ -37,7 +37,6 @@ public class BasicBodyBuilder extends Builder<Body>
 		{
 			throw new IllegalArgumentException("Illegal argument");
 		}
-
 	}
 	
 	protected JSONObject createData() 

@@ -30,7 +30,7 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 		}
 	}
 	
-	protected JSONObject createData() // REVISAR
+	protected JSONObject createData() 
 	{
 		JSONObject js = new JSONObject();
 		

@@ -30,7 +30,7 @@ public class EpsilonEqualStateBuilder extends Builder<StateComparator>
 		}
 	}
 
-    protected JSONObject createData() //REVISAR
+    protected JSONObject createData() 
     {
 	    JSONObject js = new JSONObject();
 	    js.put("eps", "the allowed error");

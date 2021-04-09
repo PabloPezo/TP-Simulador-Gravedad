@@ -20,6 +20,4 @@ public class NoForceBuilder extends Builder<ForceLaws>
 		if(!js.getString("type").equals(_type)) {return null;} 
 		return new NoForce();
 	}
-	
-	// EL JSON ESE RARO?
 }

@@ -19,10 +19,9 @@ public class MassEqualStateBuilder extends Builder<StateComparator>
 		if(!js.getString("type").equals(_type)) {return null;} 
 
         return new MassEqualStates();
-
 	}
 	
-	protected JSONObject createData() //REVISAR
+	protected JSONObject createData()
 	{
 		JSONObject data = new JSONObject();
 		return data;
