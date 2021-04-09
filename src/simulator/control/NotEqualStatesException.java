@@ -2,10 +2,8 @@ package simulator.control;
 
 import org.json.JSONObject;
 
-public class NotEqualStatesException extends Exception 
+public class NotEqualStatesException extends Exception // esto lo dio la señora?
 {
-	private static final long serialVersionUID = 1L;
-	
 	private JSONObject _actual;
 	private JSONObject _expected;
 	private JSONObject _ob1;
