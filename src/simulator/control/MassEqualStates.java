@@ -16,7 +16,8 @@ public class MassEqualStates implements StateComparator
 
 	    for(int i = 0; i < js1.length(); i++)
 	    {
-	    	if(js1.getJSONObject(i).getString("id") !=js2.getJSONObject(i).getString("id") || js1.getJSONObject(i).getDouble("m")!=js2.getJSONObject(i).getDouble("m")) 
+	    	//Con string si pero double no?
+	    	if(js1.getJSONObject(i).getString("id").equals(js2.getJSONObject(i).getString("id")) || js1.getJSONObject(i).getDouble("m")!=js2.getJSONObject(i).getDouble("m")) 
 	    	{
 	    		return false;
 	    	}
