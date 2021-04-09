@@ -188,12 +188,12 @@ public class Main
 	
 	private static void parseOutFileOption(CommandLine line) throws ParseException 
 	{
-		_outFile = line.getOptionValue("o");//
+		_outFile = line.getOptionValue("o");
 	}
 	
 	private static void parseExpOutFileOption(CommandLine line) throws ParseException 
 	{
-		_outFile = line.getOptionValue("eo");//
+		_expFile = line.getOptionValue("eo");
 	}
 	
 	private static void parseStepsOption(CommandLine line) throws ParseException 
