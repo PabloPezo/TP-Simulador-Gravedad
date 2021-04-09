@@ -9,43 +9,45 @@ import simulator.model.MovingTowardsFixedPoint;
 
 public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 {
+	static String _type = "mtfp";
+	static String _desc = "moving towards fixed point";
+	
 	public  MovingTowardsFixedPointBuilder()
 	{
-		super("mtfp", "moving towards fixed point");
+		super(_type, _desc);
 	}
 	
 	protected ForceLaws createTheInstance(JSONObject js)
 	{
-		Vector2D p = null;
-		JSONArray vector;
-		double g = js.has("g") ? js.getDouble("g") : 9.81;
+		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+		js = js.getJSONObject("data");
 		
-<<<<<<< HEAD
-=======
-		Vector2D p = null;
-		JSONArray vector;
-		double g = js.has("g") ? js.getDouble("g") : 9.81;
-		
->>>>>>> parent of 0fb131d (Mi parte ya esta)
-		if(!js.isEmpty())
+		try
 		{
-			vector = js.getJSONArray("c");
-			double x = vector.getDouble(0);
-			double y = vector.getDouble(1);
-			p = new Vector2D(x, y);
+			Vector2D p = null;
+			JSONArray vector;
+			double g = js.has("g") ? js.getDouble("g") : 9.81;
+
+			if(!js.isEmpty())
+			{
+				vector = js.getJSONArray("c");
+				double x = vector.getDouble(0);
+				double y = vector.getDouble(1);
+				p = new Vector2D(x, y);
+			}
+			else
+			{
+				p = new Vector2D(0.0, 0.0);
+			}
+			return new MovingTowardsFixedPoint(p,g);
 		}
-		else
+		catch(Exception e)
 		{
-			p = new Vector2D(0.0, 0.0);
+			throw new IllegalArgumentException("Illegal argument");
 		}
-		return new MovingTowardsFixedPoint(p,g);
-<<<<<<< HEAD
-		
-=======
->>>>>>> parent of 0fb131d (Mi parte ya esta)
 	}
 	
-	protected JSONObject createData() // REVISAR
+	protected JSONObject createData() 
 	{
 		JSONObject js = new JSONObject();
 		

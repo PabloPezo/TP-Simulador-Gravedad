@@ -7,36 +7,31 @@ import simulator.control.EpsilonEqualStates;
 
 public class EpsilonEqualStateBuilder extends Builder<StateComparator>
 {
+	static String _type = "epseq";
+	static String _desc = "Epsilon-equal states comparator";
+	
 	public  EpsilonEqualStateBuilder()
 	{
-		super("epseq", "Epsilon-equal states comparator");			
+		super(_type, _desc);
 	}
 	
     protected StateComparator createTheInstance(JSONObject js) 
 	{
-<<<<<<< HEAD
-    	double epsilon = js.has("eps") ? js.getDouble("eps") : 0.0;
+    	if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
+    	js = js.getJSONObject("data");
 
-    //		if (js.similar(super.getBuilderInfo().get("data")))
-    	//	{
-    			return new EpsilonEqualStates(epsilon);
-//    		}
-//    		else
-//    		{
-//    			return null;
-//    		}
-
-=======
-		if(!js.getString("type").equals(_type)) {return null;} // Si el tipo coincide empezamos a comparar con el campo data
-		js = js.getJSONObject("data");
-		
-    	double epsilon = js.has("eps") ? js.getDouble("eps") : 0.0;
-
-    	return new EpsilonEqualStates(epsilon);
->>>>>>> parent of 0fb131d (Mi parte ya esta)
+		try
+		{
+			double epsilon = js.has("eps") ? js.getDouble("eps") : 0.0;
+			return new EpsilonEqualStates(epsilon);
+		}
+		catch(Exception e)
+		{
+			throw new IllegalArgumentException("Illegal argument");
+		}
 	}
 
-    protected JSONObject createData() //REVISAR
+    protected JSONObject createData() 
     {
 	    JSONObject js = new JSONObject();
 	    js.put("eps", "the allowed error");
