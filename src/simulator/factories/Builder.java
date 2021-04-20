@@ -23,7 +23,7 @@ public abstract class Builder<T>
 	{
 		return new JSONObject();
 	}
-	
+
 	public T createInstance(JSONObject js) 	// Devuelve un objeto JSON que sirve de plantilla para el correspondiente constructor, i.e., un valor válido para el parámetro de createInstance
 	{
 		T b = null;
