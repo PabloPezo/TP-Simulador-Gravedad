@@ -31,6 +31,6 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 	
 	public String toString()
 	{
-		return "MovingTowardsFixedPoint [point = " + _point + ", gConst = " + _gConst + "]";
+		return "Moving towards _point " + _point + "with constant acceleration _g" + _gConst;
 	}
 }

@@ -10,7 +10,7 @@ import simulator.model.MovingTowardsFixedPoint;
 public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 {
 	static String _type = "mtfp";
-	static String _desc = "moving towards fixed point";
+	static String _desc = "Moving towards fixed point";
 	
 	public  MovingTowardsFixedPointBuilder()
 	{
@@ -51,8 +51,9 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 	{
 		JSONObject js = new JSONObject();
 		
-		js.put("g", "gravitation constant");
-		js.put("c", "fixed point");
+		js.put("c", "the point towards wich bodies move (a json list of 2 numbers, e.g., [100.0, 50.0]<");
+		js.put("g", "the length of the acceleration vector (a number)");
+
 		
 		return js;
 	}

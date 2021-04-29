@@ -4,22 +4,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import simulator.factories.Factory;
 import simulator.model.Body;
+import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
+import simulator.view.SimulatorObserver;
 
 public class Controller 
 {
 	private PhysicsSimulator _phySimulator;
 	private Factory<Body> _bodiesFactory;
+	private Factory<ForceLaws> _forces;
 	
-	public Controller(PhysicsSimulator phySimulator, Factory<Body> bodiesFactory)
+	public Controller(PhysicsSimulator phySimulator, Factory<Body> bodiesFactory, Factory<ForceLaws> forces)
 	{
 		_phySimulator = phySimulator;
 		_bodiesFactory = bodiesFactory;
+		_forces = forces;
 	}
 	
 	public void loadBodies(InputStream in)  // Carga los cuerpos desde el fichero
@@ -84,4 +90,29 @@ public class Controller
 		pr.println("]");
 		pr.println("}");
     }	
+	
+	public void reset()
+	{
+		_phySimulator.reset();
+	}
+	
+	public void setDeltaTime(double dt)
+	{
+		_phySimulator.reset();
+	}
+	
+	public void addObserver(SimulatorObserver o)
+	{
+		_phySimulator.addObserver(o);
+	}
+	
+	public List<JSONObject> getForceLawsInfo()
+	{
+		return _forces.getInfo();
+	}
+	
+	public void setForceLaws(JSONObject info)
+	{
+		
+	}
 }

@@ -2,6 +2,8 @@ package simulator.model;
 
 import org.json.JSONObject;
 
+import simulator.view.SimulatorObserver;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -65,4 +67,30 @@ public class PhysicsSimulator
 	}
  	
  	public String toString() { return getState().toString(); }
+ 	
+ 	public void reset()
+ 	{
+		this.bodyList = new ArrayList<Body>();	
+ 	}
+ 	
+ 	public void setDeltaTime(double dt) throws IllegalArgumentException
+ 	{
+		if (dt <= 0.0) throw new IllegalArgumentException();
+		{
+			_realTime = dt;
+		}	
+ 	}
+ 	
+ 	public void setForceLaws(ForceLaws forceLaws) throws IllegalArgumentException
+ 	{
+ 		if(forceLaws == null) {throw new IllegalArgumentException();}
+ 		_forceLaws = forceLaws;
+ 	}
+ 	
+ 	public void addObserver(SimulatorObserver o)
+ 	{
+ 		
+ 	}
+
+ 	
 }

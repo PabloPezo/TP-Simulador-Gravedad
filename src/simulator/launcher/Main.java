@@ -177,6 +177,14 @@ public class Main
 			System.exit(0);
 		}
 	}
+	
+	
+	// NO ESTA HECHO
+	private static void parseExModeOption(CommandLine line)
+	{
+		_inFile = line.getOptionValue("m");
+		
+	}
 
 	private static void parseInFileOption(CommandLine line) throws ParseException 
 	{
@@ -286,7 +294,7 @@ public class Main
 		OutputStream out = _outFile == null ? System.out : new FileOutputStream(new File(_outFile));
 		ForceLaws fuerzas = _forceLawsFactory.createInstance(_forceLawsInfo);
 		PhysicsSimulator simulador = new PhysicsSimulator(_dtime, fuerzas);
-		Controller control = new Controller(simulador, _bodyFactory);
+		Controller control = new Controller(simulador, _bodyFactory, _forceLawsFactory);
 		
 		InputStream expOut = null;
 		StateComparator cmp = null;
