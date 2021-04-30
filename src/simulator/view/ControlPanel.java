@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 
 import simulator.control.Controller;
 import simulator.model.Body;
+import simulator.model.SimulatorObserver;
 
 public class ControlPanel extends JPanel implements SimulatorObserver
 {

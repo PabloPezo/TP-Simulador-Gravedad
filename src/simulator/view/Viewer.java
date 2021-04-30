@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 import simulator.control.Controller;
 import simulator.misc.Vector2D;
 import simulator.model.Body;
+import simulator.model.SimulatorObserver;
 
 public class Viewer extends JComponent implements SimulatorObserver
 {
