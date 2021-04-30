@@ -65,4 +65,25 @@ public class PhysicsSimulator
 	}
  	
  	public String toString() { return getState().toString(); }
+ 	
+ 	public void reset()
+ 	{
+		this.bodyList = new ArrayList<Body>();
+		_currentTime = 0.0;
+ 	}
+ 	
+ 	public void setDeltaTime(double dt) throws IllegalArgumentException
+ 	{
+		if (dt <= 0.0) throw new IllegalArgumentException();
+		{
+			_realTime = dt;
+
+		}	
+ 	}
+ 	
+ 	public void setForceLaws(ForceLaws forceLaws) throws IllegalArgumentException
+ 	{
+ 		if(forceLaws == null) {throw new IllegalArgumentException();}
+ 		_forceLaws = forceLaws;
+ 	}
 }

@@ -10,6 +10,8 @@ import org.json.JSONTokener;
 import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.PhysicsSimulator;
+import simulator.model.SimulatorObserver;
+import simulator.viewer.Viewer;
 
 public class Controller 
 {
@@ -83,5 +85,21 @@ public class Controller
 		}
 		pr.println("]");
 		pr.println("}");
-    }	
+    }
+	
+	public void reset()
+	{
+		_phySimulator.reset();
+	}
+	
+ 	public void setDeltaTime(double dt) throws IllegalArgumentException
+ 	{
+ 		_phySimulator.setDeltaTime(dt);
+ 	}
+
+	public void addObserver(SimulatorObserver o) // Por hacer (ni idea)
+	{
+		// TODO Auto-generated method stub
+		
+	}	
 }
