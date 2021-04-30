@@ -13,7 +13,7 @@ import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
-import simulator.view.SimulatorObserver;
+import simulator.model.SimulatorObserver;
 
 public class Controller 
 {
