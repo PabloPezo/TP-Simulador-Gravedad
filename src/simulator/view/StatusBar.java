@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 
 import simulator.control.Controller;
 import simulator.model.Body;
-import simulator.model.SimulatorObserver;
 
 public class StatusBar extends JPanel implements SimulatorObserver 
 {

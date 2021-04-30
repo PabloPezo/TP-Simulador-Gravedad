@@ -10,9 +10,13 @@ import org.json.JSONTokener;
 import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.PhysicsSimulator;
-import simulator.model.SimulatorObserver;
-import simulator.view.ControlPanel;
-import simulator.view.StatusBar;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import simulator.view.SimulatorObserver;
+>>>>>>> parent of 54afdb5 (cositas)
+=======
+>>>>>>> parent of a64c985 (Merge branch 'master' of https://github.com/PabloPezo/TP-Simulador-Gravedad)
 
 public class Controller 
 {
@@ -86,15 +90,5 @@ public class Controller
 		}
 		pr.println("]");
 		pr.println("}");
-    }
-
-	public void addObserver(ControlPanel controlPanel) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addObserver(StatusBar statusBar) {
-		// TODO Auto-generated method stub
-		
-	}	
+    }	
 }

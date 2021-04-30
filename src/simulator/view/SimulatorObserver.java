@@ -1,7 +1,9 @@
-package simulator.model;
+package simulator.view;
 
 import java.awt.Graphics;
 import java.util.List;
+
+import simulator.model.Body;
 
 public interface SimulatorObserver 
 {
