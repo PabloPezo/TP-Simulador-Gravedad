@@ -10,10 +10,6 @@ import org.json.JSONTokener;
 import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.PhysicsSimulator;
-<<<<<<< HEAD
-=======
-import simulator.view.SimulatorObserver;
->>>>>>> parent of 54afdb5 (cositas)
 
 public class Controller 
 {

@@ -1,12 +1,18 @@
 package simulator.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import simulator.control.Controller;
 import simulator.model.Body;
+import simulator.model.SimulatorObserver;
 
 public class ControlPanel extends JPanel implements SimulatorObserver
 {
@@ -20,9 +26,25 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		initGUI();
 		_ctrl.addObserver(this);
 	}
-	private void initGUI() 
+	private void initGUI() // Crea todos los botones y las cositas
 	{
-		// Crea todos los botones y esas cositas
+		JPanel mainPanel = new JPanel();
+		this.setContentPane(mainPanel);
+
+		mainPanel.add(new JLabel("Click "));
+		JButton here = new JButton("HERE");
+		here.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				select_food();
+			}
+		});
+		mainPanel.add(here);
+		mainPanel.add(new JLabel(" to select your food"));
+
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.pack();
+		this.setVisible(true);
 	}
 	// other private/protected methods
 	// ...
@@ -32,7 +54,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		{
 			try 
 			{
-				//_ctrl.run(1);			// Hay que cambiar la función run o configurar un override
+				_ctrl.run(1);			// Hay que cambiar la función run o configurar un override
 			} catch (Exception e)
 			{
 				// TODO show the error in a dialog box
