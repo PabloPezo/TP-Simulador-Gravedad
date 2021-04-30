@@ -28,23 +28,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 	}
 	private void initGUI() // Crea todos los botones y las cositas
 	{
-		JPanel mainPanel = new JPanel();
-		this.setContentPane(mainPanel);
-
-		mainPanel.add(new JLabel("Click "));
-		JButton here = new JButton("HERE");
-		here.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				select_food();
-			}
-		});
-		mainPanel.add(here);
-		mainPanel.add(new JLabel(" to select your food"));
-
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.pack();
-		this.setVisible(true);
+		
 	}
 	// other private/protected methods
 	// ...
