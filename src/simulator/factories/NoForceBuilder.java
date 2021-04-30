@@ -8,7 +8,7 @@ import simulator.model.ForceLaws;
 public class NoForceBuilder extends Builder<ForceLaws>
 {	
 	static String _type = "nf";
-	static String _desc = "no force";
+	static String _desc = "No force";
 	
 	public NoForceBuilder()
 	{
