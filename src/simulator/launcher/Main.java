@@ -1,3 +1,5 @@
+// Práctica 1 TP - Pablo Lozano Martín y Pablo Magno Pezo Ortiz
+
 package simulator.launcher;
 
 import java.io.File;
