@@ -1,5 +1,3 @@
-// Práctica 1 TP - Pablo Lozano Martín y Pablo Magno Pezo Ortiz
-
 package simulator.launcher;
 
 import java.io.File;
@@ -53,7 +51,7 @@ public class Main
 	private static Factory<ForceLaws> _forceLawsFactory;
 	private static Factory<StateComparator> _stateComparatorFactory;
 
-	private static void init() 	// Inicializa los arrays y los builders
+	private static void init() 
 	{
 		ArrayList <Builder<Body>> bodyBuilders = new ArrayList<>();
 		bodyBuilders.add(new BasicBodyBuilder());
@@ -72,7 +70,7 @@ public class Main
 		_stateComparatorFactory = new BuilderBasedFactory <StateComparator>(stateCmpBuilders);
 	}
 
-	private static void parseArgs(String[] args) 	// Parsea los diferentes comandos
+	private static void parseArgs(String[] args) 
 	{
 		Options cmdLineOptions = buildOptions();
 
@@ -84,7 +82,7 @@ public class Main
 			parseHelpOption(line, cmdLineOptions);
 			parseInFileOption(line);
 			
-			parseExpOutFileOption(line);
+			parseExpOutFileOption(line);//
 			parseOutFileOption(line);
 
 			parseStepsOption(line);
@@ -94,7 +92,7 @@ public class Main
 			parseStateComparatorOption(line);
 
 			String[] remaining = line.getArgs();
-			if (remaining.length > 0) 	// Lanza la excepción cuando el comando es erróneo
+			if (remaining.length > 0) 
 			{
 				String error = "Illegal arguments:";
 				for (String o : remaining)
@@ -109,7 +107,7 @@ public class Main
 		}
 	}
 
-	private static Options buildOptions() 	 // Añade la información de las opciones
+	private static Options buildOptions() 
 	{
 		Options cmdLineOptions = new Options();
 
@@ -169,7 +167,6 @@ public class Main
 		return s;
 	}
 
-	// Parses de cada comando:
 	private static void parseHelpOption(CommandLine line, Options cmdLineOptions) 
 	{
 		if (line.hasOption("h")) 
@@ -191,12 +188,12 @@ public class Main
 	
 	private static void parseOutFileOption(CommandLine line) throws ParseException 
 	{
-		_outFile = line.getOptionValue("o");
+		_outFile = line.getOptionValue("o");//
 	}
 	
 	private static void parseExpOutFileOption(CommandLine line) throws ParseException 
 	{
-		_expFile = line.getOptionValue("eo");
+		_outFile = line.getOptionValue("eo");//
 	}
 	
 	private static void parseStepsOption(CommandLine line) throws ParseException 
@@ -282,7 +279,7 @@ public class Main
 		}
 	}
 
-	private static void startBatchMode() throws Exception // Inicia la simulación
+	private static void startBatchMode() throws Exception
 	{
 		InputStream in = new FileInputStream(new File(_inFile));
 		OutputStream out = _outFile == null ? System.out : new FileOutputStream(new File(_outFile));
@@ -303,7 +300,7 @@ public class Main
 		control.run(_steps, out, expOut, cmp);
 	}
 
-	private static void start(String[] args) throws Exception // Parsea todos los datos necesarios e inicia la simulación
+	private static void start(String[] args) throws Exception
 	{
 		parseArgs(args);
 		startBatchMode();

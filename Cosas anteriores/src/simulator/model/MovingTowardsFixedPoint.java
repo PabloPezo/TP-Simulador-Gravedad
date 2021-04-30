@@ -20,9 +20,9 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 		_point = point;
 	}
 	
-	public void apply(List<Body> bs) 	// Añade una fuerza en una dirección determinada (hacia un punto fijo) a un objeto
+	public void apply(List<Body> bs) 
 	{
-		for (Body body : bs)
+		for (Body body : bs) // de momento se va a quedar asi
 		{
 			Vector2D f = new Vector2D(_point.minus(body.getPosition()).direction().scale(_gConst * body.getMass()));
 			body.addForce(f);
