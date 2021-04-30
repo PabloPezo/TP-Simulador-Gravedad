@@ -11,12 +11,9 @@ import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.PhysicsSimulator;
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 import simulator.view.SimulatorObserver;
 >>>>>>> parent of 54afdb5 (cositas)
-=======
->>>>>>> parent of a64c985 (Merge branch 'master' of https://github.com/PabloPezo/TP-Simulador-Gravedad)
 
 public class Controller 
 {
