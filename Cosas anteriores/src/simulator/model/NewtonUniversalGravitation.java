@@ -18,7 +18,7 @@ public class NewtonUniversalGravitation implements ForceLaws
 		_gConst = gConst;
 	}
 	
-	public void apply(List<Body> bs) 	// Añade las fuerzas que se crean entre todos los cuerpos
+	public void apply(List<Body> bs) 
 	{
 		Vector2D f = new Vector2D();
 		for (Body body1 : bs)
@@ -33,7 +33,7 @@ public class NewtonUniversalGravitation implements ForceLaws
 		}
 	}
 	
-	public Vector2D makeForce(Body uno, Body dos)	// Calcula el módulo de la fuerza según las leyes gravitacionales
+	public Vector2D makeForce(Body uno, Body dos)
 	{
 		 Vector2D delta = dos.getPosition().minus(uno.getPosition());
 		 double dist = delta.magnitude();

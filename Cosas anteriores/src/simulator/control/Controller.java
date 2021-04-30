@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
 import simulator.factories.Factory;
 import simulator.model.Body;
 import simulator.model.PhysicsSimulator;
@@ -22,7 +24,7 @@ public class Controller
 		_bodiesFactory = bodiesFactory;
 	}
 	
-	public void loadBodies(InputStream in)  // Carga los cuerpos desde el fichero
+	public void loadBodies(InputStream in)
     {
         JSONObject js = new JSONObject(new JSONTokener(in));
         JSONArray bodies = js.getJSONArray("bodies");
@@ -33,33 +35,33 @@ public class Controller
         }
     }	
 	
-	public void run(int steps, OutputStream out, InputStream expOut, StateComparator cmp) throws NotEqualStatesException // Corre la simulación
+	public void run(int steps, OutputStream out, InputStream expOut, StateComparator cmp) throws NotEqualStatesException
 	{
 		JSONObject expOutJO = null;
 		
-		if (expOut != null)
+		if(expOut != null)
 		{
-			expOutJO = new JSONObject(new JSONTokener(expOut));
+			expOutJO = new JSONObject (new JSONTokener(expOut));
 		}
 		
-		if (out == null)
+		if(out == null)
 		{
-			out = new OutputStream() { public void write(int b) throws IOException {}};
+			out = new OutputStream() { public void write(int b)throws IOException {}};
 		}
 		
-		PrintStream pr = new PrintStream(out);
-		
-		pr.println("{");
-		pr.println("\"states\": [");
+		PrintStream p = new PrintStream(out);
+		p.println("{");
+		p.println("\"states\": [");
 		
 		JSONObject expectatedState = null;
 		JSONObject currentState = null;
 		
 		currentState = _phySimulator.getState();
 
-        pr.println(currentState);
-		pr.print(",");
-		
+
+        p.println(currentState);
+		p.print(","); 
+        
 		if(expOutJO != null)
 		{
 			expectatedState = expOutJO.getJSONArray("states").getJSONObject(0);
@@ -71,9 +73,10 @@ public class Controller
 			_phySimulator.advance();
 			currentState = _phySimulator.getState();
 
-			pr.println( currentState);
+			p.println( currentState);
 
-			if(i != steps) { pr.print(","); }
+
+			if(i != steps) { p.print(","); }
 
 			if(expOutJO != null)
 			{
@@ -81,7 +84,8 @@ public class Controller
 				if(!cmp.equal(expectatedState, currentState)) throw new NotEqualStatesException(expectatedState, currentState, expectatedState, currentState, i);
 			}
 		}
-		pr.println("]");
-		pr.println("}");
+
+		p.println("]");
+		p.println("}");
     }	
 }
