@@ -16,12 +16,15 @@ public class MainWindow extends JFrame
 		_ctrl = ctrl;
 		initGUI();
 	}
+	
 	private void initGUI() 
 	{
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		setContentPane(mainPanel);
 		// TODO complete this method to build the GUI7. Cambios en la clase Main 13
-		// ..
+		this.add(mainPanel);
+		this.setVisible(true);
+		
 	}
 	// other private/protected methods
 	// ...

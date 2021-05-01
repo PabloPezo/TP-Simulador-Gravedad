@@ -31,6 +31,7 @@ import simulator.factories.NoForceBuilder;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
+import simulator.viewer.MainWindow;
 
 public class Main
 {
@@ -305,6 +306,8 @@ public class Main
 	{
 		parseArgs(args);
 		startBatchMode();
+		
+		MainWindow pepe = new MainWindow(new Controller(null, null));
 	}
 
 	public static void main(String[] args) 
