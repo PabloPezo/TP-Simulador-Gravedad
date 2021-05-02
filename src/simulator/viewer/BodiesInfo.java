@@ -16,7 +16,7 @@ import simulator.model.SimulatorObserver;
 
 public class BodiesInfo extends JPanel implements SimulatorObserver
 {
-	private List<Body> bodies;
+	private List<Body> _bodies;
 	private JTextArea text;
 	
 	public BodiesInfo(Controller _ctrl)
@@ -45,6 +45,12 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 			{
 				_bodies = bodies;
 				text.setText(" ");
+				
+				for(int i = 0; i < bodies.size(); i++)
+				{
+					Body b = _bodies.get(i);
+					text.append(b.getId() + "     " + b.getPosition() + "\n");
+				}
 			}
 		}
 	}
