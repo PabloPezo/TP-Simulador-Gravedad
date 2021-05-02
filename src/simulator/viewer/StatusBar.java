@@ -13,6 +13,7 @@ import simulator.model.SimulatorObserver;
 
 public class StatusBar extends JPanel implements SimulatorObserver 
 {
+	private static final long serialVersionUID = 1L;
 	private JLabel _currTime; // for current time
 	private JLabel _currLaws; // for gravity laws
 	private JLabel _numOfBodies; // for number of bodies
@@ -29,10 +30,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 		this.setBorder( BorderFactory.createBevelBorder( 1 ));
 		// TODO complete the code to build the tool bar
 	}
-	// other private/protected methods
-	// ...
-	// SimulatorObserver methods
-	// ...
+	
 
 	@Override
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)

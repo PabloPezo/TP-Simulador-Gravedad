@@ -12,6 +12,7 @@ import simulator.control.Controller;
 
 public class MainWindow extends JFrame 
 {
+	private static final long serialVersionUID = 1L;
 	Controller _ctrl;
 	public MainWindow(Controller ctrl) 
 	{
@@ -31,7 +32,9 @@ public class MainWindow extends JFrame
 		
 		ControlPanel ctrlPanel = new ControlPanel(_ctrl);
 		
-		BodiesTable bodiesInfo = new BodiesTable(_ctrl);
+		BodiesTable bodiesTable = new BodiesTable(_ctrl);
+		
+		BodiesInfo bodiesInfo = new BodiesInfo(_ctrl);
 		
 		Viewer universeViewer = new Viewer(_ctrl);
 		
@@ -45,20 +48,11 @@ public class MainWindow extends JFrame
 		
 		universeViewer.setPreferredSize(new Dimension(800, 600));
 		contentPanel.add(new JScrollPane(universeViewer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
-		
 	}
 	
-	public void main()
+	public static void main(String[] args) 
 	{
-		
+		MainWindow main = new MainWindow(new Controller(null, null));
 	}
 	
-	// other private/protected methods
-	// ...
-	
-	public static void main(String[] args)
-	{
-		MainWindow pepe = new MainWindow(new Controller(null, null));
-		//pepe.initGUI();
-	}
 }

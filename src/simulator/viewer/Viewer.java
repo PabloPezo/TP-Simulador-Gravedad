@@ -20,6 +20,7 @@ import simulator.model.SimulatorObserver;
 
 public class Viewer extends JComponent implements SimulatorObserver 
 {
+	private static final long serialVersionUID = 1L;
 	private int _centerX;
 	private int _centerY;
 	private double _scale;
