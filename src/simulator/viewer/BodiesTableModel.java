@@ -11,6 +11,7 @@ import simulator.model.SimulatorObserver;
 
 public class BodiesTableModel extends AbstractTableModel implements SimulatorObserver 
 {
+	private static final long serialVersionUID = 1L;
 	private List<Body> _bodies;
 	BodiesTableModel(Controller ctrl) 
 	{

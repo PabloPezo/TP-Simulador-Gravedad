@@ -11,6 +11,8 @@ import simulator.control.Controller;
 
 public class BodiesTable extends JPanel 
 {
+	private static final long serialVersionUID = 1L;
+
 	BodiesTable(Controller ctrl)
 	{
 		setLayout(new BorderLayout());

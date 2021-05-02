@@ -1,13 +1,7 @@
 package simulator.viewer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -32,6 +26,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 	
 	}
 	
+	@SuppressWarnings("unused")
 	private void run_sim(int n) 
 	{
 		if ( n>0 && !_stopped ) 

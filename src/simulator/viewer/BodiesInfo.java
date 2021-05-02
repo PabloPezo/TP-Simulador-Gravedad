@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import simulator.control.Controller;
@@ -39,7 +40,8 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 	
 	private void update(List<Body> bodies)
 	{
-		SwingUtilities.invokeLater(new Runnable(){
+		SwingUtilities.invokeLater(new Runnable()
+		{
 			@Override
 			public void run()
 			{
@@ -56,38 +58,32 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 	}
 
 	@Override
-	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc) {
-		// TODO Auto-generated method stub
-		
+	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc) 
+	{
+		update(bodies);
 	}
 
 	@Override
-	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc) {
-		// TODO Auto-generated method stub
-		
+	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc) 
+	{
+		update(bodies);
 	}
 
 	@Override
-	public void onBodyAdded(List<Body> bodies, Body b) {
-		// TODO Auto-generated method stub
-		
+	public void onBodyAdded(List<Body> bodies, Body b) 
+	{
+		update(bodies);
 	}
 
 	@Override
-	public void onAdvance(List<Body> bodies, double time) {
-		// TODO Auto-generated method stub
-		
+	public void onAdvance(List<Body> bodies, double time) 
+	{
+		update(bodies);
 	}
 
 	@Override
-	public void onDeltaTimeChanged(double dt) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onDeltaTimeChanged(double dt) {}
 
 	@Override
-	public void onForceLawsChanged(String fLawsDesc) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onForceLawsChanged(String fLawsDesc) {}
 }
