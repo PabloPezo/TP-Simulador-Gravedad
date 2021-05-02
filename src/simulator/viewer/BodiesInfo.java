@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import simulator.control.Controller;
@@ -16,7 +17,7 @@ import simulator.model.SimulatorObserver;
 
 public class BodiesInfo extends JPanel implements SimulatorObserver
 {
-	private List<Body> bodies;
+	private List<Body> _bodies;
 	private JTextArea text;
 	
 	public BodiesInfo(Controller _ctrl)
@@ -29,7 +30,7 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 	private void initGUI()
 	{
 		setLayout(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), TitledBorder.LEFT, TitledBorder.TOP));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Bodies", TitledBorder.LEFT, TitledBorder.TOP));
 		text = new JTextArea();
 		JScrollPane scroll = new JScrollPane(text);
 		add(scroll);
@@ -46,7 +47,7 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 				_bodies = bodies;
 				text.setText(" ");
 			}
-		}
+		});
 	}
 
 	@Override
