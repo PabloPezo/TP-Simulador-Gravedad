@@ -30,7 +30,7 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 	private void initGUI()
 	{
 		setLayout(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), TitledBorder.LEFT, TitledBorder.TOP));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Bodies", TitledBorder.LEFT, TitledBorder.TOP));
 		text = new JTextArea();
 		JScrollPane scroll = new JScrollPane(text);
 		add(scroll);
@@ -54,7 +54,7 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 					text.append(b.getId() + "     " + b.getPosition() + "\n");
 				}
 			}
-		}
+		});
 	}
 
 	@Override

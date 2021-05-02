@@ -47,6 +47,12 @@ public class MainWindow extends JFrame
 		contentPanel.add(new JScrollPane(universeViewer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 		
 	}
+	
+	public void main()
+	{
+		
+	}
+	
 	// other private/protected methods
 	// ...
 	
