@@ -26,6 +26,12 @@ public class MainWindow extends JFrame
 		this.setVisible(true);
 		
 	}
+	
+	public void main()
+	{
+		
+	}
+	
 	// other private/protected methods
 	// ...
 }

@@ -306,8 +306,6 @@ public class Main
 	{
 		parseArgs(args);
 		startBatchMode();
-		
-		MainWindow pepe = new MainWindow(new Controller(null, null));
 	}
 
 	public static void main(String[] args) 
