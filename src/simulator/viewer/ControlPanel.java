@@ -40,11 +40,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLayout(new BorderLayout());
 
-		mainPanel.add (createButton(new ImageIcon("C:/Users/pablo/eclipse-workspace/PhysicsSimulator/resources/icons/open.png"), "ARCHIVOS"), BorderLayout.WEST);//, BorderLayout.PAGE_START);
-		mainPanel.add (createButton(new ImageIcon("C:/Users/pablo/eclipse-workspace/PhysicsSimulator/resources/icons/physics.png"), "PHYSICS"));//, BorderLayout.CENTER);
-		mainPanel.add (createButton(new ImageIcon("C:/Users/pablo/eclipse-workspace/PhysicsSimulator/resources/icons/run.png"), "RUN"));//, BorderLayout.WEST);//, BorderLayout.CENTER);
-		mainPanel.add (createButton(new ImageIcon("C:/Users/pablo/eclipse-workspace/PhysicsSimulator/resources/icons/stop.png"), "STOP"));//, BorderLayout.EAST);//, BorderLayout.CENTER);
-		mainPanel.add (createButton(new ImageIcon("C:/Users/pablo/eclipse-workspace/PhysicsSimulator/resources/icons/exit.png"), "EXIT"), BorderLayout.EAST);//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.WEST);//, BorderLayout.PAGE_START);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"));//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));//, BorderLayout.WEST);//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));//, BorderLayout.EAST);//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"), BorderLayout.EAST);//, BorderLayout.CENTER);
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
