@@ -43,8 +43,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 
 		mainFrame.setLayout(new BorderLayout(5, 5));
 
-		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.PAGE_START);//, BorderLayout.PAGE_START);
-		//mainPanel.add (Box.createHorizontalGlue());
+		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.WEST);//, BorderLayout.PAGE_START);
+		
+		mainPanel.add (Box.createHorizontalGlue());
+		
 		mainPanel.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"), BorderLayout.WEST);//, BorderLayout.CENTER);
 		mainPanel.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));//, BorderLayout.WEST);//, BorderLayout.CENTER);
 		mainPanel.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));//, BorderLayout.EAST);//, BorderLayout.CENTER);
