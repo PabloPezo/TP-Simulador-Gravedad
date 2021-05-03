@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -38,13 +39,14 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		JPanel mainPanel = new JPanel(new BorderLayout());
 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setLayout(new BorderLayout());
+		mainFrame.setLayout(new BorderLayout(50, 50));
 
-		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.WEST);//, BorderLayout.PAGE_START);
-		mainPanel.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"));//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.PAGE_START);//, BorderLayout.PAGE_START);
+		//mainPanel.add (Box.createHorizontalGlue());
+		mainPanel.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"), BorderLayout.WEST);//, BorderLayout.CENTER);
 		mainPanel.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));//, BorderLayout.WEST);//, BorderLayout.CENTER);
 		mainPanel.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));//, BorderLayout.EAST);//, BorderLayout.CENTER);
-		mainPanel.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"), BorderLayout.EAST);//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"));//, BorderLayout.CENTER);
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
@@ -87,7 +89,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 	private JButton createButton(Icon route, String caption) {
 		JButton button  = new JButton();
 		button.setIcon(route);
-		button.setAlignmentX(JButton.LEFT_ALIGNMENT);
+		//button.setAlignmentX(JButton.LEFT_ALIGNMENT);
 		return button;
 	}
 	
