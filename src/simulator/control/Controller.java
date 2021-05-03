@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import simulator.factories.Factory;
 import simulator.model.Body;
+import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
 import simulator.model.SimulatorObserver;
 import simulator.viewer.Viewer;
@@ -111,6 +112,6 @@ public class Controller
 	
 	public void setForceLaws(JSONObject info)
 	{
-		
+//		_phySimulator.setForceLaws(_bodiesFactory.createInstance(info));
 	}
 }
