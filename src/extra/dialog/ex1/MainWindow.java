@@ -31,9 +31,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		mainPanel.add(here);
-		
-		
-	//	mainPanel.add(new(" to select your food"));
+		//mainPanel.add(new(" to select your food"));
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
