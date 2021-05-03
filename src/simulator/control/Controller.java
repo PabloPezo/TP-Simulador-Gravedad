@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -99,7 +101,16 @@ public class Controller
 
 	public void addObserver(SimulatorObserver o) // Por hacer (ni idea)
 	{
-		// TODO Auto-generated method stub
-		
+		_phySimulator.addObserver(o);
 	}	
+	
+	public List<JSONObject> getForceLawsInfo()
+	{
+		return _bodiesFactory.getInfo();
+	}
+	
+	public void setForceLaws(JSONObject info)
+	{
+		
+	}
 }

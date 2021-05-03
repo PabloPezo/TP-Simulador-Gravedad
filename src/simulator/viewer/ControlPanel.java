@@ -23,7 +23,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 	}
 	private void initGUI()
 	{
-	
 	}
 	
 	@SuppressWarnings("unused")
