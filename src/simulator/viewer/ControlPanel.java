@@ -1,20 +1,17 @@
 package simulator.viewer;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 
@@ -46,21 +43,29 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		mainPanel.add(toolBar, BorderLayout.PAGE_START);
 
 
-		toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"));
-		
-		
-		JToolBar toolBar2 = new JToolBar();
-		toolBar.add(toolBar2, BorderLayout.PAGE_START);
+		toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS", "Carga el fichero seleccionado"));
+		toolBar.addSeparator();
+		toolBar.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS", "Cambia las leyes de fuerza"));
+		toolBar.addSeparator();
+		toolBar.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN", "Inicia la simulación"));
+		toolBar.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP", "Detiene la simulación"));
 
+		toolBar.add(new JLabel(" Steps: "));
+		JSpinner steps = new JSpinner();
+		toolBar.add(steps);
 		
+		toolBar.add(new JLabel(" Delta-Time: "));
+		JTextField time = new JTextField();
+		toolBar.add(time);
 		
-		toolBar2.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"));
-		toolBar2.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));
-		toolBar2.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));
-		toolBar2.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"));
+		toolBar.add(new JLabel("                                                                                      "));
+		
+		toolBar.add(Box.createHorizontalGlue());
+		toolBar.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT", "Cierra la simulación"));
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
+		
 		
 		mainFrame.setVisible(true);
 		mainPanel.setVisible(true);
@@ -96,10 +101,18 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		}
 	}
 	
-	private JButton createButton(Icon route, String caption) {
+//	
+//	@Override
+//	public void actionPerformed(ActionEvent e)
+//	{
+//		if(e.getSource == toolBar.)
+//	}
+	
+	private JButton createButton(Icon route, String caption, String toolTip) 
+	{
 		JButton button  = new JButton();
 		button.setIcon(route);
-		//button.setAlignmentX(JButton.LEFT_ALIGNMENT);
+		button.setToolTipText(toolTip);
 		return button;
 	}
 	
