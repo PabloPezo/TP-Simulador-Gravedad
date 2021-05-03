@@ -86,9 +86,4 @@ public class PhysicsSimulator
  		if(forceLaws == null) {throw new IllegalArgumentException();}
  		_forceLaws = forceLaws;
  	}
- 	
- 	public void addObserver(SimulatorObserver o)
- 	{
- 		
- 	}
 }

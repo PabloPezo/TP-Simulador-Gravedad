@@ -10,7 +10,7 @@ import simulator.model.MovingTowardsFixedPoint;
 public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 {
 	static String _type = "mtfp";
-	static String _desc = "Moving towards fixed point";
+	static String _desc = "moving towards fixed point";
 	
 	public  MovingTowardsFixedPointBuilder()
 	{

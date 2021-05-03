@@ -4,14 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import simulator.factories.Factory;
 import simulator.model.Body;
-import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
 import simulator.model.SimulatorObserver;
 import simulator.viewer.Viewer;
@@ -102,16 +99,7 @@ public class Controller
 
 	public void addObserver(SimulatorObserver o) // Por hacer (ni idea)
 	{
-		_phySimulator.addObserver(o);
+		// TODO Auto-generated method stub
+		
 	}	
-	
-	public List<JSONObject> getForceLawsInfo()
-	{
-		return _bodiesFactory.getInfo();
-	}
-	
-	public void setForceLaws(JSONObject info)
-	{
-//		_phySimulator.setForceLaws(_bodiesFactory.createInstance(info));
-	}
 }

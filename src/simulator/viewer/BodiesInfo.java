@@ -17,7 +17,6 @@ import simulator.model.SimulatorObserver;
 
 public class BodiesInfo extends JPanel implements SimulatorObserver
 {
-	private static final long serialVersionUID = 1L;
 	private List<Body> _bodies;
 	private JTextArea text;
 	
