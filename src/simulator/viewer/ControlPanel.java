@@ -3,6 +3,7 @@ package simulator.viewer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.Box;
@@ -36,10 +37,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 	private void initGUI()
 	{
 		JFrame mainFrame = new JFrame("PhysicsSimulator");
-		JPanel mainPanel = new JPanel(new BorderLayout());
+		JPanel mainPanel = new JPanel(new FlowLayout());
 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setLayout(new BorderLayout(50, 50));
+
+		mainFrame.setLayout(new BorderLayout(5, 5));
 
 		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.PAGE_START);//, BorderLayout.PAGE_START);
 		//mainPanel.add (Box.createHorizontalGlue());
@@ -50,6 +52,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
+		
 		
 		mainFrame.setVisible(true);
 		mainPanel.setVisible(true);
