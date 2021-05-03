@@ -43,12 +43,30 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		mainPanel.add(toolBar, BorderLayout.PAGE_START);
 
 
+<<<<<<< HEAD
 		toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS", "Carga el fichero seleccionado"));
 		toolBar.addSeparator();
 		toolBar.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS", "Cambia las leyes de fuerza"));
 		toolBar.addSeparator();
 		toolBar.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN", "Inicia la simulación"));
 		toolBar.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP", "Detiene la simulación"));
+=======
+<<<<<<< HEAD
+		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.WEST);//, BorderLayout.PAGE_START);
+		
+		mainPanel.add (Box.createHorizontalGlue());
+		
+		mainPanel.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"), BorderLayout.WEST);//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));//, BorderLayout.WEST);//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));//, BorderLayout.EAST);//, BorderLayout.CENTER);
+		mainPanel.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"));//, BorderLayout.CENTER);
+=======
+		toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"));
+		
+		
+		JToolBar toolBar2 = new JToolBar();
+		toolBar.add(toolBar2, BorderLayout.PAGE_START);
+>>>>>>> c704c283461f16b4a1713b7ea0a1b72ffa855072
 
 		toolBar.add(new JLabel(" Steps: "));
 		JSpinner steps = new JSpinner();
@@ -60,8 +78,16 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		
 		toolBar.add(new JLabel("                                                                                      "));
 		
+<<<<<<< HEAD
 		toolBar.add(Box.createHorizontalGlue());
 		toolBar.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT", "Cierra la simulación"));
+=======
+		toolBar2.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"));
+		toolBar2.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));
+		toolBar2.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));
+		toolBar2.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"));
+>>>>>>> a84ff81d0800a287c895e04822a666668763e45b
+>>>>>>> c704c283461f16b4a1713b7ea0a1b72ffa855072
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
