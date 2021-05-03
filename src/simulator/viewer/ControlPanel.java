@@ -1,6 +1,7 @@
 package simulator.viewer;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.Box;
@@ -100,13 +101,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 			// TODO enable all buttons
 		}
 	}
-	
-//	
-//	@Override
-//	public void actionPerformed(ActionEvent e)
-//	{
-//		if(e.getSource == toolBar.)
-//	}
 	
 	private JButton createButton(Icon route, String caption, String toolTip) 
 	{
