@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 
 import simulator.control.Controller;
@@ -37,26 +38,32 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 	private void initGUI()
 	{
 		JFrame mainFrame = new JFrame("PhysicsSimulator");
-		JPanel mainPanel = new JPanel(new FlowLayout());
-
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel mainPanel = new JPanel(new BorderLayout(5, 5));
 
-		mainFrame.setLayout(new BorderLayout(5, 5));
+		JToolBar toolBar = new JToolBar();
+		mainPanel.add(toolBar, BorderLayout.PAGE_START);
 
-		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.PAGE_START);//, BorderLayout.PAGE_START);
-		//mainPanel.add (Box.createHorizontalGlue());
-		mainPanel.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"), BorderLayout.WEST);//, BorderLayout.CENTER);
-		mainPanel.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));//, BorderLayout.WEST);//, BorderLayout.CENTER);
-		mainPanel.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));//, BorderLayout.EAST);//, BorderLayout.CENTER);
-		mainPanel.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"));//, BorderLayout.CENTER);
+
+		toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"));
+		
+		
+		JToolBar toolBar2 = new JToolBar();
+		toolBar.add(toolBar2, BorderLayout.PAGE_START);
+
+		
+		
+		toolBar2.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS"));
+		toolBar2.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));
+		toolBar2.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));
+		toolBar2.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"));
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
 		
-		
 		mainFrame.setVisible(true);
 		mainPanel.setVisible(true);
-		
 	}
 	
 	@SuppressWarnings("unused")
