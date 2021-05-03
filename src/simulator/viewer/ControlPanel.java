@@ -46,7 +46,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		mainPanel.add(toolBar, BorderLayout.PAGE_START);
 
 
-<<<<<<< HEAD
+
 		mainPanel.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"), BorderLayout.WEST);//, BorderLayout.PAGE_START);
 		
 		mainPanel.add (Box.createHorizontalGlue());
@@ -55,7 +55,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		mainPanel.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));//, BorderLayout.WEST);//, BorderLayout.CENTER);
 		mainPanel.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));//, BorderLayout.EAST);//, BorderLayout.CENTER);
 		mainPanel.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"));//, BorderLayout.CENTER);
-=======
+
 		toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS"));
 		
 		
@@ -68,7 +68,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		toolBar2.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN"));
 		toolBar2.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP"));
 		toolBar2.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT"));
->>>>>>> a84ff81d0800a287c895e04822a666668763e45b
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
