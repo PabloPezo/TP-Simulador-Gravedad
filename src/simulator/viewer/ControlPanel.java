@@ -3,12 +3,14 @@ package simulator.viewer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -106,11 +108,47 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 	public JButton createButton(Icon route, String caption, String toolTip) 
 	{
 
-	    EventoEleccion eventoBotones = new EventoEleccion(this);
+	    //EventoEleccion eventoBotones = new EventoEleccion(this);
 		JButton button  = new JButton();
 		button.setIcon(route);
 		button.setToolTipText(toolTip);
-		button.addActionListener(eventoBotones);
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg)
+			{
+				if (caption == "Archivos")
+				{
+					//System.out.println("Archivos");
+					
+					JFileChooser fileChooser = new JFileChooser();
+					int seleccion = fileChooser.showOpenDialog(getParent());
+					
+					_ctrl.reset();	//Limpia el simulador
+					
+					//_ctrl.loadBodies(seleccion);
+					
+				}
+				else if (caption == "Physics")
+				{
+					System.out.println("Physics");
+				}
+				else if (caption == "Run")
+				{
+					System.out.println("Run");
+				}
+				else if (caption == "Stop")
+				{
+					//System.out.println("Stop");
+					
+					_stopped = true;
+				}
+				else
+				{
+					System.exit(0);
+				}
+				
+			}
+		});
 		return button;
 		
 	}
@@ -178,10 +216,11 @@ class EventoEleccion implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{   
-		JButton source = (JButton)e.getSource();
+		JButton source = (JButton) e.getSource();
 
-		if (boton1 == source  )
+		if (boton1 != source  )
 		{
+			System.out.println("hola");
 		}
 		else if (boton2 == source )
 		{
