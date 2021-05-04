@@ -1,6 +1,7 @@
 package simulator.viewer;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
@@ -44,25 +45,25 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		mainPanel.add(toolBar, BorderLayout.PAGE_START);
 
 
-		toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "ARCHIVOS", "Carga el fichero seleccionado"));
+		toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "Archivos", "Carga el fichero seleccionado"));
 		toolBar.addSeparator();
-		toolBar.add (createButton(new ImageIcon("resources/icons/physics.png"), "PHYSICS", "Cambia las leyes de fuerza"));
+		toolBar.add (createButton(new ImageIcon("resources/icons/physics.png"), "Physics", "Cambia las leyes de fuerza"));
 		toolBar.addSeparator();
-		toolBar.add (createButton(new ImageIcon("resources/icons/run.png"), "RUN", "Inicia la simulación"));
-		toolBar.add (createButton(new ImageIcon("resources/icons/stop.png"), "STOP", "Detiene la simulación"));
+		toolBar.add (createButton(new ImageIcon("resources/icons/run.png"), "Run", "Inicia la simulación"));
+		toolBar.add (createButton(new ImageIcon("resources/icons/stop.png"), "Stop", "Detiene la simulación"));
 
 		toolBar.add(new JLabel(" Steps: "));
 		JSpinner steps = new JSpinner();
+		steps.setSize(1, 1);
 		toolBar.add(steps);
 		
 		toolBar.add(new JLabel(" Delta-Time: "));
 		JTextField time = new JTextField();
 		toolBar.add(time);
 		
-		toolBar.add(new JLabel("                                                                                      "));
-		
+	
 		toolBar.add(Box.createHorizontalGlue());
-		toolBar.add (createButton(new ImageIcon("resources/icons/exit.png"), "EXIT", "Cierra la simulación"));
+		toolBar.add (createButton(new ImageIcon("resources/icons/exit.png"), "Exit", "Cierra la simulación"));
 		
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
@@ -102,12 +103,16 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		}
 	}
 	
-	private JButton createButton(Icon route, String caption, String toolTip) 
+	public JButton createButton(Icon route, String caption, String toolTip) 
 	{
+
+	    EventoEleccion eventoBotones = new EventoEleccion(this);
 		JButton button  = new JButton();
 		button.setIcon(route);
 		button.setToolTipText(toolTip);
+		button.addActionListener(eventoBotones);
 		return button;
+		
 	}
 	
 	// Cositas que me pone solo
@@ -154,4 +159,47 @@ public class ControlPanel extends JPanel implements SimulatorObserver
 		ControlPanel pepe = new ControlPanel(new Controller(null, null));
 		pepe.initGUI();
 	}
+}
+
+class EventoEleccion implements ActionListener
+{
+	private ControlPanel eleccion;
+	private JButton boton1 = new JButton("Archivos");
+	private JButton boton2 = new JButton("Physics");
+	private JButton boton3 = new JButton("Run");
+	private JButton boton4 = new JButton("Stop");
+	private JButton boton5 = new JButton("Exit");
+
+	public EventoEleccion(ControlPanel eleccion) 
+	{
+		this.eleccion = eleccion;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{   
+		JButton source = (JButton)e.getSource();
+
+		if (boton1 == source  )
+		{
+		}
+		else if (boton2 == source )
+		{
+
+		}
+		else if (boton3 == source )
+		{
+
+		}		
+		else if (boton4 == source)
+		{
+
+		}
+		else// if (boton5 == source)
+		{
+			System.out.println("funciona");
+		}
+	//	https://es.stackoverflow.com/questions/130285/cambiar-tama%C3%B1o-o-estilo-de-botones-java
+	}
+
 }
