@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -25,16 +26,25 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 	{
 		super();
 		initGUI();
-		_ctrl.addObserver(this);
+	//	_ctrl.addObserver(this);
 	}
 	
 	private void initGUI()
 	{
-		setLayout(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Bodies", TitledBorder.LEFT, TitledBorder.TOP));
+		JFrame mainFrame = new JFrame("PhysicsSimulator");
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel mainPanel = new JPanel(new BorderLayout());
+
+		
+		
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Bodies", TitledBorder.LEFT, TitledBorder.TOP));
 		text = new JTextArea();
 		JScrollPane scroll = new JScrollPane(text);
-		add(scroll);
+		mainPanel.add(scroll);
+		mainPanel.setVisible(true);
+		mainFrame.setVisible(true);
 	
 	
 	}
@@ -87,4 +97,11 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) {}
+	
+	public static void main(String[] args)
+	{
+		BodiesInfo pepe = new BodiesInfo(new Controller(null, null));
+		pepe.initGUI();
+	}
+
 }
