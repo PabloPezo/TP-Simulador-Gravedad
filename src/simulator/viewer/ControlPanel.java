@@ -3,6 +3,8 @@ package simulator.viewer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 
 import javax.swing.Box;
@@ -12,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -95,7 +98,48 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		mainFrame.add(mainPanel);
 		mainFrame.setBounds(400, 300, 800, 90);
+		
+		
+		mainFrame.addWindowListener(new WindowListener() {
+			@Override
+			public void windowClosing(WindowEvent e) { quit(); }
 
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		mainFrame.setVisible(true);
 		mainPanel.setVisible(true);
@@ -142,6 +186,13 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		return button;
 	}
 
+	private void quit()
+	{
+		int n = JOptionPane.showOptionDialog(null, "Are you sure to quit?", "Quit",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (n == 0) {System.exit(0);}
+	}
+	
 	// Cositas que me pone solo
 
 	@Override
@@ -211,7 +262,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		}
 		else if(e.getSource() == boton5)
 		{
-			System.exit(0);
+			quit();
 		}
 	}
 }
