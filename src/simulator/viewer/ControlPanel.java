@@ -1,13 +1,20 @@
 package simulator.viewer;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,10 +23,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.SpinnerListModel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import simulator.control.Controller;
 import simulator.model.Body;
@@ -243,14 +255,101 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	{
 		if (e.getSource() == boton1)
 		{
-			JFileChooser fileChooser = new JFileChooser();
-			int seleccion = fileChooser.showOpenDialog(getParent());
-			_ctrl.reset();	
+//			int v = fc.showOpeninDialog(null);
+//			if (v == JFileChooser.APPROVE_OPTION)
+//			{
+//				File f = fc.getSelectedFile();
+//				_ctrl.reset();
+//				InputStream in;
+//				try
+//				{
+//					in = new FileInputStream(f);
+//					_ctrl.loadBodies(in);
+//				}
+//				catch (FileNotFoundException e1)
+//				{
+//					JOptionPane.showMessageDialog(null, "Error al cargar el archivo");
+//				}
+//			}
+			
+			
+			
+//			JFileChooser fileChooser = new JFileChooser();
+//			int seleccion = fileChooser.showOpenDialog(getParent());
+//			_ctrl.reset();	
 			//_ctrl.loadBodies(seleccion);
 		}
 		else if (e.getSource() == boton2)
 		{
-			System.out.println("Physics");
+			//System.out.println("Physics");
+			
+			String[] listita = {"Hola", "Adios"};
+			
+			SpinnerListModel sModel = new SpinnerListModel(listita);
+	        JSpinner spinner = new JSpinner(sModel);
+//	        JOptionPane.showMessageDialog(null, spinner);
+	        
+	        
+	        JPanel pepe = new JPanel();
+	        
+	        pepe.setBounds(80, 20, 100, 170);
+	        pepe.setLayout(new BoxLayout(pepe, BoxLayout.Y_AXIS));
+	        
+	        String[] columnNames = {"Key",
+                    "Value",
+                    "Description"};
+	        
+	        String[][] data1 = {
+	        	    {"G", "", "gravitional constant"},
+	        	    {"", "", ""}
+	        	};
+	        
+	        
+	        JTable tabla = new JTable(data1, columnNames);
+	        
+	        spinner.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    JSpinner spinner = (JSpinner) e.getSource();
+                    String value = (String)spinner.getValue();
+                    System.out.println("Value is " + value);
+                    
+                    if (value == "Hola")
+                    {
+                    	tabla.setValueAt("G", 0, 0);
+                    	tabla.setValueAt("the gravitational constant (a number)", 0, 2);	
+                    	tabla.setValueAt("", 1, 0);
+                    	tabla.setValueAt("", 1, 2);
+                    }
+                    else
+                    {
+                    	tabla.setValueAt("c", 0, 0);
+                    	tabla.setValueAt("the point towards...", 0, 2);
+                    	tabla.setValueAt("g", 1, 0);
+                    	tabla.setValueAt("the lenght...", 1, 2);
+                    }
+                    
+                }
+            });
+	        
+	        pepe.add(new JLabel("Select a force"), null);
+	        
+	        pepe.add(new JScrollPane(tabla));
+	        
+	        pepe.add(spinner);
+//	        pepe.add(tabla);
+	        
+	        
+	        int option = JOptionPane.showOptionDialog(null, pepe, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+	        if (option == JOptionPane.CANCEL_OPTION)
+	        {
+	        	
+	        } else if (option == JOptionPane.OK_OPTION)
+	        {
+	            
+	        }
+			
+			
 		}
 		else if (e.getSource() == boton3)
 		{

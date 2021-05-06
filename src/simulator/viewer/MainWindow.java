@@ -32,6 +32,10 @@ public class MainWindow extends JFrame
 		
 		ControlPanel ctrlPanel = new ControlPanel(_ctrl);
 		
+		//Lo que dice la lucia de poner:
+		//setCurrentDirectory("NewCurrentDirectory");
+		
+		
 		BodiesTable bodiesTable = new BodiesTable(_ctrl);
 		
 		BodiesInfo bodiesInfo = new BodiesInfo(_ctrl);
