@@ -33,6 +33,7 @@ public class MainWindow extends JFrame
 
 		ControlPanel ctrlPanel = new ControlPanel(_ctrl);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		
 		//Lo que dice la lucia de poner:
 		//setCurrentDirectory("NewCurrentDirectory");
@@ -40,6 +41,8 @@ public class MainWindow extends JFrame
 		
 		BodiesTable bodiesTable = new BodiesTable(_ctrl);
 		
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 		BodiesInfo bodiesInfo = new BodiesInfo(_ctrl);
