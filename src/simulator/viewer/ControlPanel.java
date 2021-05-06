@@ -5,12 +5,15 @@ import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< Updated upstream
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+=======
+>>>>>>> Stashed changes
 import java.util.List;
 
 import javax.swing.Box;
@@ -54,18 +57,13 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		_ctrl = ctrl;
 		_stopped = true;
 		initGUI();
-		_ctrl.addObserver(this);
+	//	_ctrl.addObserver(this);
 	}
 
 	private void initGUI()
 	{
-		JFrame mainFrame = new JFrame("PhysicsSimulator");
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		JPanel mainPanel = new JPanel(new BorderLayout(5, 5));
-
 		JToolBar toolBar = new JToolBar();
-		mainPanel.add(toolBar, BorderLayout.PAGE_START);
+		this.add(toolBar, BorderLayout.PAGE_START);
 
 		boton1 = createButton(new ImageIcon("resources/icons/open.png"), "Carga el fichero seleccionado");
 		toolBar.add(boton1);
@@ -84,19 +82,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		toolBar.add(boton4);
 
 
-
-		//	 	toolBar.add (createButton(new ImageIcon("resources/icons/open.png"), "Archivos", "Carga el fichero seleccionado"));
-		//		toolBar.addSeparator();
-		//		toolBar.add (createButton(new ImageIcon("resources/icons/physics.png"), "Physics", "Cambia las leyes de fuerza"));
-		//		toolBar.addSeparator();
-		//		toolBar.add (createButton(new ImageIcon("resources/icons/run.png"), "Run", "Inicia la simulación"));
-		//		toolBar.add (createButton(new ImageIcon("resources/icons/stop.png"), "Stop", "Detiene la simulación"));
-		//toolBar.add (createButton(new ImageIcon("resources/icons/exit.png"), "Exit", "Cierra la simulación"));
-
 		toolBar.add(new JLabel(" Steps: "));
 		JSpinner steps = new JSpinner();
 		steps.setSize(1, 1);
 		toolBar.add(steps);
+
 
 		toolBar.add(new JLabel(" Delta-Time: "));
 		JTextField time = new JTextField();
@@ -108,53 +98,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		boton5 = createButton(new ImageIcon("resources/icons/exit.png"), "Cierra la simulación");
 		toolBar.add(boton5);
 
-		mainFrame.add(mainPanel);
-		mainFrame.setBounds(400, 300, 800, 90);
-		
-		
-		mainFrame.addWindowListener(new WindowListener() {
-			@Override
-			public void windowClosing(WindowEvent e) { quit(); }
-
-			@Override
-			public void windowActivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosed(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowIconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowOpened(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-
-		mainFrame.setVisible(true);
-		mainPanel.setVisible(true);
+		this.setBounds(400, 300, 800, 90);
+		this.setVisible(true);
 	}
 
 	@SuppressWarnings("unused")
@@ -244,15 +189,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	}
 
-	public static void main(String[] args)
-	{
-		ControlPanel pepe = new ControlPanel(new Controller(null, null));
-		pepe.initGUI();
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		
 		if (e.getSource() == boton1)
 		{
 //			int v = fc.showOpeninDialog(null);
@@ -279,7 +220,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 //			_ctrl.reset();	
 			//_ctrl.loadBodies(seleccion);
 		}
-		else if (e.getSource() == boton2)
+		else if (e.getSource() == boton2) 
 		{
 			//System.out.println("Physics");
 			
@@ -351,7 +292,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			
 			
 		}
-		else if (e.getSource() == boton3)
+		else if (e.getSource() == boton3) // Yo creo que es llamar a run_sim y llorar después
 		{
 			System.out.println("Run");
 		}
@@ -365,5 +306,3 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		}
 	}
 }
-
-//https://es.stackoverflow.com/questions/130285/cambiar-tama%C3%B1o-o-estilo-de-botones-java
