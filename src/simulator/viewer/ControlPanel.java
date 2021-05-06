@@ -5,18 +5,12 @@ import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 import java.util.List;
 
 import javax.swing.Box;
