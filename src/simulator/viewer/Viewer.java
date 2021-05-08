@@ -2,6 +2,7 @@ package simulator.viewer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -44,10 +45,6 @@ public class Viewer extends JComponent implements SimulatorObserver
 	{
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Viewer", TitledBorder.LEFT, TitledBorder.TOP));
-		text = new JTextArea();
-		JScrollPane scroll = new JScrollPane(text);
-		this.add(scroll);
-		
 		
 		
 		_bodies = new ArrayList<>();
@@ -151,6 +148,13 @@ public class Viewer extends JComponent implements SimulatorObserver
 		_centerX = getWidth() / 2;
 		_centerY = getHeight() / 2;
 		
+		Font font2 = gr.getFont().deriveFont(Font.PLAIN, 25f);
+		gr.setFont(font2);
+		
+		gr.setColor(Color.RED);
+		gr.drawString("+", _centerX, _centerY);
+		
+	;
 		
 		// TODO draw a cross at center
 		// TODO draw bodies (with vectors if _showVectors is true)
