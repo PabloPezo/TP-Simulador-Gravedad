@@ -2,7 +2,9 @@ package simulator.viewer;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -64,8 +66,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void initGUI()
 	{
+		//this.setLayout(new FlowLayout());
+
 		boton1 = createButton(new ImageIcon("resources/icons/open.png"), "Carga el fichero seleccionado");
 		this.add(boton1);
+		
 		
 		boton2 = createButton(new ImageIcon("resources/icons/physics.png"), "Cambia las leyes de fuerza");
 		this.add(boton2);
@@ -79,19 +84,24 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		this.add(new JLabel(" Steps: "));
 		JSpinner steps = new JSpinner();
-		steps.setSize(1000,1000);
 		this.add(steps);
-
+		steps.setPreferredSize(new Dimension(70, 35));
+		
+	
+		Font font1 = steps.getFont().deriveFont(Font.PLAIN, 15f);
+		steps.setFont(font1);
 
 		this.add(new JLabel(" Delta-Time: "));
-		JTextField time = new JTextField();
-		time.setSize(400, 400);
-		this.add(time);
 
+		JTextField time = new JTextField();
+		this.add(time);
+		time.setPreferredSize(new Dimension(75, 40));
+
+		Font font2 = time.getFont().deriveFont(Font.PLAIN, 15f);
+		time.setFont(font2);
 
 		boton5 = createButton(new ImageIcon("resources/icons/exit.png"), "Cierra la simulación");
 		this.add(boton5);
-		
 	}
 
 	@SuppressWarnings("unused")
@@ -240,16 +250,16 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
                     "Value",
                     "Description"};
 	        
-	        ola = new JSONObject N
-	        
-	        String[][] data1 = {
-	        	    {"G", "", "gravitional constant"},
-	        	    {"", "", ""}
-	        	};
-	        
-	        
-	        JTable tabla = new JTable(data1, columnNames);
-	        
+//	        ola = new JSONObject N
+//	        
+//	        String[][] data1 = {
+//	        	    {"G", "", "gravitional constant"},
+//	        	    {"", "", ""}
+//	        	};
+//	        
+//	        
+//	        JTable tabla = new JTable(data1, columnNames);
+//	        
 //	        spinner.addChangeListener(new ChangeListener() {
 //                @Override
 //                public void stateChanged(ChangeEvent e) {
@@ -277,7 +287,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	        
 	        pepe.add(new JLabel("Select a force"), null);
 	        
-	        pepe.add(new JScrollPane(tabla));
+	    //    pepe.add(new JScrollPane(tabla));
 	        
 	        pepe.add(combo);
 	        

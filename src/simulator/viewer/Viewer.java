@@ -150,6 +150,8 @@ public class Viewer extends JComponent implements SimulatorObserver
 		// calculate the center
 		_centerX = getWidth() / 2;
 		_centerY = getHeight() / 2;
+		
+		
 		// TODO draw a cross at center
 		// TODO draw bodies (with vectors if _showVectors is true)
 		// TODO draw help if _showHelp is true

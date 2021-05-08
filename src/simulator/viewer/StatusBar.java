@@ -31,7 +31,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 		this.setLayout( new FlowLayout( FlowLayout.LEFT ));
 		this.setBorder( BorderFactory.createBevelBorder( 1 ));
 		
-		_currTime = new JLabel("Time:  ");
+		_currTime = new JLabel("Time: ");
 		this.add(_currTime);
 		
 		_numOfBodies = new JLabel("Bodies:  ");

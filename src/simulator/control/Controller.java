@@ -100,7 +100,7 @@ public class Controller
  		_phySimulator.setDeltaTime(dt);
  	}
 
-	public void addObserver(SimulatorObserver o) // Por hacer (ni idea)
+	public void addObserver(SimulatorObserver o)
 	{
 		_phySimulator.addObserver(o);
 	}	
@@ -114,4 +114,23 @@ public class Controller
 	{
 //		_phySimulator.setForceLaws(_bodiesFactory.createInstance(info));
 	}
+	
+ 	// NO ESTA MUY CLARO 
+ 	// -------------------------------
+ 	
+ 	public double currentTime()
+ 	{
+ 		return _phySimulator.currentTime();
+ 	}
+ 	
+ 	public int nBodies()
+ 	{
+ 		return _phySimulator.nBodies();
+ 	}
+ 	
+ 	public String forceLaw()
+ 	{
+ 		return _phySimulator.forceLaw();
+ 	}
+ 	// -------------------------------
 }

@@ -4,12 +4,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.json.JSONArray;
 
 public class PhysicsSimulator
 {
 	private double _realTime;
 	private List <Body>bodyList;
+	private List <SimulatorObserver> observers;
 	private ForceLaws _forceLaws;
 	private double _currentTime;
 	
@@ -87,8 +89,27 @@ public class PhysicsSimulator
  		_forceLaws = forceLaws;
  	}
  	
- 	public void addObserver(SimulatorObserver o)
+ 	public void addObserver(SimulatorObserver o)	// Repasar sdi hay que inizializarlo en la constructora
  	{
- 		
+ 		observers.add(o);
  	}
+ 	
+ 	// NO ESTA MUY CLARO 
+ 	// -------------------------------
+ 	public double currentTime()
+ 	{
+ 		return _currentTime;
+ 	}
+ 	
+ 	public int nBodies()
+ 	{
+ 		return bodyList.size();
+ 	}
+ 	
+ 	public String forceLaw()
+ 	{
+ 		return _forceLaws.toString();
+ 	}
+ 	
+ 	// -------------------------------
 }
