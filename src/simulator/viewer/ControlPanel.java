@@ -20,6 +20,7 @@ import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,6 +35,8 @@ import javax.swing.SpinnerListModel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import org.json.JSONObject;
 
 import simulator.control.Controller;
 import simulator.model.Body;
@@ -215,10 +218,18 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			
 			String[] listita = {"Hola", "Adios"};
 			
-			SpinnerListModel sModel = new SpinnerListModel(listita);
-	        JSpinner spinner = new JSpinner(sModel);
+//			SpinnerListModel sModel = new SpinnerListModel(listita);
+//	        JSpinner spinner = new JSpinner(sModel);
 //	        JOptionPane.showMessageDialog(null, spinner);
 	        
+			JComboBox combo = new JComboBox();
+			
+			
+//			List<JSONObject> lista = _ctrl.getForceLawsInfo();     //SERÍA ASI PERO DA ERROR DE NULL POINTER (?
+//			combo.addItem(lista.toArray());
+			
+			combo.addItem("Fuerza 1");
+			combo.addItem("Fuerza 2");
 	        
 	        JPanel pepe = new JPanel();
 	        
@@ -229,6 +240,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
                     "Value",
                     "Description"};
 	        
+	        ola = new JSONObject N
+	        
 	        String[][] data1 = {
 	        	    {"G", "", "gravitional constant"},
 	        	    {"", "", ""}
@@ -237,36 +250,38 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	        
 	        JTable tabla = new JTable(data1, columnNames);
 	        
-	        spinner.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent e) {
-                    JSpinner spinner = (JSpinner) e.getSource();
-                    String value = (String)spinner.getValue();
-                    System.out.println("Value is " + value);
-                    
-                    if (value == "Hola")
-                    {
-                    	tabla.setValueAt("G", 0, 0);
-                    	tabla.setValueAt("the gravitational constant (a number)", 0, 2);	
-                    	tabla.setValueAt("", 1, 0);
-                    	tabla.setValueAt("", 1, 2);
-                    }
-                    else
-                    {
-                    	tabla.setValueAt("c", 0, 0);
-                    	tabla.setValueAt("the point towards...", 0, 2);
-                    	tabla.setValueAt("g", 1, 0);
-                    	tabla.setValueAt("the lenght...", 1, 2);
-                    }
-                    
-                }
-            });
+//	        spinner.addChangeListener(new ChangeListener() {
+//                @Override
+//                public void stateChanged(ChangeEvent e) {
+//                    JSpinner spinner = (JSpinner) e.getSource();
+//                    String value = (String)spinner.getValue();
+//                    System.out.println("Value is " + value);
+//                    
+//                    if (value == "Hola")
+//                    {
+//                    	tabla.setValueAt("G", 0, 0);
+//                    	tabla.setValueAt("the gravitational constant (a number)", 0, 2);	
+//                    	tabla.setValueAt("", 1, 0);
+//                    	tabla.setValueAt("", 1, 2);
+//                    }
+//                    else
+//                    {
+//                    	tabla.setValueAt("c", 0, 0);
+//                    	tabla.setValueAt("the point towards...", 0, 2);
+//                    	tabla.setValueAt("g", 1, 0);
+//                    	tabla.setValueAt("the lenght...", 1, 2);
+//                    }
+//                    
+//                }
+//            });
 	        
 	        pepe.add(new JLabel("Select a force"), null);
 	        
 	        pepe.add(new JScrollPane(tabla));
 	        
-	        pepe.add(spinner);
+	        pepe.add(combo);
+	        
+//	        pepe.add(spinner);
 //	        pepe.add(tabla);
 	        
 	        
