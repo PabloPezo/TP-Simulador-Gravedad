@@ -1,5 +1,6 @@
 package simulator.viewer;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,7 +12,12 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
 import simulator.control.Controller;
 import simulator.misc.Vector2D;
@@ -27,15 +33,23 @@ public class Viewer extends JComponent implements SimulatorObserver
 	private List<Body> _bodies;
 	private boolean _showHelp;
 	private boolean _showVectors;
+	private JTextArea text;
 	
 	Viewer(Controller ctrl) 
 	{
 		initGUI();
-		ctrl.addObserver(this);
+		//ctrl.addObserver(this);
 	}
 	private void initGUI() 
 	{
-		// TODO add border with title
+		this.setLayout(new BorderLayout());
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Viewer", TitledBorder.LEFT, TitledBorder.TOP));
+		text = new JTextArea();
+		JScrollPane scroll = new JScrollPane(text);
+		this.add(scroll);
+		
+		
+		
 		_bodies = new ArrayList<>();
 		_scale = 1.0;
 		_showHelp = true;
@@ -43,8 +57,10 @@ public class Viewer extends JComponent implements SimulatorObserver
 		addKeyListener(new KeyListener() 
 		{
 			@Override
-			public void keyPressed(KeyEvent e) {
-				switch (e.getKeyChar()) {
+			public void keyPressed(KeyEvent e) 
+			{
+				switch (e.getKeyChar())
+				{
 				case '-':
 					_scale = _scale * 1.1;
 					repaint();

@@ -32,31 +32,29 @@ public class MainWindow extends JFrame
 
 
 		ControlPanel ctrlPanel = new ControlPanel(_ctrl);
-		
+
 		//Lo que dice la lucia de poner:
 		//setCurrentDirectory("NewCurrentDirectory");
-		
-		
+
+
 		BodiesTable bodiesTable = new BodiesTable(_ctrl);
-		
 		BodiesInfo bodiesInfo = new BodiesInfo(_ctrl);
-		//		this.add(bodiesInfo);
-		//		
-		//		Viewer universeViewer = new Viewer(_ctrl);
-		//		
-		//		StatusBar statusBar = new StatusBar(_ctrl);
-		//		
+
+		Viewer universeViewer = new Viewer(_ctrl);
+
+		StatusBar statusBar = new StatusBar(_ctrl);
+
 		mainPanel.add(ctrlPanel, BorderLayout.PAGE_START);
-		//		mainPanel.add(statusBar, BorderLayout.PAGE_END);
-		
+		mainPanel.add(statusBar, BorderLayout.PAGE_END);
+
 		bodiesInfo.setPreferredSize(new Dimension(800, 300));
 		contentPanel.add(bodiesInfo);
 
-		//		universeViewer.setPreferredSize(new Dimension(800, 600));
-		//		contentPanel.add(new JScrollPane(universeViewer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+		universeViewer.setPreferredSize(new Dimension(800, 600));
+		contentPanel.add(new JScrollPane(universeViewer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 		mainPanel.setVisible(true);
-		this.setBounds(400, 100, 700, 850);
 		this.setVisible(true);
+		this.pack();
 	}
 
 	public static void main(String[] args) 

@@ -32,15 +32,11 @@ public class BodiesInfo extends JPanel implements SimulatorObserver
 	
 	private void initGUI()
 	{
-		///this.setBounds(500,500,500,500);
-		
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Bodies", TitledBorder.LEFT, TitledBorder.TOP));
 		text = new JTextArea();
 		JScrollPane scroll = new JScrollPane(text);
 		this.add(scroll);
-		//this.setBounds(40, 890, 980, 2324);
-		this.setVisible(true);
 	}
 	
 	private void update(List<Body> bodies)

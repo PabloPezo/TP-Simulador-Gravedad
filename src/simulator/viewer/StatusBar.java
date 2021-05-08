@@ -21,14 +21,26 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	StatusBar(Controller ctrl) 
 	{
 		initGUI();
-		ctrl.addObserver(this);
+		//ctrl.addObserver(this);
 	}
 	
 	private void initGUI() 
 	{
+		// Hay que enterarse de los putos layouts
+
 		this.setLayout( new FlowLayout( FlowLayout.LEFT ));
 		this.setBorder( BorderFactory.createBevelBorder( 1 ));
-		// TODO complete the code to build the tool bar
+		
+		_currTime = new JLabel("Time:  ");
+		this.add(_currTime);
+		
+		_numOfBodies = new JLabel("Bodies:  ");
+		this.add(_numOfBodies);
+		
+		
+		_currLaws = new JLabel("Laws:  ");
+		this.add(_currLaws);
+		
 	}
 	
 

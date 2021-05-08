@@ -1,6 +1,8 @@
 package simulator.viewer;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -59,44 +61,34 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void initGUI()
 	{
-		JToolBar toolBar = new JToolBar();
-		this.add(toolBar, BorderLayout.PAGE_START);
-
 		boton1 = createButton(new ImageIcon("resources/icons/open.png"), "Carga el fichero seleccionado");
-		toolBar.add(boton1);
-
-		toolBar.addSeparator();
-
+		this.add(boton1);
+		
 		boton2 = createButton(new ImageIcon("resources/icons/physics.png"), "Cambia las leyes de fuerza");
-		toolBar.add(boton2);
-
-		toolBar.addSeparator();
+		this.add(boton2);
 
 		boton3 = createButton(new ImageIcon("resources/icons/run.png"), "Inicia la simulación");
-		toolBar.add(boton3);
+		this.add(boton3);
 
 		boton4 = createButton(new ImageIcon("resources/icons/stop.png"), "Detiene la simulación");
-		toolBar.add(boton4);
+		this.add(boton4);
 
 
-		toolBar.add(new JLabel(" Steps: "));
+		this.add(new JLabel(" Steps: "));
 		JSpinner steps = new JSpinner();
-		steps.setSize(1, 1);
-		toolBar.add(steps);
+		steps.setSize(1000,1000);
+		this.add(steps);
 
 
-		toolBar.add(new JLabel(" Delta-Time: "));
+		this.add(new JLabel(" Delta-Time: "));
 		JTextField time = new JTextField();
-		toolBar.add(time);
+		time.setSize(400, 400);
+		this.add(time);
 
-
-		toolBar.add(Box.createHorizontalGlue());
 
 		boton5 = createButton(new ImageIcon("resources/icons/exit.png"), "Cierra la simulación");
-		toolBar.add(boton5);
-
-		this.setBounds(400, 300, 800, 90);
-		this.setVisible(true);
+		this.add(boton5);
+		
 	}
 
 	@SuppressWarnings("unused")
