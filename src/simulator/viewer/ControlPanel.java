@@ -236,7 +236,9 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			
 			
 //			List<JSONObject> lista = _ctrl.getForceLawsInfo();     //SERÍA ASI PERO DA ERROR DE NULL POINTER (?
-//			combo.addItem(lista.toArray());
+//			combo.addItem(lista); //combo.addItem(lista.toArray());?????
+			
+//			lista.get(0).get("desc");
 			
 			combo.addItem("Fuerza 1");
 			combo.addItem("Fuerza 2");
@@ -252,47 +254,50 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	        
 //	        ola = new JSONObject N
 //	        
-//	        String[][] data1 = {
-//	        	    {"G", "", "gravitional constant"},
-//	        	    {"", "", ""}
-//	        	};
-//	        
-//	        
-//	        JTable tabla = new JTable(data1, columnNames);
-//	        
-//	        spinner.addChangeListener(new ChangeListener() {
-//                @Override
-//                public void stateChanged(ChangeEvent e) {
-//                    JSpinner spinner = (JSpinner) e.getSource();
-//                    String value = (String)spinner.getValue();
-//                    System.out.println("Value is " + value);
-//                    
-//                    if (value == "Hola")
-//                    {
-//                    	tabla.setValueAt("G", 0, 0);
-//                    	tabla.setValueAt("the gravitational constant (a number)", 0, 2);	
-//                    	tabla.setValueAt("", 1, 0);
-//                    	tabla.setValueAt("", 1, 2);
-//                    }
-//                    else
-//                    {
-//                    	tabla.setValueAt("c", 0, 0);
-//                    	tabla.setValueAt("the point towards...", 0, 2);
-//                    	tabla.setValueAt("g", 1, 0);
-//                    	tabla.setValueAt("the lenght...", 1, 2);
-//                    }
-//                    
-//                }
-//            });
+	        String[][] data1 = {
+	        	    {"G", "", "gravitional constant"},
+	        	    {"", "", ""}
+	        	};
+	        
+	        
+	        JTable tabla = new JTable(data1, columnNames);
+	        
+	        tabla.getDefaultEditor(String.class).isCellEditable(null);
+	        
+	        combo.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JComboBox combo = (JComboBox) e.getSource();
+                    String value = (String)combo.getSelectedItem();
+                    System.out.println("Value is " + value);
+                    
+                    if (value == "Fuerza 1")
+                    {
+                    	tabla.setValueAt("G", 0, 0);
+                    	tabla.setValueAt("the gravitational constant (a number)", 0, 2);	
+                    	tabla.setValueAt("", 1, 0);
+                    	tabla.setValueAt("", 1, 2);
+                    }
+                    else
+                    {
+                    	tabla.setValueAt("c", 0, 0);
+                    	tabla.setValueAt("the point towards...", 0, 2);
+                    	tabla.setValueAt("g", 1, 0);
+                    	tabla.setValueAt("the lenght...", 1, 2);
+                    }
+					
+				}
+            });
 	        
 	        pepe.add(new JLabel("Select a force"), null);
 	        
-	    //    pepe.add(new JScrollPane(tabla));
+	        pepe.add(new JScrollPane(tabla));
 	        
+//	        pepe.add(tabla);
 	        pepe.add(combo);
 	        
 //	        pepe.add(spinner);
-//	        pepe.add(tabla);
+
 	        
 	        
 	        int option = JOptionPane.showOptionDialog(null, pepe, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
