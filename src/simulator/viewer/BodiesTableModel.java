@@ -15,7 +15,7 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	private List<Body> _bodies;
 	private final String[] names = {"id", "mass", "position", "force"};
 	private String[] column;
-	
+
 	BodiesTableModel(Controller ctrl) 
 	{
 		_bodies = new ArrayList<>();
@@ -57,41 +57,41 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onAdvance(List<Body> bodies, double time)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onDeltaTimeChanged(double dt)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 }
