@@ -90,7 +90,7 @@ public class Controller
 		pr.println("}");
     }
 	
-	public void run(int steps) throws NotEqualStatesException // HECHO PARA LA PR2. NI IDEA DE SI ESTA BIEN
+	public void run(int steps) // HECHO PARA LA PR2. NI IDEA DE SI ESTA BIEN
 	{
 		for(int i=1; i <= steps; i++)
 		{
