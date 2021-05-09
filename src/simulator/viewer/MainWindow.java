@@ -37,7 +37,7 @@ public class MainWindow extends JFrame
 		//setCurrentDirectory("NewCurrentDirectory");
 
 
-		BodiesTable bodiesTable = new BodiesTable(_ctrl);
+		//BodiesTable bodiesTable = new BodiesTable(_ctrl);
 		BodiesInfo bodiesInfo = new BodiesInfo(_ctrl);
 
 		Viewer universeViewer = new Viewer(_ctrl);
@@ -59,6 +59,7 @@ public class MainWindow extends JFrame
 
 	public static void main(String[] args) 
 	{
+		@SuppressWarnings("unused")
 		MainWindow main = new MainWindow(new Controller(null, null));
 	}
 

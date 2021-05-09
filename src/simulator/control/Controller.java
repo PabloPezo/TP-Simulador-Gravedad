@@ -90,6 +90,14 @@ public class Controller
 		pr.println("}");
     }
 	
+	public void run(int steps) // HECHO PARA LA PR2. NI IDEA DE SI ESTA BIEN
+	{
+		for(int i=1; i <= steps; i++)
+		{
+			_phySimulator.advance();
+		}
+    }
+	
 	public void reset()
 	{
 		_phySimulator.reset();

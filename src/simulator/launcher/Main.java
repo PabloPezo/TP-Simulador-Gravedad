@@ -39,7 +39,8 @@ public class Main
 	private final static Integer _defaultStepsValue = 150;
 	private final static String _forceLawsDefaultValue = "nlug";
 	private final static String _stateComparatorDefaultValue = "epseq";
-	
+
+	private static String _mode = "BATCH";
 	private static Double _dtime = null;
 	private static Integer _steps = null;
 	private static String _inFile = null;
@@ -64,14 +65,14 @@ public class Main
 		forceLawsBuilders.add(new MovingTowardsFixedPointBuilder());
 		forceLawsBuilders.add(new NoForceBuilder());
 		_forceLawsFactory = new BuilderBasedFactory <ForceLaws>(forceLawsBuilders);
-		
+
 		ArrayList<Builder<StateComparator>> stateCmpBuilders = new ArrayList<>();
 		stateCmpBuilders.add(new EpsilonEqualStateBuilder());
 		stateCmpBuilders.add(new MassEqualStateBuilder());
 		_stateComparatorFactory = new BuilderBasedFactory <StateComparator>(stateCmpBuilders);
 	}
 
-	private static void parseArgs(String[] args) 	// Parsea los diferentes comandos
+	private static void parseArgs(String[] args) 	// MODIFICADO PARA LA PR2, CREO QUE NO IMPORTA EL ORDEN DE LOS PARSES
 	{
 		Options cmdLineOptions = buildOptions();
 
@@ -81,17 +82,30 @@ public class Main
 			CommandLine line = parser.parse(cmdLineOptions, args);
 
 			parseHelpOption(line, cmdLineOptions);
-			parseInFileOption(line);
-			
-			parseExpOutFileOption(line);
-			parseOutFileOption(line);
 
-			parseStepsOption(line);
-			
+
+			parseModeOption(line);
+
 			parseDeltaTimeOption(line);
 			parseForceLawsOption(line);
 			parseStateComparatorOption(line);
 
+			parseStepsOption(line);
+
+			if(_mode == "GUI")
+			{
+				try
+				{
+					parseInFileOption(line);
+				}
+				catch (Exception e){}
+			}
+			else
+			{
+
+				parseExpOutFileOption(line);
+				parseOutFileOption(line);
+			}
 			String[] remaining = line.getArgs();
 			if (remaining.length > 0) 	// Lanza la excepción cuando el comando es erróneo
 			{
@@ -116,16 +130,21 @@ public class Main
 
 		cmdLineOptions.addOption(Option.builder("i").longOpt("input").hasArg().desc("Bodies JSON input file.").build());
 
+		cmdLineOptions.addOption(Option.builder("m").longOpt("mode").hasArg().desc("Execution Mode. Possible values: ’batch’\r\n"
+				+ "	(Batch mode), ’gui’ (Graphical User\r\n"
+				+ "		Interface mode). Default value: ’batch’")
+				.build());
+
 		cmdLineOptions.addOption(Option.builder("o").longOpt("output").hasArg().desc("Output file, where output is written. Default value:"
-						+ "the standard output.")
+				+ "the standard output.")
 				.build());
-		
+
 		cmdLineOptions.addOption(Option.builder("eo").longOpt("expected-output").hasArg().desc("The expected output file. If not provided"
-						+ "no comparison is applied")
+				+ "no comparison is applied")
 				.build());
-		
+
 		cmdLineOptions.addOption(Option.builder("s").longOpt("steps").hasArg().desc("An integer representing the number of simulation steps."
-						+ " Default value: 150.")
+				+ " Default value: 150.")
 				.build());
 
 		cmdLineOptions.addOption(Option.builder("dt").longOpt("delta-time").hasArg()
@@ -138,7 +157,7 @@ public class Main
 						+ factoryPossibleValues(_forceLawsFactory) + ". Default value: '" + _forceLawsDefaultValue
 						+ "'.")
 				.build());
-		
+
 		cmdLineOptions.addOption(Option.builder("cmp").longOpt("comparator").hasArg()
 				.desc("State comparator to be used when comparing states. Possible values: "
 						+ factoryPossibleValues(_stateComparatorFactory) + ". Default value: '"
@@ -187,17 +206,27 @@ public class Main
 			throw new ParseException("In batch mode an input file of bodies is required");
 		}
 	}
-	
+
+	private static void parseModeOption(CommandLine line) throws ParseException // CAMBIADO PARA LA PR2
+	{
+		_mode = line.getOptionValue("i");
+
+		if(_mode != "BATCH" || _mode != "GUI")
+		{
+			throw new ParseException("This execution mode doesn't exist");
+		}
+	}
+
 	private static void parseOutFileOption(CommandLine line) throws ParseException 
 	{
 		_outFile = line.getOptionValue("o");
 	}
-	
+
 	private static void parseExpOutFileOption(CommandLine line) throws ParseException 
 	{
 		_expFile = line.getOptionValue("eo");
 	}
-	
+
 	private static void parseStepsOption(CommandLine line) throws ParseException 
 	{
 		String steps = line.getOptionValue("s", _defaultStepsValue.toString());
@@ -281,6 +310,11 @@ public class Main
 		}
 	}
 
+	private static void startGUIMpde()
+	{
+
+	}
+
 	private static void startBatchMode() throws Exception // Inicia la simulación
 	{
 		InputStream in = new FileInputStream(new File(_inFile));
@@ -288,16 +322,16 @@ public class Main
 		ForceLaws fuerzas = _forceLawsFactory.createInstance(_forceLawsInfo);
 		PhysicsSimulator simulador = new PhysicsSimulator(_dtime, fuerzas);
 		Controller control = new Controller(simulador, _bodyFactory);
-		
+
 		InputStream expOut = null;
 		StateComparator cmp = null;
-		
+
 		if(_expFile != null)
 		{
 			expOut = new FileInputStream(new File(_expFile));
 			cmp = _stateComparatorFactory.createInstance(_stateComparatorInfo);
 		}
-		
+
 		control.loadBodies(in);
 		control.run(_steps, out, expOut, cmp);
 	}
