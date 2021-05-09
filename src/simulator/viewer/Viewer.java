@@ -15,9 +15,6 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import simulator.control.Controller;
@@ -34,8 +31,6 @@ public class Viewer extends JComponent implements SimulatorObserver
 	private List<Body> _bodies;
 	private boolean _showHelp;
 	private boolean _showVectors;
-	private JTextArea text;
-	
 	Viewer(Controller ctrl) 
 	{
 		initGUI();
@@ -45,8 +40,8 @@ public class Viewer extends JComponent implements SimulatorObserver
 	{
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Viewer", TitledBorder.LEFT, TitledBorder.TOP));
-		
-		
+
+
 		_bodies = new ArrayList<>();
 		_scale = 1.0;
 		_showHelp = true;
@@ -64,12 +59,12 @@ public class Viewer extends JComponent implements SimulatorObserver
 					break;
 				case '+':
 					_scale = Math.max(1000.0, _scale / 1.1);
-				repaint();
-				break;
+					repaint();
+					break;
 				case '=':
 					autoScale();
-				repaint();
-				break;
+					repaint();
+					break;
 				case 'h':
 					_showHelp = !_showHelp;
 					repaint();
@@ -86,14 +81,14 @@ public class Viewer extends JComponent implements SimulatorObserver
 			public void keyReleased(KeyEvent arg0) 
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void keyTyped(KeyEvent arg0) 
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		addMouseListener(new MouseListener() 
@@ -108,55 +103,55 @@ public class Viewer extends JComponent implements SimulatorObserver
 			public void mouseClicked(MouseEvent arg0)
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) 
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) 
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0)
 			{
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
 		Graphics2D gr = (Graphics2D) g;
-		
+
 		gr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		gr.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		
+
 		_centerX = getWidth() / 2;
 		_centerY = getHeight() / 2;
-		
+
 		Font negrita = new Font("Arial", Font.BOLD, 13);
 		gr.setFont(negrita);
-		
+
 		gr.setColor(Color.RED);
 		gr.drawString("+", _centerX, _centerY);
-		
+
 		for(int i = 0; i < _bodies.size() && _showVectors; i ++) // He añadido el _showVectors por eficiencia algoritmica, si no funciona revisar
 		{
 			double posX = _bodies.get(i).getPosition().getX();
 			double posY = _bodies.get(i).getPosition().getY();
-			
+
 			if(_showVectors)
 			{
 				gr.setColor(Color.BLUE);
@@ -166,7 +161,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 				gr.drawString(_bodies.get(i).getId(),  _centerX + (int)(posX/_scale),  _centerY - (int)(posY/_scale));
 			}
 		}
-		
+
 		if(_showHelp)
 		{
 			gr.setColor(Color.RED);
@@ -190,12 +185,9 @@ public class Viewer extends JComponent implements SimulatorObserver
 	// This method draws a line from (x1,y1) to (x2,y2) with an arrow.
 	// The arrow is of height h and width w.
 	// The last two arguments are the colors of the arrow and the line
-	private void drawLineWithArrow(//
-			Graphics g, //
-			int x1, int y1, //
-			int x2, int y2, //
-			int w, int h, //6. La interfaz gráfica de usuario 11
-			Color lineColor, Color arrowColor) {
+	@SuppressWarnings("unused")
+	private void drawLineWithArrow(Graphics g, int x1, int y1, int x2, int y2, int w, int h, Color lineColor, Color arrowColor)
+	{
 		int dx = x2 - x1, dy = y2 - y1;
 		double D = Math.sqrt(dx * dx + dy * dy);
 		double xm = D - w, xn = xm, ym = h, yn = -h, x;
@@ -213,7 +205,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 		g.setColor(arrowColor);
 		g.fillPolygon(xpoints, ypoints, 3);
 	}
-	
+
 	@Override
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
@@ -227,7 +219,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 		autoScale();
 		_bodies = new ArrayList<>();
 		repaint();
-		
+
 	}
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) 
@@ -240,11 +232,11 @@ public class Viewer extends JComponent implements SimulatorObserver
 	{
 		repaint();
 	}
-	
+
 	@Override
 	public void onDeltaTimeChanged(double dt) 
 	{	}
-	
+
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) 
 	{	}

@@ -1,47 +1,30 @@
 package simulator.viewer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Window;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.SpinnerListModel;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import org.json.JSONObject;
 
 import simulator.control.Controller;
 import simulator.model.Body;
@@ -63,9 +46,9 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	{
 		_ctrl = ctrl;
 		_stopped = true;		
-		
+
 		initGUI();
-	//	_ctrl.addObserver(this);
+		//	_ctrl.addObserver(this);
 	}
 
 	private void initGUI()
@@ -74,8 +57,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		buttonArchive = createButton(new ImageIcon("resources/icons/open.png"), "Carga el fichero seleccionado");
 		this.add(buttonArchive);
-		
-		
+
+
 		buttonForces = createButton(new ImageIcon("resources/icons/physics.png"), "Cambia las leyes de fuerza");
 		this.add(buttonForces);
 
@@ -90,8 +73,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		JSpinner steps = new JSpinner();
 		this.add(steps);
 		steps.setPreferredSize(new Dimension(70, 35));
-		
-	
+
+
 		Font font1 = steps.getFont().deriveFont(Font.PLAIN, 15f);
 		steps.setFont(font1);
 
@@ -155,7 +138,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 		if (n == 0) {System.exit(0);}
 	}
-	
+
 	// Cositas que me pone solo
 
 	@Override
@@ -194,11 +177,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	private void archive()
 	{
 		JFileChooser fc = new JFileChooser();
-		
+
 		int v = fc.showOpenDialog(null);
 		if (v == JFileChooser.APPROVE_OPTION)
 		{
@@ -215,108 +198,108 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			}
 		}
 	}
-	
+
 	private void forces()
 	{        
 		JComboBox combo = new JComboBox();
-		
+
 		//TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
-//		List<JSONObject> list = _ctrl.getForceLawsInfo();
-//		String[] forceLaws = new String[list.size()];
-//		String[] forceLawsData = new String[list.size()];
-//		
-//		for (int i = 0; i < forceLaws.length; i++)
-//		{
-//			forceLaws[i] = list.get(i).getString("desc");
-//			forceLawsData[i] = list.get(i).getString("data");
-//		}
-		
-		
+		//		List<JSONObject> list = _ctrl.getForceLawsInfo();
+		//		String[] forceLaws = new String[list.size()];
+		//		String[] forceLawsData = new String[list.size()];
+		//		
+		//		for (int i = 0; i < forceLaws.length; i++)
+		//		{
+		//			forceLaws[i] = list.get(i).getString("desc");
+		//			forceLawsData[i] = list.get(i).getString("data");
+		//		}
+
+
 		//EJEMPLO
 		String[] forceLaws = {"Fuerza 1", "Fuerza 2", "Fuerza 3"};
 		for (int i = 0; i < forceLaws.length; i++) {
 			combo.addItem(forceLaws[i]);
 		}
 		//EJEMPLO
-        
-        JPanel pepe = new JPanel();
-        
-        pepe.setBounds(80, 20, 100, 170);
-        pepe.setLayout(new BoxLayout(pepe, BoxLayout.Y_AXIS));
-        
-        String[] columnNames = {"Key",
-                "Value",
-                "Description"};
-        
-//        ola = new JSONObject N
-//        
-        String[][] data1 = {
-        	    {"G", "", "gravitional constant"},
-        	    {"", "", ""}
-        	};
-        
-        
-        JTable tabla = new JTable(data1, columnNames);
-        
-        tabla.getDefaultEditor(String.class).isCellEditable(null);
-        
-        combo.addActionListener(new ActionListener() {
+
+		JPanel pepe = new JPanel();
+
+		pepe.setBounds(80, 20, 100, 170);
+		pepe.setLayout(new BoxLayout(pepe, BoxLayout.Y_AXIS));
+
+		String[] columnNames = {"Key",
+				"Value",
+		"Description"};
+
+		//        ola = new JSONObject N
+		//        
+		String[][] data1 = {
+				{"G", "", "gravitional constant"},
+				{"", "", ""}
+		};
+
+
+		JTable tabla = new JTable(data1, columnNames);
+
+		tabla.getDefaultEditor(String.class).isCellEditable(null);
+
+		combo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox combo = (JComboBox) e.getSource();
-                String value = (String)combo.getSelectedItem();
-                System.out.println("Value is " + value);
-                
-                if (value == "Fuerza 1")
-                {
-                	tabla.setValueAt("G", 0, 0);
-                	tabla.setValueAt("the gravitational constant (a number)", 0, 2);	
-                	tabla.setValueAt("", 1, 0);
-                	tabla.setValueAt("", 1, 2);
-                }
-                else
-                {
-                	tabla.setValueAt("c", 0, 0);
-                	tabla.setValueAt("the point towards...", 0, 2);
-                	tabla.setValueAt("g", 1, 0);
-                	tabla.setValueAt("the lenght...", 1, 2);
-                }
-				
+				String value = (String)combo.getSelectedItem();
+				System.out.println("Value is " + value);
+
+				if (value == "Fuerza 1")
+				{
+					tabla.setValueAt("G", 0, 0);
+					tabla.setValueAt("the gravitational constant (a number)", 0, 2);	
+					tabla.setValueAt("", 1, 0);
+					tabla.setValueAt("", 1, 2);
+				}
+				else
+				{
+					tabla.setValueAt("c", 0, 0);
+					tabla.setValueAt("the point towards...", 0, 2);
+					tabla.setValueAt("g", 1, 0);
+					tabla.setValueAt("the lenght...", 1, 2);
+				}
+
 			}
-        });
-        
-        pepe.add(new JLabel("Select a force"), null);
-        
-        pepe.add(new JScrollPane(tabla));
-        pepe.add(combo);
-        
-        int option = JOptionPane.showOptionDialog(null, pepe, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-        if (option == JOptionPane.CANCEL_OPTION)
-        {
-        	
-        } else if (option == JOptionPane.OK_OPTION)
-        {
-            
-        }
-		
-		
+		});
+
+		pepe.add(new JLabel("Select a force"), null);
+
+		pepe.add(new JScrollPane(tabla));
+		pepe.add(combo);
+
+		int option = JOptionPane.showOptionDialog(null, pepe, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (option == JOptionPane.CANCEL_OPTION)
+		{
+
+		} else if (option == JOptionPane.OK_OPTION)
+		{
+
+		}
+
+
 	}
-	
+
 	private void play()
 	{
-		
+
 	}
-	
+
 	private void stop()
 	{
-		
+
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		
+
 		if (e.getSource() == buttonArchive)
 		{
 			archive();

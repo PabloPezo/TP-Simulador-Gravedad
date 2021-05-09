@@ -5,6 +5,8 @@ import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 
 import simulator.control.Controller;
@@ -20,6 +22,9 @@ public class BodiesTable extends JPanel
 				BorderFactory.createLineBorder(Color.black, 2),
 				"Bodies",
 				TitledBorder.LEFT, TitledBorder.TOP));
-		// TODO complete
+
+		BodiesTableModel bodiesTable = new BodiesTableModel(ctrl);
+		this.add(new JScrollPane(new JTable(bodiesTable)));
+
 	}
 }

@@ -20,14 +20,11 @@ public class BodiesInfo extends JPanel implements SimulatorObserver//extends Abs
 	private static final long serialVersionUID = 1L;
 	private List<Body> _bodies;
 	private JTextArea text;
-	//private final String[] names = {"id", "mass", "position", "force"};
-	//	private String[] column;
 
 	public BodiesInfo(Controller _ctrl)
 	{
 		super();
 		initGUI();
-		//	this.column = new String[names.length];
 		//_ctrl.addObserver(this);
 	}
 	//	
@@ -89,28 +86,7 @@ public class BodiesInfo extends JPanel implements SimulatorObserver//extends Abs
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) {}
 
-	//	@Override
-	//	public int getColumnCount()
-	//	{
-	//		return names.length;
-	//	}
-	//
-	//	@Override
-	//	public int getRowCount() 
-	//	{
-	//		return _bodies.size();
-	//	}
-	//
-	//	@Override
-	//	public Object getValueAt(int rowIndex, int columnIndex)
-	//	{
-	//		this.column[0] = _bodies.get(rowIndex).getId().toString();
-	//		this.column[1] = String.valueOf(_bodies.get(rowIndex).getMass());
-	//		this.column[2] = String.valueOf(_bodies.get(rowIndex).getVelocity());
-	//		this.column[3] = String.valueOf(_bodies.get(rowIndex).getPosition());
-	//		this.column[4] = String.valueOf(_bodies.get(rowIndex).getForce());
-	//		return this.column[columnIndex];
-	//	}
+
 
 
 }

@@ -37,8 +37,8 @@ public class MainWindow extends JFrame
 		//setCurrentDirectory("NewCurrentDirectory");
 
 
-		//BodiesTable bodiesTable = new BodiesTable(_ctrl);
-		BodiesInfo bodiesInfo = new BodiesInfo(_ctrl);
+		BodiesTable bodiesTable = new BodiesTable(_ctrl);
+		//BodiesInfo bodiesInfo = new BodiesInfo(_ctrl);
 
 		Viewer universeViewer = new Viewer(_ctrl);
 
@@ -47,8 +47,8 @@ public class MainWindow extends JFrame
 		mainPanel.add(ctrlPanel, BorderLayout.PAGE_START);
 		mainPanel.add(statusBar, BorderLayout.PAGE_END);
 
-		bodiesInfo.setPreferredSize(new Dimension(800, 300));
-		contentPanel.add(bodiesInfo);
+		bodiesTable.setPreferredSize(new Dimension(800, 300));
+		contentPanel.add(bodiesTable);
 
 		universeViewer.setPreferredSize(new Dimension(800, 600));
 		contentPanel.add(new JScrollPane(universeViewer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));

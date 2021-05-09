@@ -13,80 +13,85 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 {
 	private static final long serialVersionUID = 1L;
 	private List<Body> _bodies;
+	private final String[] names = {"id", "mass", "position", "force"};
+	private String[] column;
+
 	BodiesTableModel(Controller ctrl) 
 	{
 		_bodies = new ArrayList<>();
-		ctrl.addObserver(this);
+		//ctrl.addObserver(this);
+		this.column = new String[names.length];
 	}
-	
-	// SIN HACER
-	
-	@Override
-	public int getRowCount() 
-	{
-		return 0;
-		// TODO complete
-	}
+
 	@Override
 	public int getColumnCount()
 	{
-		return 0;
-		// TODO complete
+		return names.length;
 	}
+
 	@Override
-	public String getColumnName(int column) 
+	public int getRowCount() 
 	{
-		return null;
-		// TODO complete
+		return _bodies.size();
 	}
+
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex)
 	{
-		return columnIndex;
-		// TODO complete
+		this.column[0] = _bodies.get(rowIndex).getId().toString();
+		this.column[1] = String.valueOf(_bodies.get(rowIndex).getMass());
+		this.column[2] = String.valueOf(_bodies.get(rowIndex).getVelocity());
+		this.column[3] = String.valueOf(_bodies.get(rowIndex).getPosition());
+		this.column[4] = String.valueOf(_bodies.get(rowIndex).getForce());
+		return this.column[columnIndex];
 	}
 
-	// Me lo ha puesto el compilador
-	
+
+	@Override
+	public String getColumnName(int column) 
+	{
+		return names[column].toString();
+	}
+
 	@Override
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onAdvance(List<Body> bodies, double time)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onDeltaTimeChanged(double dt)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) 
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 }
