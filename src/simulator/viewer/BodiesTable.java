@@ -22,11 +22,6 @@ public class BodiesTable extends JPanel
 
 		BodiesTableModel bodiesTable = new BodiesTableModel(ctrl);
 		this.add(new JScrollPane(new JTable(bodiesTable)));
-<<<<<<< HEAD
-		
-
-=======
->>>>>>> a27a2771797619ceb40b111f87b2a3436fcc0bcd
 	}
 	
 	
