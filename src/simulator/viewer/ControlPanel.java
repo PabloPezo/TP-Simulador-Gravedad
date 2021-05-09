@@ -201,7 +201,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void forces()
 	{        
-		JComboBox combo = new JComboBox();
+		JComboBox<String> combo = new JComboBox<String>();
 
 		//TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
 		//		List<JSONObject> list = _ctrl.getForceLawsInfo();
@@ -246,7 +246,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		combo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JComboBox combo = (JComboBox) e.getSource();
+				JComboBox<String> combo = (JComboBox<String>) e.getSource();
 				String value = (String)combo.getSelectedItem();
 				System.out.println("Value is " + value);
 

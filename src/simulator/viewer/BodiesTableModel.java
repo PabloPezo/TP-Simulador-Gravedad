@@ -56,32 +56,39 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	@Override
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
-		this._bodies = bodies;
+		_bodies = bodies;
 		this.fireTableStructureChanged();
+
+		System.out.println("Holiwi 1");
 
 	}
 
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
-		this._bodies = bodies;
+		_bodies = bodies;
 		this.fireTableStructureChanged();
+
+		System.out.println("Holiwi 2");
 
 	}
 
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{
-		// TODO Auto-generated method stub
+		_bodies = bodies;
+		this.fireTableStructureChanged();
 		
-
+		System.out.println("Holiwi 3");
 	}
 
 	@Override
 	public void onAdvance(List<Body> bodies, double time)
 	{
-		// TODO Auto-generated method stub
-
+		_bodies = bodies;
+		this.fireTableStructureChanged();
+		
+		System.out.println("Holiwi 4");
 	}
 
 	@Override
