@@ -48,13 +48,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		_stopped = true;		
 
 		initGUI();
-		//	_ctrl.addObserver(this);
+		_ctrl.addObserver(this);
 	}
 
 	private void initGUI()
 	{
-		//this.setLayout(new FlowLayout());
-
 		buttonArchive = createButton(new ImageIcon("resources/icons/open.png"), "Carga el fichero seleccionado");
 		this.add(buttonArchive);
 
@@ -98,7 +96,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			try 
 			{
-				//_ctrl.run(1); // Modificar o hace run override
+				_ctrl.run(1); 
 			} 
 			catch (Exception e) 
 			{
@@ -119,7 +117,9 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		else 
 		{
 			_stopped = true;
-			// TODO enable all buttons
+			buttonArchive.setEnabled(true);
+			buttonForces.setEnabled(true);
+			buttonExit.setEnabled(true);
 		}
 	}
 

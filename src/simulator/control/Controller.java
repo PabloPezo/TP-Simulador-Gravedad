@@ -120,25 +120,7 @@ public class Controller
 	
 	public void setForceLaws(JSONObject info)
 	{
-//		_phySimulator.setForceLaws(_bodiesFactory.createInstance(info));
+		//_phySimulator.setForceLaws(_bodiesFactory.createInstance(info));	REVISAR. NI ZORRA
 	}
-	
- 	// NO ESTA MUY CLARO 
- 	// -------------------------------
- 	
- 	public double currentTime()
- 	{
- 		return _phySimulator.currentTime();
- 	}
- 	
- 	public int nBodies()
- 	{
- 		return _phySimulator.nBodies();
- 	}
- 	
- 	public String forceLaw()
- 	{
- 		return _phySimulator.forceLaw();
- 	}
- 	// -------------------------------
+
 }

@@ -23,6 +23,7 @@ public class PhysicsSimulator
 			_forceLaws = fl;
 			_currentTime = 0.0;
 		}	
+		this.observers = new ArrayList<SimulatorObserver>();
 		this.bodyList = new ArrayList<Body>();
 	}
 	 	
@@ -93,23 +94,4 @@ public class PhysicsSimulator
  	{
  		observers.add(o);
  	}
- 	
- 	// NO ESTA MUY CLARO 
- 	// -------------------------------
- 	public double currentTime()
- 	{
- 		return _currentTime;
- 	}
- 	
- 	public int nBodies()
- 	{
- 		return bodyList.size();
- 	}
- 	
- 	public String forceLaw()
- 	{
- 		return _forceLaws.toString();
- 	}
- 	
- 	// -------------------------------
 }

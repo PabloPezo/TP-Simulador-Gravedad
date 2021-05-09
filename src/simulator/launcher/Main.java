@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -33,6 +35,7 @@ import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
 import simulator.viewer.MainWindow;
 
+
 public class Main
 {
 	private final static Double _dtimeDefaultValue = 2500.0;
@@ -40,7 +43,7 @@ public class Main
 	private final static String _forceLawsDefaultValue = "nlug";
 	private final static String _stateComparatorDefaultValue = "epseq";
 
-	private static String _mode = "BATCH";
+	private static String _mode = null;
 	private static Double _dtime = null;
 	private static Integer _steps = null;
 	private static String _inFile = null;
@@ -92,7 +95,7 @@ public class Main
 
 			parseStepsOption(line);
 
-			if(_mode == "GUI")
+			if(_mode.equals("GUI"))
 			{
 				try
 				{
@@ -102,7 +105,7 @@ public class Main
 			}
 			else
 			{
-
+				parseInFileOption(line);
 				parseExpOutFileOption(line);
 				parseOutFileOption(line);
 			}
@@ -187,7 +190,6 @@ public class Main
 		return s;
 	}
 
-	// Parses de cada comando:
 	private static void parseHelpOption(CommandLine line, Options cmdLineOptions) 
 	{
 		if (line.hasOption("h")) 
@@ -209,9 +211,14 @@ public class Main
 
 	private static void parseModeOption(CommandLine line) throws ParseException // CAMBIADO PARA LA PR2
 	{
-		_mode = line.getOptionValue("i");
+		_mode = line.getOptionValue("m");
 
-		if(_mode != "BATCH" || _mode != "GUI")
+		if(_mode == null)
+		{
+			_mode = "BATCH";
+		}
+
+		if(!_mode.equals("BATCH") && !_mode.equals("GUI"))
 		{
 			throw new ParseException("This execution mode doesn't exist");
 		}
@@ -310,8 +317,31 @@ public class Main
 		}
 	}
 
-	private static void startGUIMpde()
+	private static void startGUIMode() throws Exception
 	{
+		InputStream in = null;
+		if(_inFile != null)
+		{
+			in = new FileInputStream(new File(_inFile));
+		}
+		ForceLaws fuerzas = _forceLawsFactory.createInstance(_forceLawsInfo);
+		PhysicsSimulator simulador = new PhysicsSimulator(_dtime, fuerzas);
+		Controller control = new Controller(simulador, _bodyFactory);
+
+		if(in != null)
+		{
+			control.loadBodies(in);
+		}
+		new MainWindow(control);
+//
+//		SwingUtilities.invokeAndWait(new Runnable() {
+//			@Override
+//			public void run() 
+//			{
+//				
+//			}
+//		});
+		control.run(_steps);
 
 	}
 
@@ -332,6 +362,7 @@ public class Main
 			cmp = _stateComparatorFactory.createInstance(_stateComparatorInfo);
 		}
 
+
 		control.loadBodies(in);
 		control.run(_steps, out, expOut, cmp);
 	}
@@ -339,7 +370,16 @@ public class Main
 	private static void start(String[] args) throws Exception // Parsea todos los datos necesarios e inicia la simulación
 	{
 		parseArgs(args);
-		startBatchMode();
+
+		if(_mode.equals("GUI"))
+		{
+			startGUIMode();
+			
+		}
+		else if (_mode.equals("BATCH"))
+		{
+			startBatchMode();
+		}
 	}
 
 	public static void main(String[] args) 

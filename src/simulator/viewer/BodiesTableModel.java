@@ -19,7 +19,7 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	BodiesTableModel(Controller ctrl) 
 	{
 		_bodies = new ArrayList<>();
-		//ctrl.addObserver(this);
+		ctrl.addObserver(this);
 		this.column = new String[names.length];
 	}
 
