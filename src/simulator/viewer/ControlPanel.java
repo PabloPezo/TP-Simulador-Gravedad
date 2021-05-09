@@ -96,7 +96,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			try 
 			{
-				//_ctrl.run(1); // Modificar o hace run override
+				_ctrl.run(1); 
 			} 
 			catch (Exception e) 
 			{
@@ -117,7 +117,9 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		else 
 		{
 			_stopped = true;
-			// TODO enable all buttons
+			buttonArchive.setEnabled(true);
+			buttonForces.setEnabled(true);
+			buttonExit.setEnabled(true);
 		}
 	}
 
