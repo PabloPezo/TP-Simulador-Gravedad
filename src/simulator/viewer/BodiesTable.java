@@ -18,13 +18,11 @@ public class BodiesTable extends JPanel
 	BodiesTable(Controller ctrl)
 	{
 		setLayout(new BorderLayout());
-		setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(Color.black, 2),
-				"Bodies",
-				TitledBorder.LEFT, TitledBorder.TOP));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Bodies", TitledBorder.LEFT, TitledBorder.TOP));
 
 		BodiesTableModel bodiesTable = new BodiesTableModel(ctrl);
 		this.add(new JScrollPane(new JTable(bodiesTable)));
+		
 
 	}
 }

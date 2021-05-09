@@ -36,7 +36,7 @@ public class MainWindow extends JFrame
 		//Lo que dice la lucia de poner:
 		//setCurrentDirectory("NewCurrentDirectory");
 
-
+		//BodiesInfo body = new BodiesInfo(_ctrl);
 		BodiesTable bodiesTable = new BodiesTable(_ctrl);
 
 		Viewer universeViewer = new Viewer(_ctrl);
