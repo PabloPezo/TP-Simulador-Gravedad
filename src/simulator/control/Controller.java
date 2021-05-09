@@ -20,6 +20,7 @@ public class Controller
 {
 	private PhysicsSimulator _phySimulator;
 	private Factory<Body> _bodiesFactory;
+	private Factory<ForceLaws> _forceFactory;
 	
 	public Controller(PhysicsSimulator phySimulator, Factory<Body> bodiesFactory)
 	{
@@ -115,12 +116,13 @@ public class Controller
 	
 	public List<JSONObject> getForceLawsInfo()
 	{
-		return _bodiesFactory.getInfo();
+		return _forceFactory.getInfo();
 	}
 	
 	public void setForceLaws(JSONObject info)
 	{
-		//_phySimulator.setForceLaws(_bodiesFactory.createInstance(info));	REVISAR. NI ZORRA
+		
+		_phySimulator.setForceLaws(_forceFactory.createInstance(info));	//REVISAR. NI ZORRA
 	}
 
 }

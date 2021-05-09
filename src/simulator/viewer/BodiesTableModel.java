@@ -57,6 +57,8 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		// TODO Auto-generated method stub
+		this._bodies = bodies;
+		fireTableStructureChanged();
 
 	}
 
@@ -64,6 +66,8 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
 		// TODO Auto-generated method stub
+		this._bodies = bodies;
+		fireTableStructureChanged();
 
 	}
 
@@ -71,6 +75,7 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{
 		// TODO Auto-generated method stub
+		
 
 	}
 
