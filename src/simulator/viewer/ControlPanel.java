@@ -48,13 +48,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		_stopped = true;		
 
 		initGUI();
-		//	_ctrl.addObserver(this);
+		_ctrl.addObserver(this);
 	}
 
 	private void initGUI()
 	{
-		//this.setLayout(new FlowLayout());
-
 		buttonArchive = createButton(new ImageIcon("resources/icons/open.png"), "Carga el fichero seleccionado");
 		this.add(buttonArchive);
 

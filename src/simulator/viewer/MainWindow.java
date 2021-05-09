@@ -38,7 +38,6 @@ public class MainWindow extends JFrame
 
 
 		BodiesTable bodiesTable = new BodiesTable(_ctrl);
-		//BodiesInfo bodiesInfo = new BodiesInfo(_ctrl);
 
 		Viewer universeViewer = new Viewer(_ctrl);
 

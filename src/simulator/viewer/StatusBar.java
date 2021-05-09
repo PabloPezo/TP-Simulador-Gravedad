@@ -21,10 +21,10 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	StatusBar(Controller ctrl) 
 	{
 		initGUI();
-		//ctrl.addObserver(this);
+		ctrl.addObserver(this);
 	}
 
-	private void initGUI() // He arreglado cositas
+	private void initGUI() 
 	{
 		this.setLayout( new FlowLayout( FlowLayout.LEFT ));
 		this.setBorder( BorderFactory.createBevelBorder( 1 ));
@@ -35,7 +35,6 @@ public class StatusBar extends JPanel implements SimulatorObserver
 
 		_numOfBodies = new JLabel("Bodies:  ");
 		this.add(_numOfBodies);
-
 
 		_currLaws = new JLabel("Laws:  ");
 		this.add(_currLaws);

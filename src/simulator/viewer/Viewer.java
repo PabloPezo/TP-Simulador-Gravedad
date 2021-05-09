@@ -34,7 +34,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 	Viewer(Controller ctrl) 
 	{
 		initGUI();
-		//ctrl.addObserver(this);
+		ctrl.addObserver(this);
 	}
 	private void initGUI() 
 	{
