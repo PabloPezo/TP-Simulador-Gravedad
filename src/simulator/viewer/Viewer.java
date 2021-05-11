@@ -31,11 +31,13 @@ public class Viewer extends JComponent implements SimulatorObserver
 	private List<Body> _bodies;
 	private boolean _showHelp;
 	private boolean _showVectors;
+	
 	Viewer(Controller ctrl) 
 	{
 		initGUI();
 		ctrl.addObserver(this);
 	}
+	
 	private void initGUI() 
 	{
 		this.setLayout(new BorderLayout());
