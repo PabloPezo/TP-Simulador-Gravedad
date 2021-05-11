@@ -46,19 +46,21 @@ public class PhysicsSimulator
 //			observers.get(i).onAdvance(bodyList, _currentTime);
 //		}
  	}
- 	
+
  	public void addBody(Body b) throws IllegalArgumentException		// Añade el cuerpo b al simulador
  	{
  		if (!bodyList.contains(b))
  		{
- 	 		bodyList.add(b);
- 	 		
- 	 		observers.get(observers.size() - 1).onBodyAdded(bodyList, b); 	// da problemas al añadir el archivo de cero
- 			
+ 			bodyList.add(b);
+ 			if(observers != null && observers.size() != 0)
+ 			{
+ 				observers.get(observers.size() - 1).onBodyAdded(bodyList, b); 
+ 			}
+
  		}
  		else
  		{
- 	 		throw new IllegalArgumentException();
+ 			throw new IllegalArgumentException();
  		}
  	}
 
