@@ -218,7 +218,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		}
 		catch(Exception e)
 		{
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Por favor, introduzca un número de pasos (mayor que cero)", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
