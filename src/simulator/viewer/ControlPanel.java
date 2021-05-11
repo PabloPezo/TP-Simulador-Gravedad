@@ -218,6 +218,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	{        
 		JComboBox<String> combo = new JComboBox<String>();
 
+<<<<<<< HEAD
 //		TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
 		
 				List<JSONObject> list = _ctrl.getForceLawsInfo();
@@ -237,6 +238,26 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 //			combo.addItem(forceLaws[i]);
 //		}
 //		//EJEMPLO
+=======
+		//	//	TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
+		//				List<JSONObject> list = _ctrl.getForceLawsInfo();
+		//				String[] forceLaws = new String[list.size()];
+		//				String[] forceLawsData = new String[list.size()];
+		//				
+		//				for (int i = 0; i < forceLaws.length; i++)
+		//				{
+		//					forceLaws[i] = list.get(i).getString("desc");
+		//					forceLawsData[i] = list.get(i).getString("data");
+		//				}
+
+
+		//EJEMPLO
+		String[] forceLaws = {"Fuerza 1", "Fuerza 2", "Fuerza 3"};
+		for (int i = 0; i < forceLaws.length; i++) {
+			combo.addItem(forceLaws[i]);
+		}
+		//EJEMPLO
+>>>>>>> d8952e2d4a09f463d683eacdaa5528e59f709180
 
 		JPanel pepe = new JPanel();
 
@@ -247,6 +268,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				"Value",
 		"Description"};
 
+<<<<<<< HEAD
+=======
+		//        ola = new JSONObject N/		//        
+>>>>>>> d8952e2d4a09f463d683eacdaa5528e59f709180
 		String[][] data1 = {
 				{"G", "", "gravitional constant"},
 				{"", "", ""}
