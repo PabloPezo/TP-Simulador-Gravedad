@@ -33,20 +33,23 @@ public class StatusBar extends JPanel implements SimulatorObserver
 		this.add(_currTime);
 		this.setAlignmentX(567);
 
+		this.add(new JLabel("                                   |   ")); // en plan cutre
+
 		_numOfBodies = new JLabel("Bodies:  ");
 		this.add(_numOfBodies);
+
+		this.add(new JLabel("                                      |   "));
 
 		_currLaws = new JLabel("Laws:  ");
 		this.add(_currLaws);
 
 	}
 
-
 	@Override
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
-		this._currLaws.setText("Laws: " + fLawsDesc);
+		this._currLaws.setText("Laws: " + fLawsDesc);		//¿Hacer algo con el null?
 		this._currTime.setText("Time: " + String.valueOf(time));
 	}
 
@@ -62,27 +65,20 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{
 		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
-
-	}
-
-	@Override
-	public void onAdvance(List<Body> bodies, double time) 
-	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void onDeltaTimeChanged(double dt)
 	{
-		// TODO Auto-generated method stub
-
+		this._currTime.setText("Time: " + String.valueOf(dt));
 	}
 
 	@Override
 	public void onForceLawsChanged(String fLawsDesc)
 	{
-		// TODO Auto-generated method stub
-
+		this._currLaws.setText("Laws: " + fLawsDesc);
 	}
+
+	@Override
+	public void onAdvance(List<Body> bodies, double time) {}
 }

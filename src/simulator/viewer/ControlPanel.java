@@ -100,15 +100,13 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				_ctrl.run(1); 
 			} 
 			catch (Exception e) 
-			{
-				buttonArchive.setEnabled(false);
-				buttonForces.setEnabled(false);
-				buttonPlay.setEnabled(false);
-				buttonStop.setEnabled(false);
-				buttonExit.setEnabled(false);
+			{	
+				buttonArchive.setEnabled(true);
+				buttonForces.setEnabled(true);
+				buttonExit.setEnabled(true);
 				_stopped = true;
-
-				System.out.println(" CASI");
+				System.out.println("ERORORROROROOR");
+				JOptionPane.showOptionDialog(null, "Se ha producido un error durante la ejecución", "ERROR:", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
 				return;
 			}
@@ -185,20 +183,40 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			combo.addItem(forceLaws[i]);
 		}
-	
+
 	}
 
 	private void play()
 	{
-		buttonArchive.setEnabled(false);
-		buttonExit.setEnabled(false);
-		buttonForces.setEnabled(false);
+		try
+		{
+			_ctrl.setDeltaTime(Double.parseDouble(time.getText()));
+		}
+		catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(null, "Por favor, introduzca un delta-time correcto", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
 
-		_stopped = false;
+		try
+		{
 
-		_ctrl.setDeltaTime(Double.parseDouble(time.getText()));
-		int s = Integer.parseInt(steps.getValue().toString());
-		run_sim(s);
+			int s = Integer.parseInt(steps.getValue().toString());
+			if (s <= 0)
+			{
+				throw new Exception("Por favor, introduzca un número de pasos (mayor que cero)");
+			}
+			buttonArchive.setEnabled(false);
+			buttonExit.setEnabled(false);
+			buttonForces.setEnabled(false);
+
+			_stopped = false;
+			run_sim(s);
+		}
+		catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Por favor, introduzca un número de pasos (mayor que cero)", JOptionPane.ERROR_MESSAGE);
+		}
+
 	}
 
 	private void stop()
@@ -208,7 +226,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		buttonForces.setEnabled(true);
 		_stopped = true;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
