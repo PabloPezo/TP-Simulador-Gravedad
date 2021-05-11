@@ -26,6 +26,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import org.json.JSONObject;
+
 import simulator.control.Controller;
 import simulator.model.Body;
 import simulator.model.SimulatorObserver;
@@ -41,6 +43,9 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	private JButton buttonPlay;
 	private JButton buttonStop;
 	private JButton buttonExit;
+	
+	private JSpinner steps;
+	private JTextField time;
 
 	ControlPanel(Controller ctrl) 
 	{
@@ -68,7 +73,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 
 		this.add(new JLabel(" Steps: "));
-		JSpinner steps = new JSpinner();
+		this.steps = new JSpinner();
 		this.add(steps);
 		steps.setPreferredSize(new Dimension(70, 35));
 
@@ -78,7 +83,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		this.add(new JLabel(" Delta-Time: "));
 
-		JTextField time = new JTextField();
+		this.time = new JTextField();
 		this.add(time);
 		time.setPreferredSize(new Dimension(75, 40));
 
@@ -97,12 +102,20 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			try 
 			{
 				_ctrl.run(1); 
+				
+				System.out.println("SI");
 			} 
 			catch (Exception e) 
 			{
-				// TODO show the error in a dialog box
-				// TODO enable all buttons
+				buttonArchive.setEnabled(false);
+				buttonForces.setEnabled(false);
+				buttonPlay.setEnabled(false);
+				buttonStop.setEnabled(false);
+				buttonExit.setEnabled(false);
 				_stopped = true;
+				
+				System.out.println(" CASI");
+				
 				return;
 			}
 			SwingUtilities.invokeLater( new Runnable() 
@@ -116,10 +129,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		} 
 		else 
 		{
-			_stopped = true;
 			buttonArchive.setEnabled(true);
 			buttonForces.setEnabled(true);
 			buttonExit.setEnabled(true);
+			_stopped = true;
 		}
 	}
 
@@ -191,6 +204,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			{
 				InputStream in = new FileInputStream(selectedFile);
 				_ctrl.loadBodies(in);
+				
+				System.out.println("Se ha cargado bien el archivo");
 			}
 			catch (FileNotFoundException e)
 			{
@@ -203,24 +218,25 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	{        
 		JComboBox<String> combo = new JComboBox<String>();
 
-		//TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
-		//		List<JSONObject> list = _ctrl.getForceLawsInfo();
-		//		String[] forceLaws = new String[list.size()];
-		//		String[] forceLawsData = new String[list.size()];
-		//		
-		//		for (int i = 0; i < forceLaws.length; i++)
-		//		{
-		//			forceLaws[i] = list.get(i).getString("desc");
-		//			forceLawsData[i] = list.get(i).getString("data");
-		//		}
+//		TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
+		
+				List<JSONObject> list = _ctrl.getForceLawsInfo();
+				String[] forceLaws = new String[list.size()];
+				String[] forceLawsData = new String[list.size()];
+				
+				for (int i = 0; i < forceLaws.length; i++)
+				{
+					forceLaws[i] = list.get(i).getString("desc");
+					forceLawsData[i] = list.get(i).getString("data");
+				}
 
 
-		//EJEMPLO
-		String[] forceLaws = {"Fuerza 1", "Fuerza 2", "Fuerza 3"};
-		for (int i = 0; i < forceLaws.length; i++) {
-			combo.addItem(forceLaws[i]);
-		}
-		//EJEMPLO
+//		//EJEMPLO
+//		String[] forceLaws = {"Fuerza 1", "Fuerza 2", "Fuerza 3"};
+//		for (int i = 0; i < forceLaws.length; i++) {
+//			combo.addItem(forceLaws[i]);
+//		}
+//		//EJEMPLO
 
 		JPanel pepe = new JPanel();
 
@@ -231,8 +247,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				"Value",
 		"Description"};
 
-		//        ola = new JSONObject N
-		//        
 		String[][] data1 = {
 				{"G", "", "gravitional constant"},
 				{"", "", ""}
@@ -287,12 +301,20 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void play()
 	{
-
+		buttonArchive.setEnabled(false);
+		buttonExit.setEnabled(false);
+		buttonForces.setEnabled(false);
+		
+		_stopped = true;
+		
+		_ctrl.setDeltaTime(Double.parseDouble(time.getText()));
+		int s = Integer.parseInt(steps.getValue().toString());
+		run_sim(s);
 	}
 
 	private void stop()
 	{
-
+		_stopped = true;
 	}
 
 
@@ -310,11 +332,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		}
 		else if (e.getSource() == buttonPlay) // Yo creo que es llamar a run_sim y llorar después
 		{
-			System.out.println("Run");
+			play();
 		}
 		else if (e.getSource() == buttonStop)
 		{
-			_stopped = true;
+			stop();
 		}
 		else if(e.getSource() == buttonExit)
 		{

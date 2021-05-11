@@ -40,6 +40,11 @@ public class PhysicsSimulator
  			body.move(_realTime);
 		}
 		_currentTime += _realTime;
+		
+//		for (int i = 0; i < observers.size(); i++)
+//		{
+//			observers.get(i).onAdvance(bodyList, _currentTime);
+//		}
  	}
  	
  	public void addBody(Body b) throws IllegalArgumentException		// Añade el cuerpo b al simulador
@@ -47,6 +52,11 @@ public class PhysicsSimulator
  		if (!bodyList.contains(b))
  		{
  	 		bodyList.add(b);
+ 	 		
+ 			for (int i = 0; i < observers.size(); i++)
+ 			{
+ 				observers.get(i).onBodyAdded(bodyList, null);
+ 			}
  		}
  		else
  		{
@@ -73,6 +83,11 @@ public class PhysicsSimulator
  	{
 		this.bodyList = new ArrayList<Body>();
 		_currentTime = 0.0;
+		
+		for (int i = 0; i < observers.size(); i++)
+		{
+			observers.get(i).onReset(bodyList, _currentTime, _currentTime, null);
+		}
  	}
  	
  	public void setDeltaTime(double dt) throws IllegalArgumentException
@@ -80,18 +95,28 @@ public class PhysicsSimulator
 		if (dt <= 0.0) throw new IllegalArgumentException();
 		{
 			_realTime = dt;
-
-		}	
+		}
+		
+		for (int i = 0; i < observers.size(); i++)
+		{
+			observers.get(i).onDeltaTimeChanged(dt);
+		}
  	}
  	
  	public void setForceLaws(ForceLaws forceLaws) throws IllegalArgumentException
  	{
  		if(forceLaws == null) {throw new IllegalArgumentException();}
  		_forceLaws = forceLaws;
+ 		
+ 		for (int i = 0; i < observers.size(); i++)
+		{
+			observers.get(i).onForceLawsChanged(forceLaws.toString());
+		}
  	}
  	
  	public void addObserver(SimulatorObserver o)	// Repasar sdi hay que inizializarlo en la constructora
  	{
  		observers.add(o);
+ 		o.onRegister(bodyList, _currentTime, _currentTime, null);
  	}
 }

@@ -13,7 +13,7 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 {
 	private static final long serialVersionUID = 1L;
 	private List<Body> _bodies;
-	private final String[] names = {"id", "mass", "position", "force"};
+	private final String[] names = {"id", "mass", "velocity", "position", "force"};
 	private String[] column;
 
 	BodiesTableModel(Controller ctrl) 
@@ -70,7 +70,6 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 		this.fireTableStructureChanged();
 
 		System.out.println("Holiwi 2");
-
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	public void onAdvance(List<Body> bodies, double time)
 	{
 		_bodies = bodies;
-		this.fireTableStructureChanged();
+//		this.fireTableStructureChanged();
 		
 		System.out.println("Holiwi 4");
 	}

@@ -115,13 +115,12 @@ public class Controller
 	}	
 	
 	public List<JSONObject> getForceLawsInfo()
-	{
+	{		
 		return _forceFactory.getInfo();
 	}
 	
 	public void setForceLaws(JSONObject info)
 	{
-		
 		_phySimulator.setForceLaws(_forceFactory.createInstance(info));	//REVISAR. NI ZORRA
 	}
 
