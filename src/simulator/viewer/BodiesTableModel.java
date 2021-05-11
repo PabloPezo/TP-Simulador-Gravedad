@@ -38,14 +38,13 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex)
 	{
-		this.column[0] = _bodies.get(rowIndex).getId().toString();
+		this.column[0] = _bodies.get(rowIndex).getId();
 		this.column[1] = String.valueOf(_bodies.get(rowIndex).getMass());
 		this.column[2] = String.valueOf(_bodies.get(rowIndex).getVelocity());
 		this.column[3] = String.valueOf(_bodies.get(rowIndex).getPosition());
 		this.column[4] = String.valueOf(_bodies.get(rowIndex).getForce());
 		return this.column[columnIndex];
 	}
-
 
 	@Override
 	public String getColumnName(int column) 
@@ -58,9 +57,6 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	{
 		_bodies = bodies;
 		this.fireTableStructureChanged();
-
-		System.out.println("Holiwi 1");
-
 	}
 
 	@Override
@@ -68,8 +64,6 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	{
 		_bodies = bodies;
 		this.fireTableStructureChanged();
-
-		System.out.println("Holiwi 2");
 	}
 
 	@Override
@@ -77,17 +71,13 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	{
 		_bodies = bodies;
 		this.fireTableStructureChanged();
-		
-		System.out.println("Holiwi 3");
 	}
 
 	@Override
 	public void onAdvance(List<Body> bodies, double time)
 	{
 		_bodies = bodies;
-//		this.fireTableStructureChanged();
-		
-		System.out.println("Holiwi 4");
+		this.fireTableStructureChanged();
 	}
 
 	@Override

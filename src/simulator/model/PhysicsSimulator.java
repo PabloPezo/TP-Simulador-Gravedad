@@ -53,10 +53,8 @@ public class PhysicsSimulator
  		{
  	 		bodyList.add(b);
  	 		
- 			for (int i = 0; i < observers.size(); i++)
- 			{
- 				observers.get(i).onBodyAdded(bodyList, null);
- 			}
+ 	 		observers.get(observers.size() - 1).onBodyAdded(bodyList, b); 	// da problemas al añadir el archivo de cero
+ 			
  		}
  		else
  		{
