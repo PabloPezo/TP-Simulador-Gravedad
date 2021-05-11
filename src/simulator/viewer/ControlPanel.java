@@ -236,7 +236,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 //		for (int i = 0; i < forceLaws.length; i++) {
 //			combo.addItem(forceLaws[i]);
 //		}
-
+//		//EJEMPLO
 
 		JPanel pepe = new JPanel();
 
