@@ -58,7 +58,6 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	{
 		_bodies = bodies;
 		this.fireTableStructureChanged();
-
 		System.out.println("Holiwi 1");
 
 	}

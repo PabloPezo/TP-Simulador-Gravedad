@@ -26,6 +26,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import org.json.JSONObject;
+
 import simulator.control.Controller;
 import simulator.model.Body;
 import simulator.model.SimulatorObserver;
@@ -203,16 +205,16 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	{        
 		JComboBox<String> combo = new JComboBox<String>();
 
-		//TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
-		//		List<JSONObject> list = _ctrl.getForceLawsInfo();
-		//		String[] forceLaws = new String[list.size()];
-		//		String[] forceLawsData = new String[list.size()];
-		//		
-		//		for (int i = 0; i < forceLaws.length; i++)
-		//		{
-		//			forceLaws[i] = list.get(i).getString("desc");
-		//			forceLawsData[i] = list.get(i).getString("data");
-		//		}
+		//	//	TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
+		//				List<JSONObject> list = _ctrl.getForceLawsInfo();
+		//				String[] forceLaws = new String[list.size()];
+		//				String[] forceLawsData = new String[list.size()];
+		//				
+		//				for (int i = 0; i < forceLaws.length; i++)
+		//				{
+		//					forceLaws[i] = list.get(i).getString("desc");
+		//					forceLawsData[i] = list.get(i).getString("data");
+		//				}
 
 
 		//EJEMPLO
@@ -231,8 +233,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				"Value",
 		"Description"};
 
-		//        ola = new JSONObject N
-		//        
+		//        ola = new JSONObject N/		//        
 		String[][] data1 = {
 				{"G", "", "gravitional constant"},
 				{"", "", ""}

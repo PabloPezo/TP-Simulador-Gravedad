@@ -14,8 +14,8 @@ import simulator.control.Controller;
 public class BodiesTable extends JPanel 
 {
 	private static final long serialVersionUID = 1L;
-
-	BodiesTable(Controller ctrl)
+	
+	 BodiesTable(Controller ctrl)
 	{
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Bodies", TitledBorder.LEFT, TitledBorder.TOP));
@@ -23,6 +23,5 @@ public class BodiesTable extends JPanel
 		BodiesTableModel bodiesTable = new BodiesTableModel(ctrl);
 		this.add(new JScrollPane(new JTable(bodiesTable)));
 	}
-	
 	
 }
