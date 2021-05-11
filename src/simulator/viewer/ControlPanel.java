@@ -98,8 +98,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			try 
 			{
 				_ctrl.run(1); 
-
-				System.out.println("SI");
 			} 
 			catch (Exception e) 
 			{
@@ -196,7 +194,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		buttonExit.setEnabled(false);
 		buttonForces.setEnabled(false);
 
-		_stopped = true;
+		_stopped = false;
 
 		_ctrl.setDeltaTime(Double.parseDouble(time.getText()));
 		int s = Integer.parseInt(steps.getValue().toString());
@@ -205,7 +203,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void stop()
 	{
-		_stopped = false;
+		buttonArchive.setEnabled(true);
+		buttonExit.setEnabled(true);
+		buttonForces.setEnabled(true);
+		_stopped = true;
 	}
 	
 	@Override
