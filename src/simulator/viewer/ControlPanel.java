@@ -11,15 +11,19 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -165,25 +169,25 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		}
 	}
 
-	private void forces() // ARREGLA ESTA MIERDA
+	private void forces() // ARREGLA ESTA MIERDA :)
 	{        
 		JComboBox<String> combo = new JComboBox<String>();
-
 		List<JSONObject> list = _ctrl.getForceLawsInfo();
 		String[] forceLaws = new String[list.size()];
-		String[] forceLawsData = new String[list.size()];
 
 		for (int i = 0; i < forceLaws.length; i++)
 		{
-			forceLaws[i] = list.get(i).getString("desc");
-			forceLawsData[i] = list.get(i).getString("data");
+			forceLaws[i] = list.get(i).getString("desc") + " " +list.get(i).getString("data");
 		}
+		
+		JFrame jf = new JFrame();
+	
+		String dialogo = (String) JOptionPane.showInputDialog(jf, "Selecciona la fuerza que vas a usar ", "Leyes de feua", JOptionPane.QUESTION_MESSAGE, null , forceLaws, forceLaws[0]);
 
-		for (int i = 0; i < forceLaws.length; i++)
+		for (int i = 0; i < forceLaws.length; i++) 
 		{
 			combo.addItem(forceLaws[i]);
 		}
-
 	}
 
 	private void play()
@@ -230,7 +234,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-
 		if (e.getSource() == buttonArchive)
 		{
 			archive();
