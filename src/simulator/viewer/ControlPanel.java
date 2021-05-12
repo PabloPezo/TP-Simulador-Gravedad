@@ -204,7 +204,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				for (int i = 0; i < forceLaws.length; i++)
 				{
 					forceLaws[i] = list.get(i).getString("desc");
-					forceLawsData[i] = list.get(i).getString("data");
+					
+//					System.out.println("HOLA");
+//					forceLawsData[i] = list.get(i).getString("data").toString();
+//					System.out.println("ADIOS");
 					
 					combo.addItem(forceLaws[i]);
 				}
@@ -223,17 +226,13 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		pepe.setBounds(80, 20, 100, 170);
 		pepe.setLayout(new BoxLayout(pepe, BoxLayout.Y_AXIS));
 
-		String[] columnNames = {"Key",
-				"Value",
-		"Description"};
+		String[] columnNames = {"Key", "Value", "Description"};
 
-		//        ola = new JSONObject N
-		//        
 		String[][] data1 = {
-				{"G", "", "gravitional constant"},
+				{"", "", ""},
 				{"", "", ""}
 		};
-
+		
 		
 		DefaultTableModel dtm = new DefaultTableModel(null,columnNames);
 		JTable table = new JTable(dtm);
@@ -242,7 +241,56 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		
 		dtm.insertRow(0, newdata);
 
-//		JTable tabla = new JTable(data1, columnNames);
+		JTable tabla = new JTable(data1, columnNames);
+
+		tabla.getDefaultEditor(String.class).isCellEditable(null);
+
+		combo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox combo = (JComboBox<String>) e.getSource();
+				String value = (String)combo.getSelectedItem();
+				System.out.println("Value is " + value);
+
+				String key;
+				
+				if (value.equals(forceLaws[0]))
+				{
+					key = "g";
+					tabla.setValueAt(key, 0, 0);
+					tabla.setValueAt(list.get(0).getJSONObject("data").getString(key), 0, 2);
+					
+					tabla.setValueAt("", 1, 0);
+					tabla.setValueAt("", 1, 2);
+				}
+				else if (value.equals(forceLaws[1]))
+				{
+					key = "c";
+					tabla.setValueAt(key, 0, 0);
+					tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 0, 2);
+					
+					key = "g";
+					tabla.setValueAt(key, 1, 0);
+					tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 1, 2);
+				}
+				else
+				{
+					tabla.setValueAt("", 0, 0);
+					tabla.setValueAt("", 0, 2);
+					tabla.setValueAt("", 1, 0);
+					tabla.setValueAt("", 1, 2);
+				}
+
+			}
+		});
+		
+		
+//		DefaultTableModel dtm = new DefaultTableModel(null,columnNames);
+//		JTable tabla = new JTable(dtm);
+//		
+//		Object[] newdata = {1,2,3,4,5,6,7,8,9};
+//		Object[] newdata2 = {10,20,30,40,50,60,70,80,90};
+//		Object[] newdata3 = {100,200,300,400,500,600,700,800,900};
 //
 //		tabla.getDefaultEditor(String.class).isCellEditable(null);
 //
@@ -253,27 +301,33 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 //				String value = (String)combo.getSelectedItem();
 //				System.out.println("Value is " + value);
 //
-//				if (value == forceLaws[0])
+//				if (value.equals(forceLaws[0]))
 //				{
-//					
+//					dtm.insertRow(0, newdata);
+//				}
+//				else if (value.equals(forceLaws[1]))
+//				{
+//					dtm.insertRow(0, newdata2);
 //				}
 //				else
 //				{
-//					tabla.setValueAt(forceLawsData[1]);
-//					tabla.setValueAt("the point towards...", 0, 2);
-//					tabla.setValueAt("g", 1, 0);
-//					tabla.setValueAt("the lenght...", 1, 2);
+//					dtm.insertRow(0, newdata3);
 //				}
 //
 //			}
 //		});
+		
+		
+
+		
+		
 		
 
 		
 
 		pepe.add(new JLabel("Select a force"), null);
 
-		pepe.add(new JScrollPane(table));
+		pepe.add(new JScrollPane(tabla));
 		pepe.add(combo);
 
 		int option = JOptionPane.showOptionDialog(null, pepe, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
