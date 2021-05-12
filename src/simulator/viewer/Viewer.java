@@ -149,19 +149,26 @@ public class Viewer extends JComponent implements SimulatorObserver
 		gr.setColor(Color.RED);
 		gr.drawString("+", _centerX, _centerY);
 
-		for(int i = 0; i < _bodies.size() && _showVectors; i ++) // He añadido el _showVectors por eficiencia algoritmica, si no funciona revisar
+		for(int i = 0; i < _bodies.size() ; i ++)
 		{
 			double posX = _bodies.get(i).getPosition().getX();
 			double posY = _bodies.get(i).getPosition().getY();
 
+			gr.setColor(Color.BLUE);
+			gr.fillOval(_centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 10, 10);
+			gr.drawOval(_centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 10, 10);
+			gr.setColor(Color.BLACK);
+			gr.drawString(_bodies.get(i).getId(),  _centerX + (int)(posX/_scale),  _centerY - (int)(posY/_scale));
+			
 			if(_showVectors)
 			{
-				gr.setColor(Color.BLUE);
-				gr.fillOval(_centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 10, 10);
-				gr.drawOval(_centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 10, 10);
-				gr.setColor(Color.BLACK);
-				gr.drawString(_bodies.get(i).getId(),  _centerX + (int)(posX/_scale),  _centerY - (int)(posY/_scale));
+				int pepeX = (_centerX - (int) (_bodies.get(i).getVelocity().getX()/_scale)) ;
+				int pepeY = _centerY - (int) (_bodies.get(i).getVelocity().getY()/_scale);
+				drawLineWithArrow(g, _centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), pepeX, pepeY, 5, 5, Color.RED, Color.RED);
+				drawLineWithArrow(g, _centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 100, 200, 5, 5, Color.GREEN, Color.GREEN);
+				
 			}
+
 		}
 
 		if(_showHelp)
@@ -184,10 +191,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 		double size = Math.max(1.0, Math.min(getWidth(), getHeight()));
 		_scale = max > size ? 4.0 * max / size : 1.0;
 	}
-	// This method draws a line from (x1,y1) to (x2,y2) with an arrow.
-	// The arrow is of height h and width w.
-	// The last two arguments are the colors of the arrow and the line
-	@SuppressWarnings("unused")
+	
 	private void drawLineWithArrow(Graphics g, int x1, int y1, int x2, int y2, int w, int h, Color lineColor, Color arrowColor)
 	{
 		int dx = x2 - x1, dy = y2 - y1;
@@ -211,27 +215,29 @@ public class Viewer extends JComponent implements SimulatorObserver
 	@Override
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
+		_bodies = bodies;
 		autoScale();
-		_bodies = new ArrayList<>();
 		repaint();
 	}
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
+		_bodies = bodies;
 		autoScale();
-		_bodies = new ArrayList<>();
 		repaint();
-
 	}
+	
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{
-		bodies.add(b);
+		_bodies = bodies;
+		autoScale();
 		repaint();
 	}
 	@Override
 	public void onAdvance(List<Body> bodies, double time) 
 	{
+		autoScale();
 		repaint();
 	}
 

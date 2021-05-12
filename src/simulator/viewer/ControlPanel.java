@@ -188,6 +188,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			combo.addItem(forceLaws[i]);
 		}
+		
+	 
 	}
 
 	private void play()
