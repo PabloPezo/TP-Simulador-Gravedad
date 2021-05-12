@@ -20,9 +20,14 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 		if(!js.getString("type").equals(_type)) {return null;}
 		js = js.getJSONObject("data");  // Para acceder a los valores de "data" fácilmente
 
+		
+		System.out.println(js.toString());
+		
 		try
 		{
-			double gConst = js.has("g") ? js.getDouble("g") : 6.67E-11;
+//			double gConst = js.has("g") ? js.getDouble("g") : 6.67E-11;
+			double gConst = 6.67E-11;
+			
 			return new NewtonUniversalGravitation(gConst);
 		}
 		catch(Exception e)

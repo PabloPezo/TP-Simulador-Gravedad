@@ -109,7 +109,7 @@ public class PhysicsSimulator
  		_forceLaws = forceLaws;
  		
  		for (int i = 0; i < observers.size(); i++)
-		{
+		{ 			
 			observers.get(i).onForceLawsChanged(forceLaws.toString());
 		}
  	}

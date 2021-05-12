@@ -91,6 +91,5 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	public void onForceLawsChanged(String fLawsDesc) 
 	{
 		// TODO Auto-generated method stub
-
 	}
 }

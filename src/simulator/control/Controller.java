@@ -121,8 +121,8 @@ public class Controller
 	}
 	
 	public void setForceLaws(JSONObject info)
-	{
-		_phySimulator.setForceLaws(_forceFactory.createInstance(info));	//REVISAR. NI ZORRA
+	{		
+		_phySimulator.setForceLaws(_forceFactory.createInstance(info));
 	}
 
 }
