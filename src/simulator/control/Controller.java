@@ -14,7 +14,6 @@ import simulator.model.Body;
 import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
 import simulator.model.SimulatorObserver;
-import simulator.viewer.Viewer;
 
 public class Controller 
 {
