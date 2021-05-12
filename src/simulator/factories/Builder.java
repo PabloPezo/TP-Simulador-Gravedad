@@ -39,7 +39,7 @@ public abstract class Builder<T>
 	{
 		JSONObject info = new JSONObject();
 		info.put("type", _typeTag);
-		info.put("data", createData()); 
+		info.put("data", createData().toString()); //Puse el toString para que no salga como que no es string je
 		info.put("desc",_desc);
 		return info;
 	}	

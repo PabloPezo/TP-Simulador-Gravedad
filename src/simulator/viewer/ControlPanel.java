@@ -26,6 +26,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 import org.json.JSONObject;
 
@@ -171,22 +172,117 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void forces() // ARREGLA ESTA MIERDA :)
 	{        
-		JComboBox<String> combo = new JComboBox<String>();
-		List<JSONObject> list = _ctrl.getForceLawsInfo();
-		String[] forceLaws = new String[list.size()];
-
-		for (int i = 0; i < forceLaws.length; i++)
-		{
-			forceLaws[i] = list.get(i).getString("desc") + " " +list.get(i).getString("data");
-		}
+		//LO DE GONSALITO Y MARIA
+//		JComboBox<String> combo = new JComboBox<String>();
+//		List<JSONObject> list = _ctrl.getForceLawsInfo();
+//		String[] forceLaws = new String[list.size()];
+//
+//		for (int i = 0; i < forceLaws.length; i++)
+//		{
+//			forceLaws[i] = list.get(i).getString("desc") + " " +list.get(i).getString("data");
+//		}
+//		
+//		JFrame jf = new JFrame();
+//	
+//		String dialogo = (String) JOptionPane.showInputDialog(jf, "Selecciona la fuerza que vas a usar ", "Leyes de feua", JOptionPane.QUESTION_MESSAGE, null , forceLaws, forceLaws[0]);
+//
+//		for (int i = 0; i < forceLaws.length; i++) 
+//		{
+//			combo.addItem(forceLaws[i]);
+//		}
 		
-		JFrame jf = new JFrame();
-	
-		String dialogo = (String) JOptionPane.showInputDialog(jf, "Selecciona la fuerza que vas a usar ", "Leyes de feua", JOptionPane.QUESTION_MESSAGE, null , forceLaws, forceLaws[0]);
 
-		for (int i = 0; i < forceLaws.length; i++) 
+		//TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
+				List<JSONObject> list = _ctrl.getForceLawsInfo();
+				
+				JComboBox<String> combo = new JComboBox();
+				
+				String[] forceLaws = new String[list.size()];
+				String[] forceLawsData = new String[list.size()];
+				
+				
+				for (int i = 0; i < forceLaws.length; i++)
+				{
+					forceLaws[i] = list.get(i).getString("desc");
+					forceLawsData[i] = list.get(i).getString("data");
+					
+					combo.addItem(forceLaws[i]);
+				}
+//				_ctrl.setForceLaws(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
+
+
+		//EJEMPLO
+//		String[] forceLaws = {"Fuerza 1", "Fuerza 2", "Fuerza 3"};
+//		for (int i = 0; i < forceLaws.length; i++) {
+//			combo.addItem(forceLaws[i]);
+//		}
+		//EJEMPLO
+
+		JPanel pepe = new JPanel();
+
+		pepe.setBounds(80, 20, 100, 170);
+		pepe.setLayout(new BoxLayout(pepe, BoxLayout.Y_AXIS));
+
+		String[] columnNames = {"Key",
+				"Value",
+		"Description"};
+
+		//        ola = new JSONObject N
+		//        
+		String[][] data1 = {
+				{"G", "", "gravitional constant"},
+				{"", "", ""}
+		};
+
+		
+		DefaultTableModel dtm = new DefaultTableModel(null,columnNames);
+		JTable table = new JTable(dtm);
+		
+		Object[] newdata = {1,2,3,4,5,6,7,8,9};
+		
+		dtm.insertRow(0, newdata);
+
+//		JTable tabla = new JTable(data1, columnNames);
+//
+//		tabla.getDefaultEditor(String.class).isCellEditable(null);
+//
+//		combo.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				JComboBox combo = (JComboBox<String>) e.getSource();
+//				String value = (String)combo.getSelectedItem();
+//				System.out.println("Value is " + value);
+//
+//				if (value == forceLaws[0])
+//				{
+//					
+//				}
+//				else
+//				{
+//					tabla.setValueAt(forceLawsData[1]);
+//					tabla.setValueAt("the point towards...", 0, 2);
+//					tabla.setValueAt("g", 1, 0);
+//					tabla.setValueAt("the lenght...", 1, 2);
+//				}
+//
+//			}
+//		});
+		
+
+		
+
+		pepe.add(new JLabel("Select a force"), null);
+
+		pepe.add(new JScrollPane(table));
+		pepe.add(combo);
+
+		int option = JOptionPane.showOptionDialog(null, pepe, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (option == JOptionPane.CANCEL_OPTION)
 		{
-			combo.addItem(forceLaws[i]);
+
+		} else if (option == JOptionPane.OK_OPTION)
+		{
+
 		}
 		
 	 

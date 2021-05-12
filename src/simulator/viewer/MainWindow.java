@@ -59,7 +59,7 @@ public class MainWindow extends JFrame
 	public static void main(String[] args) 
 	{
 		@SuppressWarnings("unused")
-		MainWindow main = new MainWindow(new Controller(null, null));
+		MainWindow main = new MainWindow(new Controller(null, null, null));
 	}
 
 }

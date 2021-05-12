@@ -22,10 +22,11 @@ public class Controller
 	private Factory<Body> _bodiesFactory;
 	private Factory<ForceLaws> _forceFactory;
 	
-	public Controller(PhysicsSimulator phySimulator, Factory<Body> bodiesFactory)
+	public Controller(PhysicsSimulator phySimulator, Factory<Body> bodiesFactory, Factory<ForceLaws> forceFactory)
 	{
 		_phySimulator = phySimulator;
 		_bodiesFactory = bodiesFactory;
+		_forceFactory = forceFactory;
 	}
 	
 	public void loadBodies(InputStream in)  // Carga los cuerpos desde el fichero
