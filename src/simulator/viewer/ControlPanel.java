@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -25,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -172,92 +174,56 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void forces() // ARREGLA ESTA MIERDA :)
 	{
-		List<JSONObject> list = _ctrl.getForceLawsInfo();
-		
-		JComboBox<String> combo = new JComboBox();
-		
-		String[] forceLaws = new String[list.size()];
-		String[] forceLawsData = new String[list.size()];
-		
-		for (int i = 0; i < forceLaws.length; i++)
-		{
-			forceLaws[i] = list.get(i).getString("desc");
-//			forceLawsData[i] = list.get(i).getString("data").toString();
-			
-			combo.addItem(forceLaws[i]);
-		}
+		// -------------------------------------------------- ESTO ESTA PERFECTO
+		List<JSONObject> list = _ctrl.getForceLawsInfo();		
+		JComboBox<String> combo = new JComboBox<String>();
 
-		JPanel panel = new JPanel();
+		for (int i = 0; i < list.size(); i++)		
+		{
+			combo.addItem(list.get(i).getString("desc"));
+		}
 		
+		String[][] data = new String[list.size()][2];
+		String[] columnNames = {"Key", "Value", "Description"};
+		// --------------------------------------------------
+		
+		// -------------------------------------------------- ESTO ESTA EN PROGRESO
+		for(int i = 0; i < list.size();i++)
+		{
+			String[] parts = list.get(i).get("data").toString().split(":");
+		
+				parts[0] = parts[0].replace("{", "");
+				parts[1] = parts[1].replace("}", "");
+
+				data[0][i] = parts[0];
+				data[1][i] = " ";
+				data[2][i] = parts[1];
+			
+		}
+		// --------------------------------------------------
+		
+		
+		JPanel panel = new JPanel();
 		panel.setBounds(80, 20, 100, 170);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		String[] columnNames = {"Key", "Value", "Description"};
-		
-		String[][] data = {
-				{"", "", ""},
-				{"", "", ""}
-		};
-		
 		JTable tabla = new JTable(data, columnNames);
 		
-		combo.addActionListener(new ActionListener() {
+		combo.addActionListener(new ActionListener()
+		{
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				JComboBox combo = (JComboBox<String>) e.getSource();
-				String value = (String)combo.getSelectedItem();
-				System.out.println("Value is " + value);
-		
-				String key;
-				
-				if (value.equals(forceLaws[0]))
-				{
-					key = "g";
-					tabla.setValueAt(key, 0, 0);
-					tabla.setValueAt(list.get(0).getJSONObject("data").getString(key), 0, 2);
-					
-					tabla.setValueAt("", 1, 0);
-					tabla.setValueAt("", 1, 2);
-				}
-				else if (value.equals(forceLaws[1]))
-				{
-					key = "c";
-					tabla.setValueAt(key, 0, 0);
-					tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 0, 2);
-					
-					key = "g";
-					tabla.setValueAt(key, 1, 0);
-					tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 1, 2);
-				}
-				else
-				{
-					tabla.setValueAt("", 0, 0);
-					tabla.setValueAt("", 0, 2);
-					tabla.setValueAt("", 1, 0);
-					tabla.setValueAt("", 1, 2);
-				}
+			public void actionPerformed(ActionEvent e) 
+			{
+
 			}
 		});
 	
 		panel.add(new JLabel("Select a force"), null);
-		
 		panel.add(new JScrollPane(tabla));
 		panel.add(combo);
 		
 		int option = JOptionPane.showOptionDialog(null, panel, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-		if (option == JOptionPane.CANCEL_OPTION)
-		{
-		
-		} else if (option == JOptionPane.OK_OPTION)
-		{
-			
-			_ctrl.setForceLaws(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
-		}
-		
 
-
-		
-	 
 	}
 
 	private void play()

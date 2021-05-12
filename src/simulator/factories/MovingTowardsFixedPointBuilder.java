@@ -53,6 +53,7 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 		
 		js.put("g", "gravitation constant");
 		js.put("c", "fixed point");
+
 		
 		return js;
 	}
