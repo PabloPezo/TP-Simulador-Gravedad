@@ -162,8 +162,11 @@ public class Viewer extends JComponent implements SimulatorObserver
 			
 			if(_showVectors)
 			{
-				int pepe1X = (_centerX - (int) (_bodies.get(i).getVelocity().scale(1).getX())) ;
-				int pepe1Y = (_centerX - (int) (_bodies.get(i).getVelocity().scale(1).getY() ));
+				// Este es el punto al que deben apuntar
+				int pepe1X = (_centerX - (int) (_bodies.get(i).getVelocity()).direction().getX());
+				
+				int pepe1Y = (_centerX - (int) (_bodies.get(i).getVelocity()).direction().getY());
+				
 				
 				// Hay que poner dos drawLineArrow. Falla el pepe1X, pepe1Y.
 				
