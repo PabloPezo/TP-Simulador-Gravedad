@@ -162,10 +162,12 @@ public class Viewer extends JComponent implements SimulatorObserver
 			
 			if(_showVectors)
 			{
-				int pepeX = (_centerX - (int) (_bodies.get(i).getVelocity().getX()/_scale)) ;
-				int pepeY = _centerY - (int) (_bodies.get(i).getVelocity().getY()/_scale);
-				drawLineWithArrow(g, _centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), pepeX, pepeY, 5, 5, Color.RED, Color.RED);
-				drawLineWithArrow(g, _centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 100, 200, 5, 5, Color.GREEN, Color.GREEN);
+				int pepe1X = (_centerX - (int) (_bodies.get(i).getVelocity().scale(1).getX())) ;
+				int pepe1Y = (_centerX - (int) (_bodies.get(i).getVelocity().scale(1).getY() ));
+				
+				// Hay que poner dos drawLineArrow. Falla el pepe1X, pepe1Y.
+				
+				drawLineWithArrow(g, _centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), pepe1X, pepe1Y, 5, 5, Color.RED, Color.RED);
 				
 			}
 
@@ -216,29 +218,29 @@ public class Viewer extends JComponent implements SimulatorObserver
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
 		_bodies = bodies;
-		autoScale();
 		repaint();
+		autoScale();
 	}
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		_bodies = bodies;
-		autoScale();
 		repaint();
+		autoScale();
 	}
 	
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{
 		_bodies = bodies;
-		autoScale();
 		repaint();
+		autoScale();
 	}
 	@Override
 	public void onAdvance(List<Body> bodies, double time) 
 	{
-		autoScale();
 		repaint();
+		autoScale();
 	}
 
 	@Override
