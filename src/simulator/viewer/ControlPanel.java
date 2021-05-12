@@ -179,7 +179,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		String[] forceLaws = new String[list.size()];
 		String[] forceLawsData = new String[list.size()];
 		
-		
 		for (int i = 0; i < forceLaws.length; i++)
 		{
 			forceLaws[i] = list.get(i).getString("desc");
@@ -188,282 +187,75 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			combo.addItem(forceLaws[i]);
 		}
 
-	JPanel pepe = new JPanel();
+		JPanel panel = new JPanel();
+		
+		panel.setBounds(80, 20, 100, 170);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		String[] columnNames = {"Key", "Value", "Description"};
+		
+		String[][] data = {
+				{"", "", ""},
+				{"", "", ""}
+		};
+		
+		JTable tabla = new JTable(data, columnNames);
+		
+		combo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox combo = (JComboBox<String>) e.getSource();
+				String value = (String)combo.getSelectedItem();
+				System.out.println("Value is " + value);
+		
+				String key;
+				
+				if (value.equals(forceLaws[0]))
+				{
+					key = "g";
+					tabla.setValueAt(key, 0, 0);
+					tabla.setValueAt(list.get(0).getJSONObject("data").getString(key), 0, 2);
+					
+					tabla.setValueAt("", 1, 0);
+					tabla.setValueAt("", 1, 2);
+				}
+				else if (value.equals(forceLaws[1]))
+				{
+					key = "c";
+					tabla.setValueAt(key, 0, 0);
+					tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 0, 2);
+					
+					key = "g";
+					tabla.setValueAt(key, 1, 0);
+					tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 1, 2);
+				}
+				else
+				{
+					tabla.setValueAt("", 0, 0);
+					tabla.setValueAt("", 0, 2);
+					tabla.setValueAt("", 1, 0);
+					tabla.setValueAt("", 1, 2);
+				}
+			}
+		});
 	
-	pepe.setBounds(80, 20, 100, 170);
-	pepe.setLayout(new BoxLayout(pepe, BoxLayout.Y_AXIS));
-	
-	String[] columnNames = {"Key", "Value", "Description"};
-	
-	String[][] data1 = {
-			{"", "", ""},
-			{"", "", ""}
-	};
-	
-	
-	DefaultTableModel dtm = new DefaultTableModel(null,columnNames);
-	JTable table = new JTable(dtm);
-	
-	Object[] newdata = {1,2,3,4,5,6,7,8,9};
-	
-	dtm.insertRow(0, newdata);
-	
-	JTable tabla = new JTable(data1, columnNames);
-	
-	tabla.getDefaultEditor(String.class).isCellEditable(null);
-	
-	combo.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JComboBox combo = (JComboBox<String>) e.getSource();
-			String value = (String)combo.getSelectedItem();
-			System.out.println("Value is " + value);
-	
-			String key;
+		panel.add(new JLabel("Select a force"), null);
+		
+		panel.add(new JScrollPane(tabla));
+		panel.add(combo);
+		
+		int option = JOptionPane.showOptionDialog(null, panel, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (option == JOptionPane.CANCEL_OPTION)
+		{
+		
+		} else if (option == JOptionPane.OK_OPTION)
+		{
 			
-			if (value.equals(forceLaws[0]))
-			{
-				key = "g";
-				tabla.setValueAt(key, 0, 0);
-				tabla.setValueAt(list.get(0).getJSONObject("data").getString(key), 0, 2);
-				
-				tabla.setValueAt("", 1, 0);
-				tabla.setValueAt("", 1, 2);
-			}
-			else if (value.equals(forceLaws[1]))
-			{
-				key = "c";
-				tabla.setValueAt(key, 0, 0);
-				tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 0, 2);
-				
-				key = "g";
-				tabla.setValueAt(key, 1, 0);
-				tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 1, 2);
-			}
-			else
-			{
-				tabla.setValueAt("", 0, 0);
-				tabla.setValueAt("", 0, 2);
-				tabla.setValueAt("", 1, 0);
-				tabla.setValueAt("", 1, 2);
-			}
-	
+			_ctrl.setForceLaws(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
 		}
-	});
-
-	pepe.add(new JLabel("Select a force"), null);
-	
-	pepe.add(new JScrollPane(tabla));
-	pepe.add(combo);
-	
-	int option = JOptionPane.showOptionDialog(null, pepe, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-	if (option == JOptionPane.CANCEL_OPTION)
-	{
-		System.out.println("pos nada");
-	
-	} else if (option == JOptionPane.OK_OPTION)
-	{
-		System.out.println("toi en ello mister");
-		
-		_ctrl.setForceLaws(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
-	}
-		
-		
-		
-		
-		
-		
 		
 
-//								██████╗░███████╗    ░█████╗░░██████╗░██╗░░░██╗██╗    ░█████╗░  
-//								██╔══██╗██╔════╝    ██╔══██╗██╔═══██╗██║░░░██║██║    ██╔══██╗  
-//								██║░░██║█████╗░░    ███████║██║██╗██║██║░░░██║██║    ███████║  
-//								██║░░██║██╔══╝░░    ██╔══██║╚██████╔╝██║░░░██║██║    ██╔══██║  
-//								██████╔╝███████╗    ██║░░██║░╚═██╔═╝░╚██████╔╝██║    ██║░░██║  
-//								╚═════╝░╚══════╝    ╚═╝░░╚═╝░░░╚═╝░░░░╚═════╝░╚═╝    ╚═╝░░╚═╝  
-//								
-//								░█████╗░██████╗░░█████╗░░░░░░██╗░█████╗░    ███████╗░██████╗  
-//								██╔══██╗██╔══██╗██╔══██╗░░░░░██║██╔══██╗    ██╔════╝██╔════╝  
-//								███████║██████╦╝███████║░░░░░██║██║░░██║    █████╗░░╚█████╗░  
-//								██╔══██║██╔══██╗██╔══██║██╗░░██║██║░░██║    ██╔══╝░░░╚═══██╗  
-//								██║░░██║██████╦╝██║░░██║╚█████╔╝╚█████╔╝    ███████╗██████╔╝  
-//								╚═╝░░╚═╝╚═════╝░╚═╝░░╚═╝░╚════╝░░╚════╝░    ╚══════╝╚═════╝░  
-//								
-//								███████╗██╗░░░██╗███╗░░░███╗░█████╗░██████╗░░█████╗░████████╗███████╗
-//								██╔════╝██║░░░██║████╗░████║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
-//								█████╗░░██║░░░██║██╔████╔██║███████║██║░░██║██║░░██║░░░██║░░░█████╗░░
-//								██╔══╝░░██║░░░██║██║╚██╔╝██║██╔══██║██║░░██║██║░░██║░░░██║░░░██╔══╝░░
-//								██║░░░░░╚██████╔╝██║░╚═╝░██║██║░░██║██████╔╝╚█████╔╝░░░██║░░░███████╗
-//								╚═╝░░░░░░╚═════╝░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═════╝░░╚════╝░░░░╚═╝░░░╚══════╝
-		
-		
-		
-		
-		
-		
-		
 
-		
-
-//		//TENDRIA QUE SER ASI: (LO COMENTO PARA QUE NO DE ERROR DE NULL POINTER)
-//				
-//
-////		String[] columnNames = {"Key", "Value", "Description"};
-////
-////		String[][] data1 = {
-////				{"", "", ""},
-////				{"", "", ""}
-////		};
-////		
-////		
-////		DefaultTableModel dtm = new DefaultTableModel(null,columnNames);
-////		JTable table = new JTable(dtm);
-////		
-////		Object[] newdata = {1,2,3,4,5,6,7,8,9};
-////		
-////		dtm.insertRow(0, newdata);
-////
-////		JTable tabla = new JTable(data1, columnNames);
-////
-////		tabla.getDefaultEditor(String.class).isCellEditable(null);
-////
-////		combo.addActionListener(new ActionListener() {
-////			@Override
-////			public void actionPerformed(ActionEvent e) {
-////				JComboBox combo = (JComboBox<String>) e.getSource();
-////				String value = (String)combo.getSelectedItem();
-////				System.out.println("Value is " + value);
-////
-////				String key;
-////				
-////				if (value.equals(forceLaws[0]))
-////				{
-////					key = "g";
-////					tabla.setValueAt(key, 0, 0);
-////					tabla.setValueAt(list.get(0).getJSONObject("data").getString(key), 0, 2);
-////					
-////					tabla.setValueAt("", 1, 0);
-////					tabla.setValueAt("", 1, 2);
-////				}
-////				else if (value.equals(forceLaws[1]))
-////				{
-////					key = "c";
-////					tabla.setValueAt(key, 0, 0);
-////					tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 0, 2);
-////					
-////					key = "g";
-////					tabla.setValueAt(key, 1, 0);
-////					tabla.setValueAt(list.get(1).getJSONObject("data").getString(key), 1, 2);
-////				}
-////				else
-////				{
-////					tabla.setValueAt("", 0, 0);
-////					tabla.setValueAt("", 0, 2);
-////					tabla.setValueAt("", 1, 0);
-////					tabla.setValueAt("", 1, 2);
-////				}
-////			}
-////		});
-//		
-//		List<JSONObject> list = _ctrl.getForceLawsInfo();
-//		
-//		JComboBox<String> combo = new JComboBox();
-//		
-//		String[] forceLaws = new String[list.size()];
-//		String[] forceLawsData = new String[list.size()];
-//		
-//		
-//		for (int i = 0; i < forceLaws.length; i++)
-//		{
-//			forceLaws[i] = list.get(i).getString("desc");
-//			
-////			System.out.println("HOLA");
-////			forceLawsData[i] = list.get(i).getString("data").toString();
-////			System.out.println("ADIOS");
-//			
-//			combo.addItem(forceLaws[i]);
-//		}
-//		
-//		JPanel pepe = new JPanel();
-//		
-//		pepe.setBounds(80, 20, 100, 170);
-//		pepe.setLayout(new BoxLayout(pepe, BoxLayout.Y_AXIS));
-//		
-//		String[] columnNames = {"Key", "Value", "Description"};
-//		
-//		DefaultTableModel dtm = new DefaultTableModel(null,columnNames);
-//		JTable tabla = new JTable(dtm);
-//		
-//		
-//		Object[] newdata2 = {10,20,30,40,50,60,70,80,90};
-//		Object[] newdata3 = {100,200,300,400,500,600,700,800,900};
-//
-//		tabla.getDefaultEditor(String.class).isCellEditable(null);
-//
-//		combo.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				JComboBox combo = (JComboBox<String>) e.getSource();
-//				String value = (String)combo.getSelectedItem();
-//				System.out.println("Value is " + value);
-//
-//				if (value.equals(forceLaws[0]))
-//				{
-//					for(int i = 0; i < dtm.getRowCount(); i++)
-//					{
-//						dtm.removeRow(0);
-//					}
-//					
-//					String keyString = list.get(0).keys().next().toString();
-//					Object[] newdata = {keyString, list.get(0).getString(keyString)};
-//
-//					
-//					
-////					
-////					Object je = list.get(0).get("data");					
-////					System.out.println("je: " + je.toString());
-//					
-//					dtm.insertRow(0, newdata);
-//					
-//				}
-//				else if (value.equals(forceLaws[1]))
-//				{
-//					for(int i = 0; i < dtm.getRowCount(); i++)
-//					{
-//						dtm.removeRow(0);
-//					}
-//					
-//					dtm.insertRow(0, newdata2);
-//				}
-//				else
-//				{
-//					for(int i = 0; i < dtm.getRowCount(); i++)
-//					{
-//						dtm.removeRow(0);
-//					}	
-//					
-//					dtm.insertRow(0, newdata3);
-//				}
-//
-//			}
-//		});
-//		
-//		pepe.add(new JLabel("Select a force"), null);
-//
-//		pepe.add(new JScrollPane(tabla));
-//		pepe.add(combo);
-//
-//		int option = JOptionPane.showOptionDialog(null, pepe, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-//		if (option == JOptionPane.CANCEL_OPTION)
-//		{
-//			System.out.println("pos nada");
-//
-//		} else if (option == JOptionPane.OK_OPTION)
-//		{
-//			System.out.println("toi en ello mister");
-//			
-//			_ctrl.setForceLaws(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
-//		}
 		
 	 
 	}
