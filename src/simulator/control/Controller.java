@@ -115,15 +115,13 @@ public class Controller
 	}	
 	
 	public List<JSONObject> getForceLawsInfo()
-	{		
+	{
 		return _forceFactory.getInfo();
 	}
 	
 	public void setForceLaws(JSONObject info)
 	{		
 		ForceLaws oli = _forceFactory.createInstance(info);
-		
-		System.out.println("oli: " + oli.toString());
 		
 		_phySimulator.setForceLaws(oli);
 	}

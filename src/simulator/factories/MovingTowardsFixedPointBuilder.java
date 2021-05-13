@@ -27,12 +27,18 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 			Vector2D p = null;
 			JSONArray vector;
 			double g = js.has("g") ? js.getDouble("g") : 9.81;
+			
+//			double g = 9;
 
 			if(!js.isEmpty())
 			{
 				vector = js.getJSONArray("c");
 				double x = vector.getDouble(0);
 				double y = vector.getDouble(1);
+				
+//				double x = 0;
+//				double y = 1;
+				
 				p = new Vector2D(x, y);
 			}
 			else
