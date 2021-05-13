@@ -217,7 +217,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			System.out.println("toi en ello mister");
 			
-			System.out.println(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).toString());
+//			System.out.println(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).toString());
 			
 			_ctrl.setForceLaws(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
 		}

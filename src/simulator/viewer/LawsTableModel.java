@@ -72,7 +72,14 @@ public class LawsTableModel extends AbstractTableModel
 	@Override
 	public int getRowCount() 
 	{
-		return info.size();
+		if (info != null)
+		{
+			return info.size();
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 	@Override
