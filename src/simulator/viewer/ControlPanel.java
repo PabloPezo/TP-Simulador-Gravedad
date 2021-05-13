@@ -50,6 +50,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private JSpinner steps;
 	private JTextField time;
+	
+	private LawsTableModel tab;
 
 	ControlPanel(Controller ctrl) 
 	{
@@ -171,7 +173,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			}
 		}
 	}
-
+	
 	private void forces() // ARREGLA ESTA MIERDA :)
 	{
 		// -------------------------------------------------- ESTO ESTA PERFECTO
@@ -183,47 +185,42 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			combo.addItem(list.get(i).getString("desc"));
 		}
 		
-		String[][] data = new String[list.size()][2];
-		String[] columnNames = {"Key", "Value", "Description"};
-		// --------------------------------------------------
-		
-		// -------------------------------------------------- ESTO ESTA EN PROGRESO
-		for(int i = 0; i < list.size();i++)
-		{
-			String[] parts = list.get(i).get("data").toString().split(":");
-		
-				parts[0] = parts[0].replace("{", "");
-				parts[1] = parts[1].replace("}", "");
-
-				data[0][i] = parts[0];
-				data[1][i] = " ";
-				data[2][i] = parts[1];
-			
-		}
-		// --------------------------------------------------
-		
-		
 		JPanel panel = new JPanel();
 		panel.setBounds(80, 20, 100, 170);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		JTable tabla = new JTable(data, columnNames);
+		
 		
 		combo.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-
+				tab.setInfo(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
 			}
 		});
+		
+		tab = new LawsTableModel(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
+		
+		JTable table = new JTable(tab);
 	
 		panel.add(new JLabel("Select a force"), null);
-		panel.add(new JScrollPane(tabla));
+		panel.add(new JScrollPane(table));
 		panel.add(combo);
 		
 		int option = JOptionPane.showOptionDialog(null, panel, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
+		if (option == JOptionPane.CANCEL_OPTION)
+		{
+			System.out.println("pos nada");
+		
+		} else if (option == JOptionPane.OK_OPTION)
+		{
+			System.out.println("toi en ello mister");
+			
+			System.out.println(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).toString());
+			
+			_ctrl.setForceLaws(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
+		}
 	}
 
 	private void play()
@@ -270,23 +267,23 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if (e.getSource() == buttonArchive)
+		if (e.getSource().equals(buttonArchive))
 		{
 			archive();
 		}
-		else if (e.getSource() == buttonForces) 
+		else if (e.getSource().equals(buttonForces))
 		{
 			forces();
 		}
-		else if (e.getSource() == buttonPlay) 
+		else if (e.getSource().equals(buttonPlay)) 
 		{
 			play();
 		}
-		else if (e.getSource() == buttonStop)
+		else if (e.getSource().equals(buttonStop))
 		{
 			stop();
 		}
-		else if(e.getSource() == buttonExit)
+		else if(e.getSource().equals(buttonExit))
 		{
 			quit();
 		}

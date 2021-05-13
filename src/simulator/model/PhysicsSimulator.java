@@ -107,6 +107,7 @@ public class PhysicsSimulator
  	{
  		if(forceLaws == null) {throw new IllegalArgumentException();}
  		_forceLaws = forceLaws;
+ 		System.out.println("fl physcis: " + _forceLaws.toString());
  		
  		for (int i = 0; i < observers.size(); i++)
 		{ 			
