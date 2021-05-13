@@ -14,7 +14,7 @@ public class LawsTableModel extends AbstractTableModel
 	private final String[] names = {"Key", "Value", "Description"};
 	private String[] column;
 	
-	private final String nlug = "666", g = "9.81";
+	private final String nlug = "6.67E-11", g = "9.81";
 	private final Vector2D c = new Vector2D(0.0, 0.0);
 
 	public LawsTableModel(JSONObject law) 
