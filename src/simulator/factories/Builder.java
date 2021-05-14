@@ -39,11 +39,6 @@ public abstract class Builder<T>
 	{
 		JSONObject info = new JSONObject();
 		info.put("type", _typeTag);
-<<<<<<< HEAD
-//		System.out.println("queremos" + this.createData());
-//		System.out.println("queremos2" + createData());
-=======
->>>>>>> 68e40753efad3879c00c6efe1345de561479a562
 		info.put("data", this.createData()); //Puse el toString para que no salga como que no es string je
 		info.put("desc",_desc);
 		return info;

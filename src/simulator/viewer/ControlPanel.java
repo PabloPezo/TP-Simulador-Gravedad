@@ -207,9 +207,16 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		if (option == JOptionPane.CANCEL_OPTION)
 		{
 
-		} else if (option == JOptionPane.OK_OPTION)
+		}
+		else if (option == JOptionPane.OK_OPTION)
 		{			
-			_ctrl.setForceLaws(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
+			JSONObject o = new JSONObject();
+			o.put("type", _ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).get("type"));
+			o.put("data", tab.selectedForce());
+			
+			System.out.println("ola: " + tab.selectedForce().toString());
+			
+			_ctrl.setForceLaws(o);
 		}
 	}
 

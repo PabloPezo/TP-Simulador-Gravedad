@@ -3,6 +3,8 @@ package simulator.viewer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 import simulator.misc.Vector2D;
 
@@ -82,13 +84,63 @@ public class LawsTableModel extends AbstractTableModel
 			return 0;
 		}
 	}
+	
+	public JSONObject selectedForce()
+	{
+		JSONObject o = new JSONObject();
+		for (int i = 0; i < info.size(); i++)
+		{
+			if (getValueAt(i, 0).equals("c"))
+			{
+				String c = (String) getValueAt(i, 1);
+				o.put("c", parseC(c));
+			}
+			else
+			{
+				o.put((String) getValueAt(i, 0), getValueAt(i, 1));
+				
+//				System.out.println("i0: " + getValueAt(i, 0));
+//				System.out.println("i1: " + getValueAt(i, 1));
+			}
+		}
+		return o;
+	}
+	
+	private JSONArray parseC(String c)
+	{
+		JSONArray j = new JSONArray();
+		String aux = "";
+		for (int i = 1; i < c.length(); i++)
+		{
+			if (c.charAt(i) != ',')
+			{
+				aux = aux + c.charAt(i);
+			}
+			else
+			{
+				double d = Double.parseDouble(aux);
+				j.put(d);
+				aux = "";
+			}
+		}
+		return j;
+	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex)
 	{
 		this.column[0] = info.get(rowIndex).getKey();
+			
+//			System.out.println("key: " + info.get(rowIndex).getKey());
+		
 		this.column[1] = String.valueOf(info.get(rowIndex).getValue());
+		
+//			System.out.println("val: " + info.get(rowIndex).getValue());
+		
 		this.column[2] = String.valueOf(info.get(rowIndex).getDesc());
+		
+//			System.out.println("desc: " + info.get(rowIndex).getDesc());
+		
 		return this.column[columnIndex];
 	}
 
