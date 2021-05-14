@@ -65,7 +65,7 @@ public class Body
 		{
 			accel = getForce().scale(1.0 / _mass);
 		}
-		 _pos = _pos.plus(_vel.scale(t).plus(accel.scale(0.5 * t * t)));
+		 _pos = _pos.plus(_vel.scale(t).plus(accel.scale(0.5 * t * t)));		
 		 _vel = _vel.plus(accel.scale(t));
 	}
 	
