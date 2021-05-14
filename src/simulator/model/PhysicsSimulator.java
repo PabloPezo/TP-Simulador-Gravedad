@@ -116,7 +116,6 @@ public class PhysicsSimulator
 
 	public void addObserver(SimulatorObserver o)	
 	{
-
 		observers.add(o);
 		o.onRegister(bodyList, _currentTime, _currentTime, null);
 	}

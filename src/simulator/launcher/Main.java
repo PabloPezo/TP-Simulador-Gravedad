@@ -339,7 +339,6 @@ public class Main
 			@Override
 			public void run() 
 			{
-
 				control.run(_steps);
 			}
 		});
@@ -363,7 +362,6 @@ public class Main
 			cmp = _stateComparatorFactory.createInstance(_stateComparatorInfo);
 		}
 
-
 		control.loadBodies(in);
 		control.run(_steps, out, expOut, cmp);
 	}
@@ -374,8 +372,7 @@ public class Main
 
 		if(_mode.equals("GUI"))
 		{
-			startGUIMode();
-			
+			startGUIMode();			
 		}
 		else if (_mode.equals("BATCH"))
 		{
