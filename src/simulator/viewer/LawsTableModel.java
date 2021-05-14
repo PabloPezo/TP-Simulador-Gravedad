@@ -44,7 +44,7 @@ public class LawsTableModel extends AbstractTableModel
 				break;
 				
 			case "nf":
-				info = null;
+				info.add(new LawsInfo("dcvsd ", " ", " "));	// Esto esta mal, si lo pones a null no sale nada de nada
 				
 			default:
 				info = null;

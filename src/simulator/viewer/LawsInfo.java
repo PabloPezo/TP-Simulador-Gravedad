@@ -1,8 +1,7 @@
 package simulator.viewer;
 
-import simulator.misc.Vector2D;
-
-public class LawsInfo {
+public class LawsInfo 
+{
 	private String _key;
 	private String _value;
 	private String _desc;

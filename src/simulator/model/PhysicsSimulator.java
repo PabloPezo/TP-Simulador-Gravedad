@@ -14,7 +14,7 @@ public class PhysicsSimulator
 	private List <SimulatorObserver> observers;
 	private ForceLaws _forceLaws;
 	private double _currentTime;
-	
+
 	public PhysicsSimulator(double t, ForceLaws fl) throws IllegalArgumentException
 	{
 		if (t <= 0.0 || fl == null) throw new IllegalArgumentException();
@@ -26,102 +26,111 @@ public class PhysicsSimulator
 		this.observers = new ArrayList<SimulatorObserver>();
 		this.bodyList = new ArrayList<Body>();
 	}
-	 	
- 	public void advance()	// Aplica un paso de simulación
- 	{
- 		for (Body body : bodyList)
+
+	public void advance()	// Aplica un paso de simulación
+	{
+		for (Body body : bodyList)
 		{
 			body.resetForce();
 		}
- 		_forceLaws.apply(bodyList);
- 		
- 		for (Body body : bodyList)
+		_forceLaws.apply(bodyList);
+
+		for (Body body : bodyList)
 		{
- 			body.move(_realTime);
+			body.move(_realTime);
 		}
 		_currentTime += _realTime;
-		
-//		for (int i = 0; i < observers.size(); i++)
-//		{
-//			observers.get(i).onAdvance(bodyList, _currentTime);
-//		}
- 	}
 
- 	public void addBody(Body b) throws IllegalArgumentException		// Añade el cuerpo b al simulador
- 	{
- 		if (!bodyList.contains(b))
- 		{
- 			bodyList.add(b);
- 			if(observers != null && observers.size() != 0)
- 			{
- 				observers.get(observers.size() - 1).onBodyAdded(bodyList, b); 
- 			}
+		//if(observers != null)
+		//{
+		for (int i = 0; i < observers.size(); i++)
+		{
+			observers.get(i).onAdvance(bodyList, _currentTime);
+		}
+		//	}
 
- 		}
- 		else
- 		{
- 			throw new IllegalArgumentException();
- 		}
- 	}
+	}
+
+	public void addBody(Body b) throws IllegalArgumentException		// Añade el cuerpo b al simulador
+	{
+		if (!bodyList.contains(b))
+		{
+			bodyList.add(b);
+			if(observers != null && observers.size() != 0)
+			{
+				observers.get(observers.size() - 1).onBodyAdded(bodyList, b); 
+			}
+		}
+		else
+		{
+			throw new IllegalArgumentException();
+		}
+	}
 
 	public JSONObject getState() 
 	{
 		JSONObject obj = new JSONObject();
 		JSONArray arr = new JSONArray();
-		
+
 		for (Body body : bodyList)
 			arr.put(body.getState());
-		
+
 		obj.put("bodies", arr);
 		obj.put("time", _currentTime);
 		return obj;
 	}
- 	
- 	public String toString() { return getState().toString(); }
- 	
- 	public void reset()
- 	{
+
+	public String toString() { return getState().toString(); }
+
+	public void reset()
+	{
 		this.bodyList = new ArrayList<Body>();
 		_currentTime = 0.0;
-		
+		//if(observers != null)
+		//{
 		for (int i = 0; i < observers.size(); i++)
 		{
 			observers.get(i).onReset(bodyList, _currentTime, _currentTime, null);
 		}
- 	}
- 	
- 	public void setDeltaTime(double dt) throws IllegalArgumentException
- 	{
-		if (dt <= 0.0) throw new IllegalArgumentException();
+		//}
+	}
+
+	public void setDeltaTime(double dt) throws IllegalArgumentException
+	{
+		if (dt < 0.0) throw new IllegalArgumentException();
 		{
 			_realTime = dt;
 		}
-		
+
+		//if(observers != null)
+		//	{
 		for (int i = 0; i < observers.size(); i++)
 		{
 			observers.get(i).onDeltaTimeChanged(dt);
 		}
- 	}
- 	
- 	public void setForceLaws(ForceLaws forceLaws) throws IllegalArgumentException
- 	{
- 		
-// 		System.out.println("fl physcis antes: " + _forceLaws.toString());
- 		
- 		if(forceLaws == null) {throw new IllegalArgumentException();}
- 		_forceLaws = forceLaws;
- 		
-// 		System.out.println("fl physcis after: " + _forceLaws.toString());
- 		
- 		for (int i = 0; i < observers.size(); i++)
+		//}
+	}
+
+	public void setForceLaws(ForceLaws forceLaws) throws IllegalArgumentException
+	{
+		if(forceLaws == null) {throw new IllegalArgumentException();}
+		_forceLaws = forceLaws;
+
+		//if(observers != null)
+		//{
+		for (int i = 0; i < observers.size(); i++)
 		{ 			
 			observers.get(i).onForceLawsChanged(forceLaws.toString());
 		}
- 	}
- 	
- 	public void addObserver(SimulatorObserver o)	// Repasar sdi hay que inizializarlo en la constructora
- 	{
- 		observers.add(o);
- 		o.onRegister(bodyList, _currentTime, _currentTime, null);
- 	}
+		//}
+	}
+
+	public void addObserver(SimulatorObserver o)	
+	{
+		//if(observers != null)
+		//{
+		observers.add(o);
+		o.onRegister(bodyList, _currentTime, _currentTime, null);
+		//}
+	}
 }
