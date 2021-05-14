@@ -284,7 +284,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
 		this.time.setText(Double.toString(dt));
-		//_ctrl.setDeltaTime(dt);
 	}
 
 	@Override
@@ -292,7 +291,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	{
 
 		this.time.setText(Double.toString(dt));
-		//_ctrl.setDeltaTime(dt);
 	}
 
 	@Override
@@ -300,7 +298,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	{
 
 		this.time.setText(Double.toString(dt));
-		//_ctrl.setDeltaTime(dt);
 	}
 
 	@Override

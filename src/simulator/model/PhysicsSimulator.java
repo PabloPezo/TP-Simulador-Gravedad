@@ -41,13 +41,10 @@ public class PhysicsSimulator
 		}
 		_currentTime += _realTime;
 
-		//if(observers != null)
-		//{
 		for (int i = 0; i < observers.size(); i++)
 		{
 			observers.get(i).onAdvance(bodyList, _currentTime);
 		}
-		//	}
 
 	}
 
@@ -86,13 +83,11 @@ public class PhysicsSimulator
 	{
 		this.bodyList = new ArrayList<Body>();
 		_currentTime = 0.0;
-		//if(observers != null)
-		//{
+
 		for (int i = 0; i < observers.size(); i++)
 		{
 			observers.get(i).onReset(bodyList, _currentTime, _currentTime, null);
 		}
-		//}
 	}
 
 	public void setDeltaTime(double dt) throws IllegalArgumentException
@@ -102,13 +97,10 @@ public class PhysicsSimulator
 			_realTime = dt;
 		}
 
-		//if(observers != null)
-		//	{
 		for (int i = 0; i < observers.size(); i++)
 		{
 			observers.get(i).onDeltaTimeChanged(dt);
 		}
-		//}
 	}
 
 	public void setForceLaws(ForceLaws forceLaws) throws IllegalArgumentException
@@ -116,21 +108,16 @@ public class PhysicsSimulator
 		if(forceLaws == null) {throw new IllegalArgumentException();}
 		_forceLaws = forceLaws;
 
-		//if(observers != null)
-		//{
 		for (int i = 0; i < observers.size(); i++)
 		{ 			
 			observers.get(i).onForceLawsChanged(forceLaws.toString());
 		}
-		//}
 	}
 
 	public void addObserver(SimulatorObserver o)	
 	{
-		//if(observers != null)
-		//{
+
 		observers.add(o);
 		o.onRegister(bodyList, _currentTime, _currentTime, null);
-		//}
 	}
 }
