@@ -92,7 +92,7 @@ public class PhysicsSimulator
 
 	public void setDeltaTime(double dt) throws IllegalArgumentException
 	{
-		if (dt < 0.0) throw new IllegalArgumentException();
+		if (dt <= 0.0) throw new IllegalArgumentException();
 		{
 			_realTime = dt;
 		}

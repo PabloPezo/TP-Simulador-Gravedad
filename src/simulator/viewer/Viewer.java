@@ -53,44 +53,19 @@ public class Viewer extends JComponent implements SimulatorObserver
 			@Override
 			public void keyPressed(KeyEvent e) 
 			{
-				switch (e.getKeyChar())
-				{
-				case '-':
-					_scale = _scale * 1.1;
-					repaint();
-					break;
-				case '+':
-					_scale = Math.max(1000.0, _scale / 1.1);
-					repaint();
-					break;
-				case '=':
-					autoScale();
-					repaint();
-					break;
-				case 'h':
-					_showHelp = !_showHelp;
-					repaint();
-					break;
-				case 'v':
-					_showVectors = !_showVectors;
-					repaint();
-					break;
-				default:
-				}
+				keys(e);
 			}
 
 			@Override
-			public void keyReleased(KeyEvent arg0) 
-			{
-				// TODO Auto-generated method stub
-
+			public void keyReleased(KeyEvent e) 
+			{		
+				keys(e);
 			}
 
 			@Override
-			public void keyTyped(KeyEvent arg0) 
-			{
-				// TODO Auto-generated method stub
-
+			public void keyTyped(KeyEvent e) 
+			{				
+				keys(e);
 			}
 		});
 		addMouseListener(new MouseListener() 
@@ -129,6 +104,33 @@ public class Viewer extends JComponent implements SimulatorObserver
 
 			}
 		});
+	}
+	
+	public void keys(KeyEvent e)
+	{
+		switch (e.getKeyChar())
+		{
+		case '-':
+			_scale = _scale * 1.1;
+			repaint();
+			break;
+		case '+':
+			_scale = Math.max(1000.0, _scale / 1.1);
+			repaint();
+			break;
+		case '=':
+			autoScale();
+			repaint();
+			break;
+		case 'h':
+			_showHelp = !_showHelp;
+			repaint();
+			break;
+		case 'v':
+			_showVectors = !_showVectors;
+			break;
+		default:
+		}
 	}
 
 	@Override
