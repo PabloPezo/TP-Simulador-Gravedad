@@ -98,7 +98,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void run_sim(int n) 
 	{
-		System.out.println(n);
 		if ( n > 0 && !_stopped ) 
 		{
 			try 
