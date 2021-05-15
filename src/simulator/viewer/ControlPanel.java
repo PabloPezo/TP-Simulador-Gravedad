@@ -228,32 +228,30 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		try
 		{
 			_ctrl.setDeltaTime(Double.parseDouble(time.getText()));
+			
+			try
+			{
+				int s = Integer.parseInt(steps.getValue().toString());
+				if (s <= 0)
+				{
+					throw new Exception("Por favor, introduzca un número de pasos (mayor que cero)");
+				}
+				buttonArchive.setEnabled(false);
+				buttonExit.setEnabled(false);
+				buttonForces.setEnabled(false);
+
+				_stopped = false;
+				run_sim(s);
+			}
+			catch(Exception e)
+			{
+				JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		catch(Exception e)
 		{
 			JOptionPane.showMessageDialog(null, "Por favor, introduzca un delta-time correcto", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
-
-		try
-		{
-
-			int s = Integer.parseInt(steps.getValue().toString());
-			if (s <= 0)
-			{
-				throw new Exception("Por favor, introduzca un número de pasos (mayor que cero)");
-			}
-			buttonArchive.setEnabled(false);
-			buttonExit.setEnabled(false);
-			buttonForces.setEnabled(false);
-
-			_stopped = false;
-			run_sim(s);
-		}
-		catch(Exception e)
-		{
-			JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-		}
-
 	}
 
 	private void stop()

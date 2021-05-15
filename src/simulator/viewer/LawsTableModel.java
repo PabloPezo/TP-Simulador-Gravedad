@@ -94,8 +94,7 @@ public class LawsTableModel extends AbstractTableModel
 			{
 				if (getValueAt(i, 0).equals("c"))
 				{
-					String c = (String) getValueAt(i, 1);
-					o.put("c", parseC(c));
+					o.put("c", parseC((String) getValueAt(i, 1)));
 				}
 				else
 				{
@@ -108,9 +107,10 @@ public class LawsTableModel extends AbstractTableModel
 	
 	private JSONArray parseC(String c)
 	{
+		// [0.0,0.0]
 		JSONArray j = new JSONArray();
 		String aux = "";
-		for (int i = 1; i < c.length(); i++)
+		for (int i = 1; i < c.length() - 1; i++)
 		{
 			if (c.charAt(i) != ',')
 			{				
@@ -125,6 +125,10 @@ public class LawsTableModel extends AbstractTableModel
 			}
 		}
 		
+		j.put(Double.parseDouble(aux));
+
+		
+		System.out.println(j);
 		return j;
 	}
 

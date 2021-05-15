@@ -48,6 +48,8 @@ public class MainWindow extends JFrame
 		universeViewer.setPreferredSize(new Dimension(800, 600));
 		contentPanel.add(new JScrollPane(universeViewer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 		mainPanel.setVisible(true);
+		
+		this.setLocation(400,3);
 		this.setVisible(true);
 		this.pack();
 	}
