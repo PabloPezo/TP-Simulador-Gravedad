@@ -29,7 +29,6 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
-import javax.swing.table.TableColumnModel;
 
 import org.json.JSONObject;
 
