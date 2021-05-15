@@ -150,29 +150,27 @@ public class Viewer extends JComponent implements SimulatorObserver
 		{
 			double posX = _bodies.get(i).getPosition().getX();
 			double posY = _bodies.get(i).getPosition().getY();
-
+			
+			if(_showVectors)
+			{
+				int x =  _centerX + (int) (posX/_scale) + 5;
+				int y = _centerY - (int) (posY/_scale) + 5;
+				
+				double posVelX = (_bodies.get(i).getVelocity()).direction().getX();
+				double posVelY =  (_bodies.get(i).getVelocity()).direction().getY();
+				
+				drawLineWithArrow(g, x, y, (int)(x+ posVelX * 18), (int)(y - posVelY * 18), 3, 3, Color.RED, Color.RED);
+				
+				double posForceX = (_bodies.get(i).getForce()).direction().getX();
+				double posForceY =  (_bodies.get(i).getForce()).direction().getY();
+				
+				drawLineWithArrow(g, x, y, (int)(x+ posForceX * 18), (int)(y - posForceY * 18), 3, 3, Color.GREEN, Color.GREEN);
+			}
 			gr.setColor(Color.BLUE);
 			gr.fillOval(_centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 10, 10);
 			gr.drawOval(_centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 10, 10);
 			gr.setColor(Color.BLACK);
 			gr.drawString(_bodies.get(i).getId(),  _centerX + (int)(posX/_scale),  _centerY - (int)(posY/_scale));
-			
-			if(_showVectors)
-			{
-				int x =  _centerX + (int) (posX/_scale);
-				int y = _centerY - (int) (posY/_scale);
-				
-				double posVelX = (_bodies.get(i).getVelocity()).direction().getX();
-				double posVelY =  (_bodies.get(i).getVelocity()).direction().getY();
-				
-				drawLineWithArrow(g, x, y, (int)(x+ posVelX * 15), (int)(y - posVelY * 15), 5, 5, Color.RED, Color.RED);
-				
-				double posForceX = (_bodies.get(i).getForce()).direction().getX();
-				double posForceY =  (_bodies.get(i).getForce()).direction().getY();
-				
-				drawLineWithArrow(g, x, y, (int)(x+ posForceX * 15), (int)(y - posForceY * 15), 5, 5, Color.GREEN, Color.GREEN);
-			}
-
 		}
 
 		if(_showHelp)
