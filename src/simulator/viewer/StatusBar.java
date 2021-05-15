@@ -49,7 +49,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	{
 		if(fLawsDesc == null)
 		{
-			this._currLaws.setText("Laws: " + "None selected");
+			this._currLaws.setText("Laws: Newton's Universal Gravitation with G = 6.67E-11");
 		}
 		else
 		{
