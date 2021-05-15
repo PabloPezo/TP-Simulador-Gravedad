@@ -33,7 +33,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 		this.add(_currTime);
 		this.setAlignmentX(567);
 
-		this.add(new JLabel("                                   |   "));
+		this.add(new JLabel("                                      |   "));
 
 		_numOfBodies = new JLabel("Bodies:  ");
 		this.add(_numOfBodies);

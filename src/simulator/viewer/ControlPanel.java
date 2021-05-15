@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
+import javax.swing.table.TableColumnModel;
 
 import org.json.JSONObject;
 
@@ -188,31 +189,36 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void forces() 
 	{
-		List<JSONObject> list = _ctrl.getForceLawsInfo();		
+		List<JSONObject> list = _ctrl.getForceLawsInfo();	
+		
+		//PANEL PRINCIPAL
+		JPanel panel = new JPanel();
+		panel.setBounds(80, 20, 80, 170);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		//COMBOBOX
 		JComboBox<String> combo = new JComboBox<String>();
 
 		for (int i = 0; i < list.size(); i++)		
 		{
 			combo.addItem(list.get(i).getString("desc"));
 		}
-
-		JPanel panel = new JPanel();
-		panel.setBounds(80, 20, 80, 170);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
+		
 		combo.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				tab.setInfo(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
+				tab.setInfo(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));	//Cambia la información según lo seleccionado
 			}
 		});
-
+		
+		//TABLA
 		tab = new LawsTableModel(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
 
 		JTable table = new JTable(tab);
-
+		
+		//OPTION PANE
 		panel.add(new JLabel("Select a force law and provide values for the parameters in the Value column "
 				+ "(default values are used for parameters with no value)"), null);
 		panel.add(new JScrollPane(table));
@@ -221,11 +227,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		int option = JOptionPane.showOptionDialog(null, panel, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
 		if (option == JOptionPane.OK_OPTION)
-		{			
-			JSONObject o = new JSONObject();
-			o.put("type", _ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).get("type"));
-			o.put("data", tab.selectedForce());
-			_ctrl.setForceLaws(o);
+		{
+			JSONObject js = new JSONObject();	//Crea un JSONObject del tipo seleccionado y con la información de la tabla
+			js.put("type", _ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).get("type"));
+			js.put("data", tab.selectedForce());
+			_ctrl.setForceLaws(js);		//Envía el objeto al controller para dejar la fuerza lista para simulación
 		}
 	}
 
@@ -248,7 +254,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				buttonForces.setEnabled(false);
 
 				_stopped = false;
-				run_sim(s);
+				run_sim(s);		//Comienza la simulación con el número de pasos seleccionados
 			}
 			catch(Exception e)
 			{

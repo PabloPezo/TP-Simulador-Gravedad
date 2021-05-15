@@ -120,10 +120,8 @@ public class Controller
 	}
 
 	public void setForceLaws(JSONObject info)
-	{		
-		ForceLaws oli = _forceFactory.createInstance(info);
-
-		_phySimulator.setForceLaws(oli);
+	{				
+		_phySimulator.setForceLaws(_forceFactory.createInstance(info));
 	}
 
 }
