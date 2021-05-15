@@ -38,8 +38,7 @@ import simulator.viewer.MainWindow;
 
 public class Main
 {
-	
-	private enum ExecMode()
+	private enum ExecMode
 	{
 		BATCH("batch", "Batch mode"), GUI("gui", "Graphical user interface model");
 		private String _modeTag;
