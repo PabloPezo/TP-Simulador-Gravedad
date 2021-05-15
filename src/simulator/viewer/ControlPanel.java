@@ -240,6 +240,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				buttonArchive.setEnabled(false);
 				buttonExit.setEnabled(false);
 				buttonForces.setEnabled(false);
+				time.setEditable(false);
+			
 
 				_stopped = false;
 				run_sim(s);
@@ -262,6 +264,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		buttonArchive.setEnabled(true);
 		buttonExit.setEnabled(true);
 		buttonForces.setEnabled(true);
+		time.setEditable(true);
 		_stopped = true;
 	}
 
