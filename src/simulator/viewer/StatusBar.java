@@ -33,7 +33,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 		this.add(_currTime);
 		this.setAlignmentX(567);
 
-		this.add(new JLabel("                                   |   ")); // en plan cutre
+		this.add(new JLabel("                                   |   "));
 
 		_numOfBodies = new JLabel("Bodies:  ");
 		this.add(_numOfBodies);
@@ -45,16 +45,11 @@ public class StatusBar extends JPanel implements SimulatorObserver
 
 	}
 
-	@Override
-	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
+	private void drawForce(String fLawsDesc)
 	{
-		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
-
-		this._currTime.setText("Time: " + String.valueOf(time));
-
 		if(fLawsDesc == null)
 		{
-			this._currLaws.setText("Laws: " + "None");
+			this._currLaws.setText("Laws: " + "None selected");
 		}
 		else
 		{
@@ -63,20 +58,19 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	}
 
 	@Override
+	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
+	{
+		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
+		this._currTime.setText("Time: " + String.valueOf(time));
+		drawForce(fLawsDesc);
+	}
+
+	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
-
 		this._currTime.setText("Time: " + String.valueOf(time));
-
-		if(fLawsDesc == null)
-		{
-			this._currLaws.setText("Laws: " + "None");
-		}
-		else
-		{
-			this._currLaws.setText("Laws: " + fLawsDesc);
-		}
+		drawForce(fLawsDesc);
 	}
 
 	@Override
@@ -94,14 +88,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	@Override
 	public void onForceLawsChanged(String fLawsDesc)
 	{
-		if(fLawsDesc == null)
-		{
-			this._currLaws.setText("Laws: " + "None");
-		}
-		else
-		{
-			this._currLaws.setText("Laws: " + fLawsDesc);
-		}
+		drawForce(fLawsDesc);
 	}
 
 	@Override

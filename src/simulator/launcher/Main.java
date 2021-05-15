@@ -67,7 +67,6 @@ public class Main
 	private final static String _forceLawsDefaultValue = "nlug";
 	private final static String _stateComparatorDefaultValue = "epseq";
 
-	//private static String _mode = null;
 	private static Double _dtime = null;
 	private static Integer _steps = null;
 	private static String _inFile = null;

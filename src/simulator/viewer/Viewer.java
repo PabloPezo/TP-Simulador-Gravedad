@@ -240,7 +240,6 @@ public class Viewer extends JComponent implements SimulatorObserver
 	public void onAdvance(List<Body> bodies, double time) 
 	{
 		repaint();
-		autoScale();
 	}
 
 	@Override
