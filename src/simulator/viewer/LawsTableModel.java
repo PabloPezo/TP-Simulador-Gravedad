@@ -16,7 +16,7 @@ public class LawsTableModel extends AbstractTableModel
 	private final String[] names = {"Key", "Value", "Description"};
 	private String[] column;
 	
-	private final String nlug = "6.67E-11", g = "9.81";
+	private final String nlug = "", g = "";
 	private final Vector2D c = new Vector2D(0.0, 0.0);
 
 	public LawsTableModel(JSONObject law) 
@@ -46,7 +46,6 @@ public class LawsTableModel extends AbstractTableModel
 				break;
 				
 			case "nf":
-//				info.add(new LawsInfo(" ", " ", " "));	// Esto esta mal, si lo pones a null no sale nada de nada
 				info = null;
 				
 			default:
@@ -88,21 +87,25 @@ public class LawsTableModel extends AbstractTableModel
 	public JSONObject selectedForce()
 	{
 		JSONObject o = new JSONObject();
-		for (int i = 0; i < info.size(); i++)
+		
+		if (info != null)
 		{
-			if (getValueAt(i, 0).equals("c"))
+			for (int i = 0; i < info.size(); i++)
 			{
-				String c = (String) getValueAt(i, 1);
-				o.put("c", parseC(c));
+				if (getValueAt(i, 0).equals("c"))
+				{
+					String c = (String) getValueAt(i, 1);
+					
+					System.out.println("parseC(c): " + parseC(c));
+					
+					o.put("c", parseC(c));
+				}
+				else
+				{
+					o.put((String) getValueAt(i, 0), getValueAt(i, 1));
+				}
 			}
-			else
-			{
-				o.put((String) getValueAt(i, 0), getValueAt(i, 1));
-				
-//				System.out.println("i0: " + getValueAt(i, 0));
-//				System.out.println("i1: " + getValueAt(i, 1));
-			}
-		}
+		}		
 		return o;
 	}
 	
@@ -113,16 +116,18 @@ public class LawsTableModel extends AbstractTableModel
 		for (int i = 1; i < c.length(); i++)
 		{
 			if (c.charAt(i) != ',')
-			{
+			{				
 				aux = aux + c.charAt(i);
 			}
 			else
 			{
 				double d = Double.parseDouble(aux);
+				
 				j.put(d);
 				aux = "";
 			}
 		}
+		
 		return j;
 	}
 
@@ -130,16 +135,17 @@ public class LawsTableModel extends AbstractTableModel
 	public Object getValueAt(int rowIndex, int columnIndex)
 	{
 		this.column[0] = info.get(rowIndex).getKey();
-			
-//			System.out.println("key: " + info.get(rowIndex).getKey());
 		
-		this.column[1] = String.valueOf(info.get(rowIndex).getValue());
-		
-//			System.out.println("val: " + info.get(rowIndex).getValue());
+		if (String.valueOf(info.get(rowIndex).getValue()) != "")
+		{
+			this.column[1] = String.valueOf(info.get(rowIndex).getValue());
+		}
+		else
+		{
+			this.column[1] = null;
+		}
 		
 		this.column[2] = String.valueOf(info.get(rowIndex).getDesc());
-		
-//			System.out.println("desc: " + info.get(rowIndex).getDesc());
 		
 		return this.column[columnIndex];
 	}
