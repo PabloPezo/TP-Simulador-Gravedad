@@ -40,7 +40,7 @@ public class Main
 {
 	private enum ExecMode
 	{
-		BATCH("batch", "Batch mode"), GUI("gui", "Graphical user interface model");
+		BATCH("batch", "Batch mode"), GUI("GUI", "Graphical user interface model");
 		private String _modeTag;
 		private String _modeDesc;
 		
@@ -60,13 +60,14 @@ public class Main
 			return _modeDesc;
 		}
 	}
+	private static ExecMode _mode;
 	
 	private final static Double _dtimeDefaultValue = 2500.0;
 	private final static Integer _defaultStepsValue = 150;
 	private final static String _forceLawsDefaultValue = "nlug";
 	private final static String _stateComparatorDefaultValue = "epseq";
 
-	private static String _mode = null;
+	//private static String _mode = null;
 	private static Double _dtime = null;
 	private static Integer _steps = null;
 	private static String _inFile = null;
@@ -120,7 +121,7 @@ public class Main
 
 			parseStepsOption(line);
 
-			if(_mode.equals("GUI"))
+			if(_mode.equals(ExecMode.GUI))
 			{
 				try
 				{
@@ -236,14 +237,28 @@ public class Main
 
 	private static void parseModeOption(CommandLine line) throws ParseException // CAMBIADO PARA LA PR2
 	{
-		_mode = line.getOptionValue("m");
+		String aux = "";
+		boolean encontrado = false;
+		aux = line.getOptionValue("m");
 
-		if(_mode == null)
+		if(aux == null)
 		{
-			_mode = "BATCH";
+			_mode = ExecMode.BATCH;
+		}
+		else
+		{
+			for (ExecMode it : ExecMode.values()) 
+			{ 
+				if(it.getMode().equals(aux))
+				{
+					_mode = it; 
+					encontrado = true;
+				}
+			}
+
 		}
 
-		if(!_mode.equals("BATCH") && !_mode.equals("GUI"))
+		if(!encontrado)
 		{
 			throw new ParseException("This execution mode doesn't exist");
 		}
@@ -395,11 +410,11 @@ public class Main
 	{
 		parseArgs(args);
 
-		if(_mode.equals("GUI"))
+		if(_mode.equals(ExecMode.GUI))
 		{
 			startGUIMode();			
 		}
-		else if (_mode.equals("BATCH"))
+		else if (_mode.equals(ExecMode.BATCH))
 		{
 			startBatchMode();
 		}
