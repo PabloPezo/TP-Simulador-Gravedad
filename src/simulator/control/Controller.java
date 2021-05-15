@@ -28,7 +28,7 @@ public class Controller
 		_forceFactory = forceFactory;
 	}
 
-	public void loadBodies(InputStream in)  // Carga los cuerpos desde el fichero
+	public void loadBodies(InputStream in)  
 	{
 		JSONObject js = new JSONObject(new JSONTokener(in));
 		JSONArray bodies = js.getJSONArray("bodies");
@@ -39,7 +39,7 @@ public class Controller
 		}
 	}	
 
-	public void run(int steps, OutputStream out, InputStream expOut, StateComparator cmp) throws NotEqualStatesException // Corre la simulación
+	public void run(int steps, OutputStream out, InputStream expOut, StateComparator cmp) throws NotEqualStatesException 
 	{
 		JSONObject expOutJO = null;
 
@@ -91,7 +91,7 @@ public class Controller
 		pr.println("}");
 	}
 
-	public void run(int steps) 
+	public void run(int steps) // Método run para la interfaz gráfica
 	{
 		for(int i=1; i <= steps; i++)
 		{
@@ -104,7 +104,7 @@ public class Controller
 		_phySimulator.reset();
 	}
 
-	public void setDeltaTime(double dt) throws IllegalArgumentException
+	public void setDeltaTime(double dt) 
 	{
 		_phySimulator.setDeltaTime(dt);
 	}
@@ -121,9 +121,6 @@ public class Controller
 
 	public void setForceLaws(JSONObject info)
 	{		
-		ForceLaws oli = _forceFactory.createInstance(info);
-
-		_phySimulator.setForceLaws(oli);
+		_phySimulator.setForceLaws(_forceFactory.createInstance(info));
 	}
-
 }

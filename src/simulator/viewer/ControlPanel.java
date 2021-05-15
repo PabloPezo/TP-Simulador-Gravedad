@@ -41,16 +41,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	private static final long serialVersionUID = 1L;
 	private Controller _ctrl;
 	private boolean _stopped;
-
-	private JButton buttonArchive;
-	private JButton buttonForces;
-	private JButton buttonPlay;
-	private JButton buttonStop;
-	private JButton buttonExit;
-
+	private JButton buttonArchive, buttonForces, buttonPlay;
+	private JButton buttonStop, buttonExit;
 	private JSpinner steps;
 	private JTextField time;
-
 	private LawsTableModel tab;
 
 	ControlPanel(Controller ctrl) 
@@ -108,8 +102,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		buttonExit = createButton(new ImageIcon("resources/icons/exit.png"), "Cierra la simulación");
 		toolBar.add(buttonExit);
-
-
 	}
 
 	private void run_sim(int n) 
@@ -304,14 +296,12 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
-
 		this.time.setText(Double.toString(dt));
 	}
 
 	@Override
 	public void onDeltaTimeChanged(double dt) 
 	{
-
 		this.time.setText(Double.toString(dt));
 	}
 
