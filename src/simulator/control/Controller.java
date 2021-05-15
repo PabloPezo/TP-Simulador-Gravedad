@@ -20,52 +20,52 @@ public class Controller
 	private PhysicsSimulator _phySimulator;
 	private Factory<Body> _bodiesFactory;
 	private Factory<ForceLaws> _forceFactory;
-	
+
 	public Controller(PhysicsSimulator phySimulator, Factory<Body> bodiesFactory, Factory<ForceLaws> forceFactory)
 	{
 		_phySimulator = phySimulator;
 		_bodiesFactory = bodiesFactory;
 		_forceFactory = forceFactory;
 	}
-	
-	public void loadBodies(InputStream in)  // Carga los cuerpos desde el fichero
-    {
-        JSONObject js = new JSONObject(new JSONTokener(in));
-        JSONArray bodies = js.getJSONArray("bodies");
 
-        for(int i = 0; i < bodies.length(); i++)
-        {
-        	_phySimulator.addBody(_bodiesFactory.createInstance(bodies.getJSONObject(i)));
-        }
-    }	
-	
+	public void loadBodies(InputStream in)  // Carga los cuerpos desde el fichero
+	{
+		JSONObject js = new JSONObject(new JSONTokener(in));
+		JSONArray bodies = js.getJSONArray("bodies");
+
+		for(int i = 0; i < bodies.length(); i++)
+		{
+			_phySimulator.addBody(_bodiesFactory.createInstance(bodies.getJSONObject(i)));
+		}
+	}	
+
 	public void run(int steps, OutputStream out, InputStream expOut, StateComparator cmp) throws NotEqualStatesException // Corre la simulación
 	{
 		JSONObject expOutJO = null;
-		
+
 		if (expOut != null)
 		{
 			expOutJO = new JSONObject(new JSONTokener(expOut));
 		}
-		
+
 		if (out == null)
 		{
 			out = new OutputStream() { public void write(int b) throws IOException {}};
 		}
-		
+
 		PrintStream pr = new PrintStream(out);
-		
+
 		pr.println("{");
 		pr.println("\"states\": [");
-		
+
 		JSONObject expectatedState = null;
 		JSONObject currentState = null;
-		
+
 		currentState = _phySimulator.getState();
 
-        pr.println(currentState);
+		pr.println(currentState);
 		pr.print(",");
-		
+
 		if(expOutJO != null)
 		{
 			expectatedState = expOutJO.getJSONArray("states").getJSONObject(0);
@@ -89,40 +89,40 @@ public class Controller
 		}
 		pr.println("]");
 		pr.println("}");
-    }
-	
-	public void run(int steps) // HECHO PARA LA PR2. NI IDEA DE SI ESTA BIEN
+	}
+
+	public void run(int steps) 
 	{
 		for(int i=1; i <= steps; i++)
 		{
 			_phySimulator.advance();
 		}
-    }
-	
+	}
+
 	public void reset()
 	{
 		_phySimulator.reset();
 	}
-	
- 	public void setDeltaTime(double dt) throws IllegalArgumentException
- 	{
- 		_phySimulator.setDeltaTime(dt);
- 	}
+
+	public void setDeltaTime(double dt) throws IllegalArgumentException
+	{
+		_phySimulator.setDeltaTime(dt);
+	}
 
 	public void addObserver(SimulatorObserver o)
 	{
 		_phySimulator.addObserver(o);
 	}	
-	
+
 	public List<JSONObject> getForceLawsInfo()
 	{
 		return _forceFactory.getInfo();
 	}
-	
+
 	public void setForceLaws(JSONObject info)
 	{		
 		ForceLaws oli = _forceFactory.createInstance(info);
-		
+
 		_phySimulator.setForceLaws(oli);
 	}
 

@@ -25,6 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
 import org.json.JSONObject;
@@ -78,7 +79,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 
 		p1.add(new JLabel(" Steps: "));
-		this.steps = new JSpinner();
+		 steps = new JSpinner(new SpinnerNumberModel(10000, 1, 30000, 100));
+	
 		p1.add(steps);
 		steps.setPreferredSize(new Dimension(70, 35));
 
@@ -88,7 +90,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		p1.add(new JLabel(" Delta-Time: "));
 
-		this.time = new JTextField();
+		time = new JTextField();
+		
 		p1.add(time);
 		time.setPreferredSize(new Dimension(75, 40));
 
@@ -236,6 +239,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				{
 					throw new Exception("Por favor, introduzca un número de pasos (mayor que cero)");
 				}
+				buttonPlay.setEnabled(false);
 				buttonArchive.setEnabled(false);
 				buttonExit.setEnabled(false);
 				buttonForces.setEnabled(false);
@@ -256,6 +260,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void stop()
 	{
+		buttonPlay.setEnabled(true);
 		buttonArchive.setEnabled(true);
 		buttonExit.setEnabled(true);
 		buttonForces.setEnabled(true);
@@ -314,3 +319,5 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) {}
 }
+
+
