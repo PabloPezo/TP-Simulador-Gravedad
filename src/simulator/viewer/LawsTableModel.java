@@ -11,7 +11,6 @@ import simulator.misc.Vector2D;
 public class LawsTableModel extends AbstractTableModel
 {
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
 	private List<LawsInfo> infoLaws;
 	
 	private final String[] columnNames = {"Key", "Value", "Description"};
@@ -19,14 +18,6 @@ public class LawsTableModel extends AbstractTableModel
 	
 	private final String G = "";
 	private final String g = "";
-=======
-	private List<LawsInfo> info;
-
-	private final String[] names = {"Key", "Value", "Description"};
-	private String[] column;
-
-	private final String nlug = "", g = "";
->>>>>>> a66a939714571b6011c83a166608524477c7c80d
 	private final Vector2D c = new Vector2D(0.0, 0.0);
 
 	public LawsTableModel(JSONObject law) 
@@ -35,8 +26,7 @@ public class LawsTableModel extends AbstractTableModel
 	}
 
 	public void setInfo(JSONObject ley)
-	{		
-<<<<<<< HEAD
+	{
 		infoLaws = new ArrayList<LawsInfo>();
 		this.column = new String[columnNames.length];
 		String key;
@@ -70,39 +60,8 @@ public class LawsTableModel extends AbstractTableModel
 		}
 		fireTableStructureChanged();
 	}
-	
+
 	public boolean isCellEditable(int row, int col)		//Hace que solo se pueda editar la columna Values
-=======
-		info = new ArrayList<LawsInfo>();
-
-		this.column = new String[names.length];
-
-		String name = ley.getString("type");
-		JSONObject j = new JSONObject();
-		j = ley.getJSONObject("data");
-
-		switch (name)
-		{
-		case "nlug":			
-			info.add(new LawsInfo("G", nlug, j.getString("G")));
-			break;
-
-		case "mtfp":			
-			info.add(new LawsInfo("g", g, j.getString("g")));
-			info.add(new LawsInfo("c", c.toString(), j.getString("c")));
-			break;
-
-		case "nf":
-			info = null;
-
-		default:
-			info = null;
-		}
-		fireTableStructureChanged();
-	}
-
-	public boolean isCellEditable(int row, int col)
->>>>>>> a66a939714571b6011c83a166608524477c7c80d
 	{
 		return (col == 1);
 	}
@@ -131,21 +90,12 @@ public class LawsTableModel extends AbstractTableModel
 			return 0;
 		}
 	}
-<<<<<<< HEAD
 	
 	public JSONObject selectedForce()	//Devuelve la fuerza seleccionada según los parámetros de la tabla
 	{
 		JSONObject o = new JSONObject();
 		
 		if (infoLaws != null)
-=======
-
-	public JSONObject selectedForce()
-	{
-		JSONObject o = new JSONObject();
-
-		if (info != null)
->>>>>>> a66a939714571b6011c83a166608524477c7c80d
 		{
 			for (int i = 0; i < infoLaws.size(); i++)
 			{
@@ -161,7 +111,6 @@ public class LawsTableModel extends AbstractTableModel
 		}		
 		return o;
 	}
-<<<<<<< HEAD
 	
 	private JSONArray stringToVector(String c)		//Lee un array de tipo [0.0,0.0] y lo pasa a un JSONArray
 	{
@@ -170,15 +119,6 @@ public class LawsTableModel extends AbstractTableModel
 		
 		int i = 1;
 		while (c.charAt(i) != ',')
-=======
-
-	private JSONArray parseC(String c)
-	{
-		JSONArray j = new JSONArray();
-		String aux = "";
-
-		for (int i = 1; i < c.length() - 1; i++)
->>>>>>> a66a939714571b6011c83a166608524477c7c80d
 		{
 			aux += c.charAt(i);
 			i++;
@@ -201,15 +141,10 @@ public class LawsTableModel extends AbstractTableModel
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex)
 	{
-<<<<<<< HEAD
 		this.column[0] = infoLaws.get(rowIndex).getKey();
 		
-		if (String.valueOf(infoLaws.get(rowIndex).getValue()) != "")	//Comprobar si está vacío para que entonces te ponga el valor por defecto en el builder
-=======
-		this.column[0] = info.get(rowIndex).getKey();
-
-		if (String.valueOf(info.get(rowIndex).getValue()) != "")
->>>>>>> a66a939714571b6011c83a166608524477c7c80d
+		//Comprobar si está vacío para que entonces te ponga el valor por defecto en el builder
+		if (String.valueOf(infoLaws.get(rowIndex).getValue()) != "")
 		{
 			this.column[1] = String.valueOf(infoLaws.get(rowIndex).getValue());
 		}
@@ -217,15 +152,8 @@ public class LawsTableModel extends AbstractTableModel
 		{
 			this.column[1] = null;
 		}
-<<<<<<< HEAD
-		
 		this.column[2] = String.valueOf(infoLaws.get(rowIndex).getDesc());
-		
-=======
 
-		this.column[2] = String.valueOf(info.get(rowIndex).getDesc());
-
->>>>>>> a66a939714571b6011c83a166608524477c7c80d
 		return this.column[columnIndex];
 	}
 

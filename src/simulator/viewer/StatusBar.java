@@ -80,17 +80,19 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	}
 
 	@Override
-	public void onDeltaTimeChanged(double dt)
-	{
-		this._currTime.setText("Time: " + String.valueOf(dt));
-	}
-
-	@Override
 	public void onForceLawsChanged(String fLawsDesc)
 	{
 		drawForce(fLawsDesc);
 	}
 
 	@Override
-	public void onAdvance(List<Body> bodies, double time) {}
+	public void onAdvance(List<Body> bodies, double time) 
+	{
+		this._currTime.setText("Time: " + String.valueOf(time));
+	}
+	
+	@Override
+	public void onDeltaTimeChanged(double dt)
+	{	}
+
 }
