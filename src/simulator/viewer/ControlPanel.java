@@ -44,6 +44,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	private JButton buttonArchive, buttonForces, buttonPlay;
 	private JButton buttonStop, buttonExit;
 	private JSpinner steps;
+	private JSpinner.DefaultEditor editor;
+	
 	private JTextField time;
 	private LawsTableModel tab;
 
@@ -87,6 +89,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		Font font1 = steps.getFont().deriveFont(Font.PLAIN, 15f);
 		steps.setFont(font1);
 		steps.setToolTipText("Configura el número de pasos");
+		editor = ( JSpinner.DefaultEditor ) steps.getEditor();
 
 		toolBar.add(new JLabel(" Delta-Time: "));
 		time = new JTextField();
@@ -106,6 +109,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		toolBar.add(buttonExit);
 	}
 
+
 	private void run_sim(int n) 
 	{
 		if ( n > 0 && !_stopped ) 
@@ -119,7 +123,12 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				buttonArchive.setEnabled(true);
 				buttonForces.setEnabled(true);
 				buttonExit.setEnabled(true);
+
+				//editor.getTextField().setEnabled( true );
+				editor.getTextField().setEditable( true );
+				
 				_stopped = true;
+				
 				JOptionPane.showOptionDialog(null, "Se ha producido un error durante la ejecución", "ERROR:", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
 				return;
@@ -139,7 +148,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			buttonArchive.setEnabled(true);
 			buttonForces.setEnabled(true);
 			buttonExit.setEnabled(true);
+			time.setEditable(true);
+			editor.getTextField().setEditable( true );
 			_stopped = true;
+
 		}
 	}
 
@@ -246,8 +258,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				buttonExit.setEnabled(false);
 				buttonForces.setEnabled(false);
 				time.setEditable(false);
-			
-
+				editor.getTextField().setEditable( false );
 				_stopped = false;
 				run_sim(s);		//Comienza la simulación con el número de pasos seleccionados
 			}
@@ -260,7 +271,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			JOptionPane.showMessageDialog(null, "Por favor, introduzca un delta-time correcto", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
-
 	}
 
 	private void stop()
@@ -270,6 +280,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		buttonExit.setEnabled(true);
 		buttonForces.setEnabled(true);
 		time.setEditable(true);
+		editor.getTextField().setEditable( true );
 		_stopped = true;
 	}
 

@@ -143,7 +143,12 @@ public class LawsTableModel extends AbstractTableModel
 	{
 		this.column[0] = infoLaws.get(rowIndex).getKey();
 		
+<<<<<<< HEAD
 		if (String.valueOf(infoLaws.get(rowIndex).getValue()) != "")	//Comprobar si está vacío para que entonces te ponga el valor por defecto en el builder
+=======
+		//Comprobar si está vacío para que entonces te ponga el valor por defecto en el builder
+		if (String.valueOf(infoLaws.get(rowIndex).getValue()) != "")
+>>>>>>> edefa2f15c4193a05e28a2eed0ce5785d3d89751
 		{
 			this.column[1] = String.valueOf(infoLaws.get(rowIndex).getValue());
 		}
