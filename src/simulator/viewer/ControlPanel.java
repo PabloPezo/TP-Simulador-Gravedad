@@ -181,7 +181,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		}
 
 		JPanel panel = new JPanel();
-		panel.setBounds(80, 20, 100, 170);
+		panel.setBounds(80, 20, 80, 170);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 
@@ -199,7 +199,11 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		JTable table = new JTable(tab);
 
-		panel.add(new JLabel("Select a force"), null);
+		JLabel boldText = new JLabel("Value column");
+		
+		
+		panel.add(new JLabel("Select a force law and provide values for the parameters in the "
+				+ "(default values are used for parameters with no value)"), null);
 		panel.add(new JScrollPane(table));
 		panel.add(combo);
 

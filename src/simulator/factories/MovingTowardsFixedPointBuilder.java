@@ -51,8 +51,9 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 	{
 		JSONObject js = new JSONObject();
 		
-		js.put("g", "gravitation constant");
-		js.put("c", "fixed point");
+		js.put("c", "the point towards which bodies move (a json list of 2 numbers, e.g., [100.0,50.0])");
+		js.put("g", "the lenght of the acceleration vector (a number)");
+		
 
 		
 		return js;

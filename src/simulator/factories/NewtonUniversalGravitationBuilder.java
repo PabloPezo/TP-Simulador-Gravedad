@@ -46,7 +46,7 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 	{
 		JSONObject js = new JSONObject();
 		
-		js.put("G", "gravitation constant");
+		js.put("G", "the gravitation constant (a number)");
 		
 		return js;
 	}
