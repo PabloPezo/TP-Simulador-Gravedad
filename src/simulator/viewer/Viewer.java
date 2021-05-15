@@ -30,13 +30,13 @@ public class Viewer extends JComponent implements SimulatorObserver
 	private List<Body> _bodies;
 	private boolean _showHelp;
 	private boolean _showVectors;
-	
+
 	Viewer(Controller ctrl) 
 	{
 		initGUI();
 		ctrl.addObserver(this);
 	}
-	
+
 	private void initGUI() 
 	{
 		this.setLayout(new BorderLayout());
@@ -46,7 +46,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 		_scale = 1.0;
 		_showHelp = true;
 		_showVectors = true;
-		
+
 		addKeyListener(new KeyListener() 
 		{
 			@Override
@@ -67,7 +67,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 				keys(e);
 			}
 		});
-		
+
 		addMouseListener(new MouseListener() 
 		{
 			@Override
@@ -101,7 +101,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 			}
 		});
 	}
-	
+
 	public void keys(KeyEvent e)
 	{
 		switch (e.getKeyChar())
@@ -124,6 +124,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 			break;
 		case 'v':
 			_showVectors = !_showVectors;
+			repaint();
 			break;
 		default:
 		}
@@ -150,21 +151,21 @@ public class Viewer extends JComponent implements SimulatorObserver
 		{
 			double posX = _bodies.get(i).getPosition().getX();
 			double posY = _bodies.get(i).getPosition().getY();
-			
+
 			if(_showVectors)
 			{
 				int x =  _centerX + (int) (posX/_scale) + 5;
 				int y = _centerY - (int) (posY/_scale) + 5;
-				
+
 				double posVelX = (_bodies.get(i).getVelocity()).direction().getX();
 				double posVelY =  (_bodies.get(i).getVelocity()).direction().getY();
-				
-				drawLineWithArrow(g, x, y, (int)(x+ posVelX * 18), (int)(y - posVelY * 18), 3, 3, Color.RED, Color.RED);
-				
+
+				drawLineWithArrow(g, x, y, (int)(x+ posVelX * 18), (int)(y - posVelY * 18), 3, 3, Color.RED, Color.RED);	// Velocidad es roja
+
 				double posForceX = (_bodies.get(i).getForce()).direction().getX();
 				double posForceY =  (_bodies.get(i).getForce()).direction().getY();
-				
-				drawLineWithArrow(g, x, y, (int)(x+ posForceX * 18), (int)(y - posForceY * 18), 3, 3, Color.GREEN, Color.GREEN);
+
+				drawLineWithArrow(g, x, y, (int)(x+ posForceX * 18), (int)(y - posForceY * 18), 3, 3, Color.GREEN, Color.GREEN); // Fuerza es verde
 			}
 			gr.setColor(Color.BLUE);
 			gr.fillOval(_centerX + (int) (posX/_scale),  _centerY - (int) (posY/_scale), 10, 10);
@@ -193,7 +194,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 		double size = Math.max(1.0, Math.min(getWidth(), getHeight()));
 		_scale = max > size ? 4.0 * max / size : 1.0;
 	}
-	
+
 	private void drawLineWithArrow(Graphics g, int x1, int y1, int x2, int y2, int w, int h, Color lineColor, Color arrowColor)
 	{
 		int dx = x2 - x1, dy = y2 - y1;
@@ -228,7 +229,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 		repaint();
 		autoScale();
 	}
-	
+
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{

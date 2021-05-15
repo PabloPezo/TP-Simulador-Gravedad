@@ -100,7 +100,7 @@ public class Main
 		_stateComparatorFactory = new BuilderBasedFactory <StateComparator>(stateCmpBuilders);
 	}
 
-	private static void parseArgs(String[] args) 	// MODIFICADO PARA LA PR2, CREO QUE NO IMPORTA EL ORDEN DE LOS PARSES
+	private static void parseArgs(String[] args) 
 	{
 		Options cmdLineOptions = buildOptions();
 
@@ -242,12 +242,13 @@ public class Main
 	private static void parseModeOption(CommandLine line) throws ParseException // CAMBIADO PARA LA PR2
 	{
 		String aux = "";
-		boolean encontrado = false;
+		boolean found = false;
 		aux = line.getOptionValue("m");
 
 		if(aux == null)
 		{
 			_mode = _defaultMode;
+			found = true;
 		}
 		else
 		{
@@ -256,13 +257,13 @@ public class Main
 				if(it.getMode().equals(aux))
 				{
 					_mode = it; 
-					encontrado = true;
+					found = true;
 				}
 			}
 
 		}
 
-		if(!encontrado)
+		if(!found)
 		{
 			throw new ParseException("This execution mode doesn't exist");
 		}

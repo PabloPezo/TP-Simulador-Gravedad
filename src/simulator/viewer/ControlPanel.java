@@ -42,16 +42,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	private static final long serialVersionUID = 1L;
 	private Controller _ctrl;
 	private boolean _stopped;
-
-	private JButton buttonArchive;
-	private JButton buttonForces;
-	private JButton buttonPlay;
-	private JButton buttonStop;
-	private JButton buttonExit;
-
+	private JButton buttonArchive, buttonForces, buttonPlay;
+	private JButton buttonStop, buttonExit;
 	private JSpinner steps;
 	private JTextField time;
-
 	private LawsTableModel tab;
 
 	ControlPanel(Controller ctrl) 
@@ -93,11 +87,13 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		steps.setMaximumSize(steps.getPreferredSize());
 		Font font1 = steps.getFont().deriveFont(Font.PLAIN, 15f);
 		steps.setFont(font1);
+		steps.setToolTipText("Configura el número de pasos");
 
 		toolBar.add(new JLabel(" Delta-Time: "));
 		time = new JTextField();
 		time.setPreferredSize(new Dimension (70, 42));
 		time.setMaximumSize(time.getPreferredSize());
+		time.setToolTipText("Configura el tiempo de simulación");
 
 		toolBar.add(time);
 
@@ -109,8 +105,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		buttonExit = createButton(new ImageIcon("resources/icons/exit.png"), "Cierra la simulación");
 		toolBar.add(buttonExit);
-
-
 	}
 
 	private void run_sim(int n) 
@@ -265,6 +259,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			JOptionPane.showMessageDialog(null, "Por favor, introduzca un delta-time correcto", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
+
 	}
 
 	private void stop()
@@ -310,14 +305,12 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc) 
 	{
-
 		this.time.setText(Double.toString(dt));
 	}
 
 	@Override
 	public void onDeltaTimeChanged(double dt) 
 	{
-
 		this.time.setText(Double.toString(dt));
 	}
 

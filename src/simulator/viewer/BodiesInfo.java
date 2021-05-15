@@ -27,7 +27,7 @@ public class BodiesInfo extends JPanel implements SimulatorObserver//extends Abs
 		initGUI();
 		_ctrl.addObserver(this);
 	}
-	
+
 	private void initGUI()
 	{
 		this.setLayout(new BorderLayout());

@@ -45,7 +45,6 @@ public class PhysicsSimulator
 		{
 			observers.get(i).onAdvance(bodyList, _currentTime);
 		}
-
 	}
 
 	public void addBody(Body b) throws IllegalArgumentException		// Añade el cuerpo b al simulador
