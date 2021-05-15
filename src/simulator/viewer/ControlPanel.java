@@ -1,5 +1,6 @@
 package simulator.viewer;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -60,40 +61,46 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void initGUI()
 	{
+		this.setLayout(new BorderLayout());
+		JPanel p1 = new JPanel();
+		JPanel p2 = new JPanel();
 		buttonArchive = createButton(new ImageIcon("resources/icons/open.png"), "Carga el fichero seleccionado");
-		this.add(buttonArchive);
-
+		p1.add(buttonArchive);
 
 		buttonForces = createButton(new ImageIcon("resources/icons/physics.png"), "Cambia las leyes de fuerza");
-		this.add(buttonForces);
+		p1.add(buttonForces);
 
 		buttonPlay = createButton(new ImageIcon("resources/icons/run.png"), "Inicia la simulación");
-		this.add(buttonPlay);
+		p1.add(buttonPlay);
 
 		buttonStop = createButton(new ImageIcon("resources/icons/stop.png"), "Detiene la simulación");
-		this.add(buttonStop);
+		p1.add(buttonStop);
 
 
-		this.add(new JLabel(" Steps: "));
+		p1.add(new JLabel(" Steps: "));
 		this.steps = new JSpinner();
-		this.add(steps);
+		p1.add(steps);
 		steps.setPreferredSize(new Dimension(70, 35));
 
 
 		Font font1 = steps.getFont().deriveFont(Font.PLAIN, 15f);
 		steps.setFont(font1);
 
-		this.add(new JLabel(" Delta-Time: "));
+		p1.add(new JLabel(" Delta-Time: "));
 
 		this.time = new JTextField();
-		this.add(time);
+		p1.add(time);
 		time.setPreferredSize(new Dimension(75, 40));
 
 		Font font2 = time.getFont().deriveFont(Font.PLAIN, 15f);
 		time.setFont(font2);
 
 		buttonExit = createButton(new ImageIcon("resources/icons/exit.png"), "Cierra la simulación");
-		this.add(buttonExit);
+		p2.add(buttonExit);
+		
+		this.add(p1, BorderLayout.WEST);
+		this.add(p2, BorderLayout.EAST);
+		
 	}
 
 	private void run_sim(int n) 
