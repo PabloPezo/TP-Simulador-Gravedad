@@ -33,10 +33,6 @@ public class MainWindow extends JFrame
 
 		ControlPanel ctrlPanel = new ControlPanel(_ctrl);
 
-		//Lo que dice la lucia de poner:
-		//setCurrentDirectory("NewCurrentDirectory");
-
-		//BodiesInfo body = new BodiesInfo(_ctrl);
 		BodiesTable bodiesTable = new BodiesTable(_ctrl);
 
 		Viewer universeViewer = new Viewer(_ctrl);
@@ -55,11 +51,4 @@ public class MainWindow extends JFrame
 		this.setVisible(true);
 		this.pack();
 	}
-
-	public static void main(String[] args) 
-	{
-		@SuppressWarnings("unused")
-		MainWindow main = new MainWindow(new Controller(null, null, null));
-	}
-
 }

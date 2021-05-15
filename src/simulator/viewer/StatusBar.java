@@ -49,16 +49,34 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
-		this._currLaws.setText("Laws: " + fLawsDesc);		//¿Hacer algo con el null?
+
 		this._currTime.setText("Time: " + String.valueOf(time));
+
+		if(fLawsDesc == null)
+		{
+			this._currLaws.setText("Laws: " + "None");
+		}
+		else
+		{
+			this._currLaws.setText("Laws: " + fLawsDesc);
+		}
 	}
 
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
-		this._currLaws.setText("Laws: " + fLawsDesc);
+
 		this._currTime.setText("Time: " + String.valueOf(time));
+
+		if(fLawsDesc == null)
+		{
+			this._currLaws.setText("Laws: " + "None");
+		}
+		else
+		{
+			this._currLaws.setText("Laws: " + fLawsDesc);
+		}
 	}
 
 	@Override
@@ -76,7 +94,14 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	@Override
 	public void onForceLawsChanged(String fLawsDesc)
 	{
-		this._currLaws.setText("Laws: " + fLawsDesc);
+		if(fLawsDesc == null)
+		{
+			this._currLaws.setText("Laws: " + "None");
+		}
+		else
+		{
+			this._currLaws.setText("Laws: " + fLawsDesc);
+		}
 	}
 
 	@Override

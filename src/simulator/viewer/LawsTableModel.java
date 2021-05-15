@@ -95,9 +95,6 @@ public class LawsTableModel extends AbstractTableModel
 				if (getValueAt(i, 0).equals("c"))
 				{
 					String c = (String) getValueAt(i, 1);
-					
-					System.out.println("parseC(c): " + parseC(c));
-					
 					o.put("c", parseC(c));
 				}
 				else

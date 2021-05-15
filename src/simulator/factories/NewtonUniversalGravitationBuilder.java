@@ -9,7 +9,7 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 {
 	static String _type = "nlug";
 	static String _desc = "Newton's law universal gravitation";
-	
+
 	public NewtonUniversalGravitationBuilder()
 	{
 		super(_type, _desc);
@@ -21,18 +21,8 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 		js = js.getJSONObject("data");  // Para acceder a los valores de "data" fácilmente
 
 		try
-		{
-			System.out.println("has?: " + js.has("G"));
-			if (js.has("G"))
-			{
-				System.out.println("dame: " + js.getDouble("G"));
-				
-			}
-			
+		{			
 			double gConst = js.has("G") ? js.getDouble("G") : 6.67E-11;
-			
-//			double gConst = 6.67E-11;
-			
 			return new NewtonUniversalGravitation(gConst);
 		}
 		catch(Exception e)
@@ -41,13 +31,13 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>
 		}
 
 	}
-	
+
 	protected JSONObject createData()  
 	{
 		JSONObject js = new JSONObject();
-		
+
 		js.put("G", "the gravitation constant (a number)");
-		
+
 		return js;
 	}
 }

@@ -184,8 +184,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		panel.setBounds(80, 20, 80, 170);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-
-
 		combo.addActionListener(new ActionListener()
 		{
 			@Override
@@ -214,9 +212,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			JSONObject o = new JSONObject();
 			o.put("type", _ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).get("type"));
 			o.put("data", tab.selectedForce());
-			
-			System.out.println("ola: " + tab.selectedForce().toString());
-			
 			_ctrl.setForceLaws(o);
 		}
 	}

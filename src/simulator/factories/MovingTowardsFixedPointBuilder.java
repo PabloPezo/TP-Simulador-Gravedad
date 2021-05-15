@@ -11,23 +11,23 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 {
 	static String _type = "mtfp";
 	static String _desc = "Moving towards fixed point";
-	
+
 	public  MovingTowardsFixedPointBuilder()
 	{
 		super(_type, _desc);
 	}
-	
+
 	protected ForceLaws createTheInstance(JSONObject js)	// Comprueba que los datos son válidos. Si lo son crea un nuevo Body, de lo contrario devolverá null/producirá una excepción
 	{
 		if(!js.getString("type").equals(_type)) {return null;}
 		js = js.getJSONObject("data");  // Para acceder a los valores de "data" fácilmente
-		
+
 		try
 		{
 			Vector2D p = null;
 			JSONArray vector;
 			double g = js.has("g") ? js.getDouble("g") : 9.81;
-			
+
 			if(!js.isEmpty())
 			{
 				vector = js.getJSONArray("c");
@@ -46,16 +46,16 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 			throw new IllegalArgumentException("Illegal argument");
 		}
 	}
-	
+
 	protected JSONObject createData()  	// Añade la información
 	{
 		JSONObject js = new JSONObject();
-		
+
 		js.put("c", "the point towards which bodies move (a json list of 2 numbers, e.g., [100.0,50.0])");
 		js.put("g", "the lenght of the acceleration vector (a number)");
-		
 
-		
+
+
 		return js;
 	}
 }

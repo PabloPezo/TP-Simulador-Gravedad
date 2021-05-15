@@ -30,8 +30,6 @@ public class LawsInfo
 	
 	public void setValue(String v)
 	{
-		System.out.println("Pasa de " + _value + " a " + v);
-		
 		_value = v;
 	}
 }
