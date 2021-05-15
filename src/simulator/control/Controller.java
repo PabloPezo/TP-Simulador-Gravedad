@@ -91,7 +91,7 @@ public class Controller
 		pr.println("}");
 	}
 
-	public void run(int steps) // Método run para la interfaz gráfica
+	public void run(int steps) // Método run para la interfaz gráfica. Tal como esta configurada la práctica ahora solo se ejecuta run(1), pero esta preparado para ejecutar run(n)
 	{
 		for(int i=1; i <= steps; i++)
 		{

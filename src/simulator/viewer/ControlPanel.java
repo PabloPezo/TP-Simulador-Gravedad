@@ -86,11 +86,13 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		steps.setMaximumSize(steps.getPreferredSize());
 		Font font1 = steps.getFont().deriveFont(Font.PLAIN, 15f);
 		steps.setFont(font1);
+		steps.setToolTipText("Configura el número de pasos");
 
 		toolBar.add(new JLabel(" Delta-Time: "));
 		time = new JTextField();
 		time.setPreferredSize(new Dimension (70, 42));
 		time.setMaximumSize(time.getPreferredSize());
+		time.setToolTipText("Configura el tiempo de simulación");
 
 		toolBar.add(time);
 
@@ -251,6 +253,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			JOptionPane.showMessageDialog(null, "Por favor, introduzca un delta-time correcto", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
+
 	}
 
 	private void stop()

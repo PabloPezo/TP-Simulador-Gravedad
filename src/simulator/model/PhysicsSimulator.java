@@ -21,7 +21,7 @@ public class PhysicsSimulator
 		{
 			_realTime = t;
 			_forceLaws = fl;
-			_currentTime = 0.0;
+			_currentTime = 2500;
 		}	
 		this.observers = new ArrayList<SimulatorObserver>();
 		this.bodyList = new ArrayList<Body>();
@@ -45,7 +45,6 @@ public class PhysicsSimulator
 		{
 			observers.get(i).onAdvance(bodyList, _currentTime);
 		}
-
 	}
 
 	public void addBody(Body b) throws IllegalArgumentException		// Añade el cuerpo b al simulador
