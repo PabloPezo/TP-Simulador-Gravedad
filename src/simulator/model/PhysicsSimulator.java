@@ -21,7 +21,7 @@ public class PhysicsSimulator
 		{
 			_realTime = t;
 			_forceLaws = fl;
-			_currentTime = 2500;
+			_currentTime = 0.0;
 		}	
 		this.observers = new ArrayList<SimulatorObserver>();
 		this.bodyList = new ArrayList<Body>();

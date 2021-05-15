@@ -1,4 +1,4 @@
-# out.1.json
+time.setToolTipText(text);# out.1.json
 
 * was generated using the commnd-line
 
