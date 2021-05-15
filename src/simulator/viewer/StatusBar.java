@@ -31,7 +31,6 @@ public class StatusBar extends JPanel implements SimulatorObserver
 
 		_currTime = new JLabel("Time: ");
 		this.add(_currTime);
-		this.setAlignmentX(567);
 
 		this.add(new JLabel("                                      |   "));
 

@@ -120,7 +120,7 @@ public class Main
 
 			parseStepsOption(line);
 
-			if(_mode.equals(ExecMode.GUI))
+			if(_mode.equals(ExecMode.GUI))	// Si esta en modo gráfico parseInFile puede ser null (excepción olvidada).
 			{
 				try
 				{
@@ -159,7 +159,7 @@ public class Main
 		cmdLineOptions.addOption(Option.builder("i").longOpt("input").hasArg().desc("Bodies JSON input file.").build());
 
 		String aux = "";
-		for (ExecMode it : ExecMode.values()) 
+		for (ExecMode it : ExecMode.values()) // Recorre el enum para sacar su descripción
 		{ 
 			aux += "'" + it.getMode() + "'";
 			aux += " ";
@@ -239,31 +239,30 @@ public class Main
 		}
 	}
 
-	private static void parseModeOption(CommandLine line) throws ParseException // CAMBIADO PARA LA PR2
+	private static void parseModeOption(CommandLine line) throws ParseException 
 	{
 		String aux = "";
 		boolean found = false;
 		aux = line.getOptionValue("m");
 
-		if(aux == null)
+		if(aux == null)	// Si no hay -m se inicializa al modo por defecto (Batch, en este caso), Se marca el modo como encontrado
 		{
 			_mode = _defaultMode;
 			found = true;
 		}
 		else
 		{
-			for (ExecMode it : ExecMode.values()) 
+			for (ExecMode it : ExecMode.values()) 	// Se comparan todos los modos con el actual
 			{ 
-				if(it.getMode().equals(aux))
+				if(it.getMode().equals(aux))	// Si se encuentra se inicializa mode y se marca como encontrado,
 				{
 					_mode = it; 
 					found = true;
 				}
 			}
-
 		}
 
-		if(!found)
+		if(!found)	// Si no se ha encontrado lanza excepción
 		{
 			throw new ParseException("This execution mode doesn't exist");
 		}
