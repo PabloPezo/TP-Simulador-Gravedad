@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
@@ -63,47 +65,51 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	private void initGUI()
 	{
 		this.setLayout(new BorderLayout());
-		JPanel p1 = new JPanel();
-		JPanel p2 = new JPanel();
+
+		JToolBar toolBar = new JToolBar();
+		this.add(toolBar, BorderLayout.PAGE_START);
+
 		buttonArchive = createButton(new ImageIcon("resources/icons/open.png"), "Carga el fichero seleccionado");
-		p1.add(buttonArchive);
+		toolBar.add(buttonArchive);
+
+		toolBar.addSeparator();
 
 		buttonForces = createButton(new ImageIcon("resources/icons/physics.png"), "Cambia las leyes de fuerza");
-		p1.add(buttonForces);
+		toolBar.add(buttonForces);
+
+		toolBar.addSeparator();
 
 		buttonPlay = createButton(new ImageIcon("resources/icons/run.png"), "Inicia la simulación");
-		p1.add(buttonPlay);
+		toolBar.add(buttonPlay);
 
 		buttonStop = createButton(new ImageIcon("resources/icons/stop.png"), "Detiene la simulación");
-		p1.add(buttonStop);
+		toolBar.add(buttonStop);
 
-
-		p1.add(new JLabel(" Steps: "));
-		 steps = new JSpinner(new SpinnerNumberModel(10000, 1, 30000, 100));
-	
-		p1.add(steps);
-		steps.setPreferredSize(new Dimension(70, 35));
-
-
+		toolBar.add(new JLabel(" Steps: "));
+		steps = new JSpinner(new SpinnerNumberModel(10000, 1, 30000, 100));
+		toolBar.add(steps);
+		steps.setPreferredSize(new Dimension(70, 42));
+		steps.setMaximumSize(steps.getPreferredSize());
 		Font font1 = steps.getFont().deriveFont(Font.PLAIN, 15f);
 		steps.setFont(font1);
 
-		p1.add(new JLabel(" Delta-Time: "));
-
+		toolBar.add(new JLabel(" Delta-Time: "));
 		time = new JTextField();
-		
-		p1.add(time);
-		time.setPreferredSize(new Dimension(75, 40));
+		time.setPreferredSize(new Dimension (70, 42));
+		time.setMaximumSize(time.getPreferredSize());
+
+		toolBar.add(time);
 
 		Font font2 = time.getFont().deriveFont(Font.PLAIN, 15f);
 		time.setFont(font2);
 
+		toolBar.add(Box.createGlue());
+		toolBar.addSeparator();
+
 		buttonExit = createButton(new ImageIcon("resources/icons/exit.png"), "Cierra la simulación");
-		p2.add(buttonExit);
-		
-		this.add(p1, BorderLayout.WEST);
-		this.add(p2, BorderLayout.EAST);
-		
+		toolBar.add(buttonExit);
+
+
 	}
 
 	private void run_sim(int n) 
@@ -213,11 +219,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		panel.add(combo);
 
 		int option = JOptionPane.showOptionDialog(null, panel, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-		if (option == JOptionPane.CANCEL_OPTION)
-		{
 
-		}
-		else if (option == JOptionPane.OK_OPTION)
+		if (option == JOptionPane.OK_OPTION)
 		{			
 			JSONObject o = new JSONObject();
 			o.put("type", _ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).get("type"));
@@ -231,7 +234,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		try
 		{
 			_ctrl.setDeltaTime(Double.parseDouble(time.getText()));
-			
+
 			try
 			{
 				int s = Integer.parseInt(steps.getValue().toString());
