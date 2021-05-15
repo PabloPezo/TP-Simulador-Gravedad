@@ -29,7 +29,6 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
-import javax.swing.table.TableColumnModel;
 
 import org.json.JSONObject;
 
@@ -246,6 +245,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				buttonArchive.setEnabled(false);
 				buttonExit.setEnabled(false);
 				buttonForces.setEnabled(false);
+				time.setEditable(false);
+			
 
 				_stopped = false;
 				run_sim(s);		//Comienza la simulación con el número de pasos seleccionados
@@ -268,6 +269,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		buttonArchive.setEnabled(true);
 		buttonExit.setEnabled(true);
 		buttonForces.setEnabled(true);
+		time.setEditable(true);
 		_stopped = true;
 	}
 
