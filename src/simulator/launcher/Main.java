@@ -38,6 +38,30 @@ import simulator.viewer.MainWindow;
 
 public class Main
 {
+	
+	private enum ExecMode()
+	{
+		BATCH("batch", "Batch mode"), GUI("gui", "Graphical user interface model");
+		private String _modeTag;
+		private String _modeDesc;
+		
+		private ExecMode (String modeTag, String modeDesc)
+		{
+			_modeTag = modeTag;
+			_modeDesc = modeDesc;
+		}
+		
+		private String getMode()
+		{
+			return _modeTag;
+		}
+		
+		private String getModeDesc()
+		{
+			return _modeDesc;
+		}
+	}
+	
 	private final static Double _dtimeDefaultValue = 2500.0;
 	private final static Integer _defaultStepsValue = 150;
 	private final static String _forceLawsDefaultValue = "nlug";
@@ -56,6 +80,8 @@ public class Main
 	private static Factory<ForceLaws> _forceLawsFactory;
 	private static Factory<StateComparator> _stateComparatorFactory;
 
+	
+	
 	private static void init() 	// Inicializa los arrays y los builders
 	{
 		ArrayList <Builder<Body>> bodyBuilders = new ArrayList<>();
