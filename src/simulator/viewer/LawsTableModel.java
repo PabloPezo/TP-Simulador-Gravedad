@@ -107,28 +107,23 @@ public class LawsTableModel extends AbstractTableModel
 	
 	private JSONArray parseC(String c)
 	{
-		// [0.0,0.0]
 		JSONArray j = new JSONArray();
 		String aux = "";
+		
 		for (int i = 1; i < c.length() - 1; i++)
 		{
 			if (c.charAt(i) != ',')
 			{				
-				aux = aux + c.charAt(i);
+				aux += c.charAt(i);
 			}
 			else
 			{
-				double d = Double.parseDouble(aux);
-				
-				j.put(d);
+				j.put(Double.parseDouble(aux));
 				aux = "";
 			}
 		}
 		
 		j.put(Double.parseDouble(aux));
-
-		
-		System.out.println(j);
 		return j;
 	}
 
