@@ -25,8 +25,7 @@ import simulator.model.SimulatorObserver;
 public class Viewer extends JComponent implements SimulatorObserver 
 {
 	private static final long serialVersionUID = 1L;
-	private int _centerX;
-	private int _centerY;
+	private int _centerX, _centerY;
 	private double _scale;
 	private List<Body> _bodies;
 	private boolean _showHelp;
@@ -43,11 +42,11 @@ public class Viewer extends JComponent implements SimulatorObserver
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Viewer", TitledBorder.LEFT, TitledBorder.TOP));
 
-
 		_bodies = new ArrayList<>();
 		_scale = 1.0;
 		_showHelp = true;
 		_showVectors = true;
+		
 		addKeyListener(new KeyListener() 
 		{
 			@Override
@@ -68,6 +67,7 @@ public class Viewer extends JComponent implements SimulatorObserver
 				keys(e);
 			}
 		});
+		
 		addMouseListener(new MouseListener() 
 		{
 			@Override
@@ -79,29 +79,25 @@ public class Viewer extends JComponent implements SimulatorObserver
 			@Override
 			public void mouseClicked(MouseEvent arg0)
 			{
-				// TODO Auto-generated method stub
-
+				requestFocus();
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) 
 			{
-				// TODO Auto-generated method stub
-
+				requestFocus();
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) 
 			{
-				// TODO Auto-generated method stub
-
+				requestFocus();
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0)
 			{
-				// TODO Auto-generated method stub
-
+				requestFocus();
 			}
 		});
 	}
