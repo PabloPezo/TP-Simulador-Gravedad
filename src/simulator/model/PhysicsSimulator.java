@@ -104,7 +104,7 @@ public class PhysicsSimulator
 
 	public void setForceLaws(ForceLaws forceLaws) throws IllegalArgumentException
 	{
-		if(forceLaws == null) {throw new IllegalArgumentException();}
+		if(forceLaws == null) {throw new IllegalArgumentException();}	//Actualiza la fuerza para la simulación
 		_forceLaws = forceLaws;
 
 		for (int i = 0; i < observers.size(); i++)

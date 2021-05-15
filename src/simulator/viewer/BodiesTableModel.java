@@ -13,20 +13,20 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 {
 	private static final long serialVersionUID = 1L;
 	private List<Body> _bodies;
-	private final String[] names = {"id", "mass", "velocity", "position", "force"};
+	private final String[] columnNames = {"id", "mass", "velocity", "position", "force"};
 	private String[] column;
 
 	BodiesTableModel(Controller ctrl) 
 	{
 		_bodies = new ArrayList<>();
 		ctrl.addObserver(this);
-		this.column = new String[names.length];
+		this.column = new String[columnNames.length];
 	}
 
 	@Override
 	public int getColumnCount()
 	{
-		return names.length;
+		return columnNames.length;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	}
 
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex)
+	public Object getValueAt(int rowIndex, int columnIndex)		//Devuelve el valor de la casilla
 	{
 		this.column[0] = _bodies.get(rowIndex).getId();
 		this.column[1] = String.valueOf(_bodies.get(rowIndex).getMass());
@@ -49,7 +49,7 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	@Override
 	public String getColumnName(int column) 
 	{
-		return names[column].toString();
+		return columnNames[column].toString();
 	}
 
 	@Override

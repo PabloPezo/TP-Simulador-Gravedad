@@ -120,7 +120,11 @@ public class Controller
 	}
 
 	public void setForceLaws(JSONObject info)
+<<<<<<< HEAD
+	{				
+=======
 	{		
+>>>>>>> a66a939714571b6011c83a166608524477c7c80d
 		_phySimulator.setForceLaws(_forceFactory.createInstance(info));
 	}
 }
