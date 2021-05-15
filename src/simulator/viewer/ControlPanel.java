@@ -199,10 +199,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		JTable table = new JTable(tab);
 
-		JLabel boldText = new JLabel("Value column");
-		
-		
-		panel.add(new JLabel("Select a force law and provide values for the parameters in the "
+		panel.add(new JLabel("Select a force law and provide values for the parameters in the Value column "
 				+ "(default values are used for parameters with no value)"), null);
 		panel.add(new JScrollPane(table));
 		panel.add(combo);
