@@ -40,28 +40,28 @@ public class Main
 {
 	private enum ExecMode
 	{
-		BATCH("batch", "Batch mode"), GUI("GUI", "Graphical user interface model");
+		BATCH("batch", "(Batch mode)"), GUI("GUI", "(Graphical user interface mode)");
 		private String _modeTag;
 		private String _modeDesc;
-		
+
 		private ExecMode (String modeTag, String modeDesc)
 		{
 			_modeTag = modeTag;
 			_modeDesc = modeDesc;
 		}
-		
+
 		private String getMode()
 		{
 			return _modeTag;
 		}
-		
+
 		private String getModeDesc()
 		{
 			return _modeDesc;
 		}
 	}
 	private static ExecMode _mode;
-	
+	private static ExecMode _defaultMode = ExecMode.BATCH;
 	private final static Double _dtimeDefaultValue = 2500.0;
 	private final static Integer _defaultStepsValue = 150;
 	private final static String _forceLawsDefaultValue = "nlug";
@@ -80,8 +80,8 @@ public class Main
 	private static Factory<ForceLaws> _forceLawsFactory;
 	private static Factory<StateComparator> _stateComparatorFactory;
 
-	
-	
+
+
 	private static void init() 	// Inicializa los arrays y los builders
 	{
 		ArrayList <Builder<Body>> bodyBuilders = new ArrayList<>();
@@ -159,10 +159,15 @@ public class Main
 
 		cmdLineOptions.addOption(Option.builder("i").longOpt("input").hasArg().desc("Bodies JSON input file.").build());
 
-		cmdLineOptions.addOption(Option.builder("m").longOpt("mode").hasArg().desc("Execution Mode. Possible values: ’batch’\r\n"
-				+ "	(Batch mode), ’gui’ (Graphical User\r\n"
-				+ "		Interface mode). Default value: ’batch’")
-				.build());
+		String aux = "";
+		for (ExecMode it : ExecMode.values()) 
+		{ 
+			aux += "'" + it.getMode() + "'";
+			aux += " ";
+			aux += it.getModeDesc();
+			aux += " ";
+		}
+		cmdLineOptions.addOption(Option.builder("m").longOpt("mode").hasArg().desc("Execution Mode. Possible values: " + aux + ". Default value: " + _defaultMode.getMode() + ".\n").build()); 
 
 		cmdLineOptions.addOption(Option.builder("o").longOpt("output").hasArg().desc("Output file, where output is written. Default value:"
 				+ "the standard output.")
@@ -243,7 +248,7 @@ public class Main
 
 		if(aux == null)
 		{
-			_mode = ExecMode.BATCH;
+			_mode = _defaultMode;
 		}
 		else
 		{
@@ -410,11 +415,11 @@ public class Main
 	{
 		parseArgs(args);
 
-		if(_mode.equals(ExecMode.GUI))
+		if(_mode.equals(ExecMode.GUI)) // Si es el modo gráfico
 		{
 			startGUIMode();			
 		}
-		else if (_mode.equals(ExecMode.BATCH))
+		else
 		{
 			startBatchMode();
 		}
