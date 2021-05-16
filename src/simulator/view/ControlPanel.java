@@ -122,6 +122,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			{	
 				buttonArchive.setEnabled(true);
 				buttonForces.setEnabled(true);
+				buttonPlay.setEnabled(true);
 				buttonExit.setEnabled(true);
 				editor.getTextField().setEditable( true );
 				
@@ -145,6 +146,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 		{
 			buttonArchive.setEnabled(true);
 			buttonForces.setEnabled(true);
+			buttonPlay.setEnabled(true);
 			buttonExit.setEnabled(true);
 			time.setEditable(true);
 			editor.getTextField().setEditable( true );
