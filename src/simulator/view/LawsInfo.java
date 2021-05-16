@@ -1,4 +1,4 @@
-package simulator.viewer;
+package simulator.view;
 
 public class LawsInfo 
 {

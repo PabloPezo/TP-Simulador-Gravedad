@@ -123,4 +123,9 @@ public class Controller
 	{
 		_phySimulator.setForceLaws(_forceFactory.createInstance(info));
 	}
+	
+	public void updateForceLaws()	// Actualiza los observadores, garantiza que la fuerza por defecto se selecciona en caso de no seleccionar ninguna
+	{
+		_phySimulator.updateForceLaws();
+	}
 }

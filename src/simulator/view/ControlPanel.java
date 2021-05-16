@@ -1,4 +1,4 @@
-package simulator.viewer;
+package simulator.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -101,9 +101,9 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 		Font font2 = time.getFont().deriveFont(Font.PLAIN, 15f);
 		time.setFont(font2);
-
 		toolBar.add(Box.createGlue());
 		toolBar.addSeparator();
+		
 
 		buttonExit = createButton(new ImageIcon("resources/icons/exit.png"), "Cierra la simulación");
 		toolBar.add(buttonExit);
@@ -123,8 +123,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				buttonArchive.setEnabled(true);
 				buttonForces.setEnabled(true);
 				buttonExit.setEnabled(true);
-
-				//editor.getTextField().setEnabled( true );
 				editor.getTextField().setEditable( true );
 				
 				_stopped = true;
@@ -151,7 +149,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 			time.setEditable(true);
 			editor.getTextField().setEditable( true );
 			_stopped = true;
-
 		}
 	}
 
@@ -242,6 +239,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void play()
 	{
+		_ctrl.updateForceLaws();
 		try
 		{
 			_ctrl.setDeltaTime(Double.parseDouble(time.getText()));

@@ -1,4 +1,4 @@
-package simulator.viewer;
+package simulator.view;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -33,8 +33,9 @@ import simulator.factories.NoForceBuilder;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
-import simulator.viewer.MainWindow;
+import simulator.view.MainWindow;
 
+// Práctica II. Pablo Magno Pezo Ortiz y Pablo Lozano Martín
 
 public class Main
 {
@@ -393,8 +394,8 @@ public class Main
 	{
 		InputStream in = new FileInputStream(new File(_inFile));
 		OutputStream out = _outFile == null ? System.out : new FileOutputStream(new File(_outFile));
-		ForceLaws fuerzas = _forceLawsFactory.createInstance(_forceLawsInfo);
-		PhysicsSimulator simulador = new PhysicsSimulator(_dtime, fuerzas);
+		ForceLaws forces = _forceLawsFactory.createInstance(_forceLawsInfo);
+		PhysicsSimulator simulador = new PhysicsSimulator(_dtime, forces);
 		Controller control = new Controller(simulador, _bodyFactory, _forceLawsFactory);
 
 		InputStream expOut = null;

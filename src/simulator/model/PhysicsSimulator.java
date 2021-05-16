@@ -118,4 +118,12 @@ public class PhysicsSimulator
 		observers.add(o);
 		o.onRegister(bodyList, _currentTime, _currentTime, null);
 	}
+	
+	public void updateForceLaws() // Actualiza los observadores, garantiza que la fuerza por defecto se selecciona en caso de no seleccionar ninguna
+	{
+		for (int i = 0; i < observers.size(); i++)
+		{ 			
+			observers.get(i).onForceLawsChanged(_forceLaws.toString());
+		}
+	}
 }
