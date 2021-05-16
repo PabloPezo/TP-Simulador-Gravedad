@@ -1,5 +1,6 @@
 package simulator.view;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
 
@@ -31,16 +32,15 @@ public class StatusBar extends JPanel implements SimulatorObserver
 
 		_currTime = new JLabel("Time: ");
 		this.add(_currTime);
+		_currTime.setPreferredSize(new Dimension (150, 15));
 
-		this.add(new JLabel("                                      |   "));
-
-		_numOfBodies = new JLabel("Bodies:  ");
+		_numOfBodies = new JLabel("| Bodies:  ");
 		this.add(_numOfBodies);
+		_numOfBodies.setPreferredSize(new Dimension (120, 15));
 
-		this.add(new JLabel("                                      |   "));
-
-		_currLaws = new JLabel("Laws:  ");
+		_currLaws = new JLabel("| Laws:  ");
 		this.add(_currLaws);
+		_currLaws.setPreferredSize(new Dimension (530, 15));	// 150 + 120 + 530 = 800 (Dimensión de la ventana)
 
 	}
 
@@ -48,18 +48,18 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	{
 		if(fLawsDesc == null)
 		{
-			this._currLaws.setText("Laws: None selected");
+			this._currLaws.setText("| Laws: None selected");
 		}
 		else
 		{
-			this._currLaws.setText("Laws: " + fLawsDesc);
+			this._currLaws.setText("| Laws: " + fLawsDesc);
 		}
 	}
 
 	@Override
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
-		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
+		this._numOfBodies.setText("| Bodies: " + String.valueOf(bodies.size()));
 		this._currTime.setText("Time: " + String.valueOf(time));
 		drawForce(fLawsDesc);
 	}
@@ -67,7 +67,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	@Override
 	public void onReset(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
-		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
+		this._numOfBodies.setText("| Bodies: " + String.valueOf(bodies.size()));
 		this._currTime.setText("Time: " + String.valueOf(time));
 		drawForce(fLawsDesc);
 	}
@@ -75,7 +75,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) 
 	{
-		this._numOfBodies.setText("Bodies: " + String.valueOf(bodies.size()));
+		this._numOfBodies.setText("| Bodies: " + String.valueOf(bodies.size()));
 	}
 
 	@Override
