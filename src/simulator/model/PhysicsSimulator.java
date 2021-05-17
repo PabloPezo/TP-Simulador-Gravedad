@@ -19,7 +19,7 @@ public class PhysicsSimulator
 	{
 		if (t <= 0.0 || fl == null) throw new IllegalArgumentException();
 		{
-			_realTime = t;
+			_realTime = t;		
 			_forceLaws = fl;
 			_currentTime = 0.0;
 		}	
@@ -39,6 +39,7 @@ public class PhysicsSimulator
 		{
 			body.move(_realTime);
 		}
+		
 		_currentTime += _realTime;
 
 		for (int i = 0; i < observers.size(); i++)
@@ -85,7 +86,7 @@ public class PhysicsSimulator
 
 		for (int i = 0; i < observers.size(); i++)
 		{
-			observers.get(i).onReset(bodyList, _currentTime, _currentTime, null);
+			observers.get(i).onReset(bodyList, _currentTime, _realTime, null);
 		}
 	}
 
@@ -116,14 +117,6 @@ public class PhysicsSimulator
 	public void addObserver(SimulatorObserver o)	
 	{
 		observers.add(o);
-		o.onRegister(bodyList, _currentTime, _currentTime, null);
-	}
-	
-	public void updateForceLaws() // Actualiza los observadores, garantiza que la fuerza por defecto se selecciona en caso de no seleccionar ninguna
-	{
-		for (int i = 0; i < observers.size(); i++)
-		{ 			
-			observers.get(i).onForceLawsChanged(_forceLaws.toString());
-		}
+		o.onRegister(bodyList,_currentTime , _realTime , _forceLaws.toString());
 	}
 }

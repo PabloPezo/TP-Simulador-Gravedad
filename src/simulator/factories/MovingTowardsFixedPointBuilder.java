@@ -54,8 +54,6 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 		js.put("c", "the point towards which bodies move (a json list of 2 numbers, e.g., [100.0,50.0])");
 		js.put("g", "the lenght of the acceleration vector (a number)");
 
-
-
 		return js;
 	}
 }

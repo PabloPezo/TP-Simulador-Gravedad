@@ -241,7 +241,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void play()
 	{
-		_ctrl.updateForceLaws();
 		try
 		{
 			_ctrl.setDeltaTime(Double.parseDouble(time.getText()));
@@ -334,5 +333,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) {}
 }
+
+
+
 
 

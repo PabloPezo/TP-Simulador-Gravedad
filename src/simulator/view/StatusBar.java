@@ -44,24 +44,12 @@ public class StatusBar extends JPanel implements SimulatorObserver
 
 	}
 
-	private void drawForce(String fLawsDesc)
-	{
-		if(fLawsDesc == null)
-		{
-			this._currLaws.setText("| Laws: None selected");
-		}
-		else
-		{
-			this._currLaws.setText("| Laws: " + fLawsDesc);
-		}
-	}
-
 	@Override
 	public void onRegister(List<Body> bodies, double time, double dt, String fLawsDesc)
 	{
 		this._numOfBodies.setText("| Bodies: " + String.valueOf(bodies.size()));
 		this._currTime.setText("Time: " + String.valueOf(time));
-		drawForce(fLawsDesc);
+		this._currLaws.setText("| Laws: " + fLawsDesc);
 	}
 
 	@Override
@@ -69,7 +57,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	{
 		this._numOfBodies.setText("| Bodies: " + String.valueOf(bodies.size()));
 		this._currTime.setText("Time: " + String.valueOf(time));
-		drawForce(fLawsDesc);
+		this._currLaws.setText("| Laws: " + fLawsDesc);
 	}
 
 	@Override
@@ -81,7 +69,7 @@ public class StatusBar extends JPanel implements SimulatorObserver
 	@Override
 	public void onForceLawsChanged(String fLawsDesc)
 	{
-		drawForce(fLawsDesc);
+		this._currLaws.setText("| Laws: " + fLawsDesc);
 	}
 
 	@Override

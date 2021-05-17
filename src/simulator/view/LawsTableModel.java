@@ -2,11 +2,12 @@ package simulator.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import javax.swing.table.AbstractTableModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import simulator.misc.Vector2D;
 
 public class LawsTableModel extends AbstractTableModel
 {
@@ -15,48 +16,23 @@ public class LawsTableModel extends AbstractTableModel
 	
 	private final String[] columnNames = {"Key", "Value", "Description"};
 	private String[] column;
-	
-	private final String G = "";
-	private final String g = "";
-	private final Vector2D c = new Vector2D(0.0, 0.0);
-
 	public LawsTableModel(JSONObject law) 
 	{
 		setInfo(law);
 	}
-
+	
 	public void setInfo(JSONObject ley)
 	{
 		infoLaws = new ArrayList<LawsInfo>();
 		this.column = new String[columnNames.length];
-		String key;
 		
-		JSONObject j = new JSONObject();
-		j = ley.getJSONObject("data");
-		String type = ley.getString("type");
+		JSONObject j = ley.getJSONObject("data");
 		
-		switch (type)	//Dependiendo de la fuerza seleccionada, cambia los datos en la tabla
-		{
-			case "nlug":
-				key = "G";
-				infoLaws.add(new LawsInfo(key, G, j.getString(key)));
-			break;
-				
-			case "mtfp":
-				key = "g";
-				infoLaws.add(new LawsInfo(key, g, j.getString(key)));
-				
-				key = "c";
-				infoLaws.add(new LawsInfo(key, c.toString(), j.getString(key)));
-			break;
-				
-			case "nf":
-				infoLaws = null;
-			break;
-				
-			default:
-				infoLaws = null;
-			break;
+		Set<String> aux = j.keySet();
+		
+		for(String s: aux)
+		{ 
+			infoLaws.add(new LawsInfo(s, "", j.getString(s)));
 		}
 		fireTableStructureChanged();
 	}
@@ -101,7 +77,10 @@ public class LawsTableModel extends AbstractTableModel
 			{
 				if (getValueAt(i, 0).equals("c"))
 				{
-					o.put("c", stringToVector((String) getValueAt(i, 1)));
+					if(getValueAt(i,1) != null)
+					{
+						o.put((String) getValueAt(i,1), stringToVector((String) getValueAt(i, 1)));
+					}
 				}
 				else
 				{

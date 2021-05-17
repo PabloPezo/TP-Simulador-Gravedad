@@ -6,9 +6,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
-import javax.swing.SwingUtilities;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -41,14 +38,16 @@ public class Main
 {
 	private enum ExecMode
 	{
-		BATCH("batch", "(Batch mode)"), GUI("GUI", "(Graphical user interface mode)");
+		BATCH("batch", "(Batch mode)", false), GUI("gui", "(Graphical user interface mode)", true);
 		private String _modeTag;
 		private String _modeDesc;
+		private boolean _graphicMode;
 
-		private ExecMode (String modeTag, String modeDesc)
+		private ExecMode (String modeTag, String modeDesc, boolean graphicMode)
 		{
 			_modeTag = modeTag;
 			_modeDesc = modeDesc;
+			_graphicMode = graphicMode;
 		}
 
 		private String getMode()
@@ -59,6 +58,11 @@ public class Main
 		private String getModeDesc()
 		{
 			return _modeDesc;
+		}
+		
+		private boolean getGraphicMode()
+		{
+			return _graphicMode;
 		}
 	}
 	private static ExecMode _mode;
@@ -114,14 +118,13 @@ public class Main
 
 
 			parseModeOption(line);
-
 			parseDeltaTimeOption(line);
 			parseForceLawsOption(line);
 			parseStateComparatorOption(line);
 
 			parseStepsOption(line);
 
-			if(_mode.equals(ExecMode.GUI))	// Si esta en modo gráfico parseInFile puede ser null (excepción olvidada).
+			if(_mode.getGraphicMode())	// Si esta en modo gráfico parseInFile puede ser null (excepción olvidada).
 			{
 				try
 				{
@@ -378,16 +381,6 @@ public class Main
 			control.loadBodies(in);
 		}
 		new MainWindow(control);
-
-		SwingUtilities.invokeAndWait(new Runnable() 
-		{
-			@Override
-			public void run() 
-			{
-				control.run(_steps);
-			}
-		});
-
 	}
 
 	private static void startBatchMode() throws Exception // Inicia la simulación
@@ -414,8 +407,7 @@ public class Main
 	private static void start(String[] args) throws Exception // Parsea todos los datos necesarios e inicia la simulación
 	{
 		parseArgs(args);
-
-		if(_mode.equals(ExecMode.GUI)) // Si es el modo gráfico
+		if(_mode.getGraphicMode()) // Si es un modo gráfico
 		{
 			startGUIMode();			
 		}
