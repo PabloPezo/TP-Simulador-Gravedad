@@ -15,7 +15,6 @@ public class LawsTableModel extends AbstractTableModel
 	private List<LawsInfo> infoLaws;
 	
 	private final String[] columnNames = {"Key", "Value", "Description"};
-	private String[] column;
 	public LawsTableModel(JSONObject law) 
 	{
 		setInfo(law);
@@ -24,7 +23,6 @@ public class LawsTableModel extends AbstractTableModel
 	public void setInfo(JSONObject ley)
 	{
 		infoLaws = new ArrayList<LawsInfo>();
-		this.column = new String[columnNames.length];
 		
 		JSONObject j = ley.getJSONObject("data");
 		
@@ -118,21 +116,32 @@ public class LawsTableModel extends AbstractTableModel
 	}
 
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex)
+	public Object getValueAt(int row, int col)
 	{
-		this.column[0] = infoLaws.get(rowIndex).getKey();
+		Object obj = null;
 		
-		if (String.valueOf(infoLaws.get(rowIndex).getValue()) != "")	//Comprobar si está vacío para que entonces te ponga el valor por defecto en el builder
+		switch(col)
 		{
-			this.column[1] = String.valueOf(infoLaws.get(rowIndex).getValue());
+			case 0:
+				obj = infoLaws.get(row).getKey();
+				break;
+				
+			case 1:
+				if (String.valueOf(infoLaws.get(row).getValue()) != "")	//Comprobar si está vacío para que entonces te ponga el valor por defecto en el builder
+				{
+					obj = String.valueOf(infoLaws.get(row).getValue());
+				}
+				else
+				{
+					obj = null;
+				}			
+				break;
+				
+			case 2:
+				obj = String.valueOf(infoLaws.get(row).getDesc());
+				break;
 		}
-		else
-		{
-			this.column[1] = null;
-		}
-		this.column[2] = String.valueOf(infoLaws.get(rowIndex).getDesc());
-
-		return this.column[columnIndex];
+		return obj;
 	}
 
 	@Override
