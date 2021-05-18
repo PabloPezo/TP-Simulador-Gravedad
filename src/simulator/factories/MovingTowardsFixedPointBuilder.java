@@ -26,12 +26,8 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>
 		{
 			Vector2D p = null;
 			JSONArray vector;
-			System.out.println("Hasta aqui bien:" +  js.getString("g"));
-			
 			double g = js.has("g") ? js.getDouble("g") : 9.81;
 
-			
-			
 			if(!js.isEmpty())
 			{
 				vector = js.getJSONArray("c");
