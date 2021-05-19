@@ -82,6 +82,7 @@ public class LawsTableModel extends AbstractTableModel
 				}
 				else
 				{					
+
 					o.put((String) getValueAt(i, 0), getValueAt(i, 1));
 				}
 			}
