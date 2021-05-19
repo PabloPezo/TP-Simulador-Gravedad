@@ -74,7 +74,7 @@ public class LawsTableModel extends AbstractTableModel
 			for (int i = 0; i < infoLaws.size(); i++)
 			{
 				if (getValueAt(i, 0).equals("c"))
-				{
+				{					
 					if(getValueAt(i,1) != null)
 					{
 						o.put((String) getValueAt(i,0), stringToVector((String) getValueAt(i, 1)));
