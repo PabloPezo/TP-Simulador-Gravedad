@@ -75,17 +75,9 @@ public class LawsTableModel extends AbstractTableModel
 			{
 				if (getValueAt(i, 0).equals("c"))
 				{
-					System.out.println("getval");
-					
 					if(getValueAt(i,1) != null)
 					{
-						System.out.println("getvalue del null = " + getValueAt(i,1));
-						
-						System.out.println("ola");
-						
-						String olo = (String) getValueAt(i,0);
-						
-						o.put(olo, stringToVector((String) getValueAt(i, 1)));
+						o.put((String) getValueAt(i,0), stringToVector((String) getValueAt(i, 1)));
 					}
 				}
 				else
