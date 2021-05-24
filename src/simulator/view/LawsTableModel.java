@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class LawsTableModel extends AbstractTableModel
@@ -15,6 +14,7 @@ public class LawsTableModel extends AbstractTableModel
 	private List<LawsInfo> infoLaws;
 	
 	private final String[] columnNames = {"Key", "Value", "Description"};
+	
 	public LawsTableModel(JSONObject law) 
 	{
 		setInfo(law);
@@ -64,85 +64,27 @@ public class LawsTableModel extends AbstractTableModel
 			return 0;
 		}
 	}
-	
-	public JSONObject selectedForce()	//Devuelve la fuerza seleccionada según los parámetros de la tabla
-	{
-		JSONObject o = new JSONObject();
-		
-		if (infoLaws != null)
-		{
-			for (int i = 0; i < infoLaws.size(); i++)
-			{
-				if (getValueAt(i, 0).equals("c"))
-				{					
-					if(getValueAt(i,1) != null)
-					{
-						o.put((String) getValueAt(i,0), stringToVector((String) getValueAt(i, 1)));
-					}
-				}
-				else
-				{					
-
-					o.put((String) getValueAt(i, 0), getValueAt(i, 1));
-				}
-			}
-		}		
-		return o;
-	}
-	
-	private JSONArray stringToVector(String c)		//Lee un array de tipo [0.0,0.0] y lo pasa a un JSONArray
-	{
-		JSONArray j = new JSONArray();
-		String aux = "";
-		
-		int i = 1;
-		while (c.charAt(i) != ',')
-		{
-			aux += c.charAt(i);
-			i++;
-		}
-		
-		j.put(Double.parseDouble(aux));
-		aux = "";
-		i++;
-		
-		while (c.charAt(i) != ']')
-		{
-			aux += c.charAt(i);
-			i++;
-		}
-
-		j.put(Double.parseDouble(aux));
-		return j;
-	}
 
 	@Override
 	public Object getValueAt(int row, int col)
 	{
-		Object obj = null;
+		String str = "";
 		
 		switch(col)
 		{
 			case 0:
-				obj = infoLaws.get(row).getKey();
+				str = infoLaws.get(row).getKey();
 				break;
 				
 			case 1:
-				if (String.valueOf(infoLaws.get(row).getValue()) != "")	//Comprobar si está vacío para que entonces te ponga el valor por defecto en el builder
-				{
-					obj = String.valueOf(infoLaws.get(row).getValue());
-				}
-				else
-				{
-					obj = null;
-				}			
+				str = String.valueOf(infoLaws.get(row).getValue());	
 				break;
 				
 			case 2:
-				obj = String.valueOf(infoLaws.get(row).getDesc());
+				str = String.valueOf(infoLaws.get(row).getDesc());
 				break;
 		}
-		return obj;
+		return str;
 	}
 
 	@Override

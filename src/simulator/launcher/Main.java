@@ -32,22 +32,19 @@ import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
 import simulator.view.MainWindow;
 
-// Práctica II. Pablo Magno Pezo Ortiz y Pablo Lozano Martín
+// Práctica II Final. Pablo Lozano Martín y Pablo Magno Pezo Ortiz
 
 public class Main
 {
 	private enum ExecMode
 	{
-		BATCH("batch", "(Batch mode)", false), GUI("gui", "(Graphical user interface mode)", true);
+		BATCH("batch", "(Batch mode)"), GUI("gui", "(Graphical user interface mode)");
 		private String _modeTag;
 		private String _modeDesc;
-		private boolean _graphicMode;
-
-		private ExecMode (String modeTag, String modeDesc, boolean graphicMode)
+		private ExecMode (String modeTag, String modeDesc)
 		{
 			_modeTag = modeTag;
 			_modeDesc = modeDesc;
-			_graphicMode = graphicMode;
 		}
 
 		private String getMode()
@@ -58,11 +55,6 @@ public class Main
 		private String getModeDesc()
 		{
 			return _modeDesc;
-		}
-		
-		private boolean getGraphicMode()
-		{
-			return _graphicMode;
 		}
 	}
 	private static ExecMode _mode;
@@ -124,7 +116,7 @@ public class Main
 
 			parseStepsOption(line);
 
-			if(_mode.getGraphicMode())	// Si esta en modo gráfico parseInFile puede ser null (excepción olvidada).
+			if(_mode.equals(ExecMode.GUI))	// Si esta en modo gráfico parseInFile puede ser null (excepción olvidada).
 			{
 				try
 				{
@@ -407,7 +399,7 @@ public class Main
 	private static void start(String[] args) throws Exception // Parsea todos los datos necesarios e inicia la simulación
 	{
 		parseArgs(args);
-		if(_mode.getGraphicMode()) // Si es un modo gráfico
+		if(_mode.equals(ExecMode.GUI)) // Si es un modo gráfico
 		{
 			startGUIMode();			
 		}

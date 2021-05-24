@@ -86,7 +86,7 @@ public class PhysicsSimulator
 
 		for (int i = 0; i < observers.size(); i++)
 		{
-			observers.get(i).onReset(bodyList, _currentTime, _realTime, null);
+			observers.get(i).onReset(bodyList, _currentTime, _realTime, _forceLaws.toString());
 		}
 	}
 

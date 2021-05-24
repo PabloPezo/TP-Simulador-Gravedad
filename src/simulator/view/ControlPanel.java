@@ -3,7 +3,7 @@ package simulator.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,18 +13,14 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
@@ -47,7 +43,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	private JSpinner.DefaultEditor editor;
 	
 	private JTextField time;
-	private LawsTableModel tab;
+	private JFileChooser fc;
+	private ForceLawsDialog fld;
 
 	ControlPanel(Controller ctrl) 
 	{
@@ -61,6 +58,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 	private void initGUI()
 	{
 		this.setLayout(new BorderLayout());
+		fc = new JFileChooser();
+		fld = null;
 
 		JToolBar toolBar = new JToolBar();
 		this.add(toolBar, BorderLayout.PAGE_START);
@@ -172,8 +171,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void archive()
 	{
-		JFileChooser fc = new JFileChooser();
-
 		int v = fc.showOpenDialog(null);
 		if (v == JFileChooser.APPROVE_OPTION)
 		{
@@ -193,50 +190,25 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void forces() 
 	{
-		List<JSONObject> list = _ctrl.getForceLawsInfo();	
-		
-		//PANEL PRINCIPAL
-		JPanel panel = new JPanel();
-		panel.setBounds(80, 20, 80, 170);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		
-		//COMBOBOX
-		JComboBox<String> combo = new JComboBox<String>();
-
-		for (int i = 0; i < list.size(); i++)		
-		{
-			combo.addItem(list.get(i).getString("desc"));
-		}
-		
-		combo.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				tab.setInfo(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));	//Cambia la información según lo seleccionado
-			}
-		});
-		
-		//TABLA
-		tab = new LawsTableModel(_ctrl.getForceLawsInfo().get(combo.getSelectedIndex()));
-
-		JTable table = new JTable(tab);
-		
-		//OPTION PANE
-		panel.add(new JLabel("Select a force law and provide values for the parameters in the Value column "
-				+ "(default values are used for parameters with no value)"), null);
-		panel.add(new JScrollPane(table));
-		panel.add(combo);
-
-		int option = JOptionPane.showOptionDialog(null, panel, "Force Laws Selection", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-		if (option == JOptionPane.OK_OPTION)
-		{
-			JSONObject js = new JSONObject();	//Crea un JSONObject del tipo seleccionado y con la información de la tabla
-			js.put("type", _ctrl.getForceLawsInfo().get(combo.getSelectedIndex()).get("type"));
-			js.put("data", tab.selectedForce());
-			_ctrl.setForceLaws(js);		//Envía el objeto al controller para dejar la fuerza lista para simulación
-		}
+        if (fld == null)
+        {
+        	fld = new ForceLawsDialog((Frame) SwingUtilities.getWindowAncestor(this), _ctrl.getForceLawsInfo(), _ctrl);
+        }
+        
+        int status = fld.open();
+        if (status == 1)
+        {
+            try
+            {
+                JSONObject obj = fld.getForceLaw();
+                
+                _ctrl.setForceLaws(obj);
+            }
+            catch(Exception e)
+            {
+            	JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 	}
 
 	private void play()
