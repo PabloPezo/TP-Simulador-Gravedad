@@ -126,7 +126,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 				editor.getTextField().setEditable( true );
 				
 				_stopped = true;
-				
 				JOptionPane.showOptionDialog(null, "Se ha producido un error durante la ejecución", "ERROR:", JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
 				return;
@@ -190,10 +189,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
 
 	private void forces() 
 	{
-        if (fld == null)
-        {
+      //  if (fld == null)	// He quitado el null y funciona mejor
+       // {
         	fld = new ForceLawsDialog((Frame) SwingUtilities.getWindowAncestor(this), _ctrl.getForceLawsInfo(), _ctrl);
-        }
+       // }
         
         int status = fld.open();
         if (status == 1)
@@ -201,7 +200,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver, ActionLis
             try
             {
                 JSONObject obj = fld.getForceLaw();
-                
                 _ctrl.setForceLaws(obj);
             }
             catch(Exception e)
